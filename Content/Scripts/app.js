@@ -15,5 +15,6 @@ try {
     }
 }
 catch (e) {
+    Context.CreateInspector(9229)
     require('bootstrap')('app')
 }
