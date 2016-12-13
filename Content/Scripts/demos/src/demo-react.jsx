@@ -53,6 +53,35 @@ function application(elem) {
         }
     }
 
+    class RadarWidget extends JavascriptWidget {
+        properties() {
+            this.size/*int*/;
+        }
+        OnPaint(context) {
+            let s = this.size
+            let r = s/2
+            let t = $time
+            let dx = r * Math.cos(t)
+            let dy = r * Math.sin(t)
+            context.DrawLine({X:r,Y:r},{X:r+dx,Y:r+dy},{R:1,A:1},true)
+        }
+    }
+    let Radar_C = require('uclass')()(global,RadarWidget)
+
+    ReactUMG.Register('uRadar',Radar_C)
+
+    class Radar extends React.Component {
+        render() {
+            return (
+                <uSizeBox WidthOverride={this.props.size} HeightOverride={this.props.size}>
+                    <uBorder>
+                        <uRadar size={this.props.size}/>
+                    </uBorder>
+                </uSizeBox>
+            )
+        }
+    }
+
     class Timer extends React.Component {
         constructor(props, context) {
             super(props, context)
@@ -68,7 +97,11 @@ function application(elem) {
             this.setState({ count: this.state.count + 1 })
         }
         render() {
-            return <text Text={new Date().toISOString()} />
+            return (
+                <span>
+                    <text Text={new Date().toISOString()} />
+                </span>
+            )
         }
     }
 
@@ -120,7 +153,10 @@ function application(elem) {
                 <text
                     ColorAndOpacity={{ SpecifiedColor: { R: 0, G: 0, B: 1, A: 1 } }}
                     Text="HELLO React-UMG!" />
-                <Timer />
+                <span>
+                    <Timer />
+                    <Radar size={100}/>
+                </span>
                 <MyComponent />
                 <Stateful />
             </div>
@@ -134,11 +170,13 @@ function application(elem) {
 
 async function demo(defer) {
     let elem = viewport_widget()
-    defer(_ => elem.destroy())
 
     await npm('react-umg')
     let destroy = application(elem)
-    defer(_ => destroy())
+    defer(_ => {
+        destroy()
+        elem.destroy()
+    })
 }
- 
+
 module.exports = demo

@@ -55,6 +55,37 @@ function application(elem) {
         }
     }
 
+    class RadarWidget extends JavascriptWidget {
+        properties() {
+            this.size /*int*/;
+        }
+        OnPaint(context) {
+            let s = this.size;
+            let r = s / 2;
+            let t = $time;
+            let dx = r * Math.cos(t);
+            let dy = r * Math.sin(t);
+            context.DrawLine({ X: r, Y: r }, { X: r + dx, Y: r + dy }, { R: 1, A: 1 }, true);
+        }
+    }
+    let Radar_C = require('uclass')()(global, RadarWidget);
+
+    ReactUMG.Register('uRadar', Radar_C);
+
+    class Radar extends React.Component {
+        render() {
+            return React.createElement(
+                'uSizeBox',
+                { WidthOverride: this.props.size, HeightOverride: this.props.size },
+                React.createElement(
+                    'uBorder',
+                    null,
+                    React.createElement('uRadar', { size: this.props.size })
+                )
+            );
+        }
+    }
+
     class Timer extends React.Component {
         constructor(props, context) {
             super(props, context);
@@ -70,7 +101,11 @@ function application(elem) {
             this.setState({ count: this.state.count + 1 });
         }
         render() {
-            return React.createElement('text', { Text: new Date().toISOString() });
+            return React.createElement(
+                'span',
+                null,
+                React.createElement('text', { Text: new Date().toISOString() })
+            );
         }
     }
 
@@ -128,7 +163,12 @@ function application(elem) {
             React.createElement('text', {
                 ColorAndOpacity: { SpecifiedColor: { R: 0, G: 0, B: 1, A: 1 } },
                 Text: 'HELLO React-UMG!' }),
-            React.createElement(Timer, null),
+            React.createElement(
+                'span',
+                null,
+                React.createElement(Timer, null),
+                React.createElement(Radar, { size: 100 })
+            ),
             React.createElement(MyComponent, null),
             React.createElement(Stateful, null)
         )
@@ -141,11 +181,13 @@ function application(elem) {
 
 async function demo(defer) {
     let elem = viewport_widget();
-    defer(_ => elem.destroy());
 
     await npm('react-umg');
     let destroy = application(elem);
-    defer(_ => destroy());
+    defer(_ => {
+        destroy();
+        elem.destroy();
+    });
 }
 
 module.exports = demo;
