@@ -67,7 +67,6 @@ function application(elem) {
         }
     }
     let Radar_C = require('uclass')()(global,RadarWidget)
-
     ReactUMG.Register('uRadar',Radar_C)
 
     class Radar extends React.Component {
@@ -108,7 +107,7 @@ function application(elem) {
     class Stateful extends React.Component {
         constructor(props, context) {
             super(props, context)
-            this.state = { count: 500, color: { R: 1, G: 0, B: 0, A: 1 }, removed: [] }
+            this.state = { count: 50, color: { R: 1, G: 0, B: 0, A: 1 }, removed: [] }
         }
 
         OnTextChanged(value) {
