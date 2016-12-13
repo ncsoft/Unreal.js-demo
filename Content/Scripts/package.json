@@ -3,12 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel demos/src -d demos/build",
+    "watch": "babel --watch demos/src -d demos/build"    
   },
   "author": "NCSOFT",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "springy": "^2.7.1"
-  }
+    "springy": "^2.7.1",
+    "react": "<=15.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.4",
+    "babel-eslint": "^5.0.0",
+    "babel-preset-react": "^6.5.0"
+  }  
 }

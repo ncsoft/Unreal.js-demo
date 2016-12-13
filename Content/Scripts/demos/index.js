@@ -17,7 +17,7 @@ let scenes = {
     'AI' : require('./demo-ai'),
     'REST' : require('./demo-rest'),
     'Deep-learning' : require('./demo-deeplearning'),
-    'React' : require('./demo-react')
+    'React' : require('./build/demo-react')
 }
 
 async function main(defer,reset) {
