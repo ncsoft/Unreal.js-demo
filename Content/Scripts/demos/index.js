@@ -6,6 +6,9 @@ let localStorage = require('./lib/localStorage')
 let selector = require('./selector')
 
 function prepare() {
+    if (this.$init) return
+    this.$init = true
+
     GWorld.ExecuteConsoleCommand("DisableAllScreenMessages")
     let pc = GWorld.GetPlayerController(0)
     pc.bShowMouseCursor = true
