@@ -5,9 +5,10 @@ async function npm(what) {
     let m = require(what)
     if (m) return m
 
-    let paths = ['','/usr/local/bin/','/usr/bin/']
+    let paths = ['','/usr/local/bin/','/usr/bin/','c:\\Program Files (x86)\\nodejs\\']
 
     function check(path,param) {
+        console.log(path)
         let p = JavascriptProcess.Create(path, param)
         return p
     }
