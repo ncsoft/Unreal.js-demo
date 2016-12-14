@@ -1,4 +1,4 @@
-/// <reference path="typings/ue.d.ts">/>
+/// <reference path="../../typings/ue.d.ts">/>
 
 const uclass = require('uclass')().bind(this,global)
 
