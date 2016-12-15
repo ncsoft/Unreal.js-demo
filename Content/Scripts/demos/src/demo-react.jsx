@@ -150,16 +150,20 @@ function application(elem) {
     }
 
     let component = ReactUMG.render(
-        <uBorder Padding={{ Left: 100, Top: 100, Right: 10, Bottom: 10 }} BrushColor={{ R: 1, G: 1, B: 1, A: 0.2 }}>
+        <uBorder
+            Padding={{ Left: 100, Top: 100, Right: 10, Bottom: 10 }}
+            BrushColor={{ R: 1, G: 1, B: 1, A: 0.2 }}>
             <div>
                 <text
                     ColorAndOpacity={{ SpecifiedColor: { R: 0, G: 0, B: 1, A: 1 } }}
                     Text="HELLO React-UMG!" />
                 <span>
                     <Timer />
-                    <Radar size={100}/>
-                    <DragAndDrop />                    
-                </span>                
+                    <div>
+                        <Radar size={100}/>
+                    </div>
+                    <DragAndDrop />
+                </span>
                 <MyComponent />
                 <Stateful />
             </div>

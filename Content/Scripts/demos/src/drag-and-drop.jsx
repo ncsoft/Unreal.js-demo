@@ -32,9 +32,9 @@ class MyDraggable extends JavascriptWidget {
         this.DragId/*int*/;
     }
     OnDragDetected() {
-        let op = WidgetBlueprintLibrary.CreateDragDropOperation(DragOp_C)
-        context.sprite.SetVisibility('Visible')
+        let op = WidgetBlueprintLibrary.CreateDragDropOperation(DragOp_C)        
         context.E.emit('detected',this.DragId)
+        context.sprite.SetVisibility('Visible')
         return {
             $: EventReply.Handled(),
             Operation: op   

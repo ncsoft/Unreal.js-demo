@@ -158,7 +158,9 @@ function application(elem) {
 
     let component = ReactUMG.render(React.createElement(
         'uBorder',
-        { Padding: { Left: 100, Top: 100, Right: 10, Bottom: 10 }, BrushColor: { R: 1, G: 1, B: 1, A: 0.2 } },
+        {
+            Padding: { Left: 100, Top: 100, Right: 10, Bottom: 10 },
+            BrushColor: { R: 1, G: 1, B: 1, A: 0.2 } },
         React.createElement(
             'div',
             null,
@@ -169,7 +171,11 @@ function application(elem) {
                 'span',
                 null,
                 React.createElement(Timer, null),
-                React.createElement(Radar, { size: 100 }),
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(Radar, { size: 100 })
+                ),
                 React.createElement(DragAndDrop, null)
             ),
             React.createElement(MyComponent, null),
