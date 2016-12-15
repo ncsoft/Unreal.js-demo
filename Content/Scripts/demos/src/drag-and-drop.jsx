@@ -76,10 +76,9 @@ class DragAndDrop extends React.Component {
                         ref='sprite'
                         Visibility={'Hidden'}
                         BrushColor={{R:1,A:0.5}}
+                        Slot={{Size:{X:64,Y:64}}}
                         >
-                        <uSizeBox ref='sprite' HeightOverride={64}>
-                            <text Text="D"/>
-                        </uSizeBox>
+                        <text Text="D"/>
                     </uBorder>
                 </uCanvasPanel>
             </uOverlay>

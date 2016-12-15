@@ -86,13 +86,10 @@ class DragAndDrop extends React.Component {
                     {
                         ref: 'sprite',
                         Visibility: 'Hidden',
-                        BrushColor: { R: 1, A: 0.5 }
+                        BrushColor: { R: 1, A: 0.5 },
+                        Slot: { Size: { X: 64, Y: 64 } }
                     },
-                    React.createElement(
-                        'uSizeBox',
-                        { ref: 'sprite', HeightOverride: 64 },
-                        React.createElement('text', { Text: 'D' })
-                    )
+                    React.createElement('text', { Text: 'D' })
                 )
             )
         );
