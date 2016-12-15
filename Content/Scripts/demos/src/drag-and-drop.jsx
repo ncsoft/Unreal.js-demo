@@ -23,13 +23,6 @@ class DragOp extends DragDropOperation {
     }
 }    
 class MyDraggable extends JavascriptWidget {
-    AddChild(x) {
-        this.SetRootWidget(x)
-        return {}
-    }
-    RemoveChild(x) {
-        this.SetRootWidget(null)
-    }
     OnDragDetected() {
         let op = WidgetBlueprintLibrary.CreateDragDropOperation(DragOp_C)
         sprite.SetVisibility('Visible')
@@ -44,13 +37,6 @@ class MyDraggable extends JavascriptWidget {
     }
 }
 class MyDropTarget extends JavascriptWidget {
-    AddChild(x) {
-        this.SetRootWidget(x)
-        return {}
-    }
-    RemoveChild(x) {
-        this.SetRootWidget(null)
-    }
     OnDrop(x) {
         console.log('dropped',x)
         return EventReply.Handled()
