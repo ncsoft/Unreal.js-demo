@@ -11,6 +11,10 @@ let context = {
     sprite:null
 }
 
+let RemoteImage = require('./remote-image')
+
+let {ltrb} = require('../lib/utils')
+
 class DragOp extends DragDropOperation {
     Dragged(event) {
         let pos = UPointerEvent.C(event).GetScreenSpacePosition()
@@ -26,19 +30,19 @@ class DragOp extends DragDropOperation {
         context.sprite.SetVisibility('Hidden')
         context.E.emit('cancel',event)
     }
-}    
+}
 class MyDraggable extends JavascriptWidget {
     properties() {
         this.DragId/*int*/;
     }
     OnDragDetected() {
-        let op = WidgetBlueprintLibrary.CreateDragDropOperation(DragOp_C)        
+        let op = WidgetBlueprintLibrary.CreateDragDropOperation(DragOp_C)
         context.E.emit('detected',this.DragId)
         context.sprite.SetVisibility('Visible')
         return {
             $: EventReply.Handled(),
-            Operation: op   
-        } 
+            Operation: op
+        }
     }
     OnMouseButtonDown(geom,event) {
         context.mygeom = geom
@@ -52,7 +56,7 @@ class MyDropTarget extends JavascriptWidget {
     OnDrop(x) {
         context.E.emit('dropped',this.DragId,x)
         return EventReply.Handled()
-    }    
+    }
     OnDragEnter(geom,event) {
         context.E.emit('enter',this.DragId,geom,event)
     }
@@ -101,30 +105,34 @@ class DragAndDrop extends React.Component {
             }
         })
     }
-    
+
     componentWillUnmount() {
         context.sprite = null
         context.E = null
     }
 
     render() {
+        let {Font} = this.props
         return (
             <uOverlay Slot={{VerticalAlignment:'VAlign_Fill',Size:{Rule:'Fill'}}}>
                 <div Slot={{ HorizontalAlignment: 'HAlign_Fill'}}>
                     {[100,200].map(id => (
                         <uDraggable key={id} DragId={id}>
-                            <text Text={`Item ${id}`} />
+                            <text Text={`Item ${id}`} Font={Font}/>
                         </uDraggable>
                     ))}
                     {[1,2].map(id => (
                         <uDropTarget key={id} DragId={id}>
                             <uBorder BrushColor={{ R: 1, A: this.state.focus == id ? 0.5 : 0 }}>
-                                <text Text={this.state.dragging ?
-                                    "Drop HERE!" : `Drop target #${id} ${this.state.count[id]}`
-                                } />
+                                <text
+                                    Text={this.state.dragging ?
+                                        "Drop HERE!" : `Drop target #${id} ${this.state.count[id]}`
+                                    }
+                                    Font={Font}
+                                />
                             </uBorder>
                         </uDropTarget>
-                    ))}                    
+                    ))}
                 </div>
                 <uCanvasPanel
                     Visibility={'HitTestInvisible'}
@@ -137,9 +145,10 @@ class DragAndDrop extends React.Component {
                         ref='sprite'
                         Visibility={'Hidden'}
                         BrushColor={{R:1,A:0.5}}
-                        Slot={{Size:{X:128,Y:128}}}
+                        Padding={ltrb(0)}
+                        Slot={{Size:{X:64,Y:64}}}
                         >
-                        <text Text={`D ${this.state.dragging}`}/>
+                        <RemoteImage width={64} height={64} url="https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png"/>
                     </uBorder>
                 </uCanvasPanel>
             </uOverlay>

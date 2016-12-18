@@ -11,6 +11,10 @@ let context = {
     sprite: null
 };
 
+let RemoteImage = require('./remote-image');
+
+let { ltrb } = require('../lib/utils');
+
 class DragOp extends DragDropOperation {
     Dragged(event) {
         let pos = UPointerEvent.C(event).GetScreenSpacePosition();
@@ -108,6 +112,7 @@ class DragAndDrop extends React.Component {
     }
 
     render() {
+        let { Font } = this.props;
         return React.createElement(
             'uOverlay',
             { Slot: { VerticalAlignment: 'VAlign_Fill', Size: { Rule: 'Fill' } } },
@@ -117,7 +122,7 @@ class DragAndDrop extends React.Component {
                 [100, 200].map(id => React.createElement(
                     'uDraggable',
                     { key: id, DragId: id },
-                    React.createElement('text', { Text: `Item ${ id }` })
+                    React.createElement('text', { Text: `Item ${ id }`, Font: Font })
                 )),
                 [1, 2].map(id => React.createElement(
                     'uDropTarget',
@@ -125,7 +130,10 @@ class DragAndDrop extends React.Component {
                     React.createElement(
                         'uBorder',
                         { BrushColor: { R: 1, A: this.state.focus == id ? 0.5 : 0 } },
-                        React.createElement('text', { Text: this.state.dragging ? "Drop HERE!" : `Drop target #${ id } ${ this.state.count[id] }` })
+                        React.createElement('text', {
+                            Text: this.state.dragging ? "Drop HERE!" : `Drop target #${ id } ${ this.state.count[id] }`,
+                            Font: Font
+                        })
                     )
                 ))
             ),
@@ -144,9 +152,10 @@ class DragAndDrop extends React.Component {
                         ref: 'sprite',
                         Visibility: 'Hidden',
                         BrushColor: { R: 1, A: 0.5 },
-                        Slot: { Size: { X: 128, Y: 128 } }
+                        Padding: ltrb(0),
+                        Slot: { Size: { X: 64, Y: 64 } }
                     },
-                    React.createElement('text', { Text: `D ${ this.state.dragging }` })
+                    React.createElement(RemoteImage, { width: 64, height: 64, url: 'https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png' })
                 )
             )
         );
