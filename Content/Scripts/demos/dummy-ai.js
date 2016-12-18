@@ -127,8 +127,7 @@ async function mixamo(index=0) {
                 UMG.text({
                     Font:font,
                     $link:_elem => elem = _elem
-                },"test!"),
-                UMG(PropertyEditor,{$link:elem => elem.SetObject(controller.GetPathFollowingComponent())})
+                },"test!")
             )
         )
         function loop() {

@@ -3,7 +3,7 @@ let _ = require('lodash')
 
 let localStorage = require('./lib/localStorage')
 
-let selector = require('./selector')
+let selector = require('./build/demo-selector')
 
 function prepare() {
     if (this.$init) return
