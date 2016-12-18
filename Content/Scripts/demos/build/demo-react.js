@@ -23,13 +23,37 @@ function application(elem) {
     };
 
     class Window extends React.Component {
+        componentDidMount() {
+            this.phase = -1;
+            this.last;
+            let loop = () => {
+                let elapsed = this.last ? $time - this.last : 0;
+                this.last = $time;
+                this.phase += elapsed * 2;
+
+                if (this.phase > 0) {
+                    this.phase = 0;
+                } else {
+                    process.nextTick(loop);
+                }
+                let update = elem => {
+                    elem.BrushColor.A = this.phase + 1;
+                    elem.SetBrushColor(elem.BrushColor);
+                };
+                update(this.refs.border.ueobj);
+                update(this.refs.border2.ueobj);
+            };
+            loop();
+        }
         render() {
             let C = palette.Indigo;
             let { title, children, depth } = this.props;
             depth = depth || 0;
             return React.createElement(
                 'uBorder',
-                _extends({}, this.props, {
+                _extends({
+                    ref: 'border'
+                }, this.props, {
                     Padding: ltrb(0),
                     BrushColor: hex2lc(C[100 + depth * 100], 0.75) }),
                 React.createElement(
@@ -38,6 +62,7 @@ function application(elem) {
                     React.createElement(
                         'uBorder',
                         {
+                            ref: 'border2',
                             Padding: ltrb(20, 10),
                             BrushColor: hex2lc(C[500 + depth * 100])
                         },
