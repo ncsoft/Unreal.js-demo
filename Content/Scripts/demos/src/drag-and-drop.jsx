@@ -1,14 +1,15 @@
 /// <reference path="../../typings/ue.d.ts">/>
 
-const uclass = require('uclass')().bind(this,global)
+const uclass = require('uclass')().bind(this, global)
 
 const React = require('react')
 const ReactUMG = require('react-umg')
 const events = require('events')
+const _ = require('lodash')
 
 let context = {
-    mygeom:null,
-    sprite:null
+    mygeom: null,
+    sprite: null
 }
 
 let RemoteImage = require('./remote-image')
@@ -20,88 +21,114 @@ class DragOp extends DragDropOperation {
         let pos = UPointerEvent.C(event).GetScreenSpacePosition()
         pos = Geometry.C(context.mygeom).AbsoluteToLocal(pos)
         context.sprite.Slot.SetPosition(pos)
-        context.E.emit('dragged',event)
+        context.E.emit('dragged', event)
     }
     Drop(event) {
         context.sprite.SetVisibility('Hidden')
-        context.E.emit('drop',event)
+        context.E.emit('drop', event)
     }
     DragCancelled(event) {
         context.sprite.SetVisibility('Hidden')
-        context.E.emit('cancel',event)
+        context.E.emit('cancel', event)
     }
 }
+
 class MyDraggable extends JavascriptWidget {
     properties() {
         this.DragId/*int*/;
     }
     OnDragDetected() {
         let op = WidgetBlueprintLibrary.CreateDragDropOperation(DragOp_C)
-        context.E.emit('detected',this.DragId)
+        context.E.emit('detected', this.DragId)
         context.sprite.SetVisibility('Visible')
         return {
             $: EventReply.Handled(),
             Operation: op
         }
     }
-    OnMouseButtonDown(geom,event) {
+    OnMouseButtonDown(geom, event) {
         context.mygeom = geom
-        return event.DetectDragIfPressed(this,{KeyName:'LeftMouseButton'})
+        return event.DetectDragIfPressed(this, { KeyName: 'LeftMouseButton' })
     }
 }
+
 class MyDropTarget extends JavascriptWidget {
     properties() {
         this.DragId/*int*/;
     }
     OnDrop(x) {
-        context.E.emit('dropped',this.DragId,x)
+        context.E.emit('dropped', this.DragId, x)
         return EventReply.Handled()
     }
-    OnDragEnter(geom,event) {
-        context.E.emit('enter',this.DragId,geom,event)
+    OnDragEnter(geom, event) {
+        context.E.emit('enter', this.DragId, geom, event)
     }
     OnDragLeave(event) {
-        context.E.emit('leave',this.DragId,event)
+        context.E.emit('leave', this.DragId, event)
     }
 }
+
 let DragOp_C = uclass(DragOp)
 let MyDraggable_C = uclass(MyDraggable)
 let MyDropTarget_C = uclass(MyDropTarget)
-ReactUMG.Register('uDraggable',MyDraggable_C)
-ReactUMG.Register('uDropTarget',MyDropTarget_C)
+ReactUMG.Register('uDraggable', MyDraggable_C)
+ReactUMG.Register('uDropTarget', MyDropTarget_C)
+
+class Item extends React.Component {
+    render() {
+        const urls = [
+            "https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png",
+            "https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000005CD.png"
+        ]
+        const {id} = this.props
+        const url = urls[(id || 0) % urls.length]
+        return (
+            <uBorder
+                BrushColor={{ A: 0.2 }}
+                Padding={ltrb(1)}
+                ContentColorAndOpacity={this.props.dimmed ? { R: 1, G: 1, B: 1, A: 0.5 } : { R: 1, G: 1, B: 1, A: 1 }}
+                >
+                <RemoteImage
+                    width={64}
+                    height={64}
+                    url={url} />
+            </uBorder>
+        )
+    }
+}
 
 class DragAndDrop extends React.Component {
-    constructor(props,ctx) {
-        super(props,ctx)
+    constructor(props, ctx) {
+        super(props, ctx)
         this.state = {
             dragging: null,
-            count: [0,0,0]
+            count: [0, 0, 0]
         }
     }
 
     componentDidMount() {
         context.sprite = this.refs.sprite.ueobj
         let E = context.E = new events.EventEmitter()
-        E.on('drop',() => {
-            this.setState({dragging:null,focus:null})
+        E.on('drop', () => {
+            this.setState({ dragging: null, focus: null })
         })
-        E.on('cancel',() => {
-            this.setState({dragging:null,focus:null})
+        E.on('cancel', () => {
+            this.setState({ dragging: null, focus: null })
         })
-        E.on('dropped',(x) => {
+        E.on('dropped', (x) => {
             let c = this.state.count
-            c[x] = c[x]+1
-            this.setState({count:c})
+            c[x] = c[x] + 1
+            this.setState({ count: c })
         })
-        E.on('detected',(x) => {
-            this.setState({dragging:x})
+        E.on('detected', (x) => {
+            this.setState({ dragging: x })
         })
-        E.on('enter',(x) => {
-            this.setState({focus:x})
+        E.on('enter', (x) => {
+            this.setState({ focus: x })
         })
-        E.on('leave',(x) => {
+        E.on('leave', (x) => {
             if (this.state.focus == x) {
-                this.setState({focus:null})
+                this.setState({ focus: null })
             }
         })
     }
@@ -114,22 +141,24 @@ class DragAndDrop extends React.Component {
     render() {
         let {Font} = this.props
         return (
-            <uOverlay Slot={{VerticalAlignment:'VAlign_Fill',Size:{Rule:'Fill'}}}>
-                <div Slot={{ HorizontalAlignment: 'HAlign_Fill'}}>
-                    {[100,200].map(id => (
-                        <uDraggable key={id} DragId={id}>
-                            <text Text={`Item ${id}`} Font={Font}/>
-                        </uDraggable>
-                    ))}
-                    {[1,2].map(id => (
+            <uOverlay Slot={{ VerticalAlignment: 'VAlign_Fill', Size: { Rule: 'Fill' } }}>
+                <div Slot={{ HorizontalAlignment: 'HAlign_Fill' }}>
+                    <span>
+                        {[1, 2].map(id => (
+                            <uDraggable key={id} DragId={id}>
+                                <Item id={id} dimmed={this.state.dragging == id} />
+                            </uDraggable>
+                        ))}
+                    </span>
+                    {[1, 2].map(id => (
                         <uDropTarget key={id} DragId={id}>
-                            <uBorder BrushColor={{ R: 1, A: this.state.focus == id ? 0.5 : 0 }}>
+                            <uBorder BrushColor={{ R: 1, A: this.state.focus == id ? 0.5 : 0.2 }}>
                                 <text
                                     Text={this.state.dragging ?
                                         "Drop HERE!" : `Drop target #${id} ${this.state.count[id]}`
                                     }
                                     Font={Font}
-                                />
+                                    />
                             </uBorder>
                         </uDropTarget>
                     ))}
@@ -144,11 +173,13 @@ class DragAndDrop extends React.Component {
                     <uBorder
                         ref='sprite'
                         Visibility={'Hidden'}
-                        BrushColor={{R:1,A:0.5}}
                         Padding={ltrb(0)}
-                        Slot={{Size:{X:64,Y:64}}}
+                        Slot={{ Size: { X: 64, Y: 64 } }}
                         >
-                        <RemoteImage width={64} height={64} url="https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png"/>
+                        {_.compact([this.state.dragging]).map(id => (
+                            <Item key={id} id={id}/>
+                        ))}
+                        
                     </uBorder>
                 </uCanvasPanel>
             </uOverlay>

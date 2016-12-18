@@ -1,9 +1,8 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-/// <reference path="typings/ue.d.ts">/>
+/// <reference path="../../typings/ue.d.ts">/>
 
 let viewport_widget = require('./lib/viewport-widget');
-let npm = require('./lib/npm');
 
 function application(elem) {
     const React = require('react');
@@ -17,8 +16,6 @@ function application(elem) {
     let Radar = require('./radar');
     let Stateful = require('./stateful');
     let SimpleBinding = require('./simple-binding');
-
-    console.log(SimpleBinding);
 
     const font = {
         FontObject: GEngine.SmallFont,
@@ -144,15 +141,13 @@ function application(elem) {
 async function demo(defer) {
     let elem = viewport_widget();
 
-    await npm('react-umg');
-    await npm('google-material-color');
-    await npm('hex-rgb');
-
     let destroy = application(elem);
     defer(_ => {
         destroy();
         elem.destroy();
     });
 }
+
+demo.description = "This demonstrates what React-UMG can offer.";
 
 module.exports = demo;

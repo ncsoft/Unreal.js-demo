@@ -5,6 +5,8 @@ async function npm(what) {
     let m = require(what)
     if (m) return m
 
+    console.log(`trying to install node module: ${what}`)
+
     let paths = ['','/usr/local/bin/','/usr/bin/','c:\\Program Files (x86)\\nodejs\\']
 
     function check(path,param) {

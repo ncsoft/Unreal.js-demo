@@ -1,6 +1,6 @@
 /// <reference path="../typings/ue.d.ts">/>
 let _ = require('lodash')
-
+let npm = require('./lib/npm')
 let localStorage = require('./lib/localStorage')
 
 let selector = require('./build/demo-selector')
@@ -26,6 +26,10 @@ let scenes = {
 async function main(defer,reset) {
     prepare()    
 
+    await npm('react-umg')
+    await npm('google-material-color')
+    await npm('hex-rgb')
+
     let busy
     function ready() {
         busy = true
@@ -34,8 +38,8 @@ async function main(defer,reset) {
     ready()
 
     let scene = localStorage.get('demo')
-    let sceneIds = _.keys(scenes) 
-    if (sceneIds.indexOf(scene)<0) {
+    let sceneIds = _.map(scenes,(v,k) => _.extend(_.clone(k),{description:v.description}))
+    if (scenes[scene] == undefined) {
         scene = sceneIds[0]
     }
 

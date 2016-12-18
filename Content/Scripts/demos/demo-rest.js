@@ -5,19 +5,11 @@ let instantiator = require('instantiator')
 let UMG = require('UMG')
 let delay = require('./lib/delay')
 let viewport_widget = require('./lib/viewport-widget')
+let rest_texture = require('./lib/remote-texture')
 
 async function demo(defer) {    
     let elem = viewport_widget()
     defer(_ => elem.destroy())
-
-    async function rest_texture(url) {
-        return new Promise((resolve,reject) => {
-            let job = AsyncTaskDownloadImage.DownloadImage(url)
-            let texture = null
-            job.OnSuccess = [resolve]
-            job.OnFail = [reject]
-        })
-    }
 
     const url = "http://www.blogcdn.com/massively.joystiq.com/media/2013/03/ncsoft.jpg"
     const url2 = "https://pbs.twimg.com/profile_images/593636604482228224/mWPsqBsm.jpg"

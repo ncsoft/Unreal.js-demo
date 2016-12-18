@@ -5,6 +5,7 @@ const uclass = require('uclass')().bind(this, global);
 const React = require('react');
 const ReactUMG = require('react-umg');
 const events = require('events');
+const _ = require('lodash');
 
 let context = {
     mygeom: null,
@@ -31,6 +32,7 @@ class DragOp extends DragDropOperation {
         context.E.emit('cancel', event);
     }
 }
+
 class MyDraggable extends JavascriptWidget {
     properties() {
         this.DragId /*int*/;
@@ -49,6 +51,7 @@ class MyDraggable extends JavascriptWidget {
         return event.DetectDragIfPressed(this, { KeyName: 'LeftMouseButton' });
     }
 }
+
 class MyDropTarget extends JavascriptWidget {
     properties() {
         this.DragId /*int*/;
@@ -64,11 +67,32 @@ class MyDropTarget extends JavascriptWidget {
         context.E.emit('leave', this.DragId, event);
     }
 }
+
 let DragOp_C = uclass(DragOp);
 let MyDraggable_C = uclass(MyDraggable);
 let MyDropTarget_C = uclass(MyDropTarget);
 ReactUMG.Register('uDraggable', MyDraggable_C);
 ReactUMG.Register('uDropTarget', MyDropTarget_C);
+
+class Item extends React.Component {
+    render() {
+        const urls = ["https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png", "https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000005CD.png"];
+        const { id } = this.props;
+        const url = urls[(id || 0) % urls.length];
+        return React.createElement(
+            'uBorder',
+            {
+                BrushColor: { A: 0.2 },
+                Padding: ltrb(1),
+                ContentColorAndOpacity: this.props.dimmed ? { R: 1, G: 1, B: 1, A: 0.5 } : { R: 1, G: 1, B: 1, A: 1 }
+            },
+            React.createElement(RemoteImage, {
+                width: 64,
+                height: 64,
+                url: url })
+        );
+    }
+}
 
 class DragAndDrop extends React.Component {
     constructor(props, ctx) {
@@ -119,17 +143,21 @@ class DragAndDrop extends React.Component {
             React.createElement(
                 'div',
                 { Slot: { HorizontalAlignment: 'HAlign_Fill' } },
-                [100, 200].map(id => React.createElement(
-                    'uDraggable',
-                    { key: id, DragId: id },
-                    React.createElement('text', { Text: `Item ${ id }`, Font: Font })
-                )),
+                React.createElement(
+                    'span',
+                    null,
+                    [1, 2].map(id => React.createElement(
+                        'uDraggable',
+                        { key: id, DragId: id },
+                        React.createElement(Item, { id: id, dimmed: this.state.dragging == id })
+                    ))
+                ),
                 [1, 2].map(id => React.createElement(
                     'uDropTarget',
                     { key: id, DragId: id },
                     React.createElement(
                         'uBorder',
-                        { BrushColor: { R: 1, A: this.state.focus == id ? 0.5 : 0 } },
+                        { BrushColor: { R: 1, A: this.state.focus == id ? 0.5 : 0.2 } },
                         React.createElement('text', {
                             Text: this.state.dragging ? "Drop HERE!" : `Drop target #${ id } ${ this.state.count[id] }`,
                             Font: Font
@@ -151,11 +179,10 @@ class DragAndDrop extends React.Component {
                     {
                         ref: 'sprite',
                         Visibility: 'Hidden',
-                        BrushColor: { R: 1, A: 0.5 },
                         Padding: ltrb(0),
                         Slot: { Size: { X: 64, Y: 64 } }
                     },
-                    React.createElement(RemoteImage, { width: 64, height: 64, url: 'https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png' })
+                    _.compact([this.state.dragging]).map(id => React.createElement(Item, { key: id, id: id }))
                 )
             )
         );

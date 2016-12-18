@@ -1,7 +1,2762 @@
-declare type EButtonClickMethod = string | symbol;
-declare var EButtonClickMethod = { DownAndUp:'DownAndUp',MouseDown:'MouseDown',MouseUp:'MouseUp',PreciseClick:'PreciseClick', };
-declare type EButtonTouchMethod = string | symbol;
-declare var EButtonTouchMethod = { DownAndUp:'DownAndUp',PreciseTap:'PreciseTap', };
+declare class InputScaleBias { 
+	Scale: number;
+	Bias: number;
+	clone() : InputScaleBias;
+	static C(Other: UObject): InputScaleBias;
+}
+
+declare class AnimNode_ApplyAdditive extends AnimNode_Base { 
+	Base: PoseLink;
+	Additive: PoseLink;
+	Alpha: number;
+	AlphaScaleBias: InputScaleBias;
+	LODThreshold: number;
+	ActualAlpha: number;
+	clone() : AnimNode_ApplyAdditive;
+	static C(Other: UObject): AnimNode_ApplyAdditive;
+}
+
+declare class AnimGraphNode_ApplyAdditive extends AnimGraphNode_Base { 
+	UNode: AnimNode_ApplyAdditive;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_ApplyAdditive;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_ApplyAdditive;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_ApplyAdditive;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_ApplyAdditive;
+	static C(Other: UObject): AnimGraphNode_ApplyAdditive;
+}
+
+declare class AnimNode_ApplyMeshSpaceAdditive extends AnimNode_Base { 
+	Base: PoseLink;
+	Additive: PoseLink;
+	Alpha: number;
+	AlphaScaleBias: InputScaleBias;
+	LODThreshold: number;
+	ActualAlpha: number;
+	clone() : AnimNode_ApplyMeshSpaceAdditive;
+	static C(Other: UObject): AnimNode_ApplyMeshSpaceAdditive;
+}
+
+declare class AnimGraphNode_ApplyMeshSpaceAdditive extends AnimGraphNode_Base { 
+	UNode: AnimNode_ApplyMeshSpaceAdditive;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_ApplyMeshSpaceAdditive;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_ApplyMeshSpaceAdditive;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_ApplyMeshSpaceAdditive;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_ApplyMeshSpaceAdditive;
+	static C(Other: UObject): AnimGraphNode_ApplyMeshSpaceAdditive;
+}
+
+declare type EAnimGroupRole = 'CanBeLeader' | 'AlwaysFollower' | 'AlwaysLeader' | 'TransitionLeader';
+declare var EAnimGroupRole : { CanBeLeader:'CanBeLeader',AlwaysFollower:'AlwaysFollower',AlwaysLeader:'AlwaysLeader',TransitionLeader:'TransitionLeader', };
+declare class AnimationGroupReference { 
+	GroupName: string;
+	GroupRole: EAnimGroupRole;
+	clone() : AnimationGroupReference;
+	static C(Other: UObject): AnimationGroupReference;
+}
+
+declare class AnimGraphNode_AssetPlayerBase extends AnimGraphNode_Base { 
+	SyncGroup: AnimationGroupReference;
+	AssetReferenceForPinRestoration: StringAssetReference;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_AssetPlayerBase;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_AssetPlayerBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_AssetPlayerBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_AssetPlayerBase;
+	static C(Other: UObject): AnimGraphNode_AssetPlayerBase;
+}
+
+declare class AnimGraphNode_BlendSpaceBase extends AnimGraphNode_AssetPlayerBase { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BlendSpaceBase;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BlendSpaceBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BlendSpaceBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BlendSpaceBase;
+	static C(Other: UObject): AnimGraphNode_BlendSpaceBase;
+}
+
+declare class AnimNode_AssetPlayerBase extends AnimNode_Base { 
+	bIgnoreForRelevancyTest: boolean;
+	GroupIndex: number;
+	GroupRole: EAnimGroupRole;
+	BlendWeight: number;
+	InternalTimeAccumulator: number;
+	clone() : AnimNode_AssetPlayerBase;
+	static C(Other: UObject): AnimNode_AssetPlayerBase;
+}
+
+declare class BlendParameter { 
+	DisplayName: string;
+	Min: number;
+	Max: number;
+	GridNum: number;
+	clone() : BlendParameter;
+	static C(Other: UObject): BlendParameter;
+}
+
+declare type EFilterInterpolationType = 'BSIT_Average' | 'BSIT_Linear' | 'BSIT_Cubic';
+declare var EFilterInterpolationType : { BSIT_Average:'BSIT_Average',BSIT_Linear:'BSIT_Linear',BSIT_Cubic:'BSIT_Cubic', };
+declare class InterpolationParameter { 
+	InterpolationTime: number;
+	InterpolationType: EFilterInterpolationType;
+	clone() : InterpolationParameter;
+	static C(Other: UObject): InterpolationParameter;
+}
+
+declare type ENotifyTriggerMode = 'AllAnimations' | 'HighestWeightedAnimation' | 'None';
+declare var ENotifyTriggerMode : { AllAnimations:'AllAnimations',HighestWeightedAnimation:'HighestWeightedAnimation',None:'None', };
+declare class PerBoneInterpolation { 
+	BoneReference: BoneReference;
+	InterpolationSpeedPerSec: number;
+	clone() : PerBoneInterpolation;
+	static C(Other: UObject): PerBoneInterpolation;
+}
+
+declare class BlendSample { 
+	Animation: AnimSequence;
+	SampleValue: Vector;
+	clone() : BlendSample;
+	static C(Other: UObject): BlendSample;
+}
+
+declare class EditorElement { 
+	Indices: number;
+	Weights: number;
+	clone() : EditorElement;
+	static C(Other: UObject): EditorElement;
+}
+
+declare class BlendSpaceBase extends AnimationAsset { 
+	BlendParameters: BlendParameter;
+	InterpolationParam: InterpolationParameter;
+	TargetWeightInterpolationSpeedPerSec: number;
+	NotifyTriggerMode: ENotifyTriggerMode;
+	bRotationBlendInMeshSpace: boolean;
+	NumOfDimension: number;
+	PreviewBasePose: AnimSequence;
+	AnimLength: number;
+	PerBoneBlend: PerBoneInterpolation[];
+	SampleData: BlendSample[];
+	GridSamples: EditorElement[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): BlendSpaceBase;
+	static Find(Outer: UObject, ResourceName: string): BlendSpaceBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): BlendSpaceBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlendSpaceBase;
+	static C(Other: UObject): BlendSpaceBase;
+}
+
+declare class BlendFilter { 
+	clone() : BlendFilter;
+	static C(Other: UObject): BlendFilter;
+}
+
+declare class BlendSampleData { 
+	SampleDataIndex: number;
+	Animation: AnimSequence;
+	TotalWeight: number;
+	Time: number;
+	PreviousTime: number;
+	clone() : BlendSampleData;
+	static C(Other: UObject): BlendSampleData;
+}
+
+declare class AnimNode_BlendSpacePlayer extends AnimNode_AssetPlayerBase { 
+	X: number;
+	Y: number;
+	Z: number;
+	PlayRate: number;
+	bLoop: boolean;
+	StartPosition: number;
+	BlendSpace: BlendSpaceBase;
+	BlendFilter: BlendFilter;
+	BlendSampleDataCache: BlendSampleData[];
+	PreviousBlendSpace: BlendSpaceBase;
+	clone() : AnimNode_BlendSpacePlayer;
+	static C(Other: UObject): AnimNode_BlendSpacePlayer;
+}
+
+declare class AnimNode_AimOffsetLookAt extends AnimNode_BlendSpacePlayer { 
+	BasePose: PoseLink;
+	LODThreshold: number;
+	bIsLODEnabled: boolean;
+	LookAtLocation: Vector;
+	SourceSocketName: string;
+	Alpha: number;
+	clone() : AnimNode_AimOffsetLookAt;
+	static C(Other: UObject): AnimNode_AimOffsetLookAt;
+}
+
+declare class AnimGraphNode_AimOffsetLookAt extends AnimGraphNode_BlendSpaceBase { 
+	UNode: AnimNode_AimOffsetLookAt;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_AimOffsetLookAt;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_AimOffsetLookAt;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_AimOffsetLookAt;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_AimOffsetLookAt;
+	static C(Other: UObject): AnimGraphNode_AimOffsetLookAt;
+}
+
+declare class AnimNode_BlendSpaceEvaluator extends AnimNode_BlendSpacePlayer { 
+	NormalizedTime: number;
+	clone() : AnimNode_BlendSpaceEvaluator;
+	static C(Other: UObject): AnimNode_BlendSpaceEvaluator;
+}
+
+declare class AnimGraphNode_BlendSpaceEvaluator extends AnimGraphNode_BlendSpaceBase { 
+	UNode: AnimNode_BlendSpaceEvaluator;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BlendSpaceEvaluator;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BlendSpaceEvaluator;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BlendSpaceEvaluator;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BlendSpaceEvaluator;
+	static C(Other: UObject): AnimGraphNode_BlendSpaceEvaluator;
+}
+
+declare class AnimGraphNode_BlendSpacePlayer extends AnimGraphNode_BlendSpaceBase { 
+	UNode: AnimNode_BlendSpacePlayer;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BlendSpacePlayer;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BlendSpacePlayer;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BlendSpacePlayer;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BlendSpacePlayer;
+	static C(Other: UObject): AnimGraphNode_BlendSpacePlayer;
+}
+
+declare class AnimNode_RotationOffsetBlendSpace extends AnimNode_BlendSpacePlayer { 
+	BasePose: PoseLink;
+	LODThreshold: number;
+	bIsLODEnabled: boolean;
+	clone() : AnimNode_RotationOffsetBlendSpace;
+	static C(Other: UObject): AnimNode_RotationOffsetBlendSpace;
+}
+
+declare class AnimGraphNode_RotationOffsetBlendSpace extends AnimGraphNode_BlendSpaceBase { 
+	UNode: AnimNode_RotationOffsetBlendSpace;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_RotationOffsetBlendSpace;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_RotationOffsetBlendSpace;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_RotationOffsetBlendSpace;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_RotationOffsetBlendSpace;
+	static C(Other: UObject): AnimGraphNode_RotationOffsetBlendSpace;
+}
+
+declare class AnimNode_PoseHandler extends AnimNode_AssetPlayerBase { 
+	PoseAsset: PoseAsset;
+	clone() : AnimNode_PoseHandler;
+	static C(Other: UObject): AnimNode_PoseHandler;
+}
+
+declare class AnimNode_PoseByName extends AnimNode_PoseHandler { 
+	PoseName: string;
+	PoseWeight: number;
+	clone() : AnimNode_PoseByName;
+	static C(Other: UObject): AnimNode_PoseByName;
+}
+
+declare class AnimGraphNode_PoseByName extends AnimGraphNode_AssetPlayerBase { 
+	UNode: AnimNode_PoseByName;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_PoseByName;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_PoseByName;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_PoseByName;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_PoseByName;
+	static C(Other: UObject): AnimGraphNode_PoseByName;
+}
+
+declare class AnimGraphNode_PoseHandler extends AnimGraphNode_AssetPlayerBase { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_PoseHandler;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_PoseHandler;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_PoseHandler;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_PoseHandler;
+	static C(Other: UObject): AnimGraphNode_PoseHandler;
+}
+
+declare class AnimNode_PoseBlendNode extends AnimNode_PoseHandler { 
+	SourcePose: PoseLink;
+	clone() : AnimNode_PoseBlendNode;
+	static C(Other: UObject): AnimNode_PoseBlendNode;
+}
+
+declare class AnimGraphNode_PoseBlendNode extends AnimGraphNode_PoseHandler { 
+	UNode: AnimNode_PoseBlendNode;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_PoseBlendNode;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_PoseBlendNode;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_PoseBlendNode;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_PoseBlendNode;
+	static C(Other: UObject): AnimGraphNode_PoseBlendNode;
+}
+
+declare type EPoseDriverType = 'SwingAndTwist' | 'SwingOnly' | 'Translation';
+declare var EPoseDriverType : { SwingAndTwist:'SwingAndTwist',SwingOnly:'SwingOnly',Translation:'Translation', };
+declare type EBoneAxis = 'BA_X' | 'BA_Y' | 'BA_Z';
+declare var EBoneAxis : { BA_X:'BA_X',BA_Y:'BA_Y',BA_Z:'BA_Z', };
+declare class AnimNode_PoseDriver extends AnimNode_PoseHandler { 
+	SourcePose: PoseLink;
+	SourceBone: BoneReference;
+	RadialScaling: number;
+	bIncludeRefPoseAsNeutralPose: boolean;
+	Type: EPoseDriverType;
+	TwistAxis: EBoneAxis;
+	clone() : AnimNode_PoseDriver;
+	static C(Other: UObject): AnimNode_PoseDriver;
+}
+
+declare class AnimGraphNode_PoseDriver extends AnimGraphNode_PoseHandler { 
+	UNode: AnimNode_PoseDriver;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_PoseDriver;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_PoseDriver;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_PoseDriver;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_PoseDriver;
+	static C(Other: UObject): AnimGraphNode_PoseDriver;
+}
+
+declare type ESequenceEvalReinit = 'NoReset' | 'StartPosition' | 'ExplicitTime';
+declare var ESequenceEvalReinit : { NoReset:'NoReset',StartPosition:'StartPosition',ExplicitTime:'ExplicitTime', };
+declare class AnimNode_SequenceEvaluator extends AnimNode_AssetPlayerBase { 
+	Sequence: AnimSequenceBase;
+	ExplicitTime: number;
+	bShouldLoopWhenInSyncGroup: boolean;
+	bTeleportToExplicitTime: boolean;
+	StartPosition: number;
+	ReinitializationBehavior: ESequenceEvalReinit;
+	bReinitialized: boolean;
+	clone() : AnimNode_SequenceEvaluator;
+	static C(Other: UObject): AnimNode_SequenceEvaluator;
+}
+
+declare class AnimGraphNode_SequenceEvaluator extends AnimGraphNode_AssetPlayerBase { 
+	UNode: AnimNode_SequenceEvaluator;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_SequenceEvaluator;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_SequenceEvaluator;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_SequenceEvaluator;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_SequenceEvaluator;
+	static C(Other: UObject): AnimGraphNode_SequenceEvaluator;
+}
+
+declare class AnimNode_SequencePlayer extends AnimNode_AssetPlayerBase { 
+	Sequence: AnimSequenceBase;
+	bLoopAnimation: boolean;
+	PlayRate: number;
+	StartPosition: number;
+	clone() : AnimNode_SequencePlayer;
+	static C(Other: UObject): AnimNode_SequencePlayer;
+}
+
+declare class AnimGraphNode_SequencePlayer extends AnimGraphNode_AssetPlayerBase { 
+	UNode: AnimNode_SequencePlayer;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_SequencePlayer;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_SequencePlayer;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_SequencePlayer;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_SequencePlayer;
+	static C(Other: UObject): AnimGraphNode_SequencePlayer;
+}
+
+declare class AnimGraphNode_BlendListBase extends AnimGraphNode_Base { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BlendListBase;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BlendListBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BlendListBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BlendListBase;
+	static C(Other: UObject): AnimGraphNode_BlendListBase;
+}
+
+declare class AnimNode_BlendListBase extends AnimNode_Base { 
+	BlendPose: PoseLink[];
+	BlendTime: number[];
+	BlendType: EAlphaBlendOption;
+	CustomBlendCurve: CurveFloat;
+	BlendProfile: BlendProfile;
+	Blends: AlphaBlend[];
+	BlendWeights: number[];
+	RemainingBlendTimes: number[];
+	LastActiveChildIndex: number;
+	PerBoneSampleData: BlendSampleData[];
+	bResetChildOnActivation: boolean;
+	clone() : AnimNode_BlendListBase;
+	static C(Other: UObject): AnimNode_BlendListBase;
+}
+
+declare class AnimNode_BlendListByBool extends AnimNode_BlendListBase { 
+	bActiveValue: boolean;
+	clone() : AnimNode_BlendListByBool;
+	static C(Other: UObject): AnimNode_BlendListByBool;
+}
+
+declare class AnimGraphNode_BlendListByBool extends AnimGraphNode_BlendListBase { 
+	UNode: AnimNode_BlendListByBool;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BlendListByBool;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BlendListByBool;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BlendListByBool;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BlendListByBool;
+	static C(Other: UObject): AnimGraphNode_BlendListByBool;
+}
+
+declare class AnimNode_BlendListByEnum extends AnimNode_BlendListBase { 
+	EnumToPoseIndex: number[];
+	ActiveEnumValue: number;
+	clone() : AnimNode_BlendListByEnum;
+	static C(Other: UObject): AnimNode_BlendListByEnum;
+}
+
+declare class AnimGraphNode_BlendListByEnum extends AnimGraphNode_BlendListBase { 
+	UNode: AnimNode_BlendListByEnum;
+	BoundEnum: Enum;
+	VisibleEnumEntries: string[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BlendListByEnum;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BlendListByEnum;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BlendListByEnum;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BlendListByEnum;
+	static C(Other: UObject): AnimGraphNode_BlendListByEnum;
+}
+
+declare class AnimNode_BlendListByInt extends AnimNode_BlendListBase { 
+	ActiveChildIndex: number;
+	clone() : AnimNode_BlendListByInt;
+	static C(Other: UObject): AnimNode_BlendListByInt;
+}
+
+declare class AnimGraphNode_BlendListByInt extends AnimGraphNode_BlendListBase { 
+	UNode: AnimNode_BlendListByInt;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BlendListByInt;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BlendListByInt;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BlendListByInt;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BlendListByInt;
+	static C(Other: UObject): AnimGraphNode_BlendListByInt;
+}
+
+declare class BranchFilter { 
+	BoneName: string;
+	BlendDepth: number;
+	clone() : BranchFilter;
+	static C(Other: UObject): BranchFilter;
+}
+
+declare class InputBlendPose { 
+	BranchFilters: BranchFilter[];
+	clone() : InputBlendPose;
+	static C(Other: UObject): InputBlendPose;
+}
+
+declare type ECurveBlendOption = 'MaxWeight' | 'NormalizeByWeight' | 'BlendByWeight';
+declare var ECurveBlendOption : { MaxWeight:'MaxWeight',NormalizeByWeight:'NormalizeByWeight',BlendByWeight:'BlendByWeight', };
+declare class AnimNode_LayeredBoneBlend extends AnimNode_Base { 
+	BasePose: PoseLink;
+	BlendPoses: PoseLink[];
+	LayerSetup: InputBlendPose[];
+	BlendWeights: number[];
+	bMeshSpaceRotationBlend: boolean;
+	CurveBlendOption: ECurveBlendOption;
+	bBlendRootMotionBasedOnRootBone: boolean;
+	bHasRelevantPoses: boolean;
+	clone() : AnimNode_LayeredBoneBlend;
+	static C(Other: UObject): AnimNode_LayeredBoneBlend;
+}
+
+declare class AnimGraphNode_LayeredBoneBlend extends AnimGraphNode_BlendListBase { 
+	UNode: AnimNode_LayeredBoneBlend;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_LayeredBoneBlend;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_LayeredBoneBlend;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_LayeredBoneBlend;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_LayeredBoneBlend;
+	static C(Other: UObject): AnimGraphNode_LayeredBoneBlend;
+}
+
+declare class ComponentSpacePoseLink extends PoseLinkBase { 
+	clone() : ComponentSpacePoseLink;
+	static C(Other: UObject): ComponentSpacePoseLink;
+}
+
+declare class AnimNode_ConvertComponentToLocalSpace extends AnimNode_Base { 
+	ComponentPose: ComponentSpacePoseLink;
+	clone() : AnimNode_ConvertComponentToLocalSpace;
+	static C(Other: UObject): AnimNode_ConvertComponentToLocalSpace;
+}
+
+declare class AnimGraphNode_ComponentToLocalSpace extends AnimGraphNode_Base { 
+	UNode: AnimNode_ConvertComponentToLocalSpace;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_ComponentToLocalSpace;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_ComponentToLocalSpace;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_ComponentToLocalSpace;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_ComponentToLocalSpace;
+	static C(Other: UObject): AnimGraphNode_ComponentToLocalSpace;
+}
+
+declare class AnimGraphNode_SkeletalControlBase extends AnimGraphNode_Base { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_SkeletalControlBase;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_SkeletalControlBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_SkeletalControlBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_SkeletalControlBase;
+	static C(Other: UObject): AnimGraphNode_SkeletalControlBase;
+}
+
+declare class AnimNode_CopyPoseFromMesh extends AnimNode_Base { 
+	SourceMeshComponent: SkeletalMeshComponent;
+	clone() : AnimNode_CopyPoseFromMesh;
+	static C(Other: UObject): AnimNode_CopyPoseFromMesh;
+}
+
+declare class AnimGraphNode_CopyPoseFromMesh extends AnimGraphNode_Base { 
+	UNode: AnimNode_CopyPoseFromMesh;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_CopyPoseFromMesh;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_CopyPoseFromMesh;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_CopyPoseFromMesh;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_CopyPoseFromMesh;
+	static C(Other: UObject): AnimGraphNode_CopyPoseFromMesh;
+}
+
+declare class AnimNode_ConvertLocalToComponentSpace extends AnimNode_Base { 
+	LocalPose: PoseLink;
+	clone() : AnimNode_ConvertLocalToComponentSpace;
+	static C(Other: UObject): AnimNode_ConvertLocalToComponentSpace;
+}
+
+declare class AnimGraphNode_LocalToComponentSpace extends AnimGraphNode_Base { 
+	UNode: AnimNode_ConvertLocalToComponentSpace;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_LocalToComponentSpace;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_LocalToComponentSpace;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_LocalToComponentSpace;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_LocalToComponentSpace;
+	static C(Other: UObject): AnimGraphNode_LocalToComponentSpace;
+}
+
+declare class AnimNode_MeshSpaceRefPose extends AnimNode_Base { 
+	clone() : AnimNode_MeshSpaceRefPose;
+	static C(Other: UObject): AnimNode_MeshSpaceRefPose;
+}
+
+declare class AnimGraphNode_MeshRefPose extends AnimGraphNode_Base { 
+	UNode: AnimNode_MeshSpaceRefPose;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_MeshRefPose;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_MeshRefPose;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_MeshRefPose;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_MeshRefPose;
+	static C(Other: UObject): AnimGraphNode_MeshRefPose;
+}
+
+declare class RandomPlayerSequenceEntry { 
+	Sequence: AnimSequence;
+	ChanceToPlay: number;
+	MinLoopCount: number;
+	MaxLoopCount: number;
+	MinPlayRate: number;
+	MaxPlayRate: number;
+	BlendIn: AlphaBlend;
+	clone() : RandomPlayerSequenceEntry;
+	static C(Other: UObject): RandomPlayerSequenceEntry;
+}
+
+declare class AnimNode_RandomPlayer extends AnimNode_Base { 
+	bShuffleMode: boolean;
+	Entries: RandomPlayerSequenceEntry[];
+	clone() : AnimNode_RandomPlayer;
+	static C(Other: UObject): AnimNode_RandomPlayer;
+}
+
+declare class AnimGraphNode_RandomPlayer extends AnimGraphNode_Base { 
+	UNode: AnimNode_RandomPlayer;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_RandomPlayer;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_RandomPlayer;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_RandomPlayer;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_RandomPlayer;
+	static C(Other: UObject): AnimGraphNode_RandomPlayer;
+}
+
+declare type ERefPoseType = 'EIT_LocalSpace' | 'EIT_Additive';
+declare var ERefPoseType : { EIT_LocalSpace:'EIT_LocalSpace',EIT_Additive:'EIT_Additive', };
+declare class AnimNode_RefPose extends AnimNode_Base { 
+	RefPoseType: ERefPoseType;
+	clone() : AnimNode_RefPose;
+	static C(Other: UObject): AnimNode_RefPose;
+}
+
+declare class AnimGraphNode_RefPoseBase extends AnimGraphNode_Base { 
+	UNode: AnimNode_RefPose;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_RefPoseBase;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_RefPoseBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_RefPoseBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_RefPoseBase;
+	static C(Other: UObject): AnimGraphNode_RefPoseBase;
+}
+
+declare class AnimGraphNode_IdentityPose extends AnimGraphNode_RefPoseBase { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_IdentityPose;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_IdentityPose;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_IdentityPose;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_IdentityPose;
+	static C(Other: UObject): AnimGraphNode_IdentityPose;
+}
+
+declare class AnimGraphNode_LocalRefPose extends AnimGraphNode_RefPoseBase { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_LocalRefPose;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_LocalRefPose;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_LocalRefPose;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_LocalRefPose;
+	static C(Other: UObject): AnimGraphNode_LocalRefPose;
+}
+
+declare class AnimNode_RotateRootBone extends AnimNode_Base { 
+	BasePose: PoseLink;
+	Pitch: number;
+	Yaw: number;
+	MeshToComponent: Rotator;
+	clone() : AnimNode_RotateRootBone;
+	static C(Other: UObject): AnimNode_RotateRootBone;
+}
+
+declare class AnimGraphNode_RotateRootBone extends AnimGraphNode_Base { 
+	UNode: AnimNode_RotateRootBone;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_RotateRootBone;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_RotateRootBone;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_RotateRootBone;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_RotateRootBone;
+	static C(Other: UObject): AnimGraphNode_RotateRootBone;
+}
+
+declare class AnimNode_SaveCachedPose extends AnimNode_Base { 
+	Pose: PoseLink;
+	CachePoseName: string;
+	GlobalWeight: number;
+	clone() : AnimNode_SaveCachedPose;
+	static C(Other: UObject): AnimNode_SaveCachedPose;
+}
+
+declare class AnimGraphNode_SaveCachedPose extends AnimGraphNode_Base { 
+	UNode: AnimNode_SaveCachedPose;
+	CacheName: string;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_SaveCachedPose;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_SaveCachedPose;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_SaveCachedPose;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_SaveCachedPose;
+	static C(Other: UObject): AnimGraphNode_SaveCachedPose;
+}
+
+declare class AnimNode_SkeletalControlBase extends AnimNode_Base { 
+	ComponentPose: ComponentSpacePoseLink;
+	Alpha: number;
+	AlphaScaleBias: InputScaleBias;
+	LODThreshold: number;
+	ActualAlpha: number;
+	clone() : AnimNode_SkeletalControlBase;
+	static C(Other: UObject): AnimNode_SkeletalControlBase;
+}
+
+declare type AnimPhysSimSpaceType = 'Component' | 'Actor' | 'World' | 'RootRelative' | 'BoneRelative';
+declare var AnimPhysSimSpaceType : { Component:'Component',Actor:'Actor',World:'World',RootRelative:'RootRelative',BoneRelative:'BoneRelative', };
+declare type AnimPhysLinearConstraintType = 'Free' | 'Limited';
+declare var AnimPhysLinearConstraintType : { Free:'Free',Limited:'Limited', };
+declare type AnimPhysAngularConstraintType = 'Angular' | 'Cone';
+declare var AnimPhysAngularConstraintType : { Angular:'Angular',Cone:'Cone', };
+declare type AnimPhysTwistAxis = 'AxisX' | 'AxisY' | 'AxisZ';
+declare var AnimPhysTwistAxis : { AxisX:'AxisX',AxisY:'AxisY',AxisZ:'AxisZ', };
+declare class AnimPhysConstraintSetup { 
+	LinearXLimitType: AnimPhysLinearConstraintType;
+	LinearYLimitType: AnimPhysLinearConstraintType;
+	LinearZLimitType: AnimPhysLinearConstraintType;
+	LinearAxesMin: Vector;
+	LinearAxesMax: Vector;
+	AngularConstraintType: AnimPhysAngularConstraintType;
+	TwistAxis: AnimPhysTwistAxis;
+	ConeAngle: number;
+	AngularXAngle: number;
+	AngularYAngle: number;
+	AngularZAngle: number;
+	AngularLimitsMin: Vector;
+	AngularLimitsMax: Vector;
+	AngularTargetAxis: AnimPhysTwistAxis;
+	AngularTarget: Vector;
+	bLinearFullyLocked: boolean;
+	clone() : AnimPhysConstraintSetup;
+	static C(Other: UObject): AnimPhysConstraintSetup;
+}
+
+declare class AnimPhysPlanarLimit { 
+	DrivingBone: BoneReference;
+	PlaneTransform: Transform;
+	clone() : AnimPhysPlanarLimit;
+	static C(Other: UObject): AnimPhysPlanarLimit;
+}
+
+declare type ESphericalLimitType = 'Inner' | 'Outer';
+declare var ESphericalLimitType : { Inner:'Inner',Outer:'Outer', };
+declare class AnimPhysSphericalLimit { 
+	DrivingBone: BoneReference;
+	SphereLocalOffset: Vector;
+	LimitRadius: number;
+	LimitType: ESphericalLimitType;
+	clone() : AnimPhysSphericalLimit;
+	static C(Other: UObject): AnimPhysSphericalLimit;
+}
+
+declare type AnimPhysCollisionType = 'CoM' | 'CustomSphere' | 'InnerSphere' | 'OuterSphere';
+declare var AnimPhysCollisionType : { CoM:'CoM',CustomSphere:'CustomSphere',InnerSphere:'InnerSphere',OuterSphere:'OuterSphere', };
+declare class AnimNode_AnimDynamics extends AnimNode_SkeletalControlBase { 
+	SimulationSpace: AnimPhysSimSpaceType;
+	RelativeSpaceBone: BoneReference;
+	bChain: boolean;
+	BoundBone: BoneReference;
+	ChainEnd: BoneReference;
+	BoxExtents: Vector;
+	LocalJointOffset: Vector;
+	GravityScale: number;
+	bLinearSpring: boolean;
+	bAngularSpring: boolean;
+	LinearSpringConstant: number;
+	AngularSpringConstant: number;
+	bEnableWind: boolean;
+	WindScale: number;
+	bOverrideLinearDamping: boolean;
+	LinearDampingOverride: number;
+	bOverrideAngularDamping: boolean;
+	AngularDampingOverride: number;
+	bOverrideAngularBias: boolean;
+	AngularBiasOverride: number;
+	bDoUpdate: boolean;
+	bDoEval: boolean;
+	NumSolverIterationsPreUpdate: number;
+	NumSolverIterationsPostUpdate: number;
+	ConstraintSetup: AnimPhysConstraintSetup;
+	bUsePlanarLimit: boolean;
+	PlanarLimits: AnimPhysPlanarLimit[];
+	bUseSphericalLimits: boolean;
+	SphericalLimits: AnimPhysSphericalLimit[];
+	CollisionType: AnimPhysCollisionType;
+	SphereCollisionRadius: number;
+	ExternalForce: Vector;
+	clone() : AnimNode_AnimDynamics;
+	static C(Other: UObject): AnimNode_AnimDynamics;
+}
+
+declare class AnimGraphNode_AnimDynamics extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_AnimDynamics;
+	bPreviewLive: boolean;
+	bShowLinearLimits: boolean;
+	bShowAngularLimits: boolean;
+	bShowPlanarLimit: boolean;
+	bShowSphericalLimit: boolean;
+	bShowCollisionSpheres: boolean;
+	LastPreviewComponent: SkeletalMeshComponent;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_AnimDynamics;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_AnimDynamics;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_AnimDynamics;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_AnimDynamics;
+	static C(Other: UObject): AnimGraphNode_AnimDynamics;
+}
+
+declare type EComponentType = 'None' | 'TranslationX' | 'TranslationY' | 'TranslationZ' | 'RotationX' | 'RotationY' | 'RotationZ' | 'Scale' | 'ScaleX' | 'ScaleY' | 'ScaleZ';
+declare var EComponentType : { None:'None',TranslationX:'TranslationX',TranslationY:'TranslationY',TranslationZ:'TranslationZ',RotationX:'RotationX',RotationY:'RotationY',RotationZ:'RotationZ',Scale:'Scale',ScaleX:'ScaleX',ScaleY:'ScaleY',ScaleZ:'ScaleZ', };
+declare type EDrivenDestinationMode = 'Bone' | 'MorphTarget' | 'MaterialParameter';
+declare var EDrivenDestinationMode : { Bone:'Bone',MorphTarget:'MorphTarget',MaterialParameter:'MaterialParameter', };
+declare type EDrivenBoneModificationMode = 'AddToInput' | 'ReplaceComponent' | 'AddToRefPose';
+declare var EDrivenBoneModificationMode : { AddToInput:'AddToInput',ReplaceComponent:'ReplaceComponent',AddToRefPose:'AddToRefPose', };
+declare class AnimNode_BoneDrivenController extends AnimNode_SkeletalControlBase { 
+	SourceBone: BoneReference;
+	SourceComponent: EComponentType;
+	DrivingCurve: CurveFloat;
+	Multiplier: number;
+	bUseRange: boolean;
+	RangeMin: number;
+	RangeMax: number;
+	RemappedMin: number;
+	RemappedMax: number;
+	DestinationMode: EDrivenDestinationMode;
+	ParameterName: string;
+	TargetBone: BoneReference;
+	TargetComponent: EComponentType;
+	bAffectTargetTranslationX: boolean;
+	bAffectTargetTranslationY: boolean;
+	bAffectTargetTranslationZ: boolean;
+	bAffectTargetRotationX: boolean;
+	bAffectTargetRotationY: boolean;
+	bAffectTargetRotationZ: boolean;
+	bAffectTargetScaleX: boolean;
+	bAffectTargetScaleY: boolean;
+	bAffectTargetScaleZ: boolean;
+	ModificationMode: EDrivenBoneModificationMode;
+	clone() : AnimNode_BoneDrivenController;
+	static C(Other: UObject): AnimNode_BoneDrivenController;
+}
+
+declare class AnimGraphNode_BoneDrivenController extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_BoneDrivenController;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_BoneDrivenController;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_BoneDrivenController;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_BoneDrivenController;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_BoneDrivenController;
+	static C(Other: UObject): AnimGraphNode_BoneDrivenController;
+}
+
+declare type EBoneControlSpace = 'BCS_WorldSpace' | 'BCS_ComponentSpace' | 'BCS_ParentBoneSpace' | 'BCS_BoneSpace';
+declare var EBoneControlSpace : { BCS_WorldSpace:'BCS_WorldSpace',BCS_ComponentSpace:'BCS_ComponentSpace',BCS_ParentBoneSpace:'BCS_ParentBoneSpace',BCS_BoneSpace:'BCS_BoneSpace', };
+declare class AnimNode_CopyBone extends AnimNode_SkeletalControlBase { 
+	SourceBone: BoneReference;
+	TargetBone: BoneReference;
+	bCopyTranslation: boolean;
+	bCopyRotation: boolean;
+	bCopyScale: boolean;
+	ControlSpace: EBoneControlSpace;
+	clone() : AnimNode_CopyBone;
+	static C(Other: UObject): AnimNode_CopyBone;
+}
+
+declare class AnimGraphNode_CopyBone extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_CopyBone;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_CopyBone;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_CopyBone;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_CopyBone;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_CopyBone;
+	static C(Other: UObject): AnimGraphNode_CopyBone;
+}
+
+declare type CopyBoneDeltaMode = 'Accumulate' | 'Copy';
+declare var CopyBoneDeltaMode : { Accumulate:'Accumulate',Copy:'Copy', };
+declare class AnimNode_CopyBoneDelta extends AnimNode_SkeletalControlBase { 
+	SourceBone: BoneReference;
+	TargetBone: BoneReference;
+	bCopyTranslation: boolean;
+	bCopyRotation: boolean;
+	bCopyScale: boolean;
+	CopyMode: CopyBoneDeltaMode;
+	TranslationMultiplier: number;
+	RotationMultiplier: number;
+	ScaleMultiplier: number;
+	clone() : AnimNode_CopyBoneDelta;
+	static C(Other: UObject): AnimNode_CopyBoneDelta;
+}
+
+declare class AnimGraphNode_CopyBoneDelta extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_CopyBoneDelta;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_CopyBoneDelta;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_CopyBoneDelta;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_CopyBoneDelta;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_CopyBoneDelta;
+	static C(Other: UObject): AnimGraphNode_CopyBoneDelta;
+}
+
+declare type EBoneRotationSource = 'BRS_KeepComponentSpaceRotation' | 'BRS_KeepLocalSpaceRotation' | 'BRS_CopyFromTarget';
+declare var EBoneRotationSource : { BRS_KeepComponentSpaceRotation:'BRS_KeepComponentSpaceRotation',BRS_KeepLocalSpaceRotation:'BRS_KeepLocalSpaceRotation',BRS_CopyFromTarget:'BRS_CopyFromTarget', };
+declare class AnimNode_Fabrik extends AnimNode_SkeletalControlBase { 
+	EffectorTransform: Transform;
+	EffectorTransformSpace: EBoneControlSpace;
+	EffectorTransformBone: BoneReference;
+	EffectorRotationSource: EBoneRotationSource;
+	TipBone: BoneReference;
+	RootBone: BoneReference;
+	Precision: number;
+	MaxIterations: number;
+	bEnableDebugDraw: boolean;
+	clone() : AnimNode_Fabrik;
+	static C(Other: UObject): AnimNode_Fabrik;
+}
+
+declare class AnimGraphNode_Fabrik extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_Fabrik;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_Fabrik;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_Fabrik;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_Fabrik;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_Fabrik;
+	static C(Other: UObject): AnimGraphNode_Fabrik;
+}
+
+declare class AnimNode_HandIKRetargeting extends AnimNode_SkeletalControlBase { 
+	RightHandFK: BoneReference;
+	LeftHandFK: BoneReference;
+	RightHandIK: BoneReference;
+	LeftHandIK: BoneReference;
+	IKBonesToMove: BoneReference[];
+	HandFKWeight: number;
+	clone() : AnimNode_HandIKRetargeting;
+	static C(Other: UObject): AnimNode_HandIKRetargeting;
+}
+
+declare class AnimGraphNode_HandIKRetargeting extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_HandIKRetargeting;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_HandIKRetargeting;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_HandIKRetargeting;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_HandIKRetargeting;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_HandIKRetargeting;
+	static C(Other: UObject): AnimGraphNode_HandIKRetargeting;
+}
+
+declare class AnimLegIKDefinition { 
+	IKFootBone: BoneReference;
+	FKFootBone: BoneReference;
+	NumBonesInLimb: number;
+	FootBoneForwardAxis: EAxis;
+	bEnableRotationLimit: boolean;
+	MinRotationAngle: number;
+	bEnableKneeTwistCorrection: boolean;
+	clone() : AnimLegIKDefinition;
+	static C(Other: UObject): AnimLegIKDefinition;
+}
+
+declare class AnimLegIKData { 
+	clone() : AnimLegIKData;
+	static C(Other: UObject): AnimLegIKData;
+}
+
+declare class AnimNode_LegIK extends AnimNode_SkeletalControlBase { 
+	ReachPrecision: number;
+	MaxIterations: number;
+	LegsDefinition: AnimLegIKDefinition[];
+	LegsData: AnimLegIKData[];
+	clone() : AnimNode_LegIK;
+	static C(Other: UObject): AnimNode_LegIK;
+}
+
+declare class AnimGraphNode_LegIK extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_LegIK;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_LegIK;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_LegIK;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_LegIK;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_LegIK;
+	static C(Other: UObject): AnimGraphNode_LegIK;
+}
+
+declare type EAxisOption = 'X' | 'Y' | 'Z' | 'X_Neg' | 'Y_Neg' | 'Z_Neg';
+declare var EAxisOption : { X:'X',Y:'Y',Z:'Z',X_Neg:'X_Neg',Y_Neg:'Y_Neg',Z_Neg:'Z_Neg', };
+declare type EInterpolationBlend = 'Linear' | 'Cubic' | 'Sinusoidal' | 'EaseInOutExponent2' | 'EaseInOutExponent3' | 'EaseInOutExponent4' | 'EaseInOutExponent5' | 'MAX';
+declare var EInterpolationBlend : { Linear:'Linear',Cubic:'Cubic',Sinusoidal:'Sinusoidal',EaseInOutExponent2:'EaseInOutExponent2',EaseInOutExponent3:'EaseInOutExponent3',EaseInOutExponent4:'EaseInOutExponent4',EaseInOutExponent5:'EaseInOutExponent5',MAX:'MAX', };
+declare class AnimNode_LookAt extends AnimNode_SkeletalControlBase { 
+	BoneToModify: BoneReference;
+	LookAtBone: BoneReference;
+	LookAtSocket: string;
+	LookAtLocation: Vector;
+	LookAtAxis: EAxisOption;
+	bUseLookUpAxis: boolean;
+	LookUpAxis: EAxisOption;
+	LookAtClamp: number;
+	InterpolationType: EInterpolationBlend;
+	InterpolationTime: number;
+	InterpolationTriggerThreashold: number;
+	bEnableDebug: boolean;
+	clone() : AnimNode_LookAt;
+	static C(Other: UObject): AnimNode_LookAt;
+}
+
+declare class AnimGraphNode_LookAt extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_LookAt;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_LookAt;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_LookAt;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_LookAt;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_LookAt;
+	static C(Other: UObject): AnimGraphNode_LookAt;
+}
+
+declare type EBoneModificationMode = 'BMM_Ignore' | 'BMM_Replace' | 'BMM_Additive';
+declare var EBoneModificationMode : { BMM_Ignore:'BMM_Ignore',BMM_Replace:'BMM_Replace',BMM_Additive:'BMM_Additive', };
+declare class AnimNode_ModifyBone extends AnimNode_SkeletalControlBase { 
+	BoneToModify: BoneReference;
+	Translation: Vector;
+	Rotation: Rotator;
+	Scale: Vector;
+	TranslationMode: EBoneModificationMode;
+	RotationMode: EBoneModificationMode;
+	ScaleMode: EBoneModificationMode;
+	TranslationSpace: EBoneControlSpace;
+	RotationSpace: EBoneControlSpace;
+	ScaleSpace: EBoneControlSpace;
+	clone() : AnimNode_ModifyBone;
+	static C(Other: UObject): AnimNode_ModifyBone;
+}
+
+declare class AnimGraphNode_ModifyBone extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_ModifyBone;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_ModifyBone;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_ModifyBone;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_ModifyBone;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_ModifyBone;
+	static C(Other: UObject): AnimGraphNode_ModifyBone;
+}
+
+declare class AnimNode_ObserveBone extends AnimNode_SkeletalControlBase { 
+	BoneToObserve: BoneReference;
+	DisplaySpace: EBoneControlSpace;
+	bRelativeToRefPose: boolean;
+	Translation: Vector;
+	Rotation: Rotator;
+	Scale: Vector;
+	clone() : AnimNode_ObserveBone;
+	static C(Other: UObject): AnimNode_ObserveBone;
+}
+
+declare class AnimGraphNode_ObserveBone extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_ObserveBone;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_ObserveBone;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_ObserveBone;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_ObserveBone;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_ObserveBone;
+	static C(Other: UObject): AnimGraphNode_ObserveBone;
+}
+
+declare class AnimNode_RotationMultiplier extends AnimNode_SkeletalControlBase { 
+	TargetBone: BoneReference;
+	SourceBone: BoneReference;
+	Multiplier: number;
+	RotationAxisToRefer: EBoneAxis;
+	bIsAdditive: boolean;
+	clone() : AnimNode_RotationMultiplier;
+	static C(Other: UObject): AnimNode_RotationMultiplier;
+}
+
+declare class AnimGraphNode_RotationMultiplier extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_RotationMultiplier;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_RotationMultiplier;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_RotationMultiplier;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_RotationMultiplier;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_RotationMultiplier;
+	static C(Other: UObject): AnimGraphNode_RotationMultiplier;
+}
+
+declare class AnimNode_SpringBone extends AnimNode_SkeletalControlBase { 
+	SpringBone: BoneReference;
+	bLimitDisplacement: boolean;
+	MaxDisplacement: number;
+	SpringStiffness: number;
+	SpringDamping: number;
+	ErrorResetThresh: number;
+	bNoZSpring: boolean;
+	bTranslateX: boolean;
+	bTranslateY: boolean;
+	bTranslateZ: boolean;
+	bRotateX: boolean;
+	bRotateY: boolean;
+	bRotateZ: boolean;
+	clone() : AnimNode_SpringBone;
+	static C(Other: UObject): AnimNode_SpringBone;
+}
+
+declare class AnimGraphNode_SpringBone extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_SpringBone;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_SpringBone;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_SpringBone;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_SpringBone;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_SpringBone;
+	static C(Other: UObject): AnimGraphNode_SpringBone;
+}
+
+declare class AnimNode_Trail extends AnimNode_SkeletalControlBase { 
+	TrailBone: BoneReference;
+	ChainLength: number;
+	ChainBoneAxis: EAxis;
+	bInvertChainBoneAxis: boolean;
+	TrailRelaxation: number;
+	TrailRelaxationSpeed: RuntimeFloatCurve;
+	bLimitStretch: boolean;
+	StretchLimit: number;
+	FakeVelocity: Vector;
+	bActorSpaceFakeVel: boolean;
+	BaseJoint: BoneReference;
+	clone() : AnimNode_Trail;
+	static C(Other: UObject): AnimNode_Trail;
+}
+
+declare class AnimGraphNode_Trail extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_Trail;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_Trail;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_Trail;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_Trail;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_Trail;
+	static C(Other: UObject): AnimGraphNode_Trail;
+}
+
+declare class Axis { 
+	Axis: Vector;
+	bInLocalSpace: boolean;
+	clone() : Axis;
+	static C(Other: UObject): Axis;
+}
+
+declare class ReferenceBoneFrame { 
+	Bone: BoneReference;
+	Axis: Axis;
+	clone() : ReferenceBoneFrame;
+	static C(Other: UObject): ReferenceBoneFrame;
+}
+
+declare class AnimCurveParam { 
+	Name: string;
+	clone() : AnimCurveParam;
+	static C(Other: UObject): AnimCurveParam;
+}
+
+declare class AnimNode_TwistCorrectiveNode extends AnimNode_SkeletalControlBase { 
+	BaseFrame: ReferenceBoneFrame;
+	TwistFrame: ReferenceBoneFrame;
+	TwistPlaneNormalAxis: Axis;
+	RangeMax: number;
+	RemappedMin: number;
+	RemappedMax: number;
+	Curve: AnimCurveParam;
+	clone() : AnimNode_TwistCorrectiveNode;
+	static C(Other: UObject): AnimNode_TwistCorrectiveNode;
+}
+
+declare class AnimGraphNode_TwistCorrectiveNode extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_TwistCorrectiveNode;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_TwistCorrectiveNode;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_TwistCorrectiveNode;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_TwistCorrectiveNode;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_TwistCorrectiveNode;
+	static C(Other: UObject): AnimGraphNode_TwistCorrectiveNode;
+}
+
+declare class AnimNode_TwoBoneIK extends AnimNode_SkeletalControlBase { 
+	IKBone: BoneReference;
+	EffectorLocation: Vector;
+	JointTargetLocation: Vector;
+	StretchLimits: Vector2D;
+	EffectorSpaceBoneName: string;
+	bTakeRotationFromEffectorSpace: boolean;
+	bMaintainEffectorRelRot: boolean;
+	bAllowStretching: boolean;
+	EffectorLocationSpace: EBoneControlSpace;
+	JointTargetLocationSpace: EBoneControlSpace;
+	JointTargetSpaceBoneName: string;
+	clone() : AnimNode_TwoBoneIK;
+	static C(Other: UObject): AnimNode_TwoBoneIK;
+}
+
+declare class AnimGraphNode_TwoBoneIK extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_TwoBoneIK;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_TwoBoneIK;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_TwoBoneIK;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_TwoBoneIK;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_TwoBoneIK;
+	static C(Other: UObject): AnimGraphNode_TwoBoneIK;
+}
+
+declare class AnimNode_WheelHandler extends AnimNode_SkeletalControlBase { 
+	clone() : AnimNode_WheelHandler;
+	static C(Other: UObject): AnimNode_WheelHandler;
+}
+
+declare class AnimGraphNode_WheelHandler extends AnimGraphNode_SkeletalControlBase { 
+	UNode: AnimNode_WheelHandler;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_WheelHandler;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_WheelHandler;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_WheelHandler;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_WheelHandler;
+	static C(Other: UObject): AnimGraphNode_WheelHandler;
+}
+
+declare class AnimNode_Slot extends AnimNode_Base { 
+	Source: PoseLink;
+	SlotName: string;
+	clone() : AnimNode_Slot;
+	static C(Other: UObject): AnimNode_Slot;
+}
+
+declare class AnimGraphNode_Slot extends AnimGraphNode_Base { 
+	UNode: AnimNode_Slot;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_Slot;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_Slot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_Slot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_Slot;
+	static C(Other: UObject): AnimGraphNode_Slot;
+}
+
+declare class AnimNode_StateMachine extends AnimNode_Base { 
+	StateMachineIndexInClass: number;
+	MaxTransitionsPerFrame: number;
+	bSkipFirstUpdateTransition: boolean;
+	CurrentState: number;
+	ElapsedTime: number;
+	clone() : AnimNode_StateMachine;
+	static C(Other: UObject): AnimNode_StateMachine;
+}
+
+declare class AnimGraphNode_StateMachine extends AnimGraphNode_StateMachineBase { 
+	UNode: AnimNode_StateMachine;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_StateMachine;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_StateMachine;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_StateMachine;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_StateMachine;
+	static C(Other: UObject): AnimGraphNode_StateMachine;
+}
+
+declare class AnimNode_SubInput extends AnimNode_Base { 
+	clone() : AnimNode_SubInput;
+	static C(Other: UObject): AnimNode_SubInput;
+}
+
+declare class AnimGraphNode_SubInput extends AnimGraphNode_Base { 
+	UNode: AnimNode_SubInput;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_SubInput;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_SubInput;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_SubInput;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_SubInput;
+	static C(Other: UObject): AnimGraphNode_SubInput;
+}
+
+declare class AnimNode_SubInstance extends AnimNode_Base { 
+	InPose: PoseLink;
+	InstanceClass: UnrealEngineClass;
+	InstanceToRun: AnimInstance;
+	InstanceProperties: Property[];
+	SubInstanceProperties: Property[];
+	SourcePropertyNames: string[];
+	DestPropertyNames: string[];
+	clone() : AnimNode_SubInstance;
+	static C(Other: UObject): AnimNode_SubInstance;
+}
+
+declare class AnimGraphNode_SubInstance extends AnimGraphNode_Base { 
+	UNode: AnimNode_SubInstance;
+	KnownExposableProperties: string[];
+	ExposedPropertyNames: string[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_SubInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_SubInstance;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_SubInstance;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_SubInstance;
+	static C(Other: UObject): AnimGraphNode_SubInstance;
+}
+
+declare type EEvaluatorDataSource = 'EDS_SourcePose' | 'EDS_DestinationPose';
+declare var EEvaluatorDataSource : { EDS_SourcePose:'EDS_SourcePose',EDS_DestinationPose:'EDS_DestinationPose', };
+declare type EEvaluatorMode = 'EM_Standard' | 'EM_Freeze' | 'EM_DelayedFreeze';
+declare var EEvaluatorMode : { EM_Standard:'EM_Standard',EM_Freeze:'EM_Freeze',EM_DelayedFreeze:'EM_DelayedFreeze', };
+declare class AnimNode_TransitionPoseEvaluator extends AnimNode_Base { 
+	DataSource: EEvaluatorDataSource;
+	EvaluatorMode: EEvaluatorMode;
+	FramesToCachePose: number;
+	CacheFramesRemaining: number;
+	clone() : AnimNode_TransitionPoseEvaluator;
+	static C(Other: UObject): AnimNode_TransitionPoseEvaluator;
+}
+
+declare class AnimGraphNode_TransitionPoseEvaluator extends AnimGraphNode_Base { 
+	UNode: AnimNode_TransitionPoseEvaluator;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_TransitionPoseEvaluator;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_TransitionPoseEvaluator;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_TransitionPoseEvaluator;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_TransitionPoseEvaluator;
+	static C(Other: UObject): AnimGraphNode_TransitionPoseEvaluator;
+}
+
+declare class AnimationNode_TwoWayBlend extends AnimNode_Base { 
+	A: PoseLink;
+	B: PoseLink;
+	Alpha: number;
+	AlphaScaleBias: InputScaleBias;
+	clone() : AnimationNode_TwoWayBlend;
+	static C(Other: UObject): AnimationNode_TwoWayBlend;
+}
+
+declare class AnimGraphNode_TwoWayBlend extends AnimGraphNode_Base { 
+	BlendNode: AnimationNode_TwoWayBlend;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_TwoWayBlend;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_TwoWayBlend;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_TwoWayBlend;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_TwoWayBlend;
+	static C(Other: UObject): AnimGraphNode_TwoWayBlend;
+}
+
+declare class AnimNode_UseCachedPose extends AnimNode_Base { 
+	LinkToCachingNode: PoseLink;
+	CachePoseName: string;
+	clone() : AnimNode_UseCachedPose;
+	static C(Other: UObject): AnimNode_UseCachedPose;
+}
+
+declare class AnimGraphNode_UseCachedPose extends AnimGraphNode_Base { 
+	UNode: AnimNode_UseCachedPose;
+	SaveCachedPoseNode: any;
+	NameOfCache: string;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimGraphNode_UseCachedPose;
+	static Find(Outer: UObject, ResourceName: string): AnimGraphNode_UseCachedPose;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimGraphNode_UseCachedPose;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimGraphNode_UseCachedPose;
+	static C(Other: UObject): AnimGraphNode_UseCachedPose;
+}
+
+declare class AnimSingleNodeInstance extends AnimInstance { 
+	CurrentAsset: AnimationAsset;
+	PostEvaluateAnimEvent: UnrealEngineDelegate<() => void>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimSingleNodeInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimSingleNodeInstance;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimSingleNodeInstance;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSingleNodeInstance;
+	StopAnim(): void;
+	SetReverse(bInReverse: boolean): void;
+	SetPreviewCurveOverride(PoseName: string,Value: number,bRemoveIfZero: boolean): void;
+	SetPositionWithPreviousTime(InPosition: number,InPreviousTime: number,bFireNotifies: boolean): void;
+	SetPosition(InPosition: number,bFireNotifies: boolean): void;
+	SetPlayRate(InPlayRate: number): void;
+	SetPlaying(bIsPlaying: boolean): void;
+	SetLooping(bIsLooping: boolean): void;
+	SetBlendSpaceInput(InBlendInput: Vector): void;
+	SetAnimationAsset(NewAsset: AnimationAsset,bIsLooping: boolean,InPlayRate: number): void;
+	PlayAnim(bIsLooping: boolean,InPlayRate: number,InStartPosition: number): void;
+	GetLength(): number;
+	static C(Other: UObject): AnimSingleNodeInstance;
+}
+
+declare type EMontagePreviewType = 'EMPT_Normal' | 'EMPT_AllSections';
+declare var EMontagePreviewType : { EMPT_Normal:'EMPT_Normal',EMPT_AllSections:'EMPT_AllSections', };
+declare class AnimPreviewInstance extends AnimSingleNodeInstance { 
+	MontagePreviewType: EMontagePreviewType;
+	MontagePreviewStartSectionIdx: number;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimPreviewInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimPreviewInstance;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimPreviewInstance;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimPreviewInstance;
+	static C(Other: UObject): AnimPreviewInstance;
+}
+
+declare class AnimStateNodeBase extends EdGraphNode { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimStateNodeBase;
+	static Find(Outer: UObject, ResourceName: string): AnimStateNodeBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimStateNodeBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimStateNodeBase;
+	static C(Other: UObject): AnimStateNodeBase;
+}
+
+declare class AnimStateConduitNode extends AnimStateNodeBase { 
+	BoundGraph: EdGraph;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimStateConduitNode;
+	static Find(Outer: UObject, ResourceName: string): AnimStateConduitNode;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimStateConduitNode;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimStateConduitNode;
+	static C(Other: UObject): AnimStateConduitNode;
+}
+
+declare type EAnimStateType = 'AST_SingleAnimation' | 'AST_BlendGraph';
+declare var EAnimStateType : { AST_SingleAnimation:'AST_SingleAnimation',AST_BlendGraph:'AST_BlendGraph', };
+declare class AnimStateNode extends AnimStateNodeBase { 
+	BoundGraph: EdGraph;
+	StateType: EAnimStateType;
+	StateEntered: AnimNotifyEvent;
+	StateLeft: AnimNotifyEvent;
+	StateFullyBlended: AnimNotifyEvent;
+	bAlwaysResetOnEntry: boolean;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimStateNode;
+	static Find(Outer: UObject, ResourceName: string): AnimStateNode;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimStateNode;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimStateNode;
+	static C(Other: UObject): AnimStateNode;
+}
+
+declare type ETransitionBlendMode = 'TBM_Linear' | 'TBM_Cubic';
+declare var ETransitionBlendMode : { TBM_Linear:'TBM_Linear',TBM_Cubic:'TBM_Cubic', };
+declare type ETransitionLogicType = 'TLT_StandardBlend' | 'TLT_Custom';
+declare var ETransitionLogicType : { TLT_StandardBlend:'TLT_StandardBlend',TLT_Custom:'TLT_Custom', };
+declare class AnimStateTransitionNode extends AnimStateNodeBase { 
+	BoundGraph: EdGraph;
+	CustomTransitionGraph: EdGraph;
+	PriorityOrder: number;
+	CrossfadeDuration: number;
+	CrossfadeMode: ETransitionBlendMode;
+	BlendMode: EAlphaBlendOption;
+	CustomBlendCurve: CurveFloat;
+	BlendProfile: BlendProfile;
+	bAutomaticRuleBasedOnSequencePlayerInState: boolean;
+	LogicType: ETransitionLogicType;
+	TransitionStart: AnimNotifyEvent;
+	TransitionEnd: AnimNotifyEvent;
+	TransitionInterrupt: AnimNotifyEvent;
+	Bidirectional: boolean;
+	bSharedRules: boolean;
+	bSharedCrossfade: boolean;
+	SharedRulesName: string;
+	SharedRulesGuid: Guid;
+	SharedColor: LinearColor;
+	SharedCrossfadeName: string;
+	SharedCrossfadeGuid: Guid;
+	SharedCrossfadeIdx: number;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimStateTransitionNode;
+	static Find(Outer: UObject, ResourceName: string): AnimStateTransitionNode;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimStateTransitionNode;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimStateTransitionNode;
+	static C(Other: UObject): AnimStateTransitionNode;
+}
+
+declare class K2Node_AnimGetter extends K2Node_CallFunction { 
+	SourceNode: AnimGraphNode_Base;
+	SourceStateNode: AnimStateNodeBase;
+	GetterClass: UnrealEngineClass;
+	SourceAnimBlueprint: AnimBlueprint;
+	CachedTitle: string;
+	Contexts: string[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): K2Node_AnimGetter;
+	static Find(Outer: UObject, ResourceName: string): K2Node_AnimGetter;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): K2Node_AnimGetter;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_AnimGetter;
+	static C(Other: UObject): K2Node_AnimGetter;
+}
+
+declare type ETransitionGetter = 'AnimationAsset_GetCurrentTime' | 'AnimationAsset_GetLength' | 'AnimationAsset_GetCurrentTimeFraction' | 'AnimationAsset_GetTimeFromEnd' | 'AnimationAsset_GetTimeFromEndFraction' | 'CurrentState_ElapsedTime' | 'CurrentState_GetBlendWeight' | 'CurrentTransitionDuration' | 'ArbitraryState_GetBlendWeight';
+declare var ETransitionGetter : { AnimationAsset_GetCurrentTime:'AnimationAsset_GetCurrentTime',AnimationAsset_GetLength:'AnimationAsset_GetLength',AnimationAsset_GetCurrentTimeFraction:'AnimationAsset_GetCurrentTimeFraction',AnimationAsset_GetTimeFromEnd:'AnimationAsset_GetTimeFromEnd',AnimationAsset_GetTimeFromEndFraction:'AnimationAsset_GetTimeFromEndFraction',CurrentState_ElapsedTime:'CurrentState_ElapsedTime',CurrentState_GetBlendWeight:'CurrentState_GetBlendWeight',CurrentTransitionDuration:'CurrentTransitionDuration',ArbitraryState_GetBlendWeight:'ArbitraryState_GetBlendWeight', };
+declare class K2Node_TransitionRuleGetter extends K2Node { 
+	GetterType: ETransitionGetter;
+	AssociatedAnimAssetPlayerNode: AnimGraphNode_Base;
+	AssociatedStateNode: AnimStateNode;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): K2Node_TransitionRuleGetter;
+	static Find(Outer: UObject, ResourceName: string): K2Node_TransitionRuleGetter;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): K2Node_TransitionRuleGetter;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_TransitionRuleGetter;
+	static C(Other: UObject): K2Node_TransitionRuleGetter;
+}
+
+declare class BlueprintAsyncActionBase extends UObject { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): BlueprintAsyncActionBase;
+	static Find(Outer: UObject, ResourceName: string): BlueprintAsyncActionBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): BlueprintAsyncActionBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintAsyncActionBase;
+	Activate(): void;
+	static C(Other: UObject): BlueprintAsyncActionBase;
+}
+
+declare class AsyncTaskDownloadImage extends BlueprintAsyncActionBase { 
+	OnSuccess: UnrealEngineMulticastDelegate<(Texture: Texture2D) => void>;
+	OnFail: UnrealEngineMulticastDelegate<(Texture: Texture2D) => void>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AsyncTaskDownloadImage;
+	static Find(Outer: UObject, ResourceName: string): AsyncTaskDownloadImage;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AsyncTaskDownloadImage;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AsyncTaskDownloadImage;
+	static DownloadImage(URL: string): AsyncTaskDownloadImage;
+	static C(Other: UObject): AsyncTaskDownloadImage;
+}
+
+declare class MovieSceneSection extends UObject { 
+	StartTime: number;
+	EndTime: number;
+	RowIndex: number;
+	OverlapPriority: number;
+	bIsActive: boolean;
+	bIsLocked: boolean;
+	bIsInfinite: boolean;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieSceneSection;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneSection;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieSceneSection;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneSection;
+	static C(Other: UObject): MovieSceneSection;
+}
+
+declare class MovieScene2DTransformSection extends MovieSceneSection { 
+	Translation: RichCurve;
+	Rotation: RichCurve;
+	Scale: RichCurve;
+	Shear: RichCurve;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieScene2DTransformSection;
+	static Find(Outer: UObject, ResourceName: string): MovieScene2DTransformSection;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieScene2DTransformSection;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieScene2DTransformSection;
+	static C(Other: UObject): MovieScene2DTransformSection;
+}
+
+declare class MovieSceneNameableTrack extends MovieSceneTrack { 
+	DisplayName: string;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieSceneNameableTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneNameableTrack;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieSceneNameableTrack;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneNameableTrack;
+	static C(Other: UObject): MovieSceneNameableTrack;
+}
+
+declare class MovieScenePropertyTrack extends MovieSceneNameableTrack { 
+	PropertyName: string;
+	PropertyPath: string;
+	Sections: MovieSceneSection[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieScenePropertyTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieScenePropertyTrack;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieScenePropertyTrack;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieScenePropertyTrack;
+	static C(Other: UObject): MovieScenePropertyTrack;
+}
+
+declare class MovieScene2DTransformTrack extends MovieScenePropertyTrack { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieScene2DTransformTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieScene2DTransformTrack;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieScene2DTransformTrack;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieScene2DTransformTrack;
+	static C(Other: UObject): MovieScene2DTransformTrack;
+}
+
+declare class MovieSceneMarginSection extends MovieSceneSection { 
+	TopCurve: RichCurve;
+	LeftCurve: RichCurve;
+	RightCurve: RichCurve;
+	BottomCurve: RichCurve;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieSceneMarginSection;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneMarginSection;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieSceneMarginSection;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMarginSection;
+	static C(Other: UObject): MovieSceneMarginSection;
+}
+
+declare class MovieSceneMarginTrack extends MovieScenePropertyTrack { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieSceneMarginTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneMarginTrack;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieSceneMarginTrack;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMarginTrack;
+	static C(Other: UObject): MovieSceneMarginTrack;
+}
+
+declare class MovieSceneMaterialTrack extends MovieSceneNameableTrack { 
+	Sections: MovieSceneSection[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieSceneMaterialTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneMaterialTrack;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieSceneMaterialTrack;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMaterialTrack;
+	static C(Other: UObject): MovieSceneMaterialTrack;
+}
+
+declare class MovieSceneWidgetMaterialTrack extends MovieSceneMaterialTrack { 
+	BrushPropertyNamePath: string[];
+	TrackName: string;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MovieSceneWidgetMaterialTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneWidgetMaterialTrack;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MovieSceneWidgetMaterialTrack;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneWidgetMaterialTrack;
+	static C(Other: UObject): MovieSceneWidgetMaterialTrack;
+}
+
+declare class NamedSlotInterface extends Interface { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): NamedSlotInterface;
+	static Find(Outer: UObject, ResourceName: string): NamedSlotInterface;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): NamedSlotInterface;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NamedSlotInterface;
+	static C(Other: UObject): NamedSlotInterface;
+}
+
+declare class BoolBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): BoolBinding;
+	static Find(Outer: UObject, ResourceName: string): BoolBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): BoolBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BoolBinding;
+	GetValue(): boolean;
+	static C(Other: UObject): BoolBinding;
+}
+
+declare class BrushBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): BrushBinding;
+	static Find(Outer: UObject, ResourceName: string): BrushBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): BrushBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BrushBinding;
+	GetValue(): SlateBrush;
+	static C(Other: UObject): BrushBinding;
+}
+
+declare type ECheckBoxState = 'Unchecked' | 'Checked' | 'Undetermined';
+declare var ECheckBoxState : { Unchecked:'Unchecked',Checked:'Checked',Undetermined:'Undetermined', };
+declare class CheckedStateBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): CheckedStateBinding;
+	static Find(Outer: UObject, ResourceName: string): CheckedStateBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): CheckedStateBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CheckedStateBinding;
+	GetValue(): ECheckBoxState;
+	static C(Other: UObject): CheckedStateBinding;
+}
+
+declare class ColorBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ColorBinding;
+	static Find(Outer: UObject, ResourceName: string): ColorBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ColorBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ColorBinding;
+	GetSlateValue(): SlateColor;
+	GetLinearValue(): LinearColor;
+	static C(Other: UObject): ColorBinding;
+}
+
+declare class FloatBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): FloatBinding;
+	static Find(Outer: UObject, ResourceName: string): FloatBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): FloatBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FloatBinding;
+	GetValue(): number;
+	static C(Other: UObject): FloatBinding;
+}
+
+declare class Int32Binding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): Int32Binding;
+	static Find(Outer: UObject, ResourceName: string): Int32Binding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): Int32Binding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Int32Binding;
+	GetValue(): number;
+	static C(Other: UObject): Int32Binding;
+}
+
+declare class MouseCursorBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MouseCursorBinding;
+	static Find(Outer: UObject, ResourceName: string): MouseCursorBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MouseCursorBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MouseCursorBinding;
+	GetValue(): EMouseCursor;
+	static C(Other: UObject): MouseCursorBinding;
+}
+
+declare class TextBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): TextBinding;
+	static Find(Outer: UObject, ResourceName: string): TextBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): TextBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextBinding;
+	GetTextValue(): string;
+	GetStringValue(): string;
+	static C(Other: UObject): TextBinding;
+}
+
+declare class VisibilityBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): VisibilityBinding;
+	static Find(Outer: UObject, ResourceName: string): VisibilityBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): VisibilityBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VisibilityBinding;
+	GetValue(): ESlateVisibility;
+	static C(Other: UObject): VisibilityBinding;
+}
+
+declare class WidgetBinding extends PropertyBinding { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): WidgetBinding;
+	static Find(Outer: UObject, ResourceName: string): WidgetBinding;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): WidgetBinding;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WidgetBinding;
+	GetValue(): Widget;
+	static C(Other: UObject): WidgetBinding;
+}
+
+declare class RichTextBlockDecorator extends UObject { 
+	bReveal: boolean;
+	RevealedIndex: number;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): RichTextBlockDecorator;
+	static Find(Outer: UObject, ResourceName: string): RichTextBlockDecorator;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): RichTextBlockDecorator;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RichTextBlockDecorator;
+	static C(Other: UObject): RichTextBlockDecorator;
+}
+
+declare class SlateBlueprintLibrary extends BlueprintFunctionLibrary { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SlateBlueprintLibrary;
+	static Find(Outer: UObject, ResourceName: string): SlateBlueprintLibrary;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SlateBlueprintLibrary;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SlateBlueprintLibrary;
+	static ScreenToWidgetLocal(WorldContextObject: UObject,Geometry: Geometry,ScreenPosition: Vector2D,LocalCoordinate?: Vector2D): {LocalCoordinate: Vector2D};
+	static ScreenToWidgetAbsolute(WorldContextObject: UObject,ScreenPosition: Vector2D,AbsoluteCoordinate?: Vector2D): {AbsoluteCoordinate: Vector2D};
+	static LocalToViewport(WorldContextObject: UObject,Geometry: Geometry,LocalCoordinate: Vector2D,PixelPosition?: Vector2D,ViewportPosition?: Vector2D): {PixelPosition: Vector2D, ViewportPosition: Vector2D};
+	static LocalToAbsolute(Geometry: Geometry,LocalCoordinate: Vector2D): Vector2D;
+	static IsUnderLocation(Geometry: Geometry,AbsoluteCoordinate: Vector2D): boolean;
+	static GetLocalSize(Geometry: Geometry): Vector2D;
+	static AbsoluteToViewport(WorldContextObject: UObject,AbsoluteDesktopCoordinate: Vector2D,PixelPosition?: Vector2D,ViewportPosition?: Vector2D): {PixelPosition: Vector2D, ViewportPosition: Vector2D};
+	static AbsoluteToLocal(Geometry: Geometry,AbsoluteCoordinate: Vector2D): Vector2D;
+	static C(Other: UObject): SlateBlueprintLibrary;
+}
+
+declare class SlateDataSheet extends UObject { 
+	DataTexture: Texture2D;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SlateDataSheet;
+	static Find(Outer: UObject, ResourceName: string): SlateDataSheet;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SlateDataSheet;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SlateDataSheet;
+	static C(Other: UObject): SlateDataSheet;
+}
+
+declare class SlateMeshVertex { 
+	Position: Vector2D;
+	Color: Color;
+	UV0: Vector2D;
+	UV1: Vector2D;
+	UV2: Vector2D;
+	UV3: Vector2D;
+	UV4: Vector2D;
+	UV5: Vector2D;
+	clone() : SlateMeshVertex;
+	static C(Other: UObject): SlateMeshVertex;
+}
+
+declare class SlateVectorArtData extends UObject { 
+	MeshAsset: StaticMesh;
+	SourceMaterial: MaterialInterface;
+	VertexData: SlateMeshVertex[];
+	IndexData: any[];
+	Material: MaterialInterface;
+	ExtentMin: Vector2D;
+	ExtentMax: Vector2D;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SlateVectorArtData;
+	static Find(Outer: UObject, ResourceName: string): SlateVectorArtData;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SlateVectorArtData;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SlateVectorArtData;
+	static C(Other: UObject): SlateVectorArtData;
+}
+
+declare class ButtonSlot extends PanelSlot { 
+	Padding: Margin;
+	HorizontalAlignment: EHorizontalAlignment;
+	VerticalAlignment: EVerticalAlignment;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ButtonSlot;
+	static Find(Outer: UObject, ResourceName: string): ButtonSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ButtonSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ButtonSlot;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	static C(Other: UObject): ButtonSlot;
+}
+
+declare class SafeZoneSlot extends PanelSlot { 
+	bIsTitleSafe: boolean;
+	SafeAreaScale: Margin;
+	HAlign: EHorizontalAlignment;
+	VAlign: EVerticalAlignment;
+	Padding: Margin;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SafeZoneSlot;
+	static Find(Outer: UObject, ResourceName: string): SafeZoneSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SafeZoneSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SafeZoneSlot;
+	static C(Other: UObject): SafeZoneSlot;
+}
+
+declare class ScaleBoxSlot extends PanelSlot { 
+	Padding: Margin;
+	HorizontalAlignment: EHorizontalAlignment;
+	VerticalAlignment: EVerticalAlignment;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ScaleBoxSlot;
+	static Find(Outer: UObject, ResourceName: string): ScaleBoxSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ScaleBoxSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScaleBoxSlot;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	static C(Other: UObject): ScaleBoxSlot;
+}
+
+declare class ScrollBoxSlot extends PanelSlot { 
+	Padding: Margin;
+	HorizontalAlignment: EHorizontalAlignment;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ScrollBoxSlot;
+	static Find(Outer: UObject, ResourceName: string): ScrollBoxSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ScrollBoxSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScrollBoxSlot;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	static C(Other: UObject): ScrollBoxSlot;
+}
+
+declare class SizeBoxSlot extends PanelSlot { 
+	Padding: Margin;
+	HorizontalAlignment: EHorizontalAlignment;
+	VerticalAlignment: EVerticalAlignment;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SizeBoxSlot;
+	static Find(Outer: UObject, ResourceName: string): SizeBoxSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SizeBoxSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SizeBoxSlot;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	static C(Other: UObject): SizeBoxSlot;
+}
+
+declare class WidgetSwitcherSlot extends PanelSlot { 
+	Padding: Margin;
+	HorizontalAlignment: EHorizontalAlignment;
+	VerticalAlignment: EVerticalAlignment;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): WidgetSwitcherSlot;
+	static Find(Outer: UObject, ResourceName: string): WidgetSwitcherSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): WidgetSwitcherSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WidgetSwitcherSlot;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	static C(Other: UObject): WidgetSwitcherSlot;
+}
+
+declare class WindowTitleBarAreaSlot extends PanelSlot { 
+	Padding: Margin;
+	HorizontalAlignment: EHorizontalAlignment;
+	VerticalAlignment: EVerticalAlignment;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): WindowTitleBarAreaSlot;
+	static Find(Outer: UObject, ResourceName: string): WindowTitleBarAreaSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): WindowTitleBarAreaSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WindowTitleBarAreaSlot;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	static C(Other: UObject): WindowTitleBarAreaSlot;
+}
+
+declare class WrapBoxSlot extends PanelSlot { 
+	Padding: Margin;
+	bFillEmptySpace: boolean;
+	FillSpanWhenLessThan: number;
+	HorizontalAlignment: EHorizontalAlignment;
+	VerticalAlignment: EVerticalAlignment;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): WrapBoxSlot;
+	static Find(Outer: UObject, ResourceName: string): WrapBoxSlot;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): WrapBoxSlot;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WrapBoxSlot;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	SetFillSpanWhenLessThan(InFillSpanWhenLessThan: number): void;
+	SetFillEmptySpace(InbFillEmptySpace: boolean): void;
+	static C(Other: UObject): WrapBoxSlot;
+}
+
+declare class CircularThrobber extends Widget { 
+	NumberOfPieces: number;
+	Period: number;
+	Radius: number;
+	PieceImage: SlateBrushAsset;
+	UImage: SlateBrush;
+	bEnableRadius: boolean;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): CircularThrobber;
+	static Find(Outer: UObject, ResourceName: string): CircularThrobber;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): CircularThrobber;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CircularThrobber;
+	SetRadius(InRadius: number): void;
+	SetPeriod(InPeriod: number): void;
+	SetNumberOfPieces(InNumberOfPieces: number): void;
+	static C(Other: UObject): CircularThrobber;
+}
+
+declare class ComboBox extends Widget { 
+	Items: UObject[];
+	OnGenerateWidgetEvent: UnrealEngineDelegate<(Item: UObject) => Widget>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ComboBox;
+	static Find(Outer: UObject, ResourceName: string): ComboBox;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ComboBox;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ComboBox;
+	static C(Other: UObject): ComboBox;
+}
+
+declare class TableRowStyle extends SlateWidgetStyle { 
+	SelectorFocusedBrush: SlateBrush;
+	ActiveHoveredBrush: SlateBrush;
+	ActiveBrush: SlateBrush;
+	InactiveHoveredBrush: SlateBrush;
+	InactiveBrush: SlateBrush;
+	EvenRowBackgroundHoveredBrush: SlateBrush;
+	EvenRowBackgroundBrush: SlateBrush;
+	OddRowBackgroundHoveredBrush: SlateBrush;
+	OddRowBackgroundBrush: SlateBrush;
+	TextColor: SlateColor;
+	SelectedTextColor: SlateColor;
+	DropIndicator_Above: SlateBrush;
+	DropIndicator_Onto: SlateBrush;
+	DropIndicator_Below: SlateBrush;
+	clone() : TableRowStyle;
+	static C(Other: UObject): TableRowStyle;
+}
+
+declare type ESelectInfo = 'OnKeyPress' | 'OnNavigation' | 'OnMouseClick' | 'Direct';
+declare var ESelectInfo : { OnKeyPress:'OnKeyPress',OnNavigation:'OnNavigation',OnMouseClick:'OnMouseClick',Direct:'Direct', };
+declare class ComboBoxString extends Widget { 
+	DefaultOptions: string[];
+	SelectedOption: string;
+	WidgetStyle: ComboBoxStyle;
+	ItemStyle: TableRowStyle;
+	ContentPadding: Margin;
+	MaxListHeight: number;
+	HasDownArrow: boolean;
+	EnableGamepadNavigationMode: boolean;
+	Font: SlateFontInfo;
+	ForegroundColor: SlateColor;
+	OnGenerateWidgetEvent: UnrealEngineDelegate<(Item: string) => Widget>;
+	OnSelectionChanged: UnrealEngineMulticastDelegate<(SelectedItem: string, SelectionType: ESelectInfo) => void>;
+	OnOpening: UnrealEngineMulticastDelegate<() => void>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ComboBoxString;
+	static Find(Outer: UObject, ResourceName: string): ComboBoxString;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ComboBoxString;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ComboBoxString;
+	SetSelectedOption(Option: string): void;
+	RemoveOption(Option: string): boolean;
+	RefreshOptions(): void;
+	GetSelectedOption(): string;
+	GetOptionCount(): number;
+	GetOptionAtIndex(Index: number): string;
+	FindOptionIndex(Option: string): number;
+	ClearSelection(): void;
+	ClearOptions(): void;
+	AddOption(Option: string): void;
+	static C(Other: UObject): ComboBoxString;
+}
+
+declare type ETextShapingMethod = 'Auto' | 'KerningOnly' | 'FullShaping';
+declare var ETextShapingMethod : { Auto:'Auto',KerningOnly:'KerningOnly',FullShaping:'FullShaping', };
+declare type ETextFlowDirection = 'Auto' | 'LeftToRight' | 'RightToLeft';
+declare var ETextFlowDirection : { Auto:'Auto',LeftToRight:'LeftToRight',RightToLeft:'RightToLeft', };
+declare class ShapedTextOptions { 
+	bOverride_TextShapingMethod: boolean;
+	bOverride_TextFlowDirection: boolean;
+	TextShapingMethod: ETextShapingMethod;
+	TextFlowDirection: ETextFlowDirection;
+	clone() : ShapedTextOptions;
+	static C(Other: UObject): ShapedTextOptions;
+}
+
+declare type ETextJustify = 'Left' | 'Center' | 'Right';
+declare var ETextJustify : { Left:'Left',Center:'Center',Right:'Right', };
+declare type ETextWrappingPolicy = 'DefaultWrapping' | 'AllowPerCharacterWrapping';
+declare var ETextWrappingPolicy : { DefaultWrapping:'DefaultWrapping',AllowPerCharacterWrapping:'AllowPerCharacterWrapping', };
+declare class TextLayoutWidget extends Widget { 
+	ShapedTextOptions: ShapedTextOptions;
+	Justification: ETextJustify;
+	AutoWrapText: boolean;
+	WrapTextAt: number;
+	WrappingPolicy: ETextWrappingPolicy;
+	Margin: Margin;
+	LineHeightPercentage: number;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): TextLayoutWidget;
+	static Find(Outer: UObject, ResourceName: string): TextLayoutWidget;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): TextLayoutWidget;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextLayoutWidget;
+	static C(Other: UObject): TextLayoutWidget;
+}
+
+declare type EVirtualKeyboardType = 'Default' | 'Number' | 'Web' | 'Email' | 'Password' | 'AlphaNumeric';
+declare var EVirtualKeyboardType : { Default:'Default',Number:'Number',Web:'Web',Email:'Email',Password:'Password',AlphaNumeric:'AlphaNumeric', };
+declare type ETextCommit = 'Default' | 'OnEnter' | 'OnUserMovedFocus' | 'OnCleared';
+declare var ETextCommit : { Default:'Default',OnEnter:'OnEnter',OnUserMovedFocus:'OnUserMovedFocus',OnCleared:'OnCleared', };
+declare class EditableText extends Widget { 
+	Text: string;
+	TextDelegate: UnrealEngineDelegate<() => string>;
+	HintText: string;
+	HintTextDelegate: UnrealEngineDelegate<() => string>;
+	WidgetStyle: EditableTextStyle;
+	Style: SlateWidgetStyleAsset;
+	BackgroundImageSelected: SlateBrushAsset;
+	BackgroundImageComposing: SlateBrushAsset;
+	CaretImage: SlateBrushAsset;
+	Font: SlateFontInfo;
+	ColorAndOpacity: SlateColor;
+	IsReadOnly: boolean;
+	IsPassword: boolean;
+	MinimumDesiredWidth: number;
+	IsCaretMovedWhenGainFocus: boolean;
+	SelectAllTextWhenFocused: boolean;
+	RevertTextOnEscape: boolean;
+	ClearKeyboardFocusOnCommit: boolean;
+	SelectAllTextOnCommit: boolean;
+	AllowContextMenu: boolean;
+	KeyboardType: EVirtualKeyboardType;
+	ShapedTextOptions: ShapedTextOptions;
+	OnTextChanged: UnrealEngineMulticastDelegate<(Text: string) => void>;
+	OnTextCommitted: UnrealEngineMulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): EditableText;
+	static Find(Outer: UObject, ResourceName: string): EditableText;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): EditableText;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditableText;
+	SetText(InText: string): void;
+	SetIsReadOnly(InbIsReadyOnly: boolean): void;
+	SetIsPassword(InbIsPassword: boolean): void;
+	SetHintText(InHintText: string): void;
+	GetText(): string;
+	static C(Other: UObject): EditableText;
+}
+
+declare class EditableTextBox extends Widget { 
+	Text: string;
+	TextDelegate: UnrealEngineDelegate<() => string>;
+	WidgetStyle: EditableTextBoxStyle;
+	Style: SlateWidgetStyleAsset;
+	HintText: string;
+	HintTextDelegate: UnrealEngineDelegate<() => string>;
+	Font: SlateFontInfo;
+	ForegroundColor: LinearColor;
+	BackgroundColor: LinearColor;
+	ReadOnlyForegroundColor: LinearColor;
+	IsReadOnly: boolean;
+	IsPassword: boolean;
+	MinimumDesiredWidth: number;
+	Padding: Margin;
+	IsCaretMovedWhenGainFocus: boolean;
+	SelectAllTextWhenFocused: boolean;
+	RevertTextOnEscape: boolean;
+	ClearKeyboardFocusOnCommit: boolean;
+	SelectAllTextOnCommit: boolean;
+	AllowContextMenu: boolean;
+	KeyboardType: EVirtualKeyboardType;
+	ShapedTextOptions: ShapedTextOptions;
+	OnTextChanged: UnrealEngineMulticastDelegate<(Text: string) => void>;
+	OnTextCommitted: UnrealEngineMulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): EditableTextBox;
+	static Find(Outer: UObject, ResourceName: string): EditableTextBox;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): EditableTextBox;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditableTextBox;
+	SetText(InText: string): void;
+	SetError(InError: string): void;
+	HasError(): boolean;
+	GetText(): string;
+	ClearError(): void;
+	static C(Other: UObject): EditableTextBox;
+}
+
+declare class ExpandableAreaStyle extends SlateWidgetStyle { 
+	CollapsedImage: SlateBrush;
+	ExpandedImage: SlateBrush;
+	clone() : ExpandableAreaStyle;
+	static C(Other: UObject): ExpandableAreaStyle;
+}
+
+declare class ExpandableArea extends Widget { 
+	Style: ExpandableAreaStyle;
+	BorderBrush: SlateBrush;
+	BorderColor: SlateColor;
+	bIsExpanded: boolean;
+	MaxHeight: number;
+	HeaderPadding: Margin;
+	AreaPadding: Margin;
+	OnExpansionChanged: UnrealEngineMulticastDelegate<(Area: ExpandableArea, bIsExpanded: boolean) => void>;
+	HeaderContent: Widget;
+	BodyContent: Widget;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ExpandableArea;
+	static Find(Outer: UObject, ResourceName: string): ExpandableArea;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ExpandableArea;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ExpandableArea;
+	SetIsExpanded(IsExpanded: boolean): void;
+	GetIsExpanded(): boolean;
+	static C(Other: UObject): ExpandableArea;
+}
+
+declare class UImage extends Widget { 
+	UImage: SlateBrushAsset;
+	Brush: SlateBrush;
+	BrushDelegate: UnrealEngineDelegate<() => SlateBrush>;
+	ColorAndOpacity: LinearColor;
+	ColorAndOpacityDelegate: UnrealEngineDelegate<() => LinearColor>;
+	OnMouseButtonDownEvent: UnrealEngineDelegate<(MyGeometry: Geometry, MouseEvent: UPointerEvent) => EventReply>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): UImage;
+	static Find(Outer: UObject, ResourceName: string): UImage;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): UImage;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): UImage;
+	SetOpacity(InOpacity: number): void;
+	SetColorAndOpacity(InColorAndOpacity: LinearColor): void;
+	SetBrushFromTexture(Texture: Texture2D,bMatchSize: boolean): void;
+	SetBrushFromMaterial(Material: MaterialInterface): void;
+	SetBrushFromAsset(Asset: SlateBrushAsset): void;
+	SetBrush(InBrush: SlateBrush): void;
+	GetDynamicMaterial(): MaterialInstanceDynamic;
+	static C(Other: UObject): UImage;
+}
+
+declare class InputKeySelector extends Widget { 
+	SelectedKey: InputChord;
+	Font: SlateFontInfo;
+	Margin: Margin;
+	ColorAndOpacity: LinearColor;
+	KeySelectionText: string;
+	bAllowModifierKeys: boolean;
+	OnKeySelected: UnrealEngineMulticastDelegate<(SelectedKey: InputChord) => void>;
+	OnIsSelectingKeyChanged: UnrealEngineMulticastDelegate<() => void>;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): InputKeySelector;
+	static Find(Outer: UObject, ResourceName: string): InputKeySelector;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): InputKeySelector;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InputKeySelector;
+	SetSelectedKey(InSelectedKey: InputChord): void;
+	SetKeySelectionText(InKeySelectionText: string): void;
+	SetAllowModifierKeys(bInAllowModifierKeys: boolean): void;
+	GetIsSelectingKey(): boolean;
+	static C(Other: UObject): InputKeySelector;
+}
+
+declare class NativeWidgetHost extends Widget { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): NativeWidgetHost;
+	static Find(Outer: UObject, ResourceName: string): NativeWidgetHost;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): NativeWidgetHost;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NativeWidgetHost;
+	static C(Other: UObject): NativeWidgetHost;
+}
+
+declare class CanvasPanel extends PanelWidget { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): CanvasPanel;
+	static Find(Outer: UObject, ResourceName: string): CanvasPanel;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): CanvasPanel;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CanvasPanel;
+	AddChildToCanvas(Content: Widget): CanvasPanelSlot;
+	static C(Other: UObject): CanvasPanel;
+}
+
+declare class ContentWidget extends PanelWidget { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ContentWidget;
+	static Find(Outer: UObject, ResourceName: string): ContentWidget;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ContentWidget;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ContentWidget;
+	SetContent(Content: Widget): PanelSlot;
+	GetContentSlot(): PanelSlot;
+	static C(Other: UObject): ContentWidget;
+}
+
+declare class Border extends ContentWidget { 
+	ContentColorAndOpacity: LinearColor;
+	ContentColorAndOpacityDelegate: UnrealEngineDelegate<() => LinearColor>;
+	Padding: Margin;
+	HorizontalAlignment: EHorizontalAlignment;
+	VerticalAlignment: EVerticalAlignment;
+	Background: SlateBrush;
+	BackgroundDelegate: UnrealEngineDelegate<() => SlateBrush>;
+	BrushColor: LinearColor;
+	BrushColorDelegate: UnrealEngineDelegate<() => LinearColor>;
+	DesiredSizeScale: Vector2D;
+	bShowEffectWhenDisabled: boolean;
+	OnMouseButtonDownEvent: UnrealEngineDelegate<(MyGeometry: Geometry, MouseEvent: UPointerEvent) => EventReply>;
+	OnMouseButtonUpEvent: UnrealEngineDelegate<(MyGeometry: Geometry, MouseEvent: UPointerEvent) => EventReply>;
+	OnMouseMoveEvent: UnrealEngineDelegate<(MyGeometry: Geometry, MouseEvent: UPointerEvent) => EventReply>;
+	OnMouseDoubleClickEvent: UnrealEngineDelegate<(MyGeometry: Geometry, MouseEvent: UPointerEvent) => EventReply>;
+	Brush: SlateBrushAsset;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): Border;
+	static Find(Outer: UObject, ResourceName: string): Border;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): Border;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Border;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	SetDesiredSizeScale(InScale: Vector2D): void;
+	SetContentColorAndOpacity(InContentColorAndOpacity: LinearColor): void;
+	SetBrushFromTexture(Texture: Texture2D): void;
+	SetBrushFromMaterial(Material: MaterialInterface): void;
+	SetBrushFromAsset(Asset: SlateBrushAsset): void;
+	SetBrushColor(InBrushColor: LinearColor): void;
+	SetBrush(InBrush: SlateBrush): void;
+	GetDynamicMaterial(): MaterialInstanceDynamic;
+	static C(Other: UObject): Border;
+}
+
+declare type EButtonClickMethod = 'DownAndUp' | 'MouseDown' | 'MouseUp' | 'PreciseClick';
+declare var EButtonClickMethod : { DownAndUp:'DownAndUp',MouseDown:'MouseDown',MouseUp:'MouseUp',PreciseClick:'PreciseClick', };
+declare type EButtonTouchMethod = 'DownAndUp' | 'PreciseTap';
+declare var EButtonTouchMethod : { DownAndUp:'DownAndUp',PreciseTap:'PreciseTap', };
 declare class Button extends ContentWidget { 
 	Style: SlateWidgetStyleAsset;
 	WidgetStyle: ButtonStyle;
@@ -20,7 +2775,7 @@ declare class Button extends ContentWidget {
 	static Load(ResourceName: string): Button;
 	static Find(Outer: UObject, ResourceName: string): Button;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Button;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -56,7 +2811,7 @@ declare class CheckBox extends ContentWidget {
 	static Load(ResourceName: string): CheckBox;
 	static Find(Outer: UObject, ResourceName: string): CheckBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CheckBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -77,7 +2832,7 @@ declare class InvalidationBox extends ContentWidget {
 	static Load(ResourceName: string): InvalidationBox;
 	static Find(Outer: UObject, ResourceName: string): InvalidationBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InvalidationBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -88,8 +2843,8 @@ declare class InvalidationBox extends ContentWidget {
 	static C(Other: UObject): InvalidationBox;
 }
 
-declare type EMenuPlacement = string | symbol;
-declare var EMenuPlacement = { MenuPlacement_BelowAnchor:'MenuPlacement_BelowAnchor',MenuPlacement_CenteredBelowAnchor:'MenuPlacement_CenteredBelowAnchor',MenuPlacement_BelowRightAnchor:'MenuPlacement_BelowRightAnchor',MenuPlacement_ComboBox:'MenuPlacement_ComboBox',MenuPlacement_ComboBoxRight:'MenuPlacement_ComboBoxRight',MenuPlacement_MenuRight:'MenuPlacement_MenuRight',MenuPlacement_AboveAnchor:'MenuPlacement_AboveAnchor',MenuPlacement_CenteredAboveAnchor:'MenuPlacement_CenteredAboveAnchor',MenuPlacement_AboveRightAnchor:'MenuPlacement_AboveRightAnchor',MenuPlacement_MenuLeft:'MenuPlacement_MenuLeft',MenuPlacement_Center:'MenuPlacement_Center',MenuPlacement_RightLeftCenter:'MenuPlacement_RightLeftCenter', };
+declare type EMenuPlacement = 'MenuPlacement_BelowAnchor' | 'MenuPlacement_CenteredBelowAnchor' | 'MenuPlacement_BelowRightAnchor' | 'MenuPlacement_ComboBox' | 'MenuPlacement_ComboBoxRight' | 'MenuPlacement_MenuRight' | 'MenuPlacement_AboveAnchor' | 'MenuPlacement_CenteredAboveAnchor' | 'MenuPlacement_AboveRightAnchor' | 'MenuPlacement_MenuLeft' | 'MenuPlacement_Center' | 'MenuPlacement_RightLeftCenter';
+declare var EMenuPlacement : { MenuPlacement_BelowAnchor:'MenuPlacement_BelowAnchor',MenuPlacement_CenteredBelowAnchor:'MenuPlacement_CenteredBelowAnchor',MenuPlacement_BelowRightAnchor:'MenuPlacement_BelowRightAnchor',MenuPlacement_ComboBox:'MenuPlacement_ComboBox',MenuPlacement_ComboBoxRight:'MenuPlacement_ComboBoxRight',MenuPlacement_MenuRight:'MenuPlacement_MenuRight',MenuPlacement_AboveAnchor:'MenuPlacement_AboveAnchor',MenuPlacement_CenteredAboveAnchor:'MenuPlacement_CenteredAboveAnchor',MenuPlacement_AboveRightAnchor:'MenuPlacement_AboveRightAnchor',MenuPlacement_MenuLeft:'MenuPlacement_MenuLeft',MenuPlacement_Center:'MenuPlacement_Center',MenuPlacement_RightLeftCenter:'MenuPlacement_RightLeftCenter', };
 declare class MenuAnchor extends ContentWidget { 
 	MenuClass: UnrealEngineClass;
 	OnGetMenuContentEvent: UnrealEngineDelegate<() => Widget>;
@@ -102,7 +2857,7 @@ declare class MenuAnchor extends ContentWidget {
 	static Load(ResourceName: string): MenuAnchor;
 	static Find(Outer: UObject, ResourceName: string): MenuAnchor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MenuAnchor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -123,7 +2878,7 @@ declare class NamedSlot extends ContentWidget {
 	static Load(ResourceName: string): NamedSlot;
 	static Find(Outer: UObject, ResourceName: string): NamedSlot;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NamedSlot;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -141,7 +2896,7 @@ declare class RetainerBox extends ContentWidget {
 	static Load(ResourceName: string): RetainerBox;
 	static Find(Outer: UObject, ResourceName: string): RetainerBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RetainerBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -153,12 +2908,16 @@ declare class RetainerBox extends ContentWidget {
 }
 
 declare class SafeZone extends ContentWidget { 
+	PadLeft: boolean;
+	PadRight: boolean;
+	PadTop: boolean;
+	PadBottom: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): SafeZone;
 	static Find(Outer: UObject, ResourceName: string): SafeZone;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SafeZone;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -166,10 +2925,10 @@ declare class SafeZone extends ContentWidget {
 	static C(Other: UObject): SafeZone;
 }
 
-declare type EStretch = string | symbol;
-declare var EStretch = { None:'None',Fill:'Fill',ScaleToFit:'ScaleToFit',ScaleToFitX:'ScaleToFitX',ScaleToFitY:'ScaleToFitY',ScaleToFill:'ScaleToFill',ScaleBySafeZone:'ScaleBySafeZone',UserSpecified:'UserSpecified', };
-declare type EStretchDirection = string | symbol;
-declare var EStretchDirection = { Both:'Both',DownOnly:'DownOnly',UpOnly:'UpOnly', };
+declare type EStretch = 'None' | 'Fill' | 'ScaleToFit' | 'ScaleToFitX' | 'ScaleToFitY' | 'ScaleToFill' | 'ScaleBySafeZone' | 'UserSpecified';
+declare var EStretch : { None:'None',Fill:'Fill',ScaleToFit:'ScaleToFit',ScaleToFitX:'ScaleToFitX',ScaleToFitY:'ScaleToFitY',ScaleToFill:'ScaleToFill',ScaleBySafeZone:'ScaleBySafeZone',UserSpecified:'UserSpecified', };
+declare type EStretchDirection = 'Both' | 'DownOnly' | 'UpOnly';
+declare var EStretchDirection : { Both:'Both',DownOnly:'DownOnly',UpOnly:'UpOnly', };
 declare class ScaleBox extends ContentWidget { 
 	Stretch: EStretch;
 	StretchDirection: EStretchDirection;
@@ -180,7 +2939,7 @@ declare class ScaleBox extends ContentWidget {
 	static Load(ResourceName: string): ScaleBox;
 	static Find(Outer: UObject, ResourceName: string): ScaleBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ScaleBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -212,7 +2971,7 @@ declare class SizeBox extends ContentWidget {
 	static Load(ResourceName: string): SizeBox;
 	static Find(Outer: UObject, ResourceName: string): SizeBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SizeBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -241,7 +3000,7 @@ declare class Viewport extends ContentWidget {
 	static Load(ResourceName: string): Viewport;
 	static Find(Outer: UObject, ResourceName: string): Viewport;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Viewport;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -255,6 +3014,24 @@ declare class Viewport extends ContentWidget {
 	static C(Other: UObject): Viewport;
 }
 
+declare class WindowTitleBarArea extends ContentWidget { 
+	bDoubleClickTogglesFullscreen: boolean;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): WindowTitleBarArea;
+	static Find(Outer: UObject, ResourceName: string): WindowTitleBarArea;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): WindowTitleBarArea;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WindowTitleBarArea;
+	SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
+	SetPadding(InPadding: Margin): void;
+	SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
+	static C(Other: UObject): WindowTitleBarArea;
+}
+
 declare class GridPanel extends PanelWidget { 
 	ColumnFill: number[];
 	RowFill: number[];
@@ -263,7 +3040,7 @@ declare class GridPanel extends PanelWidget {
 	static Load(ResourceName: string): GridPanel;
 	static Find(Outer: UObject, ResourceName: string): GridPanel;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GridPanel;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -278,7 +3055,7 @@ declare class HorizontalBox extends PanelWidget {
 	static Load(ResourceName: string): HorizontalBox;
 	static Find(Outer: UObject, ResourceName: string): HorizontalBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HorizontalBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -293,7 +3070,7 @@ declare class Overlay extends PanelWidget {
 	static Load(ResourceName: string): Overlay;
 	static Find(Outer: UObject, ResourceName: string): Overlay;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Overlay;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -302,10 +3079,10 @@ declare class Overlay extends PanelWidget {
 	static C(Other: UObject): Overlay;
 }
 
-declare type EOrientation = string | symbol;
-declare var EOrientation = { Orient_Horizontal:'Orient_Horizontal',Orient_Vertical:'Orient_Vertical', };
-declare type EConsumeMouseWheel = string | symbol;
-declare var EConsumeMouseWheel = { WhenScrollingPossible:'WhenScrollingPossible',Always:'Always',Never:'Never', };
+declare type EOrientation = 'Orient_Horizontal' | 'Orient_Vertical';
+declare var EOrientation : { Orient_Horizontal:'Orient_Horizontal',Orient_Vertical:'Orient_Vertical', };
+declare type EConsumeMouseWheel = 'WhenScrollingPossible' | 'Always' | 'Never';
+declare var EConsumeMouseWheel : { WhenScrollingPossible:'WhenScrollingPossible',Always:'Always',Never:'Never', };
 declare class ScrollBox extends PanelWidget { 
 	WidgetStyle: ScrollBoxStyle;
 	WidgetBarStyle: ScrollBarStyle;
@@ -321,7 +3098,7 @@ declare class ScrollBox extends PanelWidget {
 	static Load(ResourceName: string): ScrollBox;
 	static Find(Outer: UObject, ResourceName: string): ScrollBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ScrollBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -343,7 +3120,7 @@ declare class UniformGridPanel extends PanelWidget {
 	static Load(ResourceName: string): UniformGridPanel;
 	static Find(Outer: UObject, ResourceName: string): UniformGridPanel;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UniformGridPanel;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -361,7 +3138,7 @@ declare class VerticalBox extends PanelWidget {
 	static Load(ResourceName: string): VerticalBox;
 	static Find(Outer: UObject, ResourceName: string): VerticalBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VerticalBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -377,7 +3154,7 @@ declare class WidgetSwitcher extends PanelWidget {
 	static Load(ResourceName: string): WidgetSwitcher;
 	static Find(Outer: UObject, ResourceName: string): WidgetSwitcher;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WidgetSwitcher;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -397,7 +3174,7 @@ declare class WrapBox extends PanelWidget {
 	static Load(ResourceName: string): WrapBox;
 	static Find(Outer: UObject, ResourceName: string): WrapBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WrapBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -407,8 +3184,8 @@ declare class WrapBox extends PanelWidget {
 	static C(Other: UObject): WrapBox;
 }
 
-declare type EProgressBarFillType = string | symbol;
-declare var EProgressBarFillType = { LeftToRight:'LeftToRight',RightToLeft:'RightToLeft',FillFromCenter:'FillFromCenter',TopToBottom:'TopToBottom',BottomToTop:'BottomToTop', };
+declare type EProgressBarFillType = 'LeftToRight' | 'RightToLeft' | 'FillFromCenter' | 'TopToBottom' | 'BottomToTop';
+declare var EProgressBarFillType : { LeftToRight:'LeftToRight',RightToLeft:'RightToLeft',FillFromCenter:'FillFromCenter',TopToBottom:'TopToBottom',BottomToTop:'BottomToTop', };
 declare class ProgressBar extends Widget { 
 	WidgetStyle: ProgressBarStyle;
 	Style: SlateWidgetStyleAsset;
@@ -426,7 +3203,7 @@ declare class ProgressBar extends Widget {
 	static Load(ResourceName: string): ProgressBar;
 	static Find(Outer: UObject, ResourceName: string): ProgressBar;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ProgressBar;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -448,7 +3225,7 @@ declare class ScrollBar extends Widget {
 	static Load(ResourceName: string): ScrollBar;
 	static Find(Outer: UObject, ResourceName: string): ScrollBar;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ScrollBar;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -488,7 +3265,7 @@ declare class Slider extends Widget {
 	static Load(ResourceName: string): Slider;
 	static Find(Outer: UObject, ResourceName: string): Slider;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Slider;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -510,7 +3287,7 @@ declare class Spacer extends Widget {
 	static Load(ResourceName: string): Spacer;
 	static Find(Outer: UObject, ResourceName: string): Spacer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Spacer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -548,7 +3325,7 @@ declare class SpinBox extends Widget {
 	static Load(ResourceName: string): SpinBox;
 	static Find(Outer: UObject, ResourceName: string): SpinBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SpinBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -577,7 +3354,7 @@ declare class TableViewBase extends Widget {
 	static Load(ResourceName: string): TableViewBase;
 	static Find(Outer: UObject, ResourceName: string): TableViewBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TableViewBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -585,8 +3362,8 @@ declare class TableViewBase extends Widget {
 	static C(Other: UObject): TableViewBase;
 }
 
-declare type ESelectionMode = string | symbol;
-declare var ESelectionMode = { None:'None',Single:'Single',SingleToggle:'SingleToggle',Multi:'Multi', };
+declare type ESelectionMode = 'None' | 'Single' | 'SingleToggle' | 'Multi';
+declare var ESelectionMode : { None:'None',Single:'Single',SingleToggle:'SingleToggle',Multi:'Multi', };
 declare class ListView extends TableViewBase { 
 	ItemHeight: number;
 	Items: UObject[];
@@ -597,7 +3374,7 @@ declare class ListView extends TableViewBase {
 	static Load(ResourceName: string): ListView;
 	static Find(Outer: UObject, ResourceName: string): ListView;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ListView;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -616,7 +3393,7 @@ declare class TileView extends TableViewBase {
 	static Load(ResourceName: string): TileView;
 	static Find(Outer: UObject, ResourceName: string): TileView;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TileView;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -641,7 +3418,7 @@ declare class MultiLineEditableText extends TextLayoutWidget {
 	static Load(ResourceName: string): MultiLineEditableText;
 	static Find(Outer: UObject, ResourceName: string): MultiLineEditableText;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MultiLineEditableText;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -670,7 +3447,7 @@ declare class MultiLineEditableTextBox extends TextLayoutWidget {
 	static Load(ResourceName: string): MultiLineEditableTextBox;
 	static Find(Outer: UObject, ResourceName: string): MultiLineEditableTextBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MultiLineEditableTextBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -692,7 +3469,7 @@ declare class RichTextBlock extends TextLayoutWidget {
 	static Load(ResourceName: string): RichTextBlock;
 	static Find(Outer: UObject, ResourceName: string): RichTextBlock;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RichTextBlock;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -716,7 +3493,7 @@ declare class TextBlock extends TextLayoutWidget {
 	static Load(ResourceName: string): TextBlock;
 	static Find(Outer: UObject, ResourceName: string): TextBlock;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextBlock;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -744,7 +3521,7 @@ declare class Throbber extends Widget {
 	static Load(ResourceName: string): Throbber;
 	static Find(Outer: UObject, ResourceName: string): Throbber;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Throbber;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -782,7 +3559,7 @@ declare class BlueprintGeneratedClass extends Class {
 	static Load(ResourceName: string): BlueprintGeneratedClass;
 	static Find(Outer: UObject, ResourceName: string): BlueprintGeneratedClass;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlueprintGeneratedClass;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -790,8 +3567,6 @@ declare class BlueprintGeneratedClass extends Class {
 	static C(Other: UObject): BlueprintGeneratedClass;
 }
 
-declare type EBindingKind = string | symbol;
-declare var EBindingKind = { Function:'Function',Property:'Property', };
 declare class DelegateRuntimeBinding { 
 	ObjectName: string;
 	PropertyName: string;
@@ -814,7 +3589,7 @@ declare class WidgetBlueprintGeneratedClass extends BlueprintGeneratedClass {
 	static Load(ResourceName: string): WidgetBlueprintGeneratedClass;
 	static Find(Outer: UObject, ResourceName: string): WidgetBlueprintGeneratedClass;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WidgetBlueprintGeneratedClass;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -835,7 +3610,7 @@ declare class WidgetBlueprintLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): WidgetBlueprintLibrary;
 	static Find(Outer: UObject, ResourceName: string): WidgetBlueprintLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WidgetBlueprintLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -893,75 +3668,13 @@ declare class WidgetBlueprintLibrary extends BlueprintFunctionLibrary {
 	static C(Other: UObject): WidgetBlueprintLibrary;
 }
 
-declare type EWidgetSpace = string | symbol;
-declare var EWidgetSpace = { World:'World',Screen:'Screen', };
-declare type EWidgetBlendMode = string | symbol;
-declare var EWidgetBlendMode = { Opaque:'Opaque',Masked:'Masked',Transparent:'Transparent', };
-declare class WidgetComponent extends MeshComponent { 
-	Space: EWidgetSpace;
-	WidgetClass: UnrealEngineClass;
-	DrawSize: IntPoint;
-	bManuallyRedraw: boolean;
-	bRedrawRequested: boolean;
-	RedrawTime: number;
-	LastWidgetRenderTime: number;
-	bWindowFocusable: boolean;
-	CurrentDrawSize: IntPoint;
-	bDrawAtDesiredSize: boolean;
-	Pivot: Vector2D;
-	OwnerPlayer: LocalPlayer;
-	BackgroundColor: LinearColor;
-	TintColorAndOpacity: LinearColor;
-	OpacityFromTexture: number;
-	BlendMode: EWidgetBlendMode;
-	bIsOpaque: boolean;
-	bIsTwoSided: boolean;
-	ParabolaDistortion: number;
-	TickWhenOffscreen: boolean;
-	Widget: UserWidget;
-	BodySetup: BodySetup;
-	TranslucentMaterial: MaterialInterface;
-	TranslucentMaterial_OneSided: MaterialInterface;
-	OpaqueMaterial: MaterialInterface;
-	OpaqueMaterial_OneSided: MaterialInterface;
-	MaskedMaterial: MaterialInterface;
-	MaskedMaterial_OneSided: MaterialInterface;
-	RenderTarget: TextureRenderTarget2D;
-	MaterialInstance: MaterialInstanceDynamic;
-	bUseLegacyRotation: boolean;
-	bAddedToScreen: boolean;
-	bEditTimeUsable: boolean;
-	SharedLayerName: string;
-	LayerZOrder: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): WidgetComponent;
-	static Find(Outer: UObject, ResourceName: string): WidgetComponent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): WidgetComponent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WidgetComponent;
-	SetWidget(Widget: UserWidget): void;
-	SetOwnerPlayer(LocalPlayer: LocalPlayer): void;
-	SetDrawSize(Size: Vector2D): void;
-	SetBackgroundColor(NewBackgroundColor: LinearColor): void;
-	RequestRedraw(): void;
-	GetUserWidgetObject(): UserWidget;
-	GetRenderTarget(): TextureRenderTarget2D;
-	GetOwnerPlayer(): LocalPlayer;
-	GetMaterialInstance(): MaterialInstanceDynamic;
-	GetDrawSize(): Vector2D;
-	static C(Other: UObject): WidgetComponent;
-}
-
-declare type EWidgetInteractionSource = string | symbol;
-declare var EWidgetInteractionSource = { World:'World',Mouse:'Mouse',CenterScreen:'CenterScreen',Custom:'Custom', };
+declare type EWidgetInteractionSource = 'World' | 'Mouse' | 'CenterScreen' | 'Custom';
+declare var EWidgetInteractionSource : { World:'World',Mouse:'Mouse',CenterScreen:'CenterScreen',Custom:'Custom', };
 declare class WidgetInteractionComponent extends SceneComponent { 
 	OnHoveredWidgetChanged: UnrealEngineMulticastDelegate<(WidgetComponent: WidgetComponent, PreviousWidgetComponent: WidgetComponent) => void>;
 	VirtualUserIndex: number;
 	PointerIndex: number;
+	TraceChannel: ECollisionChannel;
 	InteractionDistance: number;
 	InteractionSource: EWidgetInteractionSource;
 	bEnableHitTesting: boolean;
@@ -981,7 +3694,7 @@ declare class WidgetInteractionComponent extends SceneComponent {
 	static Load(ResourceName: string): WidgetInteractionComponent;
 	static Find(Outer: UObject, ResourceName: string): WidgetInteractionComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WidgetInteractionComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -999,6 +3712,7 @@ declare class WidgetInteractionComponent extends SceneComponent {
 	IsOverFocusableWidget(): boolean;
 	GetLastHitResult(): HitResult;
 	GetHoveredWidgetComponent(): WidgetComponent;
+	Get2DHitLocation(): Vector2D;
 	static C(Other: UObject): WidgetInteractionComponent;
 }
 
@@ -1008,7 +3722,7 @@ declare class WidgetLayoutLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): WidgetLayoutLibrary;
 	static Find(Outer: UObject, ResourceName: string): WidgetLayoutLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WidgetLayoutLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1035,7 +3749,7 @@ declare class MovieScene3DConstraintSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieScene3DConstraintSection;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DConstraintSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DConstraintSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1057,7 +3771,7 @@ declare class MovieScene3DAttachSection extends MovieScene3DConstraintSection {
 	static Load(ResourceName: string): MovieScene3DAttachSection;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DAttachSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DAttachSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1065,8 +3779,8 @@ declare class MovieScene3DAttachSection extends MovieScene3DConstraintSection {
 	static C(Other: UObject): MovieScene3DAttachSection;
 }
 
-declare type MovieScene3DPathSection_Axis = string | symbol;
-declare var MovieScene3DPathSection_Axis = { X:'X',Y:'Y',Z:'Z',NEG_X:'NEG_X',NEG_Y:'NEG_Y',NEG_Z:'NEG_Z', };
+declare type MovieScene3DPathSection_Axis = 'X' | 'Y' | 'Z' | 'NEG_X' | 'NEG_Y' | 'NEG_Z';
+declare var MovieScene3DPathSection_Axis : { X:'X',Y:'Y',Z:'Z',NEG_X:'NEG_X',NEG_Y:'NEG_Y',NEG_Z:'NEG_Z', };
 declare class MovieScene3DPathSection extends MovieScene3DConstraintSection { 
 	TimingCurve: RichCurve;
 	FrontAxisEnum: MovieScene3DPathSection_Axis;
@@ -1079,7 +3793,7 @@ declare class MovieScene3DPathSection extends MovieScene3DConstraintSection {
 	static Load(ResourceName: string): MovieScene3DPathSection;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DPathSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DPathSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1094,7 +3808,7 @@ declare class MovieScene3DConstraintTrack extends MovieSceneTrack {
 	static Load(ResourceName: string): MovieScene3DConstraintTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DConstraintTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DConstraintTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1108,7 +3822,7 @@ declare class MovieScene3DAttachTrack extends MovieScene3DConstraintTrack {
 	static Load(ResourceName: string): MovieScene3DAttachTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DAttachTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DAttachTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1122,7 +3836,7 @@ declare class MovieScene3DPathTrack extends MovieScene3DConstraintTrack {
 	static Load(ResourceName: string): MovieScene3DPathTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DPathTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DPathTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1130,8 +3844,8 @@ declare class MovieScene3DPathTrack extends MovieScene3DConstraintTrack {
 	static C(Other: UObject): MovieScene3DPathTrack;
 }
 
-declare type EShow3DTrajectory = string | symbol;
-declare var EShow3DTrajectory = { EST_OnlyWhenSelected:'EST_OnlyWhenSelected',EST_Always:'EST_Always',EST_Never:'EST_Never', };
+declare type EShow3DTrajectory = 'EST_OnlyWhenSelected' | 'EST_Always' | 'EST_Never';
+declare var EShow3DTrajectory : { EST_OnlyWhenSelected:'EST_OnlyWhenSelected',EST_Always:'EST_Always',EST_Never:'EST_Never', };
 declare class MovieScene3DTransformSection extends MovieSceneSection { 
 	Translation: RichCurve;
 	Rotation: RichCurve;
@@ -1142,7 +3856,7 @@ declare class MovieScene3DTransformSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieScene3DTransformSection;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DTransformSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DTransformSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1173,7 +3887,7 @@ declare class MovieSceneActorReferenceSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneActorReferenceSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneActorReferenceSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneActorReferenceSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1187,12 +3901,13 @@ declare class MovieSceneAudioSection extends MovieSceneSection {
 	AudioDilationFactor: number;
 	AudioVolume: number;
 	bShowIntensity: boolean;
+	bSuppressSubtitles: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): MovieSceneAudioSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneAudioSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneAudioSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1207,7 +3922,7 @@ declare class MovieSceneAudioTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneAudioTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneAudioTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneAudioTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1223,7 +3938,7 @@ declare class MovieSceneBoolSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneBoolSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneBoolSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneBoolSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1237,7 +3952,7 @@ declare class MovieSceneVisibilitySection extends MovieSceneBoolSection {
 	static Load(ResourceName: string): MovieSceneVisibilitySection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneVisibilitySection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneVisibilitySection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1252,7 +3967,7 @@ declare class MovieSceneByteSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneByteSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneByteSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneByteSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1274,7 +3989,7 @@ declare class MovieSceneCameraAnimSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneCameraAnimSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCameraAnimSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCameraAnimSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1289,7 +4004,7 @@ declare class MovieSceneCameraAnimTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneCameraAnimTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCameraAnimTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCameraAnimTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1305,7 +4020,7 @@ declare class MovieSceneCameraCutSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneCameraCutSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCameraCutSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCameraCutSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1320,7 +4035,7 @@ declare class MovieSceneCameraCutTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneCameraCutTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCameraCutTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCameraCutTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1338,7 +4053,7 @@ declare class MovieSceneCameraShakeSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneCameraShakeSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCameraShakeSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCameraShakeSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1353,7 +4068,7 @@ declare class MovieSceneCameraShakeTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneCameraShakeTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCameraShakeTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCameraShakeTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1371,7 +4086,7 @@ declare class MovieSceneColorSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneColorSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneColorSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneColorSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1399,7 +4114,7 @@ declare class MovieSceneEventSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneEventSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneEventSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneEventSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1416,7 +4131,7 @@ declare class MovieSceneEventTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneEventTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneEventTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneEventTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1431,7 +4146,7 @@ declare class MovieSceneFloatSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneFloatSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneFloatSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneFloatSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1447,7 +4162,7 @@ declare class MovieSceneFadeSection extends MovieSceneFloatSection {
 	static Load(ResourceName: string): MovieSceneFadeSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneFadeSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneFadeSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1461,7 +4176,7 @@ declare class MovieSceneSlomoSection extends MovieSceneFloatSection {
 	static Load(ResourceName: string): MovieSceneSlomoSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSlomoSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneSlomoSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1469,8 +4184,8 @@ declare class MovieSceneSlomoSection extends MovieSceneFloatSection {
 	static C(Other: UObject): MovieSceneSlomoSection;
 }
 
-declare type ELevelVisibility = string | symbol;
-declare var ELevelVisibility = { Visible:'Visible',Hidden:'Hidden', };
+declare type ELevelVisibility = 'Visible' | 'Hidden';
+declare var ELevelVisibility : { Visible:'Visible',Hidden:'Hidden', };
 declare class MovieSceneLevelVisibilitySection extends MovieSceneSection { 
 	Visibility: ELevelVisibility;
 	LevelNames: string[];
@@ -1479,7 +4194,7 @@ declare class MovieSceneLevelVisibilitySection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneLevelVisibilitySection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneLevelVisibilitySection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneLevelVisibilitySection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1494,7 +4209,7 @@ declare class MovieSceneLevelVisibilityTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneLevelVisibilityTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneLevelVisibilityTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneLevelVisibilityTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1540,7 +4255,7 @@ declare class MovieSceneParameterSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneParameterSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneParameterSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneParameterSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1555,7 +4270,7 @@ declare class MovieSceneComponentMaterialTrack extends MovieSceneMaterialTrack {
 	static Load(ResourceName: string): MovieSceneComponentMaterialTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneComponentMaterialTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneComponentMaterialTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1570,7 +4285,7 @@ declare class MovieSceneParticleParameterTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneParticleParameterTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneParticleParameterTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneParticleParameterTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1585,7 +4300,7 @@ declare class MovieSceneParticleSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneParticleSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneParticleSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneParticleSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1600,7 +4315,7 @@ declare class MovieSceneParticleTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneParticleTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneParticleTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneParticleTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1614,7 +4329,7 @@ declare class MovieScene3DTransformTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieScene3DTransformTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieScene3DTransformTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieScene3DTransformTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1628,7 +4343,7 @@ declare class MovieSceneActorReferenceTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieSceneActorReferenceTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneActorReferenceTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneActorReferenceTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1642,7 +4357,7 @@ declare class MovieSceneBoolTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieSceneBoolTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneBoolTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneBoolTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1656,7 +4371,7 @@ declare class MovieSceneVisibilityTrack extends MovieSceneBoolTrack {
 	static Load(ResourceName: string): MovieSceneVisibilityTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneVisibilityTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneVisibilityTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1671,7 +4386,7 @@ declare class MovieSceneByteTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieSceneByteTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneByteTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneByteTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1686,7 +4401,7 @@ declare class MovieSceneColorTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieSceneColorTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneColorTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneColorTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1700,7 +4415,7 @@ declare class MovieSceneFloatTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieSceneFloatTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneFloatTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneFloatTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1714,7 +4429,7 @@ declare class MovieSceneFadeTrack extends MovieSceneFloatTrack {
 	static Load(ResourceName: string): MovieSceneFadeTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneFadeTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneFadeTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1728,7 +4443,7 @@ declare class MovieSceneSlomoTrack extends MovieSceneFloatTrack {
 	static Load(ResourceName: string): MovieSceneSlomoTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSlomoTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneSlomoTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1742,7 +4457,7 @@ declare class MovieSceneStringTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieSceneStringTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneStringTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneStringTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1757,7 +4472,7 @@ declare class MovieSceneVectorTrack extends MovieScenePropertyTrack {
 	static Load(ResourceName: string): MovieSceneVectorTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneVectorTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneVectorTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1778,7 +4493,7 @@ declare class MovieSceneSkeletalAnimationSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneSkeletalAnimationSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSkeletalAnimationSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneSkeletalAnimationSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1793,7 +4508,7 @@ declare class MovieSceneSkeletalAnimationTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneSkeletalAnimationTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSkeletalAnimationTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneSkeletalAnimationTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1809,7 +4524,7 @@ declare class MovieSceneSpawnTrack extends MovieSceneTrack {
 	static Load(ResourceName: string): MovieSceneSpawnTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSpawnTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneSpawnTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1838,18 +4553,12 @@ declare class MovieSceneStringSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneStringSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneStringSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneStringSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneStringSection;
 	static C(Other: UObject): MovieSceneStringSection;
-}
-
-declare class DirectoryPath { 
-	Path: string;
-	clone() : DirectoryPath;
-	static C(Other: UObject): DirectoryPath;
 }
 
 declare class MovieSceneSubSection extends MovieSceneSection { 
@@ -1865,7 +4574,7 @@ declare class MovieSceneSubSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneSubSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSubSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneSubSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1881,7 +4590,7 @@ declare class MovieSceneCinematicShotSection extends MovieSceneSubSection {
 	static Load(ResourceName: string): MovieSceneCinematicShotSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCinematicShotSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCinematicShotSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1896,7 +4605,7 @@ declare class MovieSceneSubTrack extends MovieSceneNameableTrack {
 	static Load(ResourceName: string): MovieSceneSubTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSubTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneSubTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1910,7 +4619,7 @@ declare class MovieSceneCinematicShotTrack extends MovieSceneSubTrack {
 	static Load(ResourceName: string): MovieSceneCinematicShotTrack;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneCinematicShotTrack;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneCinematicShotTrack;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1926,7 +4635,7 @@ declare class MovieSceneVectorSection extends MovieSceneSection {
 	static Load(ResourceName: string): MovieSceneVectorSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneVectorSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MovieSceneVectorSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1948,7 +4657,7 @@ declare class LevelSequence extends MovieSceneSequence {
 	static Load(ResourceName: string): LevelSequence;
 	static Find(Outer: UObject, ResourceName: string): LevelSequence;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelSequence;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -1978,7 +4687,7 @@ declare class LevelSequencePlayer extends UObject {
 	static Load(ResourceName: string): LevelSequencePlayer;
 	static Find(Outer: UObject, ResourceName: string): LevelSequencePlayer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelSequencePlayer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2001,37 +4710,6 @@ declare class LevelSequencePlayer extends UObject {
 	static CreateLevelSequencePlayer(WorldContextObject: UObject,LevelSequence: LevelSequence,Settings: LevelSequencePlaybackSettings): LevelSequencePlayer;
 	ChangePlaybackDirection(): void;
 	static C(Other: UObject): LevelSequencePlayer;
-}
-
-declare class LevelSequenceBurnInInitSettings extends UObject { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): LevelSequenceBurnInInitSettings;
-	static Find(Outer: UObject, ResourceName: string): LevelSequenceBurnInInitSettings;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): LevelSequenceBurnInInitSettings;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelSequenceBurnInInitSettings;
-	static C(Other: UObject): LevelSequenceBurnInInitSettings;
-}
-
-declare class LevelSequenceBurnInOptions extends UObject { 
-	bUseBurnIn: boolean;
-	BurnInClass: StringClassReference;
-	Settings: LevelSequenceBurnInInitSettings;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): LevelSequenceBurnInOptions;
-	static Find(Outer: UObject, ResourceName: string): LevelSequenceBurnInOptions;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): LevelSequenceBurnInOptions;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelSequenceBurnInOptions;
-	static C(Other: UObject): LevelSequenceBurnInOptions;
 }
 
 declare class LevelSequenceSnapshotSettings { 
@@ -2059,7 +4737,7 @@ declare class LevelSequenceBurnIn extends UserWidget {
 	static Load(ResourceName: string): LevelSequenceBurnIn;
 	static Find(Outer: UObject, ResourceName: string): LevelSequenceBurnIn;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelSequenceBurnIn;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2078,7 +4756,7 @@ declare class LevelSequenceActor extends Actor {
 	BurnInInstance: LevelSequenceBurnIn;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelSequenceActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2101,7 +4779,7 @@ declare class ActorFactory extends UObject {
 	static Load(ResourceName: string): ActorFactory;
 	static Find(Outer: UObject, ResourceName: string): ActorFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2115,7 +4793,7 @@ declare class ActorFactoryAmbientSound extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryAmbientSound;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryAmbientSound;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryAmbientSound;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2129,7 +4807,7 @@ declare class ActorFactoryAtmosphericFog extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryAtmosphericFog;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryAtmosphericFog;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryAtmosphericFog;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2143,7 +4821,7 @@ declare class ActorFactoryBlueprint extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryBlueprint;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryBlueprint;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryBlueprint;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2157,7 +4835,7 @@ declare class ActorFactoryBoxReflectionCapture extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryBoxReflectionCapture;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryBoxReflectionCapture;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryBoxReflectionCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2171,7 +4849,7 @@ declare class ActorFactoryBoxVolume extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryBoxVolume;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryBoxVolume;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryBoxVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2185,7 +4863,7 @@ declare class ActorFactoryCameraActor extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryCameraActor;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryCameraActor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryCameraActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2199,7 +4877,7 @@ declare class ActorFactoryCharacter extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryCharacter;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryCharacter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryCharacter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2213,7 +4891,7 @@ declare class ActorFactoryClass extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryClass;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryClass;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryClass;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2227,7 +4905,7 @@ declare class ActorFactoryCylinderVolume extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryCylinderVolume;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryCylinderVolume;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryCylinderVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2241,7 +4919,7 @@ declare class ActorFactoryDeferredDecal extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryDeferredDecal;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryDeferredDecal;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryDeferredDecal;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2255,7 +4933,7 @@ declare class ActorFactoryDestructible extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryDestructible;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryDestructible;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryDestructible;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2269,7 +4947,7 @@ declare class ActorFactoryDirectionalLight extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryDirectionalLight;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryDirectionalLight;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryDirectionalLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2283,7 +4961,7 @@ declare class ActorFactoryEmitter extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryEmitter;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryEmitter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryEmitter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2297,7 +4975,7 @@ declare class ActorFactoryEmptyActor extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryEmptyActor;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryEmptyActor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryEmptyActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2311,7 +4989,7 @@ declare class ActorFactoryPawn extends ActorFactoryEmptyActor {
 	static Load(ResourceName: string): ActorFactoryPawn;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryPawn;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryPawn;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2325,7 +5003,7 @@ declare class ActorFactoryExponentialHeightFog extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryExponentialHeightFog;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryExponentialHeightFog;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryExponentialHeightFog;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2339,7 +5017,7 @@ declare class ActorFactoryMatineeActor extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryMatineeActor;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryMatineeActor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryMatineeActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2353,7 +5031,7 @@ declare class ActorFactoryMovieScene extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryMovieScene;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryMovieScene;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryMovieScene;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2367,7 +5045,7 @@ declare class ActorFactoryNote extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryNote;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryNote;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryNote;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2381,7 +5059,7 @@ declare class ActorFactoryPhysicsAsset extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryPhysicsAsset;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryPhysicsAsset;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryPhysicsAsset;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2395,7 +5073,7 @@ declare class ActorFactoryPlanarReflection extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryPlanarReflection;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryPlanarReflection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryPlanarReflection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2409,7 +5087,7 @@ declare class ActorFactoryPlaneReflectionCapture extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryPlaneReflectionCapture;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryPlaneReflectionCapture;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryPlaneReflectionCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2423,7 +5101,7 @@ declare class ActorFactoryPlayerStart extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryPlayerStart;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryPlayerStart;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryPlayerStart;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2437,7 +5115,7 @@ declare class ActorFactoryPointLight extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryPointLight;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryPointLight;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryPointLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2451,7 +5129,7 @@ declare class ActorFactorySkeletalMesh extends ActorFactory {
 	static Load(ResourceName: string): ActorFactorySkeletalMesh;
 	static Find(Outer: UObject, ResourceName: string): ActorFactorySkeletalMesh;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactorySkeletalMesh;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2465,7 +5143,7 @@ declare class ActorFactoryAnimationAsset extends ActorFactorySkeletalMesh {
 	static Load(ResourceName: string): ActorFactoryAnimationAsset;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryAnimationAsset;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryAnimationAsset;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2479,7 +5157,7 @@ declare class ActorFactorySkyLight extends ActorFactory {
 	static Load(ResourceName: string): ActorFactorySkyLight;
 	static Find(Outer: UObject, ResourceName: string): ActorFactorySkyLight;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactorySkyLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2493,7 +5171,7 @@ declare class ActorFactorySphereReflectionCapture extends ActorFactory {
 	static Load(ResourceName: string): ActorFactorySphereReflectionCapture;
 	static Find(Outer: UObject, ResourceName: string): ActorFactorySphereReflectionCapture;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactorySphereReflectionCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2507,7 +5185,7 @@ declare class ActorFactorySphereVolume extends ActorFactory {
 	static Load(ResourceName: string): ActorFactorySphereVolume;
 	static Find(Outer: UObject, ResourceName: string): ActorFactorySphereVolume;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactorySphereVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2521,7 +5199,7 @@ declare class ActorFactorySpotLight extends ActorFactory {
 	static Load(ResourceName: string): ActorFactorySpotLight;
 	static Find(Outer: UObject, ResourceName: string): ActorFactorySpotLight;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactorySpotLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2535,7 +5213,7 @@ declare class ActorFactoryStaticMesh extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryStaticMesh;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryStaticMesh;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryStaticMesh;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2549,7 +5227,7 @@ declare class ActorFactoryBasicShape extends ActorFactoryStaticMesh {
 	static Load(ResourceName: string): ActorFactoryBasicShape;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryBasicShape;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryBasicShape;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2563,7 +5241,7 @@ declare class ActorFactoryInteractiveFoliage extends ActorFactoryStaticMesh {
 	static Load(ResourceName: string): ActorFactoryInteractiveFoliage;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryInteractiveFoliage;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryInteractiveFoliage;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2577,7 +5255,7 @@ declare class ActorFactorySubDSurface extends ActorFactory {
 	static Load(ResourceName: string): ActorFactorySubDSurface;
 	static Find(Outer: UObject, ResourceName: string): ActorFactorySubDSurface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactorySubDSurface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2591,7 +5269,7 @@ declare class ActorFactoryTargetPoint extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryTargetPoint;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryTargetPoint;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryTargetPoint;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2605,7 +5283,7 @@ declare class ActorFactoryTextRender extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryTextRender;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryTextRender;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryTextRender;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2619,7 +5297,7 @@ declare class ActorFactoryTriggerBox extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryTriggerBox;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryTriggerBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryTriggerBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2633,7 +5311,7 @@ declare class ActorFactoryTriggerCapsule extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryTriggerCapsule;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryTriggerCapsule;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryTriggerCapsule;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2647,7 +5325,7 @@ declare class ActorFactoryTriggerSphere extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryTriggerSphere;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryTriggerSphere;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryTriggerSphere;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2661,7 +5339,7 @@ declare class ActorFactoryVectorFieldVolume extends ActorFactory {
 	static Load(ResourceName: string): ActorFactoryVectorFieldVolume;
 	static Find(Outer: UObject, ResourceName: string): ActorFactoryVectorFieldVolume;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorFactoryVectorFieldVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2676,7 +5354,7 @@ declare class AnalyticsPrivacySettings extends UObject {
 	static Load(ResourceName: string): AnalyticsPrivacySettings;
 	static Find(Outer: UObject, ResourceName: string): AnalyticsPrivacySettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnalyticsPrivacySettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2694,7 +5372,7 @@ declare class SkeletalMeshActor extends Actor {
 	ReplicatedMaterial1: MaterialInterface;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SkeletalMeshActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2709,7 +5387,7 @@ declare class SkeletalMeshActor extends Actor {
 declare class AnimationThumbnailSkeletalMeshActor extends SkeletalMeshActor { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimationThumbnailSkeletalMeshActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2732,7 +5410,7 @@ declare class Exporter extends UObject {
 	static Load(ResourceName: string): Exporter;
 	static Find(Outer: UObject, ResourceName: string): Exporter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Exporter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2746,7 +5424,7 @@ declare class AnimSequenceExporterFBX extends Exporter {
 	static Load(ResourceName: string): AnimSequenceExporterFBX;
 	static Find(Outer: UObject, ResourceName: string): AnimSequenceExporterFBX;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimSequenceExporterFBX;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2762,7 +5440,8 @@ declare class PreviewSceneProfile {
 	bRotateLightingRig: boolean;
 	bShowEnvironment: boolean;
 	bShowFloor: boolean;
-	EnvironmentCubeMap: TextureCube;
+	EnvironmentCubeMap: any;
+	EnvironmentCubeMapPath: string;
 	PostProcessingSettings: PostProcessSettings;
 	bPostProcessingEnabled: boolean;
 	LightingRigRotation: number;
@@ -2779,7 +5458,7 @@ declare class AssetViewerSettings extends UObject {
 	static Load(ResourceName: string): AssetViewerSettings;
 	static Find(Outer: UObject, ResourceName: string): AssetViewerSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AssetViewerSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2803,12 +5482,26 @@ declare class Commandlet extends UObject {
 	static Load(ResourceName: string): Commandlet;
 	static Find(Outer: UObject, ResourceName: string): Commandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Commandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Commandlet;
 	static C(Other: UObject): Commandlet;
+}
+
+declare class AudioMixerCommandlet extends Commandlet { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AudioMixerCommandlet;
+	static Find(Outer: UObject, ResourceName: string): AudioMixerCommandlet;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AudioMixerCommandlet;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AudioMixerCommandlet;
+	static C(Other: UObject): AudioMixerCommandlet;
 }
 
 declare class AudioTestCommandlet extends Commandlet { 
@@ -2817,7 +5510,7 @@ declare class AudioTestCommandlet extends Commandlet {
 	static Load(ResourceName: string): AudioTestCommandlet;
 	static Find(Outer: UObject, ResourceName: string): AudioTestCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AudioTestCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2831,7 +5524,7 @@ declare class AutoReimportManager extends UObject {
 	static Load(ResourceName: string): AutoReimportManager;
 	static Find(Outer: UObject, ResourceName: string): AutoReimportManager;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AutoReimportManager;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2894,7 +5587,7 @@ declare class CascadeOptions extends UObject {
 	static Load(ResourceName: string): CascadeOptions;
 	static Find(Outer: UObject, ResourceName: string): CascadeOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CascadeOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2916,46 +5609,12 @@ declare class ChunkDependencyInfo extends UObject {
 	static Load(ResourceName: string): ChunkDependencyInfo;
 	static Find(Outer: UObject, ResourceName: string): ChunkDependencyInfo;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ChunkDependencyInfo;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChunkDependencyInfo;
 	static C(Other: UObject): ChunkDependencyInfo;
-}
-
-declare class CollisionTestEntry { 
-	RootShapeAsset: string;
-	ShapeType: string;
-	HitResult: HitResult;
-	clone() : CollisionTestEntry;
-	static C(Other: UObject): CollisionTestEntry;
-}
-
-declare class CollisionPerfTest { 
-	RootShapeAsset: string;
-	ShapeType: string;
-	CreationBounds: Vector;
-	CreationElements: Vector;
-	clone() : CollisionPerfTest;
-	static C(Other: UObject): CollisionPerfTest;
-}
-
-declare class CollisionAutomationTestConfigData extends UObject { 
-	ComponentSweepMultiTests: CollisionTestEntry[];
-	LineTraceSingleByChannelTests: CollisionTestEntry[];
-	LineTracePerformanceTests: CollisionPerfTest[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): CollisionAutomationTestConfigData;
-	static Find(Outer: UObject, ResourceName: string): CollisionAutomationTestConfigData;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): CollisionAutomationTestConfigData;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CollisionAutomationTestConfigData;
-	static C(Other: UObject): CollisionAutomationTestConfigData;
 }
 
 declare class CompressAnimationsCommandlet extends Commandlet { 
@@ -2964,7 +5623,7 @@ declare class CompressAnimationsCommandlet extends Commandlet {
 	static Load(ResourceName: string): CompressAnimationsCommandlet;
 	static Find(Outer: UObject, ResourceName: string): CompressAnimationsCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CompressAnimationsCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2979,7 +5638,7 @@ declare class CompressionHolder extends UObject {
 	static Load(ResourceName: string): CompressionHolder;
 	static Find(Outer: UObject, ResourceName: string): CompressionHolder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CompressionHolder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -2996,12 +5655,13 @@ declare class ContentBrowserSettings extends UObject {
 	DisplayL10NFolder: boolean;
 	DisplayPluginFolders: boolean;
 	DisplayCollections: boolean;
+	DisplayCppFolders: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): ContentBrowserSettings;
 	static Find(Outer: UObject, ResourceName: string): ContentBrowserSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ContentBrowserSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3016,7 +5676,7 @@ declare class CookCommandlet extends Commandlet {
 	static Load(ResourceName: string): CookCommandlet;
 	static Find(Outer: UObject, ResourceName: string): CookCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CookCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3030,7 +5690,7 @@ declare class DeveloperSettings extends UObject {
 	static Load(ResourceName: string): DeveloperSettings;
 	static Find(Outer: UObject, ResourceName: string): DeveloperSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DeveloperSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3044,6 +5704,8 @@ declare class CookerSettings extends DeveloperSettings {
 	bIterativeCookingForLaunchOn: boolean;
 	bCompileBlueprintsInDevelopmentMode: boolean;
 	bCookBlueprintComponentTemplateData: boolean;
+	ClassesExcludedOnDedicatedServer: string[];
+	ClassesExcludedOnDedicatedClient: string[];
 	DefaultPVRTCQuality: number;
 	DefaultASTCQualityBySpeed: number;
 	DefaultASTCQualityBySize: number;
@@ -3052,7 +5714,7 @@ declare class CookerSettings extends DeveloperSettings {
 	static Load(ResourceName: string): CookerSettings;
 	static Find(Outer: UObject, ResourceName: string): CookerSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CookerSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3066,7 +5728,7 @@ declare class CookOnTheFlyServer extends UObject {
 	static Load(ResourceName: string): CookOnTheFlyServer;
 	static Find(Outer: UObject, ResourceName: string): CookOnTheFlyServer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CookOnTheFlyServer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3083,7 +5745,7 @@ declare class CrashReporterSettings extends UObject {
 	static Load(ResourceName: string): CrashReporterSettings;
 	static Find(Outer: UObject, ResourceName: string): CrashReporterSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CrashReporterSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3091,10 +5753,10 @@ declare class CrashReporterSettings extends UObject {
 	static C(Other: UObject): CrashReporterSettings;
 }
 
-declare type ECurveEditorCurveVisibility = string | symbol;
-declare var ECurveEditorCurveVisibility = { AllCurves:'AllCurves',SelectedCurves:'SelectedCurves',AnimatedCurves:'AnimatedCurves', };
-declare type ECurveEditorTangentVisibility = string | symbol;
-declare var ECurveEditorTangentVisibility = { AllTangents:'AllTangents',SelectedKeys:'SelectedKeys',NoTangents:'NoTangents', };
+declare type ECurveEditorCurveVisibility = 'AllCurves' | 'SelectedCurves' | 'AnimatedCurves';
+declare var ECurveEditorCurveVisibility : { AllCurves:'AllCurves',SelectedCurves:'SelectedCurves',AnimatedCurves:'AnimatedCurves', };
+declare type ECurveEditorTangentVisibility = 'AllTangents' | 'SelectedKeys' | 'NoTangents';
+declare var ECurveEditorTangentVisibility : { AllTangents:'AllTangents',SelectedKeys:'SelectedKeys',NoTangents:'NoTangents', };
 declare class CurveEditorSettings extends UObject { 
 	bAutoFrameCurveEditor: boolean;
 	bShowCurveEditorCurveToolTips: boolean;
@@ -3105,7 +5767,7 @@ declare class CurveEditorSettings extends UObject {
 	static Load(ResourceName: string): CurveEditorSettings;
 	static Find(Outer: UObject, ResourceName: string): CurveEditorSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveEditorSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3128,7 +5790,7 @@ declare class CurveEdOptions extends UObject {
 	static Load(ResourceName: string): CurveEdOptions;
 	static Find(Outer: UObject, ResourceName: string): CurveEdOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveEdOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3136,20 +5798,15 @@ declare class CurveEdOptions extends UObject {
 	static C(Other: UObject): CurveEdOptions;
 }
 
-declare class SelectedSocketInfo { 
-	clone() : SelectedSocketInfo;
-	static C(Other: UObject): SelectedSocketInfo;
-}
-
 declare class DebugSkelMeshComponent extends SkeletalMeshComponent { 
 	bRenderRawSkeleton: boolean;
 	bDrawMesh: boolean;
 	bShowBoneNames: boolean;
 	bDrawBoneInfluences: boolean;
+	bDrawMorphTargetVerts: boolean;
 	bDrawNormals: boolean;
 	bDrawTangents: boolean;
 	bDrawBinormals: boolean;
-	bCPUSkinning: boolean;
 	bDrawSockets: boolean;
 	bSkeletonSocketsVisible: boolean;
 	bMeshSocketsVisible: boolean;
@@ -3161,7 +5818,7 @@ declare class DebugSkelMeshComponent extends SkeletalMeshComponent {
 	bDisplayBound: boolean;
 	bPreviewRootMotion: boolean;
 	BonesOfInterest: number[];
-	SocketsOfInterest: SelectedSocketInfo[];
+	MorphTargetOfInterests: MorphTarget[];
 	SkelMaterials: MaterialInterface[];
 	PreviewInstance: AnimPreviewInstance;
 	SavedAnimScriptInstance: AnimInstance;
@@ -3171,7 +5828,7 @@ declare class DebugSkelMeshComponent extends SkeletalMeshComponent {
 	static Load(ResourceName: string): DebugSkelMeshComponent;
 	static Find(Outer: UObject, ResourceName: string): DebugSkelMeshComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DebugSkelMeshComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3185,7 +5842,7 @@ declare class UnrealEdTypes extends UObject {
 	static Load(ResourceName: string): UnrealEdTypes;
 	static Find(Outer: UObject, ResourceName: string): UnrealEdTypes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UnrealEdTypes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3202,7 +5859,7 @@ declare class DEditorParameterValue extends UObject {
 	static Load(ResourceName: string): DEditorParameterValue;
 	static Find(Outer: UObject, ResourceName: string): DEditorParameterValue;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DEditorParameterValue;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3224,7 +5881,7 @@ declare class DEditorFontParameterValue extends DEditorParameterValue {
 	static Load(ResourceName: string): DEditorFontParameterValue;
 	static Find(Outer: UObject, ResourceName: string): DEditorFontParameterValue;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DEditorFontParameterValue;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3239,7 +5896,7 @@ declare class DEditorScalarParameterValue extends DEditorParameterValue {
 	static Load(ResourceName: string): DEditorScalarParameterValue;
 	static Find(Outer: UObject, ResourceName: string): DEditorScalarParameterValue;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DEditorScalarParameterValue;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3263,7 +5920,7 @@ declare class DEditorStaticComponentMaskParameterValue extends DEditorParameterV
 	static Load(ResourceName: string): DEditorStaticComponentMaskParameterValue;
 	static Find(Outer: UObject, ResourceName: string): DEditorStaticComponentMaskParameterValue;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DEditorStaticComponentMaskParameterValue;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3278,7 +5935,7 @@ declare class DEditorStaticSwitchParameterValue extends DEditorParameterValue {
 	static Load(ResourceName: string): DEditorStaticSwitchParameterValue;
 	static Find(Outer: UObject, ResourceName: string): DEditorStaticSwitchParameterValue;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DEditorStaticSwitchParameterValue;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3293,7 +5950,7 @@ declare class DEditorTextureParameterValue extends DEditorParameterValue {
 	static Load(ResourceName: string): DEditorTextureParameterValue;
 	static Find(Outer: UObject, ResourceName: string): DEditorTextureParameterValue;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DEditorTextureParameterValue;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3308,7 +5965,7 @@ declare class DEditorVectorParameterValue extends DEditorParameterValue {
 	static Load(ResourceName: string): DEditorVectorParameterValue;
 	static Find(Outer: UObject, ResourceName: string): DEditorVectorParameterValue;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DEditorVectorParameterValue;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3322,7 +5979,7 @@ declare class DerivedDataCacheCommandlet extends Commandlet {
 	static Load(ResourceName: string): DerivedDataCacheCommandlet;
 	static Find(Outer: UObject, ResourceName: string): DerivedDataCacheCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DerivedDataCacheCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3342,7 +5999,7 @@ declare class DestructableMeshEditorSettings extends UObject {
 	static Load(ResourceName: string): DestructableMeshEditorSettings;
 	static Find(Outer: UObject, ResourceName: string): DestructableMeshEditorSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DestructableMeshEditorSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3356,7 +6013,7 @@ declare class DiffAssetsCommandlet extends Commandlet {
 	static Load(ResourceName: string): DiffAssetsCommandlet;
 	static Find(Outer: UObject, ResourceName: string): DiffAssetsCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DiffAssetsCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3370,7 +6027,7 @@ declare class DiffFilesCommandlet extends Commandlet {
 	static Load(ResourceName: string): DiffFilesCommandlet;
 	static Find(Outer: UObject, ResourceName: string): DiffFilesCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DiffFilesCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3385,7 +6042,7 @@ declare class DiffPackagesCommandlet extends Commandlet {
 	static Load(ResourceName: string): DiffPackagesCommandlet;
 	static Find(Outer: UObject, ResourceName: string): DiffPackagesCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DiffPackagesCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3399,7 +6056,7 @@ declare class DumpBlueprintsInfoCommandlet extends Commandlet {
 	static Load(ResourceName: string): DumpBlueprintsInfoCommandlet;
 	static Find(Outer: UObject, ResourceName: string): DumpBlueprintsInfoCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DumpBlueprintsInfoCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3413,7 +6070,7 @@ declare class DumpHiddenCategoriesCommandlet extends Commandlet {
 	static Load(ResourceName: string): DumpHiddenCategoriesCommandlet;
 	static Find(Outer: UObject, ResourceName: string): DumpHiddenCategoriesCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DumpHiddenCategoriesCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3421,8 +6078,8 @@ declare class DumpHiddenCategoriesCommandlet extends Commandlet {
 	static C(Other: UObject): DumpHiddenCategoriesCommandlet;
 }
 
-declare type ECommentBoxMode = string | symbol;
-declare var ECommentBoxMode = { GroupMovement:'GroupMovement',NoGroupMovement:'NoGroupMovement', };
+declare type ECommentBoxMode = 'GroupMovement' | 'NoGroupMovement';
+declare var ECommentBoxMode : { GroupMovement:'GroupMovement',NoGroupMovement:'NoGroupMovement', };
 declare class EdGraphNode_Comment extends EdGraphNode { 
 	CommentColor: LinearColor;
 	bColorCommentBubble: boolean;
@@ -3433,7 +6090,7 @@ declare class EdGraphNode_Comment extends EdGraphNode {
 	static Load(ResourceName: string): EdGraphNode_Comment;
 	static Find(Outer: UObject, ResourceName: string): EdGraphNode_Comment;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EdGraphNode_Comment;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3447,7 +6104,7 @@ declare class MaterialGraphNode_Base extends EdGraphNode {
 	static Load(ResourceName: string): MaterialGraphNode_Base;
 	static Find(Outer: UObject, ResourceName: string): MaterialGraphNode_Base;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialGraphNode_Base;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3462,7 +6119,7 @@ declare class MaterialGraphNode_Root extends MaterialGraphNode_Base {
 	static Load(ResourceName: string): MaterialGraphNode_Root;
 	static Find(Outer: UObject, ResourceName: string): MaterialGraphNode_Root;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialGraphNode_Root;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3480,7 +6137,7 @@ declare class MaterialGraph extends EdGraph {
 	static Load(ResourceName: string): MaterialGraph;
 	static Find(Outer: UObject, ResourceName: string): MaterialGraph;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialGraph;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3495,7 +6152,7 @@ declare class MaterialGraphNode_Comment extends EdGraphNode_Comment {
 	static Load(ResourceName: string): MaterialGraphNode_Comment;
 	static Find(Outer: UObject, ResourceName: string): MaterialGraphNode_Comment;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialGraphNode_Comment;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3509,7 +6166,7 @@ declare class EditorActorFolders extends UObject {
 	static Load(ResourceName: string): EditorActorFolders;
 	static Find(Outer: UObject, ResourceName: string): EditorActorFolders;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorActorFolders;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3523,7 +6180,7 @@ declare class EditorAnimBaseObj extends UObject {
 	static Load(ResourceName: string): EditorAnimBaseObj;
 	static Find(Outer: UObject, ResourceName: string): EditorAnimBaseObj;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorAnimBaseObj;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3538,7 +6195,7 @@ declare class EditorAnimCompositeSegment extends EditorAnimBaseObj {
 	static Load(ResourceName: string): EditorAnimCompositeSegment;
 	static Find(Outer: UObject, ResourceName: string): EditorAnimCompositeSegment;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorAnimCompositeSegment;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3553,7 +6210,7 @@ declare class EditorAnimSegment extends EditorAnimBaseObj {
 	static Load(ResourceName: string): EditorAnimSegment;
 	static Find(Outer: UObject, ResourceName: string): EditorAnimSegment;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorAnimSegment;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3568,7 +6225,7 @@ declare class EditorCompositeSection extends EditorAnimBaseObj {
 	static Load(ResourceName: string): EditorCompositeSection;
 	static Find(Outer: UObject, ResourceName: string): EditorCompositeSection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorCompositeSection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3583,7 +6240,7 @@ declare class EditorNotifyObject extends EditorAnimBaseObj {
 	static Load(ResourceName: string): EditorNotifyObject;
 	static Find(Outer: UObject, ResourceName: string): EditorNotifyObject;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorNotifyObject;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3597,7 +6254,7 @@ declare class EditorBrushBuilder extends BrushBuilder {
 	static Load(ResourceName: string): EditorBrushBuilder;
 	static Find(Outer: UObject, ResourceName: string): EditorBrushBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorBrushBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3619,7 +6276,7 @@ declare class ConeBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): ConeBuilder;
 	static Find(Outer: UObject, ResourceName: string): ConeBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ConeBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3640,7 +6297,7 @@ declare class CubeBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): CubeBuilder;
 	static Find(Outer: UObject, ResourceName: string): CubeBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CubeBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3662,7 +6319,7 @@ declare class CurvedStairBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): CurvedStairBuilder;
 	static Find(Outer: UObject, ResourceName: string): CurvedStairBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurvedStairBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3683,7 +6340,7 @@ declare class CylinderBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): CylinderBuilder;
 	static Find(Outer: UObject, ResourceName: string): CylinderBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CylinderBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3703,7 +6360,7 @@ declare class LinearStairBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): LinearStairBuilder;
 	static Find(Outer: UObject, ResourceName: string): LinearStairBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LinearStairBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3711,8 +6368,8 @@ declare class LinearStairBuilder extends EditorBrushBuilder {
 	static C(Other: UObject): LinearStairBuilder;
 }
 
-declare type ESheetAxis = string | symbol;
-declare var ESheetAxis = { AX_Horizontal:'AX_Horizontal',AX_XAxis:'AX_XAxis',AX_YAxis:'AX_YAxis', };
+declare type ESheetAxis = 'AX_Horizontal' | 'AX_XAxis' | 'AX_YAxis';
+declare var ESheetAxis : { AX_Horizontal:'AX_Horizontal',AX_XAxis:'AX_XAxis',AX_YAxis:'AX_YAxis', };
 declare class SheetBuilder extends EditorBrushBuilder { 
 	X: number;
 	Y: number;
@@ -3725,7 +6382,7 @@ declare class SheetBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): SheetBuilder;
 	static Find(Outer: UObject, ResourceName: string): SheetBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SheetBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3749,7 +6406,7 @@ declare class SpiralStairBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): SpiralStairBuilder;
 	static Find(Outer: UObject, ResourceName: string): SpiralStairBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SpiralStairBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3766,7 +6423,7 @@ declare class TetrahedronBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): TetrahedronBuilder;
 	static Find(Outer: UObject, ResourceName: string): TetrahedronBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TetrahedronBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3784,7 +6441,7 @@ declare class VolumetricBuilder extends EditorBrushBuilder {
 	static Load(ResourceName: string): VolumetricBuilder;
 	static Find(Outer: UObject, ResourceName: string): VolumetricBuilder;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VolumetricBuilder;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3792,8 +6449,8 @@ declare class VolumetricBuilder extends EditorBrushBuilder {
 	static C(Other: UObject): VolumetricBuilder;
 }
 
-declare type EFbxExportCompatibility = string | symbol;
-declare var EFbxExportCompatibility = { FBX_2010:'FBX_2010',FBX_2011:'FBX_2011',FBX_2012:'FBX_2012',FBX_2013:'FBX_2013',FBX_2014:'FBX_2014',FBX_2016:'FBX_2016', };
+declare type EFbxExportCompatibility = 'FBX_2010' | 'FBX_2011' | 'FBX_2012' | 'FBX_2013' | 'FBX_2014' | 'FBX_2016';
+declare var EFbxExportCompatibility : { FBX_2010:'FBX_2010',FBX_2011:'FBX_2011',FBX_2012:'FBX_2012',FBX_2013:'FBX_2013',FBX_2014:'FBX_2014',FBX_2016:'FBX_2016', };
 declare class EditorPerProjectUserSettings extends UObject { 
 	bDisplayUIExtensionPoints: boolean;
 	bDisplayDocumentationLink: boolean;
@@ -3804,6 +6461,8 @@ declare class EditorPerProjectUserSettings extends UObject {
 	SimplygonServerIP: string;
 	bEnableSwarmDebugging: boolean;
 	SimplygonSwarmDelay: any;
+	SwarmNumOfConcurrentJobs: any;
+	SwarmMaxUploadChunkSizeInMB: any;
 	SwarmIntermediateFolder: string;
 	bShowFrameRateAndMemory: boolean;
 	bThrottleCPUWhenNotForeground: boolean;
@@ -3811,7 +6470,9 @@ declare class EditorPerProjectUserSettings extends UObject {
 	bAutomaticallyHotReloadNewClasses: boolean;
 	bShowCompilerLogOnCompileError: boolean;
 	bKeepAttachHierarchy: boolean;
+	bMapSkeletalMotionToRoot: boolean;
 	FbxExportCompatibility: EFbxExportCompatibility;
+	bFbxExportCollisionMesh: boolean;
 	bUseCurvesForDistributions: boolean;
 	PropertyMatrix_NumberOfPasteOperationsBeforeWarning: number;
 	bSCSEditorShowGrid: boolean;
@@ -3828,7 +6489,7 @@ declare class EditorPerProjectUserSettings extends UObject {
 	static Load(ResourceName: string): EditorPerProjectUserSettings;
 	static Find(Outer: UObject, ResourceName: string): EditorPerProjectUserSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorPerProjectUserSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3853,7 +6514,7 @@ declare class Transactor extends UObject {
 	static Load(ResourceName: string): Transactor;
 	static Find(Outer: UObject, ResourceName: string): Transactor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Transactor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3867,20 +6528,20 @@ declare class Transactor extends UObject {
 	static IsActive(Transactor: Transactor): boolean;
 }
 
-declare type ELabelAnchorMode = string | symbol;
-declare var ELabelAnchorMode = { LabelAnchorMode_TopLeft:'LabelAnchorMode_TopLeft',LabelAnchorMode_TopCenter:'LabelAnchorMode_TopCenter',LabelAnchorMode_TopRight:'LabelAnchorMode_TopRight',LabelAnchorMode_CenterLeft:'LabelAnchorMode_CenterLeft',LabelAnchorMode_Centered:'LabelAnchorMode_Centered',LabelAnchorMode_CenterRight:'LabelAnchorMode_CenterRight',LabelAnchorMode_BottomLeft:'LabelAnchorMode_BottomLeft',LabelAnchorMode_BottomCenter:'LabelAnchorMode_BottomCenter',LabelAnchorMode_BottomRight:'LabelAnchorMode_BottomRight', };
-declare type EPlayOnBuildMode = string | symbol;
-declare var EPlayOnBuildMode = { PlayOnBuild_Always:'PlayOnBuild_Always',PlayOnBuild_Never:'PlayOnBuild_Never',PlayOnBuild_Default:'PlayOnBuild_Default', };
-declare type EPlayOnLaunchConfiguration = string | symbol;
-declare var EPlayOnLaunchConfiguration = { LaunchConfig_Default:'LaunchConfig_Default',LaunchConfig_Debug:'LaunchConfig_Debug',LaunchConfig_Development:'LaunchConfig_Development',LaunchConfig_Test:'LaunchConfig_Test',LaunchConfig_Shipping:'LaunchConfig_Shipping', };
-declare type EPlayNetMode = string | symbol;
-declare var EPlayNetMode = { PIE_Standalone:'PIE_Standalone',PIE_ListenServer:'PIE_ListenServer',PIE_Client:'PIE_Client', };
-declare type ELaunchModeType = string | symbol;
-declare var ELaunchModeType = { LaunchMode_OnDevice:'LaunchMode_OnDevice', };
-declare type EPlayModeLocations = string | symbol;
-declare var EPlayModeLocations = { PlayLocation_CurrentCameraLocation:'PlayLocation_CurrentCameraLocation',PlayLocation_DefaultPlayerStart:'PlayLocation_DefaultPlayerStart', };
-declare type EPlayModeType = string | symbol;
-declare var EPlayModeType = { PlayMode_InViewPort:'PlayMode_InViewPort',PlayMode_InEditorFloating:'PlayMode_InEditorFloating',PlayMode_InMobilePreview:'PlayMode_InMobilePreview',PlayMode_InVulkanPreview:'PlayMode_InVulkanPreview',PlayMode_InNewProcess:'PlayMode_InNewProcess',PlayMode_InVR:'PlayMode_InVR',PlayMode_Simulate:'PlayMode_Simulate',PlayMode_Count:'PlayMode_Count', };
+declare type ELabelAnchorMode = 'LabelAnchorMode_TopLeft' | 'LabelAnchorMode_TopCenter' | 'LabelAnchorMode_TopRight' | 'LabelAnchorMode_CenterLeft' | 'LabelAnchorMode_Centered' | 'LabelAnchorMode_CenterRight' | 'LabelAnchorMode_BottomLeft' | 'LabelAnchorMode_BottomCenter' | 'LabelAnchorMode_BottomRight';
+declare var ELabelAnchorMode : { LabelAnchorMode_TopLeft:'LabelAnchorMode_TopLeft',LabelAnchorMode_TopCenter:'LabelAnchorMode_TopCenter',LabelAnchorMode_TopRight:'LabelAnchorMode_TopRight',LabelAnchorMode_CenterLeft:'LabelAnchorMode_CenterLeft',LabelAnchorMode_Centered:'LabelAnchorMode_Centered',LabelAnchorMode_CenterRight:'LabelAnchorMode_CenterRight',LabelAnchorMode_BottomLeft:'LabelAnchorMode_BottomLeft',LabelAnchorMode_BottomCenter:'LabelAnchorMode_BottomCenter',LabelAnchorMode_BottomRight:'LabelAnchorMode_BottomRight', };
+declare type EPlayOnBuildMode = 'PlayOnBuild_Always' | 'PlayOnBuild_Never' | 'PlayOnBuild_Default';
+declare var EPlayOnBuildMode : { PlayOnBuild_Always:'PlayOnBuild_Always',PlayOnBuild_Never:'PlayOnBuild_Never',PlayOnBuild_Default:'PlayOnBuild_Default', };
+declare type EPlayOnLaunchConfiguration = 'LaunchConfig_Default' | 'LaunchConfig_Debug' | 'LaunchConfig_Development' | 'LaunchConfig_Test' | 'LaunchConfig_Shipping';
+declare var EPlayOnLaunchConfiguration : { LaunchConfig_Default:'LaunchConfig_Default',LaunchConfig_Debug:'LaunchConfig_Debug',LaunchConfig_Development:'LaunchConfig_Development',LaunchConfig_Test:'LaunchConfig_Test',LaunchConfig_Shipping:'LaunchConfig_Shipping', };
+declare type EPlayNetMode = 'PIE_Standalone' | 'PIE_ListenServer' | 'PIE_Client';
+declare var EPlayNetMode : { PIE_Standalone:'PIE_Standalone',PIE_ListenServer:'PIE_ListenServer',PIE_Client:'PIE_Client', };
+declare type ELaunchModeType = 'LaunchMode_OnDevice';
+declare var ELaunchModeType : { LaunchMode_OnDevice:'LaunchMode_OnDevice', };
+declare type EPlayModeLocations = 'PlayLocation_CurrentCameraLocation' | 'PlayLocation_DefaultPlayerStart';
+declare var EPlayModeLocations : { PlayLocation_CurrentCameraLocation:'PlayLocation_CurrentCameraLocation',PlayLocation_DefaultPlayerStart:'PlayLocation_DefaultPlayerStart', };
+declare type EPlayModeType = 'PlayMode_InViewPort' | 'PlayMode_InEditorFloating' | 'PlayMode_InMobilePreview' | 'PlayMode_InVulkanPreview' | 'PlayMode_InNewProcess' | 'PlayMode_InVR' | 'PlayMode_Simulate' | 'PlayMode_Count';
+declare var EPlayModeType : { PlayMode_InViewPort:'PlayMode_InViewPort',PlayMode_InEditorFloating:'PlayMode_InEditorFloating',PlayMode_InMobilePreview:'PlayMode_InMobilePreview',PlayMode_InVulkanPreview:'PlayMode_InVulkanPreview',PlayMode_InNewProcess:'PlayMode_InNewProcess',PlayMode_InVR:'PlayMode_InVR',PlayMode_Simulate:'PlayMode_Simulate',PlayMode_Count:'PlayMode_Count', };
 declare class PlayScreenResolution { 
 	Description: string;
 	Width: number;
@@ -3944,7 +6605,7 @@ declare class LevelEditorPlaySettings extends UObject {
 	static Load(ResourceName: string): LevelEditorPlaySettings;
 	static Find(Outer: UObject, ResourceName: string): LevelEditorPlaySettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelEditorPlaySettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -3952,12 +6613,12 @@ declare class LevelEditorPlaySettings extends UObject {
 	static C(Other: UObject): LevelEditorPlaySettings;
 }
 
-declare type EWASDType = string | symbol;
-declare var EWASDType = { WASD_Always:'WASD_Always',WASD_RMBOnly:'WASD_RMBOnly',WASD_Never:'WASD_Never', };
-declare type ELandscapeFoliageEditorControlType = string | symbol;
-declare var ELandscapeFoliageEditorControlType = { IgnoreCtrl:'IgnoreCtrl',RequireCtrl:'RequireCtrl',RequireNoCtrl:'RequireNoCtrl', };
-declare type EScrollGestureDirection = string | symbol;
-declare var EScrollGestureDirection = { UseSystemSetting:'UseSystemSetting',Standard:'Standard',Natural:'Natural', };
+declare type EWASDType = 'WASD_Always' | 'WASD_RMBOnly' | 'WASD_Never';
+declare var EWASDType : { WASD_Always:'WASD_Always',WASD_RMBOnly:'WASD_RMBOnly',WASD_Never:'WASD_Never', };
+declare type ELandscapeFoliageEditorControlType = 'IgnoreCtrl' | 'RequireCtrl' | 'RequireNoCtrl';
+declare var ELandscapeFoliageEditorControlType : { IgnoreCtrl:'IgnoreCtrl',RequireCtrl:'RequireCtrl',RequireNoCtrl:'RequireNoCtrl', };
+declare type EScrollGestureDirection = 'UseSystemSetting' | 'Standard' | 'Natural';
+declare var EScrollGestureDirection : { UseSystemSetting:'UseSystemSetting',Standard:'Standard',Natural:'Natural', };
 declare class SnapToSurfaceSettings { 
 	bEnabled: boolean;
 	SnapOffsetExtent: number;
@@ -3966,14 +6627,14 @@ declare class SnapToSurfaceSettings {
 	static C(Other: UObject): SnapToSurfaceSettings;
 }
 
-declare type ERotationGridMode = string | symbol;
-declare var ERotationGridMode = { GridMode_DivisionsOf360:'GridMode_DivisionsOf360',GridMode_Common:'GridMode_Common', };
-declare type EMeasuringToolUnits = string | symbol;
-declare var EMeasuringToolUnits = { MeasureUnits_Centimeters:'MeasureUnits_Centimeters',MeasureUnits_Meters:'MeasureUnits_Meters',MeasureUnits_Kilometers:'MeasureUnits_Kilometers', };
-declare type ELevelViewportType = string | symbol;
-declare var ELevelViewportType = { LVT_OrthoXY:'LVT_OrthoXY',LVT_OrthoXZ:'LVT_OrthoXZ',LVT_OrthoYZ:'LVT_OrthoYZ',LVT_Perspective:'LVT_Perspective',LVT_OrthoFreelook:'LVT_OrthoFreelook',LVT_OrthoNegativeXY:'LVT_OrthoNegativeXY',LVT_OrthoNegativeXZ:'LVT_OrthoNegativeXZ',LVT_OrthoNegativeYZ:'LVT_OrthoNegativeYZ',LVT_MAX:'LVT_MAX',LVT_None:'LVT_None',None:'None', };
-declare type EViewModeIndex = string | symbol;
-declare var EViewModeIndex = { VMI_BrushWireframe:'VMI_BrushWireframe',VMI_Wireframe:'VMI_Wireframe',VMI_Unlit:'VMI_Unlit',VMI_Lit:'VMI_Lit',VMI_Lit_DetailLighting:'VMI_Lit_DetailLighting',VMI_LightingOnly:'VMI_LightingOnly',VMI_LightComplexity:'VMI_LightComplexity',VMI_ShaderComplexity:'VMI_ShaderComplexity',VMI_LightmapDensity:'VMI_LightmapDensity',VMI_LitLightmapDensity:'VMI_LitLightmapDensity',VMI_ReflectionOverride:'VMI_ReflectionOverride',VMI_VisualizeBuffer:'VMI_VisualizeBuffer',VMI_StationaryLightOverlap:'VMI_StationaryLightOverlap',VMI_CollisionPawn:'VMI_CollisionPawn',VMI_CollisionVisibility:'VMI_CollisionVisibility',VMI_LODColoration:'VMI_LODColoration',VMI_QuadOverdraw:'VMI_QuadOverdraw',VMI_PrimitiveDistanceAccuracy:'VMI_PrimitiveDistanceAccuracy',VMI_MeshTexCoordSizeAccuracy:'VMI_MeshTexCoordSizeAccuracy',VMI_ShaderComplexityWithQuadOverdraw:'VMI_ShaderComplexityWithQuadOverdraw',VMI_HLODColoration:'VMI_HLODColoration',VMI_GroupLODColoration:'VMI_GroupLODColoration',VMI_MaterialTexCoordScalesAccuracy:'VMI_MaterialTexCoordScalesAccuracy',VMI_Max:'VMI_Max',VMI_Unknown:'VMI_Unknown',None:'None', };
+declare type ERotationGridMode = 'GridMode_DivisionsOf360' | 'GridMode_Common';
+declare var ERotationGridMode : { GridMode_DivisionsOf360:'GridMode_DivisionsOf360',GridMode_Common:'GridMode_Common', };
+declare type EMeasuringToolUnits = 'MeasureUnits_Centimeters' | 'MeasureUnits_Meters' | 'MeasureUnits_Kilometers';
+declare var EMeasuringToolUnits : { MeasureUnits_Centimeters:'MeasureUnits_Centimeters',MeasureUnits_Meters:'MeasureUnits_Meters',MeasureUnits_Kilometers:'MeasureUnits_Kilometers', };
+declare type ELevelViewportType = 'LVT_OrthoXY' | 'LVT_OrthoXZ' | 'LVT_OrthoYZ' | 'LVT_Perspective' | 'LVT_OrthoFreelook' | 'LVT_OrthoNegativeXY' | 'LVT_OrthoNegativeXZ' | 'LVT_OrthoNegativeYZ' | 'LVT_MAX' | 'LVT_None' | 'None';
+declare var ELevelViewportType : { LVT_OrthoXY:'LVT_OrthoXY',LVT_OrthoXZ:'LVT_OrthoXZ',LVT_OrthoYZ:'LVT_OrthoYZ',LVT_Perspective:'LVT_Perspective',LVT_OrthoFreelook:'LVT_OrthoFreelook',LVT_OrthoNegativeXY:'LVT_OrthoNegativeXY',LVT_OrthoNegativeXZ:'LVT_OrthoNegativeXZ',LVT_OrthoNegativeYZ:'LVT_OrthoNegativeYZ',LVT_MAX:'LVT_MAX',LVT_None:'LVT_None',None:'None', };
+declare type EViewModeIndex = 'VMI_BrushWireframe' | 'VMI_Wireframe' | 'VMI_Unlit' | 'VMI_Lit' | 'VMI_Lit_DetailLighting' | 'VMI_LightingOnly' | 'VMI_LightComplexity' | 'VMI_ShaderComplexity' | 'VMI_LightmapDensity' | 'VMI_LitLightmapDensity' | 'VMI_ReflectionOverride' | 'VMI_VisualizeBuffer' | 'VMI_StationaryLightOverlap' | 'VMI_CollisionPawn' | 'VMI_CollisionVisibility' | 'VMI_LODColoration' | 'VMI_QuadOverdraw' | 'VMI_PrimitiveDistanceAccuracy' | 'VMI_MeshUVDensityAccuracy' | 'VMI_ShaderComplexityWithQuadOverdraw' | 'VMI_HLODColoration' | 'VMI_GroupLODColoration' | 'VMI_MaterialTextureScaleAccuracy' | 'VMI_Max' | 'VMI_Unknown' | 'None';
+declare var EViewModeIndex : { VMI_BrushWireframe:'VMI_BrushWireframe',VMI_Wireframe:'VMI_Wireframe',VMI_Unlit:'VMI_Unlit',VMI_Lit:'VMI_Lit',VMI_Lit_DetailLighting:'VMI_Lit_DetailLighting',VMI_LightingOnly:'VMI_LightingOnly',VMI_LightComplexity:'VMI_LightComplexity',VMI_ShaderComplexity:'VMI_ShaderComplexity',VMI_LightmapDensity:'VMI_LightmapDensity',VMI_LitLightmapDensity:'VMI_LitLightmapDensity',VMI_ReflectionOverride:'VMI_ReflectionOverride',VMI_VisualizeBuffer:'VMI_VisualizeBuffer',VMI_StationaryLightOverlap:'VMI_StationaryLightOverlap',VMI_CollisionPawn:'VMI_CollisionPawn',VMI_CollisionVisibility:'VMI_CollisionVisibility',VMI_LODColoration:'VMI_LODColoration',VMI_QuadOverdraw:'VMI_QuadOverdraw',VMI_PrimitiveDistanceAccuracy:'VMI_PrimitiveDistanceAccuracy',VMI_MeshUVDensityAccuracy:'VMI_MeshUVDensityAccuracy',VMI_ShaderComplexityWithQuadOverdraw:'VMI_ShaderComplexityWithQuadOverdraw',VMI_HLODColoration:'VMI_HLODColoration',VMI_GroupLODColoration:'VMI_GroupLODColoration',VMI_MaterialTextureScaleAccuracy:'VMI_MaterialTextureScaleAccuracy',VMI_Max:'VMI_Max',VMI_Unknown:'VMI_Unknown',None:'None', };
 declare class ExposureSettings { 
 	LogOffset: number;
 	bFixed: boolean;
@@ -4077,7 +6738,7 @@ declare class LevelEditorViewportSettings extends UObject {
 	static Load(ResourceName: string): LevelEditorViewportSettings;
 	static Find(Outer: UObject, ResourceName: string): LevelEditorViewportSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelEditorViewportSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4085,8 +6746,8 @@ declare class LevelEditorViewportSettings extends UObject {
 	static C(Other: UObject): LevelEditorViewportSettings;
 }
 
-declare type EWindowMode = string | symbol;
-declare var EWindowMode = { Fullscreen:'Fullscreen',WindowedFullscreen:'WindowedFullscreen',Windowed:'Windowed', };
+declare type EWindowMode = 'Fullscreen' | 'WindowedFullscreen' | 'Windowed';
+declare var EWindowMode : { Fullscreen:'Fullscreen',WindowedFullscreen:'WindowedFullscreen',Windowed:'Windowed', };
 declare class GameUserSettings extends UObject { 
 	bUseVSync: boolean;
 	ResolutionSizeX: any;
@@ -4095,7 +6756,6 @@ declare class GameUserSettings extends UObject {
 	LastUserConfirmedResolutionSizeY: any;
 	WindowPosX: number;
 	WindowPosY: number;
-	bUseDesktopResolutionForFullscreen: boolean;
 	FullscreenMode: number;
 	LastConfirmedFullscreenMode: number;
 	PreferredFullscreenMode: number;
@@ -4118,7 +6778,7 @@ declare class GameUserSettings extends UObject {
 	static Load(ResourceName: string): GameUserSettings;
 	static Find(Outer: UObject, ResourceName: string): GameUserSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GameUserSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4159,6 +6819,7 @@ declare class GameUserSettings extends UObject {
 	GetScreenResolution(): IntPoint;
 	GetResolutionScaleInformation(CurrentScaleNormalized?: number,CurrentScaleValue?: number,MinScaleValue?: number,MaxScaleValue?: number): {CurrentScaleNormalized: number, CurrentScaleValue: number, MinScaleValue: number, MaxScaleValue: number};
 	GetResolutionScaleInformation_Deprecated(CurrentScaleNormalized?: number,CurrentScaleValue?: number,MinScaleValue?: number,MaxScaleValue?: number): {CurrentScaleNormalized: number, CurrentScaleValue: number, MinScaleValue: number, MaxScaleValue: number};
+	GetPreferredFullscreenMode(): EWindowMode;
 	GetPostProcessingQuality(): number;
 	GetOverallScalabilityLevel(): number;
 	GetLastConfirmedScreenResolution(): IntPoint;
@@ -4231,8 +6892,8 @@ declare class StructRedirect {
 	static C(Other: UObject): StructRedirect;
 }
 
-declare type ETransitionType = string | symbol;
-declare var ETransitionType = { TT_None:'TT_None',TT_Paused:'TT_Paused',TT_Loading:'TT_Loading',TT_Saving:'TT_Saving',TT_Connecting:'TT_Connecting',TT_Precaching:'TT_Precaching',TT_WaitingToConnect:'TT_WaitingToConnect', };
+declare type ETransitionType = 'TT_None' | 'TT_Paused' | 'TT_Loading' | 'TT_Saving' | 'TT_Connecting' | 'TT_Precaching' | 'TT_WaitingToConnect';
+declare var ETransitionType : { TT_None:'TT_None',TT_Paused:'TT_Paused',TT_Loading:'TT_Loading',TT_Saving:'TT_Saving',TT_Connecting:'TT_Connecting',TT_Precaching:'TT_Precaching',TT_WaitingToConnect:'TT_WaitingToConnect', };
 declare class DropNoteInfo { 
 	Location: Vector;
 	Rotation: Rotator;
@@ -4451,13 +7112,13 @@ declare class Engine extends UObject {
 	bEnableOnScreenDebugMessages: boolean;
 	bEnableOnScreenDebugMessagesDisplay: boolean;
 	bSuppressMapWarnings: boolean;
-	bCookSeparateSharedMPGameContent: boolean;
 	bDisableAILogging: boolean;
 	bEnableVisualLogRecordingOnStart: any;
 	ScreenSaverInhibitorSemaphore: number;
 	bLockReadOnlyLevels: boolean;
 	ParticleEventManagerClassPath: string;
 	SelectionHighlightIntensity: number;
+	SelectionMeshSectionHighlightIntensity: number;
 	BSPSelectionHighlightIntensity: number;
 	HoverHighlightIntensity: number;
 	SelectionHighlightIntensityBillboards: number;
@@ -4471,7 +7132,7 @@ declare class Engine extends UObject {
 	static Load(ResourceName: string): Engine;
 	static Find(Outer: UObject, ResourceName: string): Engine;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Engine;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4487,15 +7148,15 @@ declare class Engine extends UObject {
 	static SetClientTravel(Engine: Engine,InWorld: World,NextURL: string,InTravelType: ETravelType): void;
 }
 
-declare type ECsgOper = string | symbol;
-declare var ECsgOper = { CSG_Active:'CSG_Active',CSG_Add:'CSG_Add',CSG_Subtract:'CSG_Subtract',CSG_Intersect:'CSG_Intersect',CSG_Deintersect:'CSG_Deintersect',CSG_None:'CSG_None', };
+declare type ECsgOper = 'CSG_Active' | 'CSG_Add' | 'CSG_Subtract' | 'CSG_Intersect' | 'CSG_Deintersect' | 'CSG_None';
+declare var ECsgOper : { CSG_Active:'CSG_Active',CSG_Add:'CSG_Add',CSG_Subtract:'CSG_Subtract',CSG_Intersect:'CSG_Intersect',CSG_Deintersect:'CSG_Deintersect',CSG_None:'CSG_None', };
 declare class USelection extends UObject { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): USelection;
 	static Find(Outer: UObject, ResourceName: string): USelection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): USelection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4519,7 +7180,7 @@ declare class GroupActor extends Actor {
 	SubGroups: GroupActor[];
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GroupActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4599,7 +7260,7 @@ declare class EditorEngine extends Engine {
 	static Load(ResourceName: string): EditorEngine;
 	static Find(Outer: UObject, ResourceName: string): EditorEngine;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorEngine;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4670,7 +7331,7 @@ declare class UnrealEdKeyBindings extends UObject {
 	static Load(ResourceName: string): UnrealEdKeyBindings;
 	static Find(Outer: UObject, ResourceName: string): UnrealEdKeyBindings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UnrealEdKeyBindings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4696,7 +7357,7 @@ declare class UnrealEdOptions extends UObject {
 	static Load(ResourceName: string): UnrealEdOptions;
 	static Find(Outer: UObject, ResourceName: string): UnrealEdOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UnrealEdOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4730,7 +7391,7 @@ declare class UnrealEdEngine extends EditorEngine {
 	static Load(ResourceName: string): UnrealEdEngine;
 	static Find(Outer: UObject, ResourceName: string): UnrealEdEngine;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UnrealEdEngine;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4738,14 +7399,13 @@ declare class UnrealEdEngine extends EditorEngine {
 	static C(Other: UObject): UnrealEdEngine;
 }
 
-declare type EConsoleForGamepadLabels = string | symbol;
-declare var EConsoleForGamepadLabels = { None:'None',XBoxOne:'XBoxOne',PS4:'PS4', };
+declare type EConsoleForGamepadLabels = 'None' | 'XBoxOne' | 'PS4';
+declare var EConsoleForGamepadLabels : { None:'None',XBoxOne:'XBoxOne',PS4:'PS4', };
 declare class EditorExperimentalSettings extends UObject { 
 	bProceduralFoliage: boolean;
 	bEnableLocalizationDashboard: boolean;
 	bEnableTranslationPicker: boolean;
 	bEnableEditorUtilityBlueprints: boolean;
-	bUnifiedBlueprintEditor: boolean;
 	bEnableFavoriteSystem: boolean;
 	bBlueprintableComponents: boolean;
 	bDeviceOutputLog: boolean;
@@ -4753,11 +7413,10 @@ declare class EditorExperimentalSettings extends UObject {
 	bToolbarCustomization: boolean;
 	bBreakOnExceptions: boolean;
 	bBlueprintPerformanceAnalysisTools: boolean;
-	bEnableWidgetVisualDiff: boolean;
-	bEnableAnimVisualDiff: boolean;
 	bEnableFindAndReplaceReferences: boolean;
 	bDrawMidpointArrowsInBlueprints: boolean;
 	bShowAudioStreamingOptions: boolean;
+	bShowAudioMixerData: boolean;
 	bContextMenuChunkAssignments: boolean;
 	bDisableCookInEditor: boolean;
 	MultiProcessCooking: number;
@@ -4771,13 +7430,14 @@ declare class EditorExperimentalSettings extends UObject {
 	bUseOpenCLForConvexHullDecomp: boolean;
 	bEnableVREditing: boolean;
 	bEnableAutoVREditMode: boolean;
+	bAlwaysShowVRTutorial: boolean;
 	bAllowPotentiallyUnsafePropertyEditing: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): EditorExperimentalSettings;
 	static Find(Outer: UObject, ResourceName: string): EditorExperimentalSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorExperimentalSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4785,8 +7445,8 @@ declare class EditorExperimentalSettings extends UObject {
 	static C(Other: UObject): EditorExperimentalSettings;
 }
 
-declare type ELoadLevelAtStartup = string | symbol;
-declare var ELoadLevelAtStartup = { None:'None',ProjectDefault:'ProjectDefault',LastOpened:'LastOpened', };
+declare type ELoadLevelAtStartup = 'None' | 'ProjectDefault' | 'LastOpened';
+declare var ELoadLevelAtStartup : { None:'None',ProjectDefault:'ProjectDefault',LastOpened:'LastOpened', };
 declare class AutoReimportWildcard { 
 	Wildcard: string;
 	bInclude: boolean;
@@ -4800,12 +7460,6 @@ declare class AutoReimportDirectoryConfig {
 	Wildcards: AutoReimportWildcard[];
 	clone() : AutoReimportDirectoryConfig;
 	static C(Other: UObject): AutoReimportDirectoryConfig;
-}
-
-declare class FilePath { 
-	FilePath: string;
-	clone() : FilePath;
-	static C(Other: UObject): FilePath;
 }
 
 declare class EditorLoadingSavingSettings extends UObject { 
@@ -4840,7 +7494,7 @@ declare class EditorLoadingSavingSettings extends UObject {
 	static Load(ResourceName: string): EditorLoadingSavingSettings;
 	static Find(Outer: UObject, ResourceName: string): EditorLoadingSavingSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorLoadingSavingSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4854,7 +7508,7 @@ declare class EditorMiscSettings extends UObject {
 	static Load(ResourceName: string): EditorMiscSettings;
 	static Find(Outer: UObject, ResourceName: string): EditorMiscSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorMiscSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4869,7 +7523,7 @@ declare class EditorParentPlayerListObj extends UObject {
 	static Load(ResourceName: string): EditorParentPlayerListObj;
 	static Find(Outer: UObject, ResourceName: string): EditorParentPlayerListObj;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorParentPlayerListObj;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4877,12 +7531,12 @@ declare class EditorParentPlayerListObj extends UObject {
 	static C(Other: UObject): EditorParentPlayerListObj;
 }
 
-declare type EUnit = string | symbol;
-declare var EUnit = { Micrometers:'Micrometers',Millimeters:'Millimeters',Centimeters:'Centimeters',Meters:'Meters',Kilometers:'Kilometers',Inches:'Inches',Feet:'Feet',Yards:'Yards',Miles:'Miles',Lightyears:'Lightyears',Degrees:'Degrees',Radians:'Radians',MetersPerSecond:'MetersPerSecond',KilometersPerHour:'KilometersPerHour',MilesPerHour:'MilesPerHour',Celsius:'Celsius',Farenheit:'Farenheit',Kelvin:'Kelvin',Micrograms:'Micrograms',Milligrams:'Milligrams',Grams:'Grams',Kilograms:'Kilograms',MetricTons:'MetricTons',Ounces:'Ounces',Pounds:'Pounds',Stones:'Stones',Newtons:'Newtons',PoundsForce:'PoundsForce',KilogramsForce:'KilogramsForce',Hertz:'Hertz',Kilohertz:'Kilohertz',Megahertz:'Megahertz',Gigahertz:'Gigahertz',RevolutionsPerMinute:'RevolutionsPerMinute',Bytes:'Bytes',Kilobytes:'Kilobytes',Megabytes:'Megabytes',Gigabytes:'Gigabytes',Terabytes:'Terabytes',Lumens:'Lumens',Milliseconds:'Milliseconds',Seconds:'Seconds',Minutes:'Minutes',Hours:'Hours',Days:'Days',Months:'Months',Years:'Years',Multiplier:'Multiplier',Unspecified:'Unspecified', };
-declare type EUnitDisplay = string | symbol;
-declare var EUnitDisplay = { None:'None',Metric:'Metric',Imperial:'Imperial',Invalid:'Invalid', };
-declare type EDefaultLocationUnit = string | symbol;
-declare var EDefaultLocationUnit = { Micrometers:'Micrometers',Millimeters:'Millimeters',Centimeters:'Centimeters',Meters:'Meters',Kilometers:'Kilometers',Inches:'Inches',Feet:'Feet',Yards:'Yards',Miles:'Miles',Invalid:'Invalid', };
+declare type EUnit = 'Micrometers' | 'Millimeters' | 'Centimeters' | 'Meters' | 'Kilometers' | 'Inches' | 'Feet' | 'Yards' | 'Miles' | 'Lightyears' | 'Degrees' | 'Radians' | 'MetersPerSecond' | 'KilometersPerHour' | 'MilesPerHour' | 'Celsius' | 'Farenheit' | 'Kelvin' | 'Micrograms' | 'Milligrams' | 'Grams' | 'Kilograms' | 'MetricTons' | 'Ounces' | 'Pounds' | 'Stones' | 'Newtons' | 'PoundsForce' | 'KilogramsForce' | 'Hertz' | 'Kilohertz' | 'Megahertz' | 'Gigahertz' | 'RevolutionsPerMinute' | 'Bytes' | 'Kilobytes' | 'Megabytes' | 'Gigabytes' | 'Terabytes' | 'Lumens' | 'Milliseconds' | 'Seconds' | 'Minutes' | 'Hours' | 'Days' | 'Months' | 'Years' | 'Multiplier' | 'Unspecified';
+declare var EUnit : { Micrometers:'Micrometers',Millimeters:'Millimeters',Centimeters:'Centimeters',Meters:'Meters',Kilometers:'Kilometers',Inches:'Inches',Feet:'Feet',Yards:'Yards',Miles:'Miles',Lightyears:'Lightyears',Degrees:'Degrees',Radians:'Radians',MetersPerSecond:'MetersPerSecond',KilometersPerHour:'KilometersPerHour',MilesPerHour:'MilesPerHour',Celsius:'Celsius',Farenheit:'Farenheit',Kelvin:'Kelvin',Micrograms:'Micrograms',Milligrams:'Milligrams',Grams:'Grams',Kilograms:'Kilograms',MetricTons:'MetricTons',Ounces:'Ounces',Pounds:'Pounds',Stones:'Stones',Newtons:'Newtons',PoundsForce:'PoundsForce',KilogramsForce:'KilogramsForce',Hertz:'Hertz',Kilohertz:'Kilohertz',Megahertz:'Megahertz',Gigahertz:'Gigahertz',RevolutionsPerMinute:'RevolutionsPerMinute',Bytes:'Bytes',Kilobytes:'Kilobytes',Megabytes:'Megabytes',Gigabytes:'Gigabytes',Terabytes:'Terabytes',Lumens:'Lumens',Milliseconds:'Milliseconds',Seconds:'Seconds',Minutes:'Minutes',Hours:'Hours',Days:'Days',Months:'Months',Years:'Years',Multiplier:'Multiplier',Unspecified:'Unspecified', };
+declare type EUnitDisplay = 'None' | 'Metric' | 'Imperial' | 'Invalid';
+declare var EUnitDisplay : { None:'None',Metric:'Metric',Imperial:'Imperial',Invalid:'Invalid', };
+declare type EDefaultLocationUnit = 'Micrometers' | 'Millimeters' | 'Centimeters' | 'Meters' | 'Kilometers' | 'Inches' | 'Feet' | 'Yards' | 'Miles' | 'Invalid';
+declare var EDefaultLocationUnit : { Micrometers:'Micrometers',Millimeters:'Millimeters',Centimeters:'Centimeters',Meters:'Meters',Kilometers:'Kilometers',Inches:'Inches',Feet:'Feet',Yards:'Yards',Miles:'Miles',Invalid:'Invalid', };
 declare class EditorProjectAppearanceSettings extends DeveloperSettings { 
 	bDisplayUnits: boolean;
 	DistanceUnits: EUnit[];
@@ -4899,7 +7553,7 @@ declare class EditorProjectAppearanceSettings extends DeveloperSettings {
 	static Load(ResourceName: string): EditorProjectAppearanceSettings;
 	static Find(Outer: UObject, ResourceName: string): EditorProjectAppearanceSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorProjectAppearanceSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4907,8 +7561,8 @@ declare class EditorProjectAppearanceSettings extends DeveloperSettings {
 	static C(Other: UObject): EditorProjectAppearanceSettings;
 }
 
-declare type ELevelEditor2DAxis = string | symbol;
-declare var ELevelEditor2DAxis = { X:'X',Y:'Y',Z:'Z', };
+declare type ELevelEditor2DAxis = 'X' | 'Y' | 'Z';
+declare var ELevelEditor2DAxis : { X:'X',Y:'Y',Z:'Z', };
 declare class Mode2DLayer { 
 	Name: string;
 	Depth: number;
@@ -4926,7 +7580,7 @@ declare class LevelEditor2DSettings extends DeveloperSettings {
 	static Load(ResourceName: string): LevelEditor2DSettings;
 	static Find(Outer: UObject, ResourceName: string): LevelEditor2DSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelEditor2DSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4948,7 +7602,7 @@ declare class EditorSettings extends UObject {
 	static Load(ResourceName: string): EditorSettings;
 	static Find(Outer: UObject, ResourceName: string): EditorSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4963,7 +7617,7 @@ declare class EditorSkeletonNotifyObj extends UObject {
 	static Load(ResourceName: string): EditorSkeletonNotifyObj;
 	static Find(Outer: UObject, ResourceName: string): EditorSkeletonNotifyObj;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EditorSkeletonNotifyObj;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -4978,34 +7632,12 @@ declare class ExportTextContainer extends UObject {
 	static Load(ResourceName: string): ExportTextContainer;
 	static Find(Outer: UObject, ResourceName: string): ExportTextContainer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ExportTextContainer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ExportTextContainer;
 	static C(Other: UObject): ExportTextContainer;
-}
-
-declare class Factory extends UObject { 
-	SupportedClass: UnrealEngineClass;
-	ContextClass: UnrealEngineClass;
-	Formats: string[];
-	bEditAfterNew: boolean;
-	bEditorImport: boolean;
-	bText: boolean;
-	ImportPriority: number;
-	bCreateNew: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): Factory;
-	static Find(Outer: UObject, ResourceName: string): Factory;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): Factory;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Factory;
-	static C(Other: UObject): Factory;
 }
 
 declare class AnimBlueprintFactory extends Factory { 
@@ -5017,7 +7649,7 @@ declare class AnimBlueprintFactory extends Factory {
 	static Load(ResourceName: string): AnimBlueprintFactory;
 	static Find(Outer: UObject, ResourceName: string): AnimBlueprintFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimBlueprintFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5033,7 +7665,7 @@ declare class AnimCompositeFactory extends Factory {
 	static Load(ResourceName: string): AnimCompositeFactory;
 	static Find(Outer: UObject, ResourceName: string): AnimCompositeFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompositeFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5049,7 +7681,7 @@ declare class AnimMontageFactory extends Factory {
 	static Load(ResourceName: string): AnimMontageFactory;
 	static Find(Outer: UObject, ResourceName: string): AnimMontageFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimMontageFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5064,7 +7696,7 @@ declare class AnimSequenceFactory extends Factory {
 	static Load(ResourceName: string): AnimSequenceFactory;
 	static Find(Outer: UObject, ResourceName: string): AnimSequenceFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimSequenceFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5079,7 +7711,7 @@ declare class BlendSpaceFactory1D extends Factory {
 	static Load(ResourceName: string): BlendSpaceFactory1D;
 	static Find(Outer: UObject, ResourceName: string): BlendSpaceFactory1D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlendSpaceFactory1D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5093,7 +7725,7 @@ declare class AimOffsetBlendSpaceFactory1D extends BlendSpaceFactory1D {
 	static Load(ResourceName: string): AimOffsetBlendSpaceFactory1D;
 	static Find(Outer: UObject, ResourceName: string): AimOffsetBlendSpaceFactory1D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AimOffsetBlendSpaceFactory1D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5108,7 +7740,7 @@ declare class BlendSpaceFactoryNew extends Factory {
 	static Load(ResourceName: string): BlendSpaceFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): BlendSpaceFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlendSpaceFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5122,7 +7754,7 @@ declare class AimOffsetBlendSpaceFactoryNew extends BlendSpaceFactoryNew {
 	static Load(ResourceName: string): AimOffsetBlendSpaceFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): AimOffsetBlendSpaceFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AimOffsetBlendSpaceFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5137,7 +7769,7 @@ declare class BlueprintFactory extends Factory {
 	static Load(ResourceName: string): BlueprintFactory;
 	static Find(Outer: UObject, ResourceName: string): BlueprintFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlueprintFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5151,7 +7783,7 @@ declare class BlueprintFunctionLibraryFactory extends BlueprintFactory {
 	static Load(ResourceName: string): BlueprintFunctionLibraryFactory;
 	static Find(Outer: UObject, ResourceName: string): BlueprintFunctionLibraryFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlueprintFunctionLibraryFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5165,7 +7797,7 @@ declare class BlueprintMacroFactory extends BlueprintFactory {
 	static Load(ResourceName: string): BlueprintMacroFactory;
 	static Find(Outer: UObject, ResourceName: string): BlueprintMacroFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlueprintMacroFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5179,7 +7811,7 @@ declare class BlueprintInterfaceFactory extends Factory {
 	static Load(ResourceName: string): BlueprintInterfaceFactory;
 	static Find(Outer: UObject, ResourceName: string): BlueprintInterfaceFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlueprintInterfaceFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5193,7 +7825,7 @@ declare class CameraAnimFactory extends Factory {
 	static Load(ResourceName: string): CameraAnimFactory;
 	static Find(Outer: UObject, ResourceName: string): CameraAnimFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CameraAnimFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5210,7 +7842,7 @@ declare class CanvasRenderTarget2DFactoryNew extends Factory {
 	static Load(ResourceName: string): CanvasRenderTarget2DFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): CanvasRenderTarget2DFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CanvasRenderTarget2DFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5218,13 +7850,24 @@ declare class CanvasRenderTarget2DFactoryNew extends Factory {
 	static C(Other: UObject): CanvasRenderTarget2DFactoryNew;
 }
 
+declare type ECSVImportType = 'ECSV_DataTable' | 'ECSV_CurveTable' | 'ECSV_CurveFloat' | 'ECSV_CurveVector' | 'ECSV_CurveLinearColor';
+declare var ECSVImportType : { ECSV_DataTable:'ECSV_DataTable',ECSV_CurveTable:'ECSV_CurveTable',ECSV_CurveFloat:'ECSV_CurveFloat',ECSV_CurveVector:'ECSV_CurveVector',ECSV_CurveLinearColor:'ECSV_CurveLinearColor', };
+declare class CSVImportSettings { 
+	ImportRowStruct: ScriptStruct;
+	ImportType: ECSVImportType;
+	ImportCurveInterpMode: ERichCurveInterpMode;
+	clone() : CSVImportSettings;
+	static C(Other: UObject): CSVImportSettings;
+}
+
 declare class CSVImportFactory extends Factory { 
+	AutomatedImportSettings: CSVImportSettings;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): CSVImportFactory;
 	static Find(Outer: UObject, ResourceName: string): CSVImportFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CSVImportFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5238,7 +7881,7 @@ declare class ReimportCurveFactory extends CSVImportFactory {
 	static Load(ResourceName: string): ReimportCurveFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportCurveFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportCurveFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5252,7 +7895,7 @@ declare class ReimportCurveTableFactory extends CSVImportFactory {
 	static Load(ResourceName: string): ReimportCurveTableFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportCurveTableFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportCurveTableFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5266,7 +7909,7 @@ declare class ReimportDataTableFactory extends CSVImportFactory {
 	static Load(ResourceName: string): ReimportDataTableFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportDataTableFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportDataTableFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5281,7 +7924,7 @@ declare class CurveFactory extends Factory {
 	static Load(ResourceName: string): CurveFactory;
 	static Find(Outer: UObject, ResourceName: string): CurveFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5295,7 +7938,7 @@ declare class CurveFloatFactory extends CurveFactory {
 	static Load(ResourceName: string): CurveFloatFactory;
 	static Find(Outer: UObject, ResourceName: string): CurveFloatFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveFloatFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5309,7 +7952,7 @@ declare class CurveLinearColorFactory extends CurveFactory {
 	static Load(ResourceName: string): CurveLinearColorFactory;
 	static Find(Outer: UObject, ResourceName: string): CurveLinearColorFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveLinearColorFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5323,7 +7966,7 @@ declare class CurveVectorFactory extends CurveFactory {
 	static Load(ResourceName: string): CurveVectorFactory;
 	static Find(Outer: UObject, ResourceName: string): CurveVectorFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveVectorFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5337,7 +7980,7 @@ declare class CurveImportFactory extends Factory {
 	static Load(ResourceName: string): CurveImportFactory;
 	static Find(Outer: UObject, ResourceName: string): CurveImportFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveImportFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5352,7 +7995,7 @@ declare class DataAssetFactory extends Factory {
 	static Load(ResourceName: string): DataAssetFactory;
 	static Find(Outer: UObject, ResourceName: string): DataAssetFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DataAssetFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5367,7 +8010,7 @@ declare class DataTableFactory extends Factory {
 	static Load(ResourceName: string): DataTableFactory;
 	static Find(Outer: UObject, ResourceName: string): DataTableFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DataTableFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5381,7 +8024,7 @@ declare class DestructibleMeshFactory extends Factory {
 	static Load(ResourceName: string): DestructibleMeshFactory;
 	static Find(Outer: UObject, ResourceName: string): DestructibleMeshFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DestructibleMeshFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5395,7 +8038,7 @@ declare class ReimportDestructibleMeshFactory extends DestructibleMeshFactory {
 	static Load(ResourceName: string): ReimportDestructibleMeshFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportDestructibleMeshFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportDestructibleMeshFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5409,7 +8052,7 @@ declare class DialogueVoiceFactory extends Factory {
 	static Load(ResourceName: string): DialogueVoiceFactory;
 	static Find(Outer: UObject, ResourceName: string): DialogueVoiceFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DialogueVoiceFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5427,7 +8070,7 @@ declare class DialogueWaveFactory extends Factory {
 	static Load(ResourceName: string): DialogueWaveFactory;
 	static Find(Outer: UObject, ResourceName: string): DialogueWaveFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DialogueWaveFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5441,7 +8084,7 @@ declare class EnumFactory extends Factory {
 	static Load(ResourceName: string): EnumFactory;
 	static Find(Outer: UObject, ResourceName: string): EnumFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EnumFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5449,8 +8092,8 @@ declare class EnumFactory extends Factory {
 	static C(Other: UObject): EnumFactory;
 }
 
-declare type EFBXImportType = string | symbol;
-declare var EFBXImportType = { FBXIT_StaticMesh:'FBXIT_StaticMesh',FBXIT_SkeletalMesh:'FBXIT_SkeletalMesh',FBXIT_Animation:'FBXIT_Animation',FBXIT_SubDSurface:'FBXIT_SubDSurface', };
+declare type EFBXImportType = 'FBXIT_StaticMesh' | 'FBXIT_SkeletalMesh' | 'FBXIT_Animation' | 'FBXIT_SubDSurface';
+declare var EFBXImportType : { FBXIT_StaticMesh:'FBXIT_StaticMesh',FBXIT_SkeletalMesh:'FBXIT_SkeletalMesh',FBXIT_Animation:'FBXIT_Animation',FBXIT_SubDSurface:'FBXIT_SubDSurface', };
 declare class FbxSceneImportData extends UObject { 
 	SourceFbxFile: string;
 	constructor();
@@ -5458,7 +8101,7 @@ declare class FbxSceneImportData extends UObject {
 	static Load(ResourceName: string): FbxSceneImportData;
 	static Find(Outer: UObject, ResourceName: string): FbxSceneImportData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxSceneImportData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5471,14 +8114,13 @@ declare class FbxAssetImportData extends AssetImportData {
 	ImportRotation: Rotator;
 	ImportUniformScale: number;
 	bImportAsScene: boolean;
-	bImportMaterials: boolean;
 	FbxSceneImportDataReference: FbxSceneImportData;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): FbxAssetImportData;
 	static Find(Outer: UObject, ResourceName: string): FbxAssetImportData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxAssetImportData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5486,10 +8128,10 @@ declare class FbxAssetImportData extends AssetImportData {
 	static C(Other: UObject): FbxAssetImportData;
 }
 
-declare type EFBXNormalImportMethod = string | symbol;
-declare var EFBXNormalImportMethod = { FBXNIM_ComputeNormals:'FBXNIM_ComputeNormals',FBXNIM_ImportNormals:'FBXNIM_ImportNormals',FBXNIM_ImportNormalsAndTangents:'FBXNIM_ImportNormalsAndTangents', };
-declare type EFBXNormalGenerationMethod = string | symbol;
-declare var EFBXNormalGenerationMethod = { BuiltIn:'BuiltIn',MikkTSpace:'MikkTSpace', };
+declare type EFBXNormalImportMethod = 'FBXNIM_ComputeNormals' | 'FBXNIM_ImportNormals' | 'FBXNIM_ImportNormalsAndTangents';
+declare var EFBXNormalImportMethod : { FBXNIM_ComputeNormals:'FBXNIM_ComputeNormals',FBXNIM_ImportNormals:'FBXNIM_ImportNormals',FBXNIM_ImportNormalsAndTangents:'FBXNIM_ImportNormalsAndTangents', };
+declare type EFBXNormalGenerationMethod = 'BuiltIn' | 'MikkTSpace';
+declare var EFBXNormalGenerationMethod : { BuiltIn:'BuiltIn',MikkTSpace:'MikkTSpace', };
 declare class FbxMeshImportData extends FbxAssetImportData { 
 	bTransformVertexToAbsolute: boolean;
 	bBakePivotInVertex: boolean;
@@ -5501,7 +8143,7 @@ declare class FbxMeshImportData extends FbxAssetImportData {
 	static Load(ResourceName: string): FbxMeshImportData;
 	static Find(Outer: UObject, ResourceName: string): FbxMeshImportData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxMeshImportData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5509,8 +8151,8 @@ declare class FbxMeshImportData extends FbxAssetImportData {
 	static C(Other: UObject): FbxMeshImportData;
 }
 
-declare type EVertexColorImportOption = string | symbol;
-declare var EVertexColorImportOption = { Replace:'Replace',Ignore:'Ignore',Override:'Override', };
+declare type EVertexColorImportOption = 'Replace' | 'Ignore' | 'Override';
+declare var EVertexColorImportOption : { Replace:'Replace',Ignore:'Ignore',Override:'Override', };
 declare class FbxStaticMeshImportData extends FbxMeshImportData { 
 	StaticMeshLODGroup: string;
 	VertexColorImportOption: EVertexColorImportOption;
@@ -5526,7 +8168,7 @@ declare class FbxStaticMeshImportData extends FbxMeshImportData {
 	static Load(ResourceName: string): FbxStaticMeshImportData;
 	static Find(Outer: UObject, ResourceName: string): FbxStaticMeshImportData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxStaticMeshImportData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5546,7 +8188,7 @@ declare class FbxSkeletalMeshImportData extends FbxMeshImportData {
 	static Load(ResourceName: string): FbxSkeletalMeshImportData;
 	static Find(Outer: UObject, ResourceName: string): FbxSkeletalMeshImportData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxSkeletalMeshImportData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5554,8 +8196,8 @@ declare class FbxSkeletalMeshImportData extends FbxMeshImportData {
 	static C(Other: UObject): FbxSkeletalMeshImportData;
 }
 
-declare type EFBXAnimationLengthImportType = string | symbol;
-declare var EFBXAnimationLengthImportType = { FBXALIT_ExportedTime:'FBXALIT_ExportedTime',FBXALIT_AnimatedKey:'FBXALIT_AnimatedKey',FBXALIT_SetRange:'FBXALIT_SetRange', };
+declare type EFBXAnimationLengthImportType = 'FBXALIT_ExportedTime' | 'FBXALIT_AnimatedKey' | 'FBXALIT_SetRange';
+declare var EFBXAnimationLengthImportType : { FBXALIT_ExportedTime:'FBXALIT_ExportedTime',FBXALIT_AnimatedKey:'FBXALIT_AnimatedKey',FBXALIT_SetRange:'FBXALIT_SetRange', };
 declare class Int32Interval { 
 	Min: number;
 	Max: number;
@@ -5564,6 +8206,7 @@ declare class Int32Interval {
 }
 
 declare class FbxAnimSequenceImportData extends FbxAssetImportData { 
+	bImportMeshesInBoneHierarchy: boolean;
 	AnimationLength: EFBXAnimationLengthImportType;
 	StartFrame: number;
 	EndFrame: number;
@@ -5582,7 +8225,7 @@ declare class FbxAnimSequenceImportData extends FbxAssetImportData {
 	static Load(ResourceName: string): FbxAnimSequenceImportData;
 	static Find(Outer: UObject, ResourceName: string): FbxAnimSequenceImportData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxAnimSequenceImportData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5592,12 +8235,19 @@ declare class FbxAnimSequenceImportData extends FbxAssetImportData {
 
 declare class FbxTextureImportData extends FbxAssetImportData { 
 	bInvertNormalMaps: boolean;
+	BaseMaterialName: StringAssetReference;
+	BaseColorName: string;
+	BaseDiffuseTextureName: string;
+	BaseNormalTextureName: string;
+	BaseEmissiveColorName: string;
+	BaseEmmisiveTextureName: string;
+	BaseSpecularTextureName: string;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): FbxTextureImportData;
 	static Find(Outer: UObject, ResourceName: string): FbxTextureImportData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxTextureImportData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5611,6 +8261,7 @@ declare class FbxImportUI extends UObject {
 	MeshTypeToImport: EFBXImportType;
 	bOverrideFullName: boolean;
 	bConvertScene: boolean;
+	bConvertSceneUnit: boolean;
 	bImportAsSkeletal: boolean;
 	bImportAsSubDSurface: boolean;
 	bImportMesh: boolean;
@@ -5632,7 +8283,7 @@ declare class FbxImportUI extends UObject {
 	static Load(ResourceName: string): FbxImportUI;
 	static Find(Outer: UObject, ResourceName: string): FbxImportUI;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxImportUI;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5647,7 +8298,7 @@ declare class FbxFactory extends Factory {
 	static Load(ResourceName: string): FbxFactory;
 	static Find(Outer: UObject, ResourceName: string): FbxFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5661,7 +8312,7 @@ declare class ReimportFbxAnimSequenceFactory extends FbxFactory {
 	static Load(ResourceName: string): ReimportFbxAnimSequenceFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportFbxAnimSequenceFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportFbxAnimSequenceFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5675,7 +8326,7 @@ declare class ReimportFbxSkeletalMeshFactory extends FbxFactory {
 	static Load(ResourceName: string): ReimportFbxSkeletalMeshFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportFbxSkeletalMeshFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportFbxSkeletalMeshFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5689,7 +8340,7 @@ declare class ReimportFbxStaticMeshFactory extends FbxFactory {
 	static Load(ResourceName: string): ReimportFbxStaticMeshFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportFbxStaticMeshFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportFbxStaticMeshFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5697,8 +8348,8 @@ declare class ReimportFbxStaticMeshFactory extends FbxFactory {
 	static C(Other: UObject): ReimportFbxStaticMeshFactory;
 }
 
-declare type EFBXSceneOptionsCreateHierarchyType = string | symbol;
-declare var EFBXSceneOptionsCreateHierarchyType = { FBXSOCHT_CreateLevelActors:'FBXSOCHT_CreateLevelActors',FBXSOCHT_CreateActorComponents:'FBXSOCHT_CreateActorComponents',FBXSOCHT_CreateBlueprint:'FBXSOCHT_CreateBlueprint', };
+declare type EFBXSceneOptionsCreateHierarchyType = 'FBXSOCHT_CreateLevelActors' | 'FBXSOCHT_CreateActorComponents' | 'FBXSOCHT_CreateBlueprint';
+declare var EFBXSceneOptionsCreateHierarchyType : { FBXSOCHT_CreateLevelActors:'FBXSOCHT_CreateLevelActors',FBXSOCHT_CreateActorComponents:'FBXSOCHT_CreateActorComponents',FBXSOCHT_CreateBlueprint:'FBXSOCHT_CreateBlueprint', };
 declare class FbxSceneImportOptions extends UObject { 
 	bCreateContentFolderHierarchy: boolean;
 	bImportAsDynamic: boolean;
@@ -5716,7 +8367,7 @@ declare class FbxSceneImportOptions extends UObject {
 	static Load(ResourceName: string): FbxSceneImportOptions;
 	static Find(Outer: UObject, ResourceName: string): FbxSceneImportOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxSceneImportOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5724,12 +8375,12 @@ declare class FbxSceneImportOptions extends UObject {
 	static C(Other: UObject): FbxSceneImportOptions;
 }
 
-declare type EFbxSceneVertexColorImportOption = string | symbol;
-declare var EFbxSceneVertexColorImportOption = { Replace:'Replace',Ignore:'Ignore',Override:'Override', };
-declare type EFBXSceneNormalImportMethod = string | symbol;
-declare var EFBXSceneNormalImportMethod = { FBXSceneNIM_ComputeNormals:'FBXSceneNIM_ComputeNormals',FBXSceneNIM_ImportNormals:'FBXSceneNIM_ImportNormals',FBXSceneNIM_ImportNormalsAndTangents:'FBXSceneNIM_ImportNormalsAndTangents', };
-declare type EFBXSceneNormalGenerationMethod = string | symbol;
-declare var EFBXSceneNormalGenerationMethod = { BuiltIn:'BuiltIn',MikkTSpace:'MikkTSpace', };
+declare type EFbxSceneVertexColorImportOption = 'Replace' | 'Ignore' | 'Override';
+declare var EFbxSceneVertexColorImportOption : { Replace:'Replace',Ignore:'Ignore',Override:'Override', };
+declare type EFBXSceneNormalImportMethod = 'FBXSceneNIM_ComputeNormals' | 'FBXSceneNIM_ImportNormals' | 'FBXSceneNIM_ImportNormalsAndTangents';
+declare var EFBXSceneNormalImportMethod : { FBXSceneNIM_ComputeNormals:'FBXSceneNIM_ComputeNormals',FBXSceneNIM_ImportNormals:'FBXSceneNIM_ImportNormals',FBXSceneNIM_ImportNormalsAndTangents:'FBXSceneNIM_ImportNormalsAndTangents', };
+declare type EFBXSceneNormalGenerationMethod = 'BuiltIn' | 'MikkTSpace';
+declare var EFBXSceneNormalGenerationMethod : { BuiltIn:'BuiltIn',MikkTSpace:'MikkTSpace', };
 declare class FbxSceneImportOptionsStaticMesh extends UObject { 
 	StaticMeshLODGroup: string;
 	bAutoGenerateCollision: boolean;
@@ -5747,7 +8398,7 @@ declare class FbxSceneImportOptionsStaticMesh extends UObject {
 	static Load(ResourceName: string): FbxSceneImportOptionsStaticMesh;
 	static Find(Outer: UObject, ResourceName: string): FbxSceneImportOptionsStaticMesh;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxSceneImportOptionsStaticMesh;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5775,7 +8426,7 @@ declare class FbxSceneImportOptionsSkeletalMesh extends UObject {
 	static Load(ResourceName: string): FbxSceneImportOptionsSkeletalMesh;
 	static Find(Outer: UObject, ResourceName: string): FbxSceneImportOptionsSkeletalMesh;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxSceneImportOptionsSkeletalMesh;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5791,12 +8442,13 @@ declare class FbxSceneImportFactory extends Factory {
 	SkeletalMeshImportData: FbxSkeletalMeshImportData;
 	AnimSequenceImportData: FbxAnimSequenceImportData;
 	TextureImportData: FbxTextureImportData;
+	ReimportData: FbxSceneImportData;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): FbxSceneImportFactory;
 	static Find(Outer: UObject, ResourceName: string): FbxSceneImportFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxSceneImportFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5810,7 +8462,7 @@ declare class ReimportFbxSceneFactory extends FbxSceneImportFactory {
 	static Load(ResourceName: string): ReimportFbxSceneFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportFbxSceneFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportFbxSceneFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5824,7 +8476,7 @@ declare class FontFactory extends Factory {
 	static Load(ResourceName: string): FontFactory;
 	static Find(Outer: UObject, ResourceName: string): FontFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FontFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5838,7 +8490,7 @@ declare class FontFileImportFactory extends Factory {
 	static Load(ResourceName: string): FontFileImportFactory;
 	static Find(Outer: UObject, ResourceName: string): FontFileImportFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FontFileImportFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5852,7 +8504,7 @@ declare class ForceFeedbackEffectFactory extends Factory {
 	static Load(ResourceName: string): ForceFeedbackEffectFactory;
 	static Find(Outer: UObject, ResourceName: string): ForceFeedbackEffectFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ForceFeedbackEffectFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5866,7 +8518,7 @@ declare class HapticFeedbackEffectBufferFactory extends Factory {
 	static Load(ResourceName: string): HapticFeedbackEffectBufferFactory;
 	static Find(Outer: UObject, ResourceName: string): HapticFeedbackEffectBufferFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HapticFeedbackEffectBufferFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5880,7 +8532,7 @@ declare class HapticFeedbackEffectCurveFactory extends Factory {
 	static Load(ResourceName: string): HapticFeedbackEffectCurveFactory;
 	static Find(Outer: UObject, ResourceName: string): HapticFeedbackEffectCurveFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HapticFeedbackEffectCurveFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5894,7 +8546,7 @@ declare class HapticFeedbackEffectSoundWaveFactory extends Factory {
 	static Load(ResourceName: string): HapticFeedbackEffectSoundWaveFactory;
 	static Find(Outer: UObject, ResourceName: string): HapticFeedbackEffectSoundWaveFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HapticFeedbackEffectSoundWaveFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5908,7 +8560,7 @@ declare class InterpDataFactoryNew extends Factory {
 	static Load(ResourceName: string): InterpDataFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): InterpDataFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpDataFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5922,7 +8574,7 @@ declare class LevelFactory extends Factory {
 	static Load(ResourceName: string): LevelFactory;
 	static Find(Outer: UObject, ResourceName: string): LevelFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5937,7 +8589,7 @@ declare class MaterialFactoryNew extends Factory {
 	static Load(ResourceName: string): MaterialFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): MaterialFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5951,7 +8603,7 @@ declare class MaterialFunctionFactoryNew extends Factory {
 	static Load(ResourceName: string): MaterialFunctionFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): MaterialFunctionFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialFunctionFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5966,7 +8618,7 @@ declare class MaterialInstanceConstantFactoryNew extends Factory {
 	static Load(ResourceName: string): MaterialInstanceConstantFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): MaterialInstanceConstantFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialInstanceConstantFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5980,7 +8632,7 @@ declare class MaterialParameterCollectionFactoryNew extends Factory {
 	static Load(ResourceName: string): MaterialParameterCollectionFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): MaterialParameterCollectionFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialParameterCollectionFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -5994,7 +8646,7 @@ declare class ModelFactory extends Factory {
 	static Load(ResourceName: string): ModelFactory;
 	static Find(Outer: UObject, ResourceName: string): ModelFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ModelFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6008,7 +8660,7 @@ declare class ObjectLibraryFactory extends Factory {
 	static Load(ResourceName: string): ObjectLibraryFactory;
 	static Find(Outer: UObject, ResourceName: string): ObjectLibraryFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ObjectLibraryFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6022,7 +8674,7 @@ declare class PackageFactory extends Factory {
 	static Load(ResourceName: string): PackageFactory;
 	static Find(Outer: UObject, ResourceName: string): PackageFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PackageFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6036,7 +8688,7 @@ declare class PackFactory extends Factory {
 	static Load(ResourceName: string): PackFactory;
 	static Find(Outer: UObject, ResourceName: string): PackFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PackFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6050,7 +8702,7 @@ declare class ParticleSystemFactoryNew extends Factory {
 	static Load(ResourceName: string): ParticleSystemFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): ParticleSystemFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleSystemFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6065,7 +8717,7 @@ declare class PhysicalMaterialFactoryNew extends Factory {
 	static Load(ResourceName: string): PhysicalMaterialFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): PhysicalMaterialFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicalMaterialFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6079,7 +8731,7 @@ declare class PolysFactory extends Factory {
 	static Load(ResourceName: string): PolysFactory;
 	static Find(Outer: UObject, ResourceName: string): PolysFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PolysFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6095,12 +8747,27 @@ declare class PoseAssetFactory extends Factory {
 	static Load(ResourceName: string): PoseAssetFactory;
 	static Find(Outer: UObject, ResourceName: string): PoseAssetFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PoseAssetFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PoseAssetFactory;
 	static C(Other: UObject): PoseAssetFactory;
+}
+
+declare class PreviewMeshCollectionFactory extends Factory { 
+	CurrentSkeleton: any;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): PreviewMeshCollectionFactory;
+	static Find(Outer: UObject, ResourceName: string): PreviewMeshCollectionFactory;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): PreviewMeshCollectionFactory;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PreviewMeshCollectionFactory;
+	static C(Other: UObject): PreviewMeshCollectionFactory;
 }
 
 declare class ReverbEffectFactory extends Factory { 
@@ -6109,7 +8776,7 @@ declare class ReverbEffectFactory extends Factory {
 	static Load(ResourceName: string): ReverbEffectFactory;
 	static Find(Outer: UObject, ResourceName: string): ReverbEffectFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReverbEffectFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6124,7 +8791,7 @@ declare class SkeletonFactory extends Factory {
 	static Load(ResourceName: string): SkeletonFactory;
 	static Find(Outer: UObject, ResourceName: string): SkeletonFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SkeletonFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6139,7 +8806,7 @@ declare class SlateBrushAssetFactory extends Factory {
 	static Load(ResourceName: string): SlateBrushAssetFactory;
 	static Find(Outer: UObject, ResourceName: string): SlateBrushAssetFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SlateBrushAssetFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6154,7 +8821,7 @@ declare class SlateWidgetStyleAssetFactory extends Factory {
 	static Load(ResourceName: string): SlateWidgetStyleAssetFactory;
 	static Find(Outer: UObject, ResourceName: string): SlateWidgetStyleAssetFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SlateWidgetStyleAssetFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6168,7 +8835,7 @@ declare class SoundAttenuationFactory extends Factory {
 	static Load(ResourceName: string): SoundAttenuationFactory;
 	static Find(Outer: UObject, ResourceName: string): SoundAttenuationFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundAttenuationFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6182,7 +8849,7 @@ declare class SoundClassFactory extends Factory {
 	static Load(ResourceName: string): SoundClassFactory;
 	static Find(Outer: UObject, ResourceName: string): SoundClassFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundClassFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6196,7 +8863,7 @@ declare class SoundConcurrencyFactory extends Factory {
 	static Load(ResourceName: string): SoundConcurrencyFactory;
 	static Find(Outer: UObject, ResourceName: string): SoundConcurrencyFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundConcurrencyFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6212,7 +8879,7 @@ declare class SoundCueFactoryNew extends Factory {
 	static Load(ResourceName: string): SoundCueFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): SoundCueFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundCueFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6232,7 +8899,7 @@ declare class SoundFactory extends Factory {
 	static Load(ResourceName: string): SoundFactory;
 	static Find(Outer: UObject, ResourceName: string): SoundFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6246,7 +8913,7 @@ declare class ReimportSoundFactory extends SoundFactory {
 	static Load(ResourceName: string): ReimportSoundFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportSoundFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportSoundFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6260,7 +8927,7 @@ declare class SoundMixFactory extends Factory {
 	static Load(ResourceName: string): SoundMixFactory;
 	static Find(Outer: UObject, ResourceName: string): SoundMixFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundMixFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6275,7 +8942,7 @@ declare class SoundSurroundFactory extends Factory {
 	static Load(ResourceName: string): SoundSurroundFactory;
 	static Find(Outer: UObject, ResourceName: string): SoundSurroundFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundSurroundFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6290,7 +8957,7 @@ declare class ReimportSoundSurroundFactory extends SoundSurroundFactory {
 	static Load(ResourceName: string): ReimportSoundSurroundFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportSoundSurroundFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportSoundSurroundFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6304,7 +8971,7 @@ declare class StructureFactory extends Factory {
 	static Load(ResourceName: string): StructureFactory;
 	static Find(Outer: UObject, ResourceName: string): StructureFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StructureFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6318,7 +8985,7 @@ declare class SubDSurfaceFactory extends Factory {
 	static Load(ResourceName: string): SubDSurfaceFactory;
 	static Find(Outer: UObject, ResourceName: string): SubDSurfaceFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SubDSurfaceFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6332,7 +8999,7 @@ declare class SubsurfaceProfileFactory extends Factory {
 	static Load(ResourceName: string): SubsurfaceProfileFactory;
 	static Find(Outer: UObject, ResourceName: string): SubsurfaceProfileFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SubsurfaceProfileFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6347,7 +9014,7 @@ declare class SubUVAnimationFactory extends Factory {
 	static Load(ResourceName: string): SubUVAnimationFactory;
 	static Find(Outer: UObject, ResourceName: string): SubUVAnimationFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SubUVAnimationFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6363,7 +9030,7 @@ declare class Texture2DFactoryNew extends Factory {
 	static Load(ResourceName: string): Texture2DFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): Texture2DFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Texture2DFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6398,7 +9065,7 @@ declare class TextureFactory extends Factory {
 	static Load(ResourceName: string): TextureFactory;
 	static Find(Outer: UObject, ResourceName: string): TextureFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6413,7 +9080,7 @@ declare class ReimportTextureFactory extends TextureFactory {
 	static Load(ResourceName: string): ReimportTextureFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportTextureFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportTextureFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6428,7 +9095,7 @@ declare class FontImportOptions extends UObject {
 	static Load(ResourceName: string): FontImportOptions;
 	static Find(Outer: UObject, ResourceName: string): FontImportOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FontImportOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6445,7 +9112,7 @@ declare class TrueTypeFontFactory extends TextureFactory {
 	static Load(ResourceName: string): TrueTypeFontFactory;
 	static Find(Outer: UObject, ResourceName: string): TrueTypeFontFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TrueTypeFontFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6461,7 +9128,7 @@ declare class TextureRenderTargetCubeFactoryNew extends Factory {
 	static Load(ResourceName: string): TextureRenderTargetCubeFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): TextureRenderTargetCubeFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureRenderTargetCubeFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6478,7 +9145,7 @@ declare class TextureRenderTargetFactoryNew extends Factory {
 	static Load(ResourceName: string): TextureRenderTargetFactoryNew;
 	static Find(Outer: UObject, ResourceName: string): TextureRenderTargetFactoryNew;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureRenderTargetFactoryNew;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6492,7 +9159,7 @@ declare class TouchInterfaceFactory extends Factory {
 	static Load(ResourceName: string): TouchInterfaceFactory;
 	static Find(Outer: UObject, ResourceName: string): TouchInterfaceFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TouchInterfaceFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6506,7 +9173,7 @@ declare class VectorFieldStaticFactory extends Factory {
 	static Load(ResourceName: string): VectorFieldStaticFactory;
 	static Find(Outer: UObject, ResourceName: string): VectorFieldStaticFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VectorFieldStaticFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6520,7 +9187,7 @@ declare class ReimportVectorFieldStaticFactory extends VectorFieldStaticFactory 
 	static Load(ResourceName: string): ReimportVectorFieldStaticFactory;
 	static Find(Outer: UObject, ResourceName: string): ReimportVectorFieldStaticFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReimportVectorFieldStaticFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6534,7 +9201,7 @@ declare class WorldFactory extends Factory {
 	static Load(ResourceName: string): WorldFactory;
 	static Find(Outer: UObject, ResourceName: string): WorldFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WorldFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6542,10 +9209,10 @@ declare class WorldFactory extends Factory {
 	static C(Other: UObject): WorldFactory;
 }
 
-declare type EFBXTestPlanActionType = string | symbol;
-declare var EFBXTestPlanActionType = { Import:'Import',Reimport:'Reimport',AddLOD:'AddLOD',ReimportLOD:'ReimportLOD',Action_MAX:'Action_MAX', };
-declare type EFBXExpectedResultPreset = string | symbol;
-declare var EFBXExpectedResultPreset = { Error_Number:'Error_Number',Warning_Number:'Warning_Number',Created_Staticmesh_Number:'Created_Staticmesh_Number',Created_Skeletalmesh_Number:'Created_Skeletalmesh_Number',Materials_Created_Number:'Materials_Created_Number',Vertex_Number:'Vertex_Number',Lod_Number:'Lod_Number',Vertex_Number_Lod:'Vertex_Number_Lod',Mesh_Materials_Number:'Mesh_Materials_Number',Mesh_LOD_Section_Number:'Mesh_LOD_Section_Number',Mesh_LOD_Section_Vertex_Number:'Mesh_LOD_Section_Vertex_Number',Mesh_LOD_Section_Triangle_Number:'Mesh_LOD_Section_Triangle_Number',Mesh_LOD_Section_Material_Name:'Mesh_LOD_Section_Material_Name',Mesh_LOD_Section_Material_Index:'Mesh_LOD_Section_Material_Index',LOD_UV_Channel_Number:'LOD_UV_Channel_Number',Bone_Number:'Bone_Number',Bone_Position:'Bone_Position',Preset_MAX:'Preset_MAX', };
+declare type EFBXTestPlanActionType = 'Import' | 'Reimport' | 'AddLOD' | 'ReimportLOD';
+declare var EFBXTestPlanActionType : { Import:'Import',Reimport:'Reimport',AddLOD:'AddLOD',ReimportLOD:'ReimportLOD', };
+declare type EFBXExpectedResultPreset = 'Error_Number' | 'Warning_Number' | 'Created_Staticmesh_Number' | 'Created_Skeletalmesh_Number' | 'Materials_Created_Number' | 'Vertex_Number' | 'Lod_Number' | 'Vertex_Number_Lod' | 'Mesh_Materials_Number' | 'Mesh_LOD_Section_Number' | 'Mesh_LOD_Section_Vertex_Number' | 'Mesh_LOD_Section_Triangle_Number' | 'Mesh_LOD_Section_Material_Name' | 'Mesh_LOD_Section_Material_Index' | 'LOD_UV_Channel_Number' | 'Bone_Number' | 'Bone_Position';
+declare var EFBXExpectedResultPreset : { Error_Number:'Error_Number',Warning_Number:'Warning_Number',Created_Staticmesh_Number:'Created_Staticmesh_Number',Created_Skeletalmesh_Number:'Created_Skeletalmesh_Number',Materials_Created_Number:'Materials_Created_Number',Vertex_Number:'Vertex_Number',Lod_Number:'Lod_Number',Vertex_Number_Lod:'Vertex_Number_Lod',Mesh_Materials_Number:'Mesh_Materials_Number',Mesh_LOD_Section_Number:'Mesh_LOD_Section_Number',Mesh_LOD_Section_Vertex_Number:'Mesh_LOD_Section_Vertex_Number',Mesh_LOD_Section_Triangle_Number:'Mesh_LOD_Section_Triangle_Number',Mesh_LOD_Section_Material_Name:'Mesh_LOD_Section_Material_Name',Mesh_LOD_Section_Material_Index:'Mesh_LOD_Section_Material_Index',LOD_UV_Channel_Number:'LOD_UV_Channel_Number',Bone_Number:'Bone_Number',Bone_Position:'Bone_Position', };
 declare class FbxTestPlanExpectedResult { 
 	ExpectedPresetsType: EFBXExpectedResultPreset;
 	ExpectedPresetsDataInteger: number[];
@@ -6568,7 +9235,7 @@ declare class FbxTestPlan extends UObject {
 	static Load(ResourceName: string): FbxTestPlan;
 	static Find(Outer: UObject, ResourceName: string): FbxTestPlan;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FbxTestPlan;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6582,7 +9249,7 @@ declare class FileServerCommandlet extends Commandlet {
 	static Load(ResourceName: string): FileServerCommandlet;
 	static Find(Outer: UObject, ResourceName: string): FileServerCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FileServerCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6596,7 +9263,7 @@ declare class FixupRedirectsCommandlet extends Commandlet {
 	static Load(ResourceName: string): FixupRedirectsCommandlet;
 	static Find(Outer: UObject, ResourceName: string): FixupRedirectsCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FixupRedirectsCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6610,7 +9277,7 @@ declare class GatherTextCommandletBase extends Commandlet {
 	static Load(ResourceName: string): GatherTextCommandletBase;
 	static Find(Outer: UObject, ResourceName: string): GatherTextCommandletBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GatherTextCommandletBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6624,7 +9291,7 @@ declare class ExportDialogueScriptCommandlet extends GatherTextCommandletBase {
 	static Load(ResourceName: string): ExportDialogueScriptCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ExportDialogueScriptCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ExportDialogueScriptCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6638,7 +9305,7 @@ declare class GatherTextCommandlet extends GatherTextCommandletBase {
 	static Load(ResourceName: string): GatherTextCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GatherTextCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GatherTextCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6652,7 +9319,7 @@ declare class GatherTextFromAssetsCommandlet extends GatherTextCommandletBase {
 	static Load(ResourceName: string): GatherTextFromAssetsCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GatherTextFromAssetsCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GatherTextFromAssetsCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6666,7 +9333,7 @@ declare class GatherTextFromMetaDataCommandlet extends GatherTextCommandletBase 
 	static Load(ResourceName: string): GatherTextFromMetaDataCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GatherTextFromMetaDataCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GatherTextFromMetaDataCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6680,7 +9347,7 @@ declare class GatherTextFromSourceCommandlet extends GatherTextCommandletBase {
 	static Load(ResourceName: string): GatherTextFromSourceCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GatherTextFromSourceCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GatherTextFromSourceCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6694,7 +9361,7 @@ declare class GenerateGatherArchiveCommandlet extends GatherTextCommandletBase {
 	static Load(ResourceName: string): GenerateGatherArchiveCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GenerateGatherArchiveCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GenerateGatherArchiveCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6708,7 +9375,7 @@ declare class GenerateGatherManifestCommandlet extends GatherTextCommandletBase 
 	static Load(ResourceName: string): GenerateGatherManifestCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GenerateGatherManifestCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GenerateGatherManifestCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6722,7 +9389,7 @@ declare class GenerateTextLocalizationReportCommandlet extends GatherTextCommand
 	static Load(ResourceName: string): GenerateTextLocalizationReportCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GenerateTextLocalizationReportCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GenerateTextLocalizationReportCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6736,7 +9403,7 @@ declare class GenerateTextLocalizationResourceCommandlet extends GatherTextComma
 	static Load(ResourceName: string): GenerateTextLocalizationResourceCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GenerateTextLocalizationResourceCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GenerateTextLocalizationResourceCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6750,7 +9417,7 @@ declare class ImportDialogueScriptCommandlet extends GatherTextCommandletBase {
 	static Load(ResourceName: string): ImportDialogueScriptCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ImportDialogueScriptCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ImportDialogueScriptCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6765,7 +9432,7 @@ declare class ImportLocalizedDialogueCommandlet extends GatherTextCommandletBase
 	static Load(ResourceName: string): ImportLocalizedDialogueCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ImportLocalizedDialogueCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ImportLocalizedDialogueCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6779,7 +9446,7 @@ declare class InternationalizationConditioningCommandlet extends GatherTextComma
 	static Load(ResourceName: string): InternationalizationConditioningCommandlet;
 	static Find(Outer: UObject, ResourceName: string): InternationalizationConditioningCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InternationalizationConditioningCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6793,26 +9460,12 @@ declare class InternationalizationExportCommandlet extends GatherTextCommandletB
 	static Load(ResourceName: string): InternationalizationExportCommandlet;
 	static Find(Outer: UObject, ResourceName: string): InternationalizationExportCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InternationalizationExportCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InternationalizationExportCommandlet;
 	static C(Other: UObject): InternationalizationExportCommandlet;
-}
-
-declare class RepairLocalizationDataCommandlet extends GatherTextCommandletBase { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): RepairLocalizationDataCommandlet;
-	static Find(Outer: UObject, ResourceName: string): RepairLocalizationDataCommandlet;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): RepairLocalizationDataCommandlet;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RepairLocalizationDataCommandlet;
-	static C(Other: UObject): RepairLocalizationDataCommandlet;
 }
 
 declare class GenerateBlueprintAPICommandlet extends Commandlet { 
@@ -6821,7 +9474,7 @@ declare class GenerateBlueprintAPICommandlet extends Commandlet {
 	static Load(ResourceName: string): GenerateBlueprintAPICommandlet;
 	static Find(Outer: UObject, ResourceName: string): GenerateBlueprintAPICommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GenerateBlueprintAPICommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6835,7 +9488,7 @@ declare class GenerateDistillFileSetsCommandlet extends Commandlet {
 	static Load(ResourceName: string): GenerateDistillFileSetsCommandlet;
 	static Find(Outer: UObject, ResourceName: string): GenerateDistillFileSetsCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GenerateDistillFileSetsCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6846,12 +9499,28 @@ declare class GenerateDistillFileSetsCommandlet extends Commandlet {
 declare class HierarchicalLODVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HierarchicalLODVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): HierarchicalLODVolume;
 	static C(Other: UObject): HierarchicalLODVolume;
+}
+
+declare class ImportAssetsCommandlet extends Commandlet { 
+	GlobalImportData: AutomatedAssetImportData;
+	ImportDataList: AutomatedAssetImportData[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ImportAssetsCommandlet;
+	static Find(Outer: UObject, ResourceName: string): ImportAssetsCommandlet;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ImportAssetsCommandlet;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImportAssetsCommandlet;
+	static C(Other: UObject): ImportAssetsCommandlet;
 }
 
 declare class LevelEditorMiscSettings extends DeveloperSettings { 
@@ -6870,7 +9539,7 @@ declare class LevelEditorMiscSettings extends DeveloperSettings {
 	static Load(ResourceName: string): LevelEditorMiscSettings;
 	static Find(Outer: UObject, ResourceName: string): LevelEditorMiscSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelEditorMiscSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6884,7 +9553,7 @@ declare class LevelExporterFBX extends Exporter {
 	static Load(ResourceName: string): LevelExporterFBX;
 	static Find(Outer: UObject, ResourceName: string): LevelExporterFBX;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelExporterFBX;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6898,7 +9567,7 @@ declare class LevelExporterLOD extends Exporter {
 	static Load(ResourceName: string): LevelExporterLOD;
 	static Find(Outer: UObject, ResourceName: string): LevelExporterLOD;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelExporterLOD;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6912,7 +9581,7 @@ declare class LevelExporterOBJ extends Exporter {
 	static Load(ResourceName: string): LevelExporterOBJ;
 	static Find(Outer: UObject, ResourceName: string): LevelExporterOBJ;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelExporterOBJ;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6926,7 +9595,7 @@ declare class LevelExporterSTL extends Exporter {
 	static Load(ResourceName: string): LevelExporterSTL;
 	static Find(Outer: UObject, ResourceName: string): LevelExporterSTL;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelExporterSTL;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6940,7 +9609,7 @@ declare class LevelExporterT3D extends Exporter {
 	static Load(ResourceName: string): LevelExporterT3D;
 	static Find(Outer: UObject, ResourceName: string): LevelExporterT3D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelExporterT3D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6985,7 +9654,7 @@ declare class LightmassOptionsObject extends UObject {
 	static Load(ResourceName: string): LightmassOptionsObject;
 	static Find(Outer: UObject, ResourceName: string): LightmassOptionsObject;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LightmassOptionsObject;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -6999,7 +9668,7 @@ declare class ListMaterialsUsedWithMeshEmittersCommandlet extends Commandlet {
 	static Load(ResourceName: string): ListMaterialsUsedWithMeshEmittersCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ListMaterialsUsedWithMeshEmittersCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ListMaterialsUsedWithMeshEmittersCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7013,7 +9682,7 @@ declare class ListStaticMeshesImportedFromSpeedTreesCommandlet extends Commandle
 	static Load(ResourceName: string): ListStaticMeshesImportedFromSpeedTreesCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ListStaticMeshesImportedFromSpeedTreesCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ListStaticMeshesImportedFromSpeedTreesCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7027,7 +9696,7 @@ declare class LoadPackageCommandlet extends Commandlet {
 	static Load(ResourceName: string): LoadPackageCommandlet;
 	static Find(Outer: UObject, ResourceName: string): LoadPackageCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LoadPackageCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7049,7 +9718,7 @@ declare class MaterialInstanceConstant extends MaterialInstance {
 	static Load(ResourceName: string): MaterialInstanceConstant;
 	static Find(Outer: UObject, ResourceName: string): MaterialInstanceConstant;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialInstanceConstant;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7102,7 +9771,7 @@ declare class MaterialEditorInstanceConstant extends UObject {
 	static Load(ResourceName: string): MaterialEditorInstanceConstant;
 	static Find(Outer: UObject, ResourceName: string): MaterialEditorInstanceConstant;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialEditorInstanceConstant;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7116,7 +9785,7 @@ declare class MaterialEditorMeshComponent extends StaticMeshComponent {
 	static Load(ResourceName: string): MaterialEditorMeshComponent;
 	static Find(Outer: UObject, ResourceName: string): MaterialEditorMeshComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialEditorMeshComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7140,7 +9809,7 @@ declare class MaterialEditorOptions extends UObject {
 	static Load(ResourceName: string): MaterialEditorOptions;
 	static Find(Outer: UObject, ResourceName: string): MaterialEditorOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialEditorOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7155,7 +9824,7 @@ declare class MaterialGraphNode extends MaterialGraphNode_Base {
 	static Load(ResourceName: string): MaterialGraphNode;
 	static Find(Outer: UObject, ResourceName: string): MaterialGraphNode;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialGraphNode;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7180,7 +9849,7 @@ declare class MaterialGraphSchema extends EdGraphSchema {
 	static Load(ResourceName: string): MaterialGraphSchema;
 	static Find(Outer: UObject, ResourceName: string): MaterialGraphSchema;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialGraphSchema;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7194,7 +9863,7 @@ declare class ModelExporterT3D extends Exporter {
 	static Load(ResourceName: string): ModelExporterT3D;
 	static Find(Outer: UObject, ResourceName: string): ModelExporterT3D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ModelExporterT3D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7208,7 +9877,7 @@ declare class NativeCodeGenCommandlet extends Commandlet {
 	static Load(ResourceName: string): NativeCodeGenCommandlet;
 	static Find(Outer: UObject, ResourceName: string): NativeCodeGenCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NativeCodeGenCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7222,7 +9891,7 @@ declare class ObjectExporterT3D extends Exporter {
 	static Load(ResourceName: string): ObjectExporterT3D;
 	static Find(Outer: UObject, ResourceName: string): ObjectExporterT3D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ObjectExporterT3D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7238,7 +9907,7 @@ declare class ParticleSystemAuditCommandlet extends Commandlet {
 	static Load(ResourceName: string): ParticleSystemAuditCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ParticleSystemAuditCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleSystemAuditCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7263,12 +9932,15 @@ declare class PersonaOptions extends UObject {
 	SectionTimingNodeColor: LinearColor;
 	NotifyTimingNodeColor: LinearColor;
 	BranchingPointTimingNodeColor: LinearColor;
+	bUseStandaloneAnimationEditors: boolean;
+	bUseInlineSocketEditor: boolean;
+	bAllowPreviewMeshCollectionsToSelectFromDifferentSkeletons: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): PersonaOptions;
 	static Find(Outer: UObject, ResourceName: string): PersonaOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PersonaOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7300,7 +9972,7 @@ declare class PhATSimOptions extends UObject {
 	static Load(ResourceName: string): PhATSimOptions;
 	static Find(Outer: UObject, ResourceName: string): PhATSimOptions;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhATSimOptions;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7314,7 +9986,7 @@ declare class PkgInfoCommandlet extends Commandlet {
 	static Load(ResourceName: string): PkgInfoCommandlet;
 	static Find(Outer: UObject, ResourceName: string): PkgInfoCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PkgInfoCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7328,7 +10000,7 @@ declare class PolysExporterOBJ extends Exporter {
 	static Load(ResourceName: string): PolysExporterOBJ;
 	static Find(Outer: UObject, ResourceName: string): PolysExporterOBJ;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PolysExporterOBJ;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7342,7 +10014,7 @@ declare class PolysExporterT3D extends Exporter {
 	static Load(ResourceName: string): PolysExporterT3D;
 	static Find(Outer: UObject, ResourceName: string): PolysExporterT3D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PolysExporterT3D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7356,7 +10028,7 @@ declare class PopulateDialogueWaveFromCharacterSheetCommandlet extends Commandle
 	static Load(ResourceName: string): PopulateDialogueWaveFromCharacterSheetCommandlet;
 	static Find(Outer: UObject, ResourceName: string): PopulateDialogueWaveFromCharacterSheetCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PopulateDialogueWaveFromCharacterSheetCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7370,7 +10042,7 @@ declare class PreviewMaterial extends Material {
 	static Load(ResourceName: string): PreviewMaterial;
 	static Find(Outer: UObject, ResourceName: string): PreviewMaterial;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PreviewMaterial;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7378,10 +10050,10 @@ declare class PreviewMaterial extends Material {
 	static C(Other: UObject): PreviewMaterial;
 }
 
-declare type EProjectPackagingBuildConfigurations = string | symbol;
-declare var EProjectPackagingBuildConfigurations = { PPBC_DebugGame:'PPBC_DebugGame',PPBC_Development:'PPBC_Development',PPBC_Shipping:'PPBC_Shipping', };
-declare type EProjectPackagingInternationalizationPresets = string | symbol;
-declare var EProjectPackagingInternationalizationPresets = { English:'English',EFIGS:'EFIGS',EFIGSCJK:'EFIGSCJK',CJK:'CJK',All:'All', };
+declare type EProjectPackagingBuildConfigurations = 'PPBC_DebugGame' | 'PPBC_Development' | 'PPBC_Shipping';
+declare var EProjectPackagingBuildConfigurations : { PPBC_DebugGame:'PPBC_DebugGame',PPBC_Development:'PPBC_Development',PPBC_Shipping:'PPBC_Shipping', };
+declare type EProjectPackagingInternationalizationPresets = 'English' | 'EFIGS' | 'EFIGSCJK' | 'CJK' | 'All';
+declare var EProjectPackagingInternationalizationPresets : { English:'English',EFIGS:'EFIGS',EFIGSCJK:'EFIGSCJK',CJK:'CJK',All:'All', };
 declare class ProjectPackagingSettings extends UObject { 
 	BuildConfiguration: EProjectPackagingBuildConfigurations;
 	StagingDirectory: DirectoryPath;
@@ -7416,7 +10088,7 @@ declare class ProjectPackagingSettings extends UObject {
 	static Load(ResourceName: string): ProjectPackagingSettings;
 	static Find(Outer: UObject, ResourceName: string): ProjectPackagingSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ProjectPackagingSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7424,8 +10096,8 @@ declare class ProjectPackagingSettings extends UObject {
 	static C(Other: UObject): ProjectPackagingSettings;
 }
 
-declare type PropertEditorTestEnum = string | symbol;
-declare var PropertEditorTestEnum = { PropertyEditorTest_Enum1:'PropertyEditorTest_Enum1',PropertyEditorTest_Enum2:'PropertyEditorTest_Enum2',PropertyEditorTest_Enum3:'PropertyEditorTest_Enum3',PropertyEditorTest_Enum4:'PropertyEditorTest_Enum4',PropertyEditorTest_Enum5:'PropertyEditorTest_Enum5',PropertyEditorTest_Enum6:'PropertyEditorTest_Enum6', };
+declare type PropertEditorTestEnum = 'PropertyEditorTest_Enum1' | 'PropertyEditorTest_Enum2' | 'PropertyEditorTest_Enum3' | 'PropertyEditorTest_Enum4' | 'PropertyEditorTest_Enum5' | 'PropertyEditorTest_Enum6';
+declare var PropertEditorTestEnum : { PropertyEditorTest_Enum1:'PropertyEditorTest_Enum1',PropertyEditorTest_Enum2:'PropertyEditorTest_Enum2',PropertyEditorTest_Enum3:'PropertyEditorTest_Enum3',PropertyEditorTest_Enum4:'PropertyEditorTest_Enum4',PropertyEditorTest_Enum5:'PropertyEditorTest_Enum5',PropertyEditorTest_Enum6:'PropertyEditorTest_Enum6', };
 declare class PropertyEditorTestSubStruct { 
 	FirstProperty: number;
 	SecondProperty: number;
@@ -7509,12 +10181,29 @@ declare class PropertyEditorTestObject extends UObject {
 	StaticMeshProp: StaticMesh;
 	AnyMaterialInterface: MaterialInterface;
 	OnlyActorsAllowed: Actor;
+	Int32Set: any;
+	FloatSet: any;
+	StringSet: any;
+	ObjectSet: any;
+	ActorSet: any;
+	Int32ToStringMap: any;
+	StringToColorMap: any;
+	Int32ToStructMap: any;
+	StringToFloatMap: any;
+	StringToObjectMap: any;
+	StringToActorMap: any;
+	ObjectToInt32Map: any;
+	ObjectToColorMap: any;
+	BlendableInterface: any;
+	AnimClassInterface: any;
+	LightPropagationVolumeBlendable: any;
+	TextureOrBlendableInterface: UObject;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): PropertyEditorTestObject;
 	static Find(Outer: UObject, ResourceName: string): PropertyEditorTestObject;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PropertyEditorTestObject;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7528,7 +10217,7 @@ declare class RenderTargetExporterHDR extends Exporter {
 	static Load(ResourceName: string): RenderTargetExporterHDR;
 	static Find(Outer: UObject, ResourceName: string): RenderTargetExporterHDR;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RenderTargetExporterHDR;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7542,7 +10231,7 @@ declare class ReplaceActorCommandlet extends Commandlet {
 	static Load(ResourceName: string): ReplaceActorCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ReplaceActorCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReplaceActorCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7556,7 +10245,7 @@ declare class ResavePackagesCommandlet extends Commandlet {
 	static Load(ResourceName: string): ResavePackagesCommandlet;
 	static Find(Outer: UObject, ResourceName: string): ResavePackagesCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ResavePackagesCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7570,7 +10259,7 @@ declare class FixupNeedsLoadForEditorGameCommandlet extends ResavePackagesComman
 	static Load(ResourceName: string): FixupNeedsLoadForEditorGameCommandlet;
 	static Find(Outer: UObject, ResourceName: string): FixupNeedsLoadForEditorGameCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FixupNeedsLoadForEditorGameCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7587,7 +10276,7 @@ declare class SceneThumbnailInfo extends ThumbnailInfo {
 	static Load(ResourceName: string): SceneThumbnailInfo;
 	static Find(Outer: UObject, ResourceName: string): SceneThumbnailInfo;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneThumbnailInfo;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7601,7 +10290,7 @@ declare class ThumbnailRenderer extends UObject {
 	static Load(ResourceName: string): ThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): ThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7635,7 +10324,7 @@ declare class ThumbnailManager extends UObject {
 	static Load(ResourceName: string): ThumbnailManager;
 	static Find(Outer: UObject, ResourceName: string): ThumbnailManager;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ThumbnailManager;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7643,8 +10332,8 @@ declare class ThumbnailManager extends UObject {
 	static C(Other: UObject): ThumbnailManager;
 }
 
-declare type EThumbnailPrimType = string | symbol;
-declare var EThumbnailPrimType = { TPT_None:'TPT_None',TPT_Sphere:'TPT_Sphere',TPT_Cube:'TPT_Cube',TPT_Plane:'TPT_Plane',TPT_Cylinder:'TPT_Cylinder', };
+declare type EThumbnailPrimType = 'TPT_None' | 'TPT_Sphere' | 'TPT_Cube' | 'TPT_Plane' | 'TPT_Cylinder';
+declare var EThumbnailPrimType : { TPT_None:'TPT_None',TPT_Sphere:'TPT_Sphere',TPT_Cube:'TPT_Cube',TPT_Plane:'TPT_Plane',TPT_Cylinder:'TPT_Cylinder', };
 declare class SceneThumbnailInfoWithPrimitive extends SceneThumbnailInfo { 
 	PrimitiveType: EThumbnailPrimType;
 	PreviewMesh: StringAssetReference;
@@ -7653,7 +10342,7 @@ declare class SceneThumbnailInfoWithPrimitive extends SceneThumbnailInfo {
 	static Load(ResourceName: string): SceneThumbnailInfoWithPrimitive;
 	static Find(Outer: UObject, ResourceName: string): SceneThumbnailInfoWithPrimitive;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneThumbnailInfoWithPrimitive;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7661,8 +10350,8 @@ declare class SceneThumbnailInfoWithPrimitive extends SceneThumbnailInfo {
 	static C(Other: UObject): SceneThumbnailInfoWithPrimitive;
 }
 
-declare type EOrthoThumbnailDirection = string | symbol;
-declare var EOrthoThumbnailDirection = { Top:'Top',Bottom:'Bottom',Left:'Left',Right:'Right',Front:'Front',Back:'Back', };
+declare type EOrthoThumbnailDirection = 'Top' | 'Bottom' | 'Left' | 'Right' | 'Front' | 'Back';
+declare var EOrthoThumbnailDirection : { Top:'Top',Bottom:'Bottom',Left:'Left',Right:'Right',Front:'Front',Back:'Back', };
 declare class WorldThumbnailInfo extends SceneThumbnailInfo { 
 	CameraMode: ECameraProjectionMode;
 	OrthoDirection: EOrthoThumbnailDirection;
@@ -7671,7 +10360,7 @@ declare class WorldThumbnailInfo extends SceneThumbnailInfo {
 	static Load(ResourceName: string): WorldThumbnailInfo;
 	static Find(Outer: UObject, ResourceName: string): WorldThumbnailInfo;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WorldThumbnailInfo;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7685,7 +10374,7 @@ declare class SequenceExporterT3D extends Exporter {
 	static Load(ResourceName: string): SequenceExporterT3D;
 	static Find(Outer: UObject, ResourceName: string): SequenceExporterT3D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SequenceExporterT3D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7699,7 +10388,7 @@ declare class SkeletalMeshExporterFBX extends Exporter {
 	static Load(ResourceName: string): SkeletalMeshExporterFBX;
 	static Find(Outer: UObject, ResourceName: string): SkeletalMeshExporterFBX;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SkeletalMeshExporterFBX;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7713,7 +10402,7 @@ declare class SoundClassGraph extends EdGraph {
 	static Load(ResourceName: string): SoundClassGraph;
 	static Find(Outer: UObject, ResourceName: string): SoundClassGraph;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundClassGraph;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7728,7 +10417,7 @@ declare class SoundClassGraphNode extends EdGraphNode {
 	static Load(ResourceName: string): SoundClassGraphNode;
 	static Find(Outer: UObject, ResourceName: string): SoundClassGraphNode;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundClassGraphNode;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7742,7 +10431,7 @@ declare class SoundClassGraphSchema extends EdGraphSchema {
 	static Load(ResourceName: string): SoundClassGraphSchema;
 	static Find(Outer: UObject, ResourceName: string): SoundClassGraphSchema;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundClassGraphSchema;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7756,7 +10445,7 @@ declare class SoundCueGraph extends EdGraph {
 	static Load(ResourceName: string): SoundCueGraph;
 	static Find(Outer: UObject, ResourceName: string): SoundCueGraph;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundCueGraph;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7770,7 +10459,7 @@ declare class SoundCueGraphNode_Base extends EdGraphNode {
 	static Load(ResourceName: string): SoundCueGraphNode_Base;
 	static Find(Outer: UObject, ResourceName: string): SoundCueGraphNode_Base;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundCueGraphNode_Base;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7785,7 +10474,7 @@ declare class SoundCueGraphNode extends SoundCueGraphNode_Base {
 	static Load(ResourceName: string): SoundCueGraphNode;
 	static Find(Outer: UObject, ResourceName: string): SoundCueGraphNode;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundCueGraphNode;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7799,7 +10488,7 @@ declare class SoundCueGraphNode_Root extends SoundCueGraphNode_Base {
 	static Load(ResourceName: string): SoundCueGraphNode_Root;
 	static Find(Outer: UObject, ResourceName: string): SoundCueGraphNode_Root;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundCueGraphNode_Root;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7813,7 +10502,7 @@ declare class SoundCueGraphSchema extends EdGraphSchema {
 	static Load(ResourceName: string): SoundCueGraphSchema;
 	static Find(Outer: UObject, ResourceName: string): SoundCueGraphSchema;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundCueGraphSchema;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7827,7 +10516,7 @@ declare class SoundExporterOGG extends Exporter {
 	static Load(ResourceName: string): SoundExporterOGG;
 	static Find(Outer: UObject, ResourceName: string): SoundExporterOGG;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundExporterOGG;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7841,7 +10530,7 @@ declare class SoundExporterWAV extends Exporter {
 	static Load(ResourceName: string): SoundExporterWAV;
 	static Find(Outer: UObject, ResourceName: string): SoundExporterWAV;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundExporterWAV;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7855,7 +10544,7 @@ declare class SoundSurroundExporterWAV extends Exporter {
 	static Load(ResourceName: string): SoundSurroundExporterWAV;
 	static Find(Outer: UObject, ResourceName: string): SoundSurroundExporterWAV;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundSurroundExporterWAV;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7869,7 +10558,7 @@ declare class StabilizeLocalizationKeysCommandlet extends Commandlet {
 	static Load(ResourceName: string): StabilizeLocalizationKeysCommandlet;
 	static Find(Outer: UObject, ResourceName: string): StabilizeLocalizationKeysCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StabilizeLocalizationKeysCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7883,7 +10572,7 @@ declare class StaticMeshExporterFBX extends Exporter {
 	static Load(ResourceName: string): StaticMeshExporterFBX;
 	static Find(Outer: UObject, ResourceName: string): StaticMeshExporterFBX;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StaticMeshExporterFBX;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7897,7 +10586,7 @@ declare class StaticMeshExporterOBJ extends Exporter {
 	static Load(ResourceName: string): StaticMeshExporterOBJ;
 	static Find(Outer: UObject, ResourceName: string): StaticMeshExporterOBJ;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StaticMeshExporterOBJ;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7911,7 +10600,7 @@ declare class SwapSoundForDialogueInCuesCommandlet extends Commandlet {
 	static Load(ResourceName: string): SwapSoundForDialogueInCuesCommandlet;
 	static Find(Outer: UObject, ResourceName: string): SwapSoundForDialogueInCuesCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SwapSoundForDialogueInCuesCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7925,7 +10614,7 @@ declare class TemplateMapMetadata extends UObject {
 	static Load(ResourceName: string): TemplateMapMetadata;
 	static Find(Outer: UObject, ResourceName: string): TemplateMapMetadata;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TemplateMapMetadata;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7933,8 +10622,8 @@ declare class TemplateMapMetadata extends UObject {
 	static C(Other: UObject): TemplateMapMetadata;
 }
 
-declare type ETexAlign = string | symbol;
-declare var ETexAlign = { TEXALIGN_None:'TEXALIGN_None',TEXALIGN_Default:'TEXALIGN_Default',TEXALIGN_Box:'TEXALIGN_Box',TEXALIGN_Planar:'TEXALIGN_Planar',TEXALIGN_Fit:'TEXALIGN_Fit',TEXALIGN_PlanarAuto:'TEXALIGN_PlanarAuto',TEXALIGN_PlanarWall:'TEXALIGN_PlanarWall',TEXALIGN_PlanarFloor:'TEXALIGN_PlanarFloor', };
+declare type ETexAlign = 'TEXALIGN_None' | 'TEXALIGN_Default' | 'TEXALIGN_Box' | 'TEXALIGN_Planar' | 'TEXALIGN_Fit' | 'TEXALIGN_PlanarAuto' | 'TEXALIGN_PlanarWall' | 'TEXALIGN_PlanarFloor';
+declare var ETexAlign : { TEXALIGN_None:'TEXALIGN_None',TEXALIGN_Default:'TEXALIGN_Default',TEXALIGN_Box:'TEXALIGN_Box',TEXALIGN_Planar:'TEXALIGN_Planar',TEXALIGN_Fit:'TEXALIGN_Fit',TEXALIGN_PlanarAuto:'TEXALIGN_PlanarAuto',TEXALIGN_PlanarWall:'TEXALIGN_PlanarWall',TEXALIGN_PlanarFloor:'TEXALIGN_PlanarFloor', };
 declare class TexAligner extends UObject { 
 	DefTexAlign: ETexAlign;
 	TAxis: number;
@@ -7946,7 +10635,7 @@ declare class TexAligner extends UObject {
 	static Load(ResourceName: string): TexAligner;
 	static Find(Outer: UObject, ResourceName: string): TexAligner;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TexAligner;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7960,7 +10649,7 @@ declare class TexAlignerBox extends TexAligner {
 	static Load(ResourceName: string): TexAlignerBox;
 	static Find(Outer: UObject, ResourceName: string): TexAlignerBox;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TexAlignerBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7974,7 +10663,7 @@ declare class TexAlignerDefault extends TexAligner {
 	static Load(ResourceName: string): TexAlignerDefault;
 	static Find(Outer: UObject, ResourceName: string): TexAlignerDefault;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TexAlignerDefault;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -7988,7 +10677,7 @@ declare class TexAlignerFit extends TexAligner {
 	static Load(ResourceName: string): TexAlignerFit;
 	static Find(Outer: UObject, ResourceName: string): TexAlignerFit;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TexAlignerFit;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8002,7 +10691,7 @@ declare class TexAlignerPlanar extends TexAligner {
 	static Load(ResourceName: string): TexAlignerPlanar;
 	static Find(Outer: UObject, ResourceName: string): TexAlignerPlanar;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TexAlignerPlanar;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8016,7 +10705,7 @@ declare class TextBufferExporterTXT extends Exporter {
 	static Load(ResourceName: string): TextBufferExporterTXT;
 	static Find(Outer: UObject, ResourceName: string): TextBufferExporterTXT;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextBufferExporterTXT;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8030,7 +10719,7 @@ declare class TextureCubeExporterHDR extends Exporter {
 	static Load(ResourceName: string): TextureCubeExporterHDR;
 	static Find(Outer: UObject, ResourceName: string): TextureCubeExporterHDR;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureCubeExporterHDR;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8044,7 +10733,7 @@ declare class TextureExporterBMP extends Exporter {
 	static Load(ResourceName: string): TextureExporterBMP;
 	static Find(Outer: UObject, ResourceName: string): TextureExporterBMP;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureExporterBMP;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8058,7 +10747,7 @@ declare class TextureExporterHDR extends Exporter {
 	static Load(ResourceName: string): TextureExporterHDR;
 	static Find(Outer: UObject, ResourceName: string): TextureExporterHDR;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureExporterHDR;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8072,7 +10761,7 @@ declare class TextureExporterPCX extends Exporter {
 	static Load(ResourceName: string): TextureExporterPCX;
 	static Find(Outer: UObject, ResourceName: string): TextureExporterPCX;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureExporterPCX;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8086,7 +10775,7 @@ declare class TextureExporterTGA extends Exporter {
 	static Load(ResourceName: string): TextureExporterTGA;
 	static Find(Outer: UObject, ResourceName: string): TextureExporterTGA;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureExporterTGA;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8102,7 +10791,7 @@ declare class DefaultSizedThumbnailRenderer extends ThumbnailRenderer {
 	static Load(ResourceName: string): DefaultSizedThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): DefaultSizedThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DefaultSizedThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8116,7 +10805,7 @@ declare class AnimBlueprintThumbnailRenderer extends DefaultSizedThumbnailRender
 	static Load(ResourceName: string): AnimBlueprintThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): AnimBlueprintThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimBlueprintThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8130,7 +10819,7 @@ declare class AnimSequenceThumbnailRenderer extends DefaultSizedThumbnailRendere
 	static Load(ResourceName: string): AnimSequenceThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): AnimSequenceThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimSequenceThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8144,7 +10833,7 @@ declare class BlendSpaceThumbnailRenderer extends DefaultSizedThumbnailRenderer 
 	static Load(ResourceName: string): BlendSpaceThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): BlendSpaceThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlendSpaceThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8158,7 +10847,7 @@ declare class BlueprintThumbnailRenderer extends DefaultSizedThumbnailRenderer {
 	static Load(ResourceName: string): BlueprintThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): BlueprintThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlueprintThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8172,7 +10861,7 @@ declare class ClassThumbnailRenderer extends DefaultSizedThumbnailRenderer {
 	static Load(ResourceName: string): ClassThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): ClassThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ClassThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8186,7 +10875,7 @@ declare class DestructibleMeshThumbnailRenderer extends DefaultSizedThumbnailRen
 	static Load(ResourceName: string): DestructibleMeshThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): DestructibleMeshThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DestructibleMeshThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8200,7 +10889,7 @@ declare class LevelThumbnailRenderer extends DefaultSizedThumbnailRenderer {
 	static Load(ResourceName: string): LevelThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): LevelThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8214,7 +10903,7 @@ declare class MaterialFunctionThumbnailRenderer extends DefaultSizedThumbnailRen
 	static Load(ResourceName: string): MaterialFunctionThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): MaterialFunctionThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialFunctionThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8228,7 +10917,7 @@ declare class MaterialInstanceThumbnailRenderer extends DefaultSizedThumbnailRen
 	static Load(ResourceName: string): MaterialInstanceThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): MaterialInstanceThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialInstanceThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8242,7 +10931,7 @@ declare class SkeletalMeshThumbnailRenderer extends DefaultSizedThumbnailRendere
 	static Load(ResourceName: string): SkeletalMeshThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): SkeletalMeshThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SkeletalMeshThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8256,7 +10945,7 @@ declare class SlateBrushThumbnailRenderer extends DefaultSizedThumbnailRenderer 
 	static Load(ResourceName: string): SlateBrushThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): SlateBrushThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SlateBrushThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8270,7 +10959,7 @@ declare class StaticMeshThumbnailRenderer extends DefaultSizedThumbnailRenderer 
 	static Load(ResourceName: string): StaticMeshThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): StaticMeshThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StaticMeshThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8288,7 +10977,7 @@ declare class WorldThumbnailRenderer extends DefaultSizedThumbnailRenderer {
 	static Load(ResourceName: string): WorldThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): WorldThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WorldThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8302,7 +10991,7 @@ declare class SoundWaveThumbnailRenderer extends ThumbnailRenderer {
 	static Load(ResourceName: string): SoundWaveThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): SoundWaveThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundWaveThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8316,7 +11005,7 @@ declare class TextureThumbnailRenderer extends ThumbnailRenderer {
 	static Load(ResourceName: string): TextureThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): TextureThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8330,7 +11019,7 @@ declare class FontThumbnailRenderer extends TextureThumbnailRenderer {
 	static Load(ResourceName: string): FontThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): FontThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FontThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8346,7 +11035,7 @@ declare class ParticleSystemThumbnailRenderer extends TextureThumbnailRenderer {
 	static Load(ResourceName: string): ParticleSystemThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): ParticleSystemThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleSystemThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8360,7 +11049,7 @@ declare class SubsurfaceProfileRenderer extends TextureThumbnailRenderer {
 	static Load(ResourceName: string): SubsurfaceProfileRenderer;
 	static Find(Outer: UObject, ResourceName: string): SubsurfaceProfileRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SubsurfaceProfileRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8374,7 +11063,7 @@ declare class TextureCubeThumbnailRenderer extends TextureThumbnailRenderer {
 	static Load(ResourceName: string): TextureCubeThumbnailRenderer;
 	static Find(Outer: UObject, ResourceName: string): TextureCubeThumbnailRenderer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureCubeThumbnailRenderer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8388,7 +11077,7 @@ declare class TransBuffer extends Transactor {
 	static Load(ResourceName: string): TransBuffer;
 	static Find(Outer: UObject, ResourceName: string): TransBuffer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TransBuffer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8402,7 +11091,7 @@ declare class UpdateGameProjectCommandlet extends Commandlet {
 	static Load(ResourceName: string): UpdateGameProjectCommandlet;
 	static Find(Outer: UObject, ResourceName: string): UpdateGameProjectCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UpdateGameProjectCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8439,7 +11128,7 @@ declare class UserDefinedStructEditorData extends UObject {
 	static Load(ResourceName: string): UserDefinedStructEditorData;
 	static Find(Outer: UObject, ResourceName: string): UserDefinedStructEditorData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UserDefinedStructEditorData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8453,7 +11142,7 @@ declare class WrangleContentCommandlet extends Commandlet {
 	static Load(ResourceName: string): WrangleContentCommandlet;
 	static Find(Outer: UObject, ResourceName: string): WrangleContentCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WrangleContentCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8475,7 +11164,7 @@ declare class PhysicsSerializer extends UObject {
 	static Load(ResourceName: string): PhysicsSerializer;
 	static Find(Outer: UObject, ResourceName: string): PhysicsSerializer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsSerializer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8503,7 +11192,7 @@ declare class InstancedStaticMeshComponent extends StaticMeshComponent {
 	static Load(ResourceName: string): InstancedStaticMeshComponent;
 	static Find(Outer: UObject, ResourceName: string): InstancedStaticMeshComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InstancedStaticMeshComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8535,7 +11224,7 @@ declare class HierarchicalInstancedStaticMeshComponent extends InstancedStaticMe
 	static Load(ResourceName: string): HierarchicalInstancedStaticMeshComponent;
 	static Find(Outer: UObject, ResourceName: string): HierarchicalInstancedStaticMeshComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HierarchicalInstancedStaticMeshComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8553,7 +11242,7 @@ declare class FoliageInstancedStaticMeshComponent extends HierarchicalInstancedS
 	static Load(ResourceName: string): FoliageInstancedStaticMeshComponent;
 	static Find(Outer: UObject, ResourceName: string): FoliageInstancedStaticMeshComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FoliageInstancedStaticMeshComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8567,7 +11256,7 @@ declare class FoliageStatistics extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): FoliageStatistics;
 	static Find(Outer: UObject, ResourceName: string): FoliageStatistics;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FoliageStatistics;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8577,8 +11266,8 @@ declare class FoliageStatistics extends BlueprintFunctionLibrary {
 	static C(Other: UObject): FoliageStatistics;
 }
 
-declare type EFoliageScaling = string | symbol;
-declare var EFoliageScaling = { Uniform:'Uniform',Free:'Free',LockXY:'LockXY',LockXZ:'LockXZ',LockYZ:'LockYZ', };
+declare type EFoliageScaling = 'Uniform' | 'Free' | 'LockXY' | 'LockXZ' | 'LockYZ';
+declare var EFoliageScaling : { Uniform:'Uniform',Free:'Free',LockXY:'LockXY',LockXZ:'LockXZ',LockYZ:'LockYZ', };
 declare class FloatInterval { 
 	Min: number;
 	Max: number;
@@ -8594,8 +11283,8 @@ declare class FoliageVertexColorChannelMask {
 	static C(Other: UObject): FoliageVertexColorChannelMask;
 }
 
-declare type FoliageVertexColorMask = string | symbol;
-declare var FoliageVertexColorMask = { FOLIAGEVERTEXCOLORMASK_Disabled:'FOLIAGEVERTEXCOLORMASK_Disabled',FOLIAGEVERTEXCOLORMASK_Red:'FOLIAGEVERTEXCOLORMASK_Red',FOLIAGEVERTEXCOLORMASK_Green:'FOLIAGEVERTEXCOLORMASK_Green',FOLIAGEVERTEXCOLORMASK_Blue:'FOLIAGEVERTEXCOLORMASK_Blue',FOLIAGEVERTEXCOLORMASK_Alpha:'FOLIAGEVERTEXCOLORMASK_Alpha', };
+declare type FoliageVertexColorMask = 'FOLIAGEVERTEXCOLORMASK_Disabled' | 'FOLIAGEVERTEXCOLORMASK_Red' | 'FOLIAGEVERTEXCOLORMASK_Green' | 'FOLIAGEVERTEXCOLORMASK_Blue' | 'FOLIAGEVERTEXCOLORMASK_Alpha';
+declare var FoliageVertexColorMask : { FOLIAGEVERTEXCOLORMASK_Disabled:'FOLIAGEVERTEXCOLORMASK_Disabled',FOLIAGEVERTEXCOLORMASK_Red:'FOLIAGEVERTEXCOLORMASK_Red',FOLIAGEVERTEXCOLORMASK_Green:'FOLIAGEVERTEXCOLORMASK_Green',FOLIAGEVERTEXCOLORMASK_Blue:'FOLIAGEVERTEXCOLORMASK_Blue',FOLIAGEVERTEXCOLORMASK_Alpha:'FOLIAGEVERTEXCOLORMASK_Alpha', };
 declare class FoliageType extends UObject { 
 	UpdateGuid: Guid;
 	Density: number;
@@ -8699,7 +11388,7 @@ declare class FoliageType extends UObject {
 	static Load(ResourceName: string): FoliageType;
 	static Find(Outer: UObject, ResourceName: string): FoliageType;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FoliageType;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8716,7 +11405,7 @@ declare class FoliageType_InstancedStaticMesh extends FoliageType {
 	static Load(ResourceName: string): FoliageType_InstancedStaticMesh;
 	static Find(Outer: UObject, ResourceName: string): FoliageType_InstancedStaticMesh;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FoliageType_InstancedStaticMesh;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8727,7 +11416,7 @@ declare class FoliageType_InstancedStaticMesh extends FoliageType {
 declare class InstancedFoliageActor extends Actor { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InstancedFoliageActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8735,15 +11424,15 @@ declare class InstancedFoliageActor extends Actor {
 	static C(Other: UObject): InstancedFoliageActor;
 }
 
-declare type ENavDataGatheringMode = string | symbol;
-declare var ENavDataGatheringMode = { Default:'Default',Instant:'Instant',Lazy:'Lazy', };
+declare type ENavDataGatheringMode = 'Default' | 'Instant' | 'Lazy';
+declare var ENavDataGatheringMode : { Default:'Default',Instant:'Instant',Lazy:'Lazy', };
 declare class StaticMeshActor extends Actor { 
 	StaticMeshComponent: StaticMeshComponent;
 	bStaticMeshReplicateMovement: boolean;
 	NavigationGeometryGatheringMode: ENavDataGatheringMode;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StaticMeshActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8768,7 +11457,7 @@ declare class InteractiveFoliageActor extends StaticMeshActor {
 	Mass: number;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InteractiveFoliageActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8783,7 +11472,7 @@ declare class InteractiveFoliageComponent extends StaticMeshComponent {
 	static Load(ResourceName: string): InteractiveFoliageComponent;
 	static Find(Outer: UObject, ResourceName: string): InteractiveFoliageComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InteractiveFoliageComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8812,7 +11501,7 @@ declare class ProceduralFoliageSpawner extends UObject {
 	static Load(ResourceName: string): ProceduralFoliageSpawner;
 	static Find(Outer: UObject, ResourceName: string): ProceduralFoliageSpawner;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ProceduralFoliageSpawner;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8828,6 +11517,7 @@ declare class ProceduralFoliageComponent extends ActorComponent {
 	bAllowBSP: boolean;
 	bAllowStaticMesh: boolean;
 	bAllowTranslucent: boolean;
+	bAllowFoliage: boolean;
 	bShowDebugTiles: boolean;
 	SpawningVolume: Volume;
 	ProceduralGuid: Guid;
@@ -8836,7 +11526,7 @@ declare class ProceduralFoliageComponent extends ActorComponent {
 	static Load(ResourceName: string): ProceduralFoliageComponent;
 	static Find(Outer: UObject, ResourceName: string): ProceduralFoliageComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ProceduralFoliageComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8848,7 +11538,7 @@ declare class ProceduralFoliageVolume extends Volume {
 	ProceduralComponent: ProceduralFoliageComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ProceduralFoliageVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8860,7 +11550,7 @@ declare class ProceduralFoliageBlockingVolume extends Volume {
 	ProceduralFoliageVolume: ProceduralFoliageVolume;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ProceduralFoliageBlockingVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8887,7 +11577,7 @@ declare class ProceduralFoliageTile extends UObject {
 	static Load(ResourceName: string): ProceduralFoliageTile;
 	static Find(Outer: UObject, ResourceName: string): ProceduralFoliageTile;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ProceduralFoliageTile;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8902,7 +11592,7 @@ declare class ControlPointMeshComponent extends StaticMeshComponent {
 	static Load(ResourceName: string): ControlPointMeshComponent;
 	static Find(Outer: UObject, ResourceName: string): ControlPointMeshComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ControlPointMeshComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8921,7 +11611,7 @@ declare class LandscapeLayerInfoObject extends UObject {
 	static Load(ResourceName: string): LandscapeLayerInfoObject;
 	static Find(Outer: UObject, ResourceName: string): LandscapeLayerInfoObject;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeLayerInfoObject;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8957,6 +11647,7 @@ declare class LandscapeComponent extends PrimitiveComponent {
 	CachedLocalBox: Box;
 	CollisionComponent: any;
 	LightingGuid: Guid;
+	MapBuildDataId: Guid;
 	IrrelevantLights: Guid[];
 	CollisionMipLevel: number;
 	SimpleCollisionMipLevel: number;
@@ -8980,7 +11671,7 @@ declare class LandscapeComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): LandscapeComponent;
 	static Find(Outer: UObject, ResourceName: string): LandscapeComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -8996,8 +11687,8 @@ declare class LandscapeSplineSegmentConnection {
 	static C(Other: UObject): LandscapeSplineSegmentConnection;
 }
 
-declare type LandscapeSplineMeshOrientation = string | symbol;
-declare var LandscapeSplineMeshOrientation = { LSMO_XUp:'LSMO_XUp',LSMO_YUp:'LSMO_YUp', };
+declare type LandscapeSplineMeshOrientation = 'LSMO_XUp' | 'LSMO_YUp';
+declare var LandscapeSplineMeshOrientation : { LSMO_XUp:'LSMO_XUp',LSMO_YUp:'LSMO_YUp', };
 declare class LandscapeSplineMeshEntry { 
 	Mesh: StaticMesh;
 	MaterialOverrides: MaterialInterface[];
@@ -9048,7 +11739,7 @@ declare class LandscapeSplineSegment extends UObject {
 	static Load(ResourceName: string): LandscapeSplineSegment;
 	static Find(Outer: UObject, ResourceName: string): LandscapeSplineSegment;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeSplineSegment;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9094,7 +11785,7 @@ declare class LandscapeSplineControlPoint extends UObject {
 	static Load(ResourceName: string): LandscapeSplineControlPoint;
 	static Find(Outer: UObject, ResourceName: string): LandscapeSplineControlPoint;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeSplineControlPoint;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9117,7 +11808,7 @@ declare class LandscapeSplinesComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): LandscapeSplinesComponent;
 	static Find(Outer: UObject, ResourceName: string): LandscapeSplinesComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeSplinesComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9125,8 +11816,8 @@ declare class LandscapeSplinesComponent extends PrimitiveComponent {
 	static C(Other: UObject): LandscapeSplinesComponent;
 }
 
-declare type ELandscapeLODFalloff = string | symbol;
-declare var ELandscapeLODFalloff = { Linear:'Linear',SquareRoot:'SquareRoot', };
+declare type ELandscapeLODFalloff = 'Linear' | 'SquareRoot';
+declare var ELandscapeLODFalloff : { Linear:'Linear',SquareRoot:'SquareRoot', };
 declare class LandscapeHeightfieldCollisionComponent extends PrimitiveComponent { 
 	ComponentLayerInfos: LandscapeLayerInfoObject[];
 	SectionBaseX: number;
@@ -9144,7 +11835,7 @@ declare class LandscapeHeightfieldCollisionComponent extends PrimitiveComponent 
 	static Load(ResourceName: string): LandscapeHeightfieldCollisionComponent;
 	static Find(Outer: UObject, ResourceName: string): LandscapeHeightfieldCollisionComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeHeightfieldCollisionComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9203,7 +11894,7 @@ declare class LandscapeProxy extends Actor {
 	bUseLandscapeForCullingInvisibleHLODVertices: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeProxy;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9224,8 +11915,8 @@ declare class LandscapeInfoLayerSettings {
 	static C(Other: UObject): LandscapeInfoLayerSettings;
 }
 
-declare type ELandscapeLayerPaintingRestriction = string | symbol;
-declare var ELandscapeLayerPaintingRestriction = { None:'None',UseMaxLayers:'UseMaxLayers',ExistingOnly:'ExistingOnly',UseComponentWhitelist:'UseComponentWhitelist', };
+declare type ELandscapeLayerPaintingRestriction = 'None' | 'UseMaxLayers' | 'ExistingOnly' | 'UseComponentWhitelist';
+declare var ELandscapeLayerPaintingRestriction : { None:'None',UseMaxLayers:'UseMaxLayers',ExistingOnly:'ExistingOnly',UseComponentWhitelist:'UseComponentWhitelist', };
 declare class LandscapeInfo extends UObject { 
 	LandscapeActor: any;
 	LandscapeGuid: Guid;
@@ -9240,7 +11931,7 @@ declare class LandscapeInfo extends UObject {
 	static Load(ResourceName: string): LandscapeInfo;
 	static Find(Outer: UObject, ResourceName: string): LandscapeInfo;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeInfo;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9271,7 +11962,7 @@ declare class LandscapeGizmoActor extends Actor {
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeGizmoActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9279,8 +11970,8 @@ declare class LandscapeGizmoActor extends Actor {
 	static C(Other: UObject): LandscapeGizmoActor;
 }
 
-declare type ELandscapeGizmoType = string | symbol;
-declare var ELandscapeGizmoType = { LGT_None:'LGT_None',LGT_Height:'LGT_Height',LGT_Weight:'LGT_Weight', };
+declare type ELandscapeGizmoType = 'LGT_None' | 'LGT_Height' | 'LGT_Weight';
+declare var ELandscapeGizmoType : { LGT_None:'LGT_None',LGT_Height:'LGT_Height',LGT_Weight:'LGT_Weight', };
 declare class LandscapeGizmoActiveActor extends LandscapeGizmoActor { 
 	DataType: ELandscapeGizmoType;
 	GizmoTexture: Texture2D;
@@ -9301,7 +11992,7 @@ declare class LandscapeGizmoActiveActor extends LandscapeGizmoActor {
 	UnsnappedRotation: Rotator;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeGizmoActiveActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9315,7 +12006,7 @@ declare class LandscapeGizmoRenderComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): LandscapeGizmoRenderComponent;
 	static Find(Outer: UObject, ResourceName: string): LandscapeGizmoRenderComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeGizmoRenderComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9323,8 +12014,8 @@ declare class LandscapeGizmoRenderComponent extends PrimitiveComponent {
 	static C(Other: UObject): LandscapeGizmoRenderComponent;
 }
 
-declare type EGrassScaling = string | symbol;
-declare var EGrassScaling = { Uniform:'Uniform',Free:'Free',LockXY:'LockXY', };
+declare type EGrassScaling = 'Uniform' | 'Free' | 'LockXY';
+declare var EGrassScaling : { Uniform:'Uniform',Free:'Free',LockXY:'LockXY', };
 declare class GrassVariety { 
 	GrassMesh: StaticMesh;
 	GrassDensity: number;
@@ -9360,7 +12051,7 @@ declare class LandscapeGrassType extends UObject {
 	static Load(ResourceName: string): LandscapeGrassType;
 	static Find(Outer: UObject, ResourceName: string): LandscapeGrassType;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeGrassType;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9375,7 +12066,7 @@ declare class LandscapeMeshCollisionComponent extends LandscapeHeightfieldCollis
 	static Load(ResourceName: string): LandscapeMeshCollisionComponent;
 	static Find(Outer: UObject, ResourceName: string): LandscapeMeshCollisionComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeMeshCollisionComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9389,7 +12080,7 @@ declare class LandscapeInfoMap extends UObject {
 	static Load(ResourceName: string): LandscapeInfoMap;
 	static Find(Outer: UObject, ResourceName: string): LandscapeInfoMap;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeInfoMap;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9405,7 +12096,7 @@ declare class LandscapeMaterialInstanceConstant extends MaterialInstanceConstant
 	static Load(ResourceName: string): LandscapeMaterialInstanceConstant;
 	static Find(Outer: UObject, ResourceName: string): LandscapeMaterialInstanceConstant;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeMaterialInstanceConstant;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9422,7 +12113,7 @@ declare class LandscapeMeshProxyComponent extends StaticMeshComponent {
 	static Load(ResourceName: string): LandscapeMeshProxyComponent;
 	static Find(Outer: UObject, ResourceName: string): LandscapeMeshProxyComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeMeshProxyComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9434,7 +12125,7 @@ declare class LandscapeMeshProxyActor extends Actor {
 	LandscapeMeshProxyComponent: LandscapeMeshProxyComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeMeshProxyActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9445,7 +12136,7 @@ declare class LandscapeMeshProxyActor extends Actor {
 declare class Landscape extends LandscapeProxy { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Landscape;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9459,7 +12150,7 @@ declare class LandscapeStreamingProxy extends LandscapeProxy {
 	LandscapeActor: any;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LandscapeStreamingProxy;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9473,7 +12164,7 @@ declare class MaterialExpressionCustomOutput extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCustomOutput;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCustomOutput;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCustomOutput;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9496,7 +12187,7 @@ declare class MaterialExpressionLandscapeGrassOutput extends MaterialExpressionC
 	static Load(ResourceName: string): MaterialExpressionLandscapeGrassOutput;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLandscapeGrassOutput;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLandscapeGrassOutput;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9504,8 +12195,8 @@ declare class MaterialExpressionLandscapeGrassOutput extends MaterialExpressionC
 	static C(Other: UObject): MaterialExpressionLandscapeGrassOutput;
 }
 
-declare type ELandscapeLayerBlendType = string | symbol;
-declare var ELandscapeLayerBlendType = { LB_WeightBlend:'LB_WeightBlend',LB_AlphaBlend:'LB_AlphaBlend',LB_HeightBlend:'LB_HeightBlend', };
+declare type ELandscapeLayerBlendType = 'LB_WeightBlend' | 'LB_AlphaBlend' | 'LB_HeightBlend';
+declare var ELandscapeLayerBlendType : { LB_WeightBlend:'LB_WeightBlend',LB_AlphaBlend:'LB_AlphaBlend',LB_HeightBlend:'LB_HeightBlend', };
 declare class LayerBlendInput { 
 	LayerName: string;
 	BlendType: ELandscapeLayerBlendType;
@@ -9526,7 +12217,7 @@ declare class MaterialExpressionLandscapeLayerBlend extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionLandscapeLayerBlend;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLandscapeLayerBlend;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLandscapeLayerBlend;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9534,10 +12225,10 @@ declare class MaterialExpressionLandscapeLayerBlend extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionLandscapeLayerBlend;
 }
 
-declare type ETerrainCoordMappingType = string | symbol;
-declare var ETerrainCoordMappingType = { TCMT_Auto:'TCMT_Auto',TCMT_XY:'TCMT_XY',TCMT_XZ:'TCMT_XZ',TCMT_YZ:'TCMT_YZ', };
-declare type ELandscapeCustomizedCoordType = string | symbol;
-declare var ELandscapeCustomizedCoordType = { LCCT_None:'LCCT_None',LCCT_CustomUV0:'LCCT_CustomUV0',LCCT_CustomUV1:'LCCT_CustomUV1',LCCT_CustomUV2:'LCCT_CustomUV2',LCCT_WeightMapUV:'LCCT_WeightMapUV', };
+declare type ETerrainCoordMappingType = 'TCMT_Auto' | 'TCMT_XY' | 'TCMT_XZ' | 'TCMT_YZ';
+declare var ETerrainCoordMappingType : { TCMT_Auto:'TCMT_Auto',TCMT_XY:'TCMT_XY',TCMT_XZ:'TCMT_XZ',TCMT_YZ:'TCMT_YZ', };
+declare type ELandscapeCustomizedCoordType = 'LCCT_None' | 'LCCT_CustomUV0' | 'LCCT_CustomUV1' | 'LCCT_CustomUV2' | 'LCCT_WeightMapUV';
+declare var ELandscapeCustomizedCoordType : { LCCT_None:'LCCT_None',LCCT_CustomUV0:'LCCT_CustomUV0',LCCT_CustomUV1:'LCCT_CustomUV1',LCCT_CustomUV2:'LCCT_CustomUV2',LCCT_WeightMapUV:'LCCT_WeightMapUV', };
 declare class MaterialExpressionLandscapeLayerCoords extends MaterialExpression { 
 	MappingType: ETerrainCoordMappingType;
 	CustomUVType: ELandscapeCustomizedCoordType;
@@ -9550,7 +12241,7 @@ declare class MaterialExpressionLandscapeLayerCoords extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionLandscapeLayerCoords;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLandscapeLayerCoords;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLandscapeLayerCoords;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9567,7 +12258,7 @@ declare class MaterialExpressionLandscapeLayerSample extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionLandscapeLayerSample;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLandscapeLayerSample;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLandscapeLayerSample;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9586,7 +12277,7 @@ declare class MaterialExpressionLandscapeLayerSwitch extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionLandscapeLayerSwitch;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLandscapeLayerSwitch;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLandscapeLayerSwitch;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9606,7 +12297,7 @@ declare class MaterialExpressionLandscapeLayerWeight extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionLandscapeLayerWeight;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLandscapeLayerWeight;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLandscapeLayerWeight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9621,7 +12312,7 @@ declare class MaterialExpressionLandscapeVisibilityMask extends MaterialExpressi
 	static Load(ResourceName: string): MaterialExpressionLandscapeVisibilityMask;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLandscapeVisibilityMask;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLandscapeVisibilityMask;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9635,7 +12326,7 @@ declare class EngineBaseTypes extends UObject {
 	static Load(ResourceName: string): EngineBaseTypes;
 	static Find(Outer: UObject, ResourceName: string): EngineBaseTypes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EngineBaseTypes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9649,7 +12340,7 @@ declare class EngineTypes extends UObject {
 	static Load(ResourceName: string): EngineTypes;
 	static Find(Outer: UObject, ResourceName: string): EngineTypes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EngineTypes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9663,7 +12354,7 @@ declare class Interface_AssetUserData extends Interface {
 	static Load(ResourceName: string): Interface_AssetUserData;
 	static Find(Outer: UObject, ResourceName: string): Interface_AssetUserData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Interface_AssetUserData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9675,7 +12366,7 @@ declare class AmbientSound extends Actor {
 	AudioComponent: AudioComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AmbientSound;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9691,7 +12382,7 @@ declare class AmbientSound extends Actor {
 declare class BrushShape extends Brush { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BrushShape;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9706,7 +12397,7 @@ declare class AudioVolume extends Volume {
 	AmbientZoneSettings: InteriorSettings;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AudioVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9722,7 +12413,7 @@ declare class AudioVolume extends Volume {
 declare class BlockingVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlockingVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9733,7 +12424,7 @@ declare class BlockingVolume extends Volume {
 declare class CameraBlockingVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CameraBlockingVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9753,7 +12444,7 @@ declare class CullDistanceVolume extends Volume {
 	bEnabled: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CullDistanceVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9761,21 +12452,10 @@ declare class CullDistanceVolume extends Volume {
 	static C(Other: UObject): CullDistanceVolume;
 }
 
-declare class HLODMeshCullingVolume extends Volume { 
-	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): HLODMeshCullingVolume;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): HLODMeshCullingVolume;
-	static C(Other: UObject): HLODMeshCullingVolume;
-}
-
 declare class LightmassCharacterIndirectDetailVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LightmassCharacterIndirectDetailVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9786,12 +12466,23 @@ declare class LightmassCharacterIndirectDetailVolume extends Volume {
 declare class LightmassImportanceVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LightmassImportanceVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LightmassImportanceVolume;
 	static C(Other: UObject): LightmassImportanceVolume;
+}
+
+declare class MeshMergeCullingVolume extends Volume { 
+	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MeshMergeCullingVolume;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MeshMergeCullingVolume;
+	static C(Other: UObject): MeshMergeCullingVolume;
 }
 
 declare class NavigationTypes extends UObject { 
@@ -9800,7 +12491,7 @@ declare class NavigationTypes extends UObject {
 	static Load(ResourceName: string): NavigationTypes;
 	static Find(Outer: UObject, ResourceName: string): NavigationTypes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavigationTypes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9814,7 +12505,7 @@ declare class NavRelevantInterface extends Interface {
 	static Load(ResourceName: string): NavRelevantInterface;
 	static Find(Outer: UObject, ResourceName: string): NavRelevantInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavRelevantInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9826,7 +12517,7 @@ declare class NavModifierVolume extends Volume {
 	AreaClass: UnrealEngineClass;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavModifierVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9838,7 +12529,7 @@ declare class NavModifierVolume extends Volume {
 declare class KillZVolume extends PhysicsVolume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KillZVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9856,7 +12547,7 @@ declare class PainCausingVolume extends PhysicsVolume {
 	DamageInstigator: Controller;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PainCausingVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9870,7 +12561,7 @@ declare class BlendableInterface extends Interface {
 	static Load(ResourceName: string): BlendableInterface;
 	static Find(Outer: UObject, ResourceName: string): BlendableInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlendableInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9884,7 +12575,7 @@ declare class Scene extends UObject {
 	static Load(ResourceName: string): Scene;
 	static Find(Outer: UObject, ResourceName: string): Scene;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Scene;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9898,7 +12589,7 @@ declare class Interface_PostProcessVolume extends Interface {
 	static Load(ResourceName: string): Interface_PostProcessVolume;
 	static Find(Outer: UObject, ResourceName: string): Interface_PostProcessVolume;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Interface_PostProcessVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9915,7 +12606,7 @@ declare class PostProcessVolume extends Volume {
 	bUnbound: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PostProcessVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9929,7 +12620,7 @@ declare class PrecomputedVisibilityOverrideVolume extends Volume {
 	OverrideInvisibleLevels: string[];
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PrecomputedVisibilityOverrideVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9940,7 +12631,7 @@ declare class PrecomputedVisibilityOverrideVolume extends Volume {
 declare class PrecomputedVisibilityVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PrecomputedVisibilityVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9951,7 +12642,7 @@ declare class PrecomputedVisibilityVolume extends Volume {
 declare class PreCullTrianglesVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PreCullTrianglesVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9962,7 +12653,7 @@ declare class PreCullTrianglesVolume extends Volume {
 declare class TriggerVolume extends Volume { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TriggerVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9976,7 +12667,7 @@ declare class NavAgentInterface extends Interface {
 	static Load(ResourceName: string): NavAgentInterface;
 	static Find(Outer: UObject, ResourceName: string): NavAgentInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavAgentInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -9991,7 +12682,7 @@ declare class BoxComponent extends ShapeComponent {
 	static Load(ResourceName: string): BoxComponent;
 	static Find(Outer: UObject, ResourceName: string): BoxComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BoxComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10009,7 +12700,7 @@ declare class DecalActor extends Actor {
 	BoxComponent: BoxComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DecalActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10068,8 +12759,8 @@ declare class DestructibleSpecialHierarchyDepths {
 	static C(Other: UObject): DestructibleSpecialHierarchyDepths;
 }
 
-declare type EImpactDamageOverride = string | symbol;
-declare var EImpactDamageOverride = { IDO_None:'IDO_None',IDO_On:'IDO_On',IDO_Off:'IDO_Off', };
+declare type EImpactDamageOverride = 'IDO_None' | 'IDO_On' | 'IDO_Off';
+declare var EImpactDamageOverride : { IDO_None:'IDO_None',IDO_On:'IDO_On',IDO_Off:'IDO_Off', };
 declare class DestructibleDepthParameters { 
 	ImpactDamageOverride: EImpactDamageOverride;
 	clone() : DestructibleDepthParameters;
@@ -10133,7 +12824,7 @@ declare class DestructibleFractureSettings extends UObject {
 	static Load(ResourceName: string): DestructibleFractureSettings;
 	static Find(Outer: UObject, ResourceName: string): DestructibleFractureSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DestructibleFractureSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10207,6 +12898,9 @@ declare class DateTime {
 	AsDate(): string;
 	AsDateTime(): string;
 	AsTime(): string;
+	AsDate(InTimeZone: string): string;
+	AsDateTime(InTimeZone: string): string;
+	AsTime(InTimeZone: string): string;
 	Add_DateTimeTimespan(B: Timespan): DateTime;
 	BreakDateTime(Year?: number,Month?: number,Day?: number,Hour?: number,Minute?: number,Second?: number,Millisecond?: number): {Year: number, Month: number, Day: number, Hour: number, Minute: number, Second: number, Millisecond: number};
 	Equal(B: DateTime): boolean;
@@ -10234,6 +12928,9 @@ declare class DateTime {
 	static AsDate(InDateTime: DateTime): string;
 	static AsDateTime(In: DateTime): string;
 	static AsTime(In: DateTime): string;
+	static AsDate(InDateTime: DateTime,InTimeZone: string): string;
+	static AsDateTime(InDateTime: DateTime,InTimeZone: string): string;
+	static AsTime(InDateTime: DateTime,InTimeZone: string): string;
 	static Add_DateTimeTimespan(A: DateTime,B: Timespan): DateTime;
 	static BreakDateTime(InDateTime: DateTime,Year?: number,Month?: number,Day?: number,Hour?: number,Minute?: number,Second?: number,Millisecond?: number): {Year: number, Month: number, Day: number, Hour: number, Minute: number, Second: number, Millisecond: number};
 	static Equal(A: DateTime,B: DateTime): boolean;
@@ -10278,7 +12975,7 @@ declare class DestructibleMesh extends SkeletalMesh {
 	static Load(ResourceName: string): DestructibleMesh;
 	static Find(Outer: UObject, ResourceName: string): DestructibleMesh;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DestructibleMesh;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10298,7 +12995,7 @@ declare class DestructibleComponent extends SkinnedMeshComponent {
 	static Load(ResourceName: string): DestructibleComponent;
 	static Find(Outer: UObject, ResourceName: string): DestructibleComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DestructibleComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10316,7 +13013,7 @@ declare class DestructibleActor extends Actor {
 	OnActorFracture: UnrealEngineMulticastDelegate<(HitPoint: Vector, HitDirection: Vector) => void>;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DestructibleActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10342,7 +13039,7 @@ declare class MaterialBillboardComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): MaterialBillboardComponent;
 	static Find(Outer: UObject, ResourceName: string): MaterialBillboardComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialBillboardComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10357,7 +13054,7 @@ declare class DocumentationActor extends Actor {
 	Billboard: MaterialBillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DocumentationActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10368,7 +13065,7 @@ declare class DocumentationActor extends Actor {
 declare class DebugCameraHUD extends HUD { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DebugCameraHUD;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10415,7 +13112,7 @@ declare class AtmosphericFogComponent extends SceneComponent {
 	static Load(ResourceName: string): AtmosphericFogComponent;
 	static Find(Outer: UObject, ResourceName: string): AtmosphericFogComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AtmosphericFogComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10442,7 +13139,7 @@ declare class AtmosphericFog extends Info {
 	ArrowComponent: ArrowComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AtmosphericFog;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10464,7 +13161,7 @@ declare class ExponentialHeightFogComponent extends SceneComponent {
 	static Load(ResourceName: string): ExponentialHeightFogComponent;
 	static Find(Outer: UObject, ResourceName: string): ExponentialHeightFogComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ExponentialHeightFogComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10485,7 +13182,7 @@ declare class ExponentialHeightFog extends Info {
 	bEnabled: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ExponentialHeightFog;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10499,7 +13196,7 @@ declare class PlayerStart extends NavigationObjectBase {
 	ArrowComponent: ArrowComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlayerStart;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10507,39 +13204,60 @@ declare class PlayerStart extends NavigationObjectBase {
 	static C(Other: UObject): PlayerStart;
 }
 
-declare class LightComponentBase extends SceneComponent { 
-	LightGuid: Guid;
-	Brightness: number;
-	Intensity: number;
-	LightColor: Color;
-	bAffectsWorld: boolean;
-	CastShadows: boolean;
-	CastStaticShadows: boolean;
-	CastDynamicShadows: boolean;
-	bAffectTranslucentLighting: boolean;
-	bPrecomputedLightingIsValid: boolean;
-	IndirectLightingIntensity: number;
-	StaticEditorTexture: Texture2D;
-	StaticEditorTextureScale: number;
-	DynamicEditorTexture: Texture2D;
-	DynamicEditorTextureScale: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): LightComponentBase;
-	static Find(Outer: UObject, ResourceName: string): LightComponentBase;
+declare class GameMode extends GameModeBase { 
+	MatchState: string;
+	bDelayedStart: boolean;
+	NumSpectators: number;
+	NumPlayers: number;
+	NumBots: number;
+	MinRespawnDelay: number;
+	NumTravellingPlayers: number;
+	EngineMessageClass: UnrealEngineClass;
+	InactivePlayerArray: PlayerState[];
+	InactivePlayerStateLifeSpan: number;
+	bHandleDedicatedServerReplays: boolean;
+	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): LightComponentBase;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): GameMode;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LightComponentBase;
-	SetCastShadows(bNewValue: boolean): void;
-	GetLightColor(): LinearColor;
-	static C(Other: UObject): LightComponentBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameMode;
+	StartMatch(): void;
+	SetBandwidthLimit(AsyncIOBandwidthLimit: number): void;
+	Say(Msg: string): void;
+	RestartGame(): void;
+	ReadyToStartMatch(): boolean;
+	ReadyToEndMatch(): boolean;
+	OnSetMatchState(NewState: string): void;
+	IsMatchInProgress(): boolean;
+	HasMatchEnded(): boolean;
+	GetMatchState(): string;
+	EndMatch(): void;
+	AbortMatch(): void;
+	static C(Other: UObject): GameMode;
+	HandleSeamlessTravelPlayer(C?: Controller): {C: Controller};
+	static HandleSeamlessTravelPlayer(GameMode: GameMode,C?: Controller): {C: Controller};
 }
 
-declare type ESkyLightSourceType = string | symbol;
-declare var ESkyLightSourceType = { SLS_CapturedScene:'SLS_CapturedScene',SLS_SpecifiedCubemap:'SLS_SpecifiedCubemap', };
+declare class GameState extends GameStateBase { 
+	MatchState: string;
+	PreviousMatchState: string;
+	ElapsedTime: number;
+	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): GameState;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameState;
+	OnRep_MatchState(): void;
+	OnRep_ElapsedTime(): void;
+	static C(Other: UObject): GameState;
+}
+
+declare type ESkyLightSourceType = 'SLS_CapturedScene' | 'SLS_SpecifiedCubemap';
+declare var ESkyLightSourceType : { SLS_CapturedScene:'SLS_CapturedScene',SLS_SpecifiedCubemap:'SLS_SpecifiedCubemap', };
 declare class SkyLightComponent extends LightComponentBase { 
 	SourceType: ESkyLightSourceType;
 	Cubemap: TextureCube;
@@ -10558,7 +13276,7 @@ declare class SkyLightComponent extends LightComponentBase {
 	static Load(ResourceName: string): SkyLightComponent;
 	static Find(Outer: UObject, ResourceName: string): SkyLightComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SkyLightComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10579,7 +13297,7 @@ declare class SkyLight extends Info {
 	bEnabled: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SkyLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10600,7 +13318,7 @@ declare class WindDirectionalSourceComponent extends SceneComponent {
 	static Load(ResourceName: string): WindDirectionalSourceComponent;
 	static Find(Outer: UObject, ResourceName: string): WindDirectionalSourceComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WindDirectionalSourceComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10613,7 +13331,7 @@ declare class WindDirectionalSource extends Info {
 	ArrowComponent: ArrowComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WindDirectionalSource;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10625,7 +13343,7 @@ declare class LevelBounds extends Actor {
 	bAutoUpdateBounds: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelBounds;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10633,84 +13351,12 @@ declare class LevelBounds extends Actor {
 	static C(Other: UObject): LevelBounds;
 }
 
-declare class TextureLightProfile extends Texture2D { 
-	Brightness: number;
-	TextureMultiplier: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): TextureLightProfile;
-	static Find(Outer: UObject, ResourceName: string): TextureLightProfile;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): TextureLightProfile;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextureLightProfile;
-	static C(Other: UObject): TextureLightProfile;
-}
-
-declare class LightComponent extends LightComponentBase { 
-	Temperature: number;
-	MaxDrawDistance: number;
-	MaxDistanceFadeRange: number;
-	bUseTemperature: boolean;
-	ShadowMapChannel: number;
-	MinRoughness: number;
-	ShadowBias: number;
-	ShadowSharpen: number;
-	ContactShadowLength: number;
-	InverseSquaredFalloff: boolean;
-	CastTranslucentShadows: boolean;
-	bCastShadowsFromCinematicObjectsOnly: boolean;
-	bAffectDynamicIndirectLighting: boolean;
-	LightingChannels: LightingChannels;
-	LightFunctionMaterial: MaterialInterface;
-	LightFunctionScale: Vector;
-	IESTexture: TextureLightProfile;
-	bUseIESBrightness: boolean;
-	IESBrightnessScale: number;
-	LightFunctionFadeDistance: number;
-	DisabledBrightness: number;
-	bEnableLightShaftBloom: boolean;
-	BloomScale: number;
-	BloomThreshold: number;
-	BloomTint: Color;
-	bUseRayTracedDistanceFieldShadows: boolean;
-	RayStartOffsetDepthScale: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): LightComponent;
-	static Find(Outer: UObject, ResourceName: string): LightComponent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): LightComponent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LightComponent;
-	SetTemperature(NewTemperature: number): void;
-	SetLightFunctionScale(NewLightFunctionScale: Vector): void;
-	SetLightFunctionMaterial(NewLightFunctionMaterial: MaterialInterface): void;
-	SetLightFunctionFadeDistance(NewLightFunctionFadeDistance: number): void;
-	SetLightFunctionDisabledBrightness(NewValue: number): void;
-	SetLightColor(NewLightColor: LinearColor,bSRGB: boolean): void;
-	SetIntensity(NewIntensity: number): void;
-	SetIndirectLightingIntensity(NewIntensity: number): void;
-	SetIESTexture(NewValue: TextureLightProfile): void;
-	SetEnableLightShaftBloom(bNewValue: boolean): void;
-	SetBloomTint(NewValue: Color): void;
-	SetBloomThreshold(NewValue: number): void;
-	SetBloomScale(NewValue: number): void;
-	SetAffectTranslucentLighting(bNewValue: boolean): void;
-	SetAffectDynamicIndirectLighting(bNewValue: boolean): void;
-	static C(Other: UObject): LightComponent;
-}
-
 declare class Light extends Actor { 
 	LightComponent: LightComponent;
 	bEnabled: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Light;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10735,7 +13381,7 @@ declare class DirectionalLight extends Light {
 	ArrowComponent: ArrowComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DirectionalLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10743,49 +13389,11 @@ declare class DirectionalLight extends Light {
 	static C(Other: UObject): DirectionalLight;
 }
 
-declare class LightmassLightSettings { 
-	IndirectLightingSaturation: number;
-	ShadowExponent: number;
-	bUseAreaShadowsForStationaryLight: boolean;
-	clone() : LightmassLightSettings;
-	static C(Other: UObject): LightmassLightSettings;
-}
-
-declare class LightmassPointLightSettings extends LightmassLightSettings { 
-	clone() : LightmassPointLightSettings;
-	static C(Other: UObject): LightmassPointLightSettings;
-}
-
-declare class PointLightComponent extends LightComponent { 
-	Radius: number;
-	AttenuationRadius: number;
-	bUseInverseSquaredFalloff: boolean;
-	LightFalloffExponent: number;
-	SourceRadius: number;
-	SourceLength: number;
-	LightmassSettings: LightmassPointLightSettings;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): PointLightComponent;
-	static Find(Outer: UObject, ResourceName: string): PointLightComponent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): PointLightComponent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PointLightComponent;
-	SetSourceRadius(bNewValue: number): void;
-	SetSourceLength(NewValue: number): void;
-	SetLightFalloffExponent(NewLightFalloffExponent: number): void;
-	SetAttenuationRadius(NewRadius: number): void;
-	static C(Other: UObject): PointLightComponent;
-}
-
 declare class PointLight extends Light { 
 	PointLightComponent: PointLightComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PointLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10804,7 +13412,7 @@ declare class SpotLightComponent extends PointLightComponent {
 	static Load(ResourceName: string): SpotLightComponent;
 	static Find(Outer: UObject, ResourceName: string): SpotLightComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SpotLightComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10819,7 +13427,7 @@ declare class SpotLight extends Light {
 	ArrowComponent: ArrowComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SpotLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10832,7 +13440,7 @@ declare class SpotLight extends Light {
 declare class GeneratedMeshAreaLight extends SpotLight { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GeneratedMeshAreaLight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10847,7 +13455,7 @@ declare class LightmassPortalComponent extends SceneComponent {
 	static Load(ResourceName: string): LightmassPortalComponent;
 	static Find(Outer: UObject, ResourceName: string): LightmassPortalComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LightmassPortalComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10860,7 +13468,7 @@ declare class LightmassPortal extends Actor {
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LightmassPortal;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10885,7 +13493,7 @@ declare class LODActor extends Actor {
 	ScreenSize: number;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LODActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10897,7 +13505,7 @@ declare class MaterialInstanceActor extends Actor {
 	TargetActors: Actor[];
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialInstanceActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10909,7 +13517,7 @@ declare class MatineeActorCameraAnim extends MatineeActor {
 	CameraAnim: CameraAnim;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MatineeActorCameraAnim;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10920,7 +13528,7 @@ declare class MatineeActorCameraAnim extends MatineeActor {
 declare class AbstractNavData extends NavigationData { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AbstractNavData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10931,7 +13539,7 @@ declare class AbstractNavData extends NavigationData {
 declare class NavigationGraph extends NavigationData { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavigationGraph;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10942,7 +13550,7 @@ declare class NavigationGraph extends NavigationData {
 declare class NavigationGraphNode extends Actor { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavigationGraphNode;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10953,7 +13561,7 @@ declare class NavigationGraphNode extends Actor {
 declare class PlayerStartPIE extends PlayerStart { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlayerStartPIE;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10967,7 +13575,7 @@ declare class NavPathObserverInterface extends Interface {
 	static Load(ResourceName: string): NavPathObserverInterface;
 	static Find(Outer: UObject, ResourceName: string): NavPathObserverInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavPathObserverInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10981,7 +13589,7 @@ declare class NavTestRenderingComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): NavTestRenderingComponent;
 	static Find(Outer: UObject, ResourceName: string): NavTestRenderingComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavTestRenderingComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -10997,7 +13605,7 @@ declare class NavigationInvokerComponent extends ActorComponent {
 	static Load(ResourceName: string): NavigationInvokerComponent;
 	static Find(Outer: UObject, ResourceName: string): NavigationInvokerComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavigationInvokerComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11005,8 +13613,8 @@ declare class NavigationInvokerComponent extends ActorComponent {
 	static C(Other: UObject): NavigationInvokerComponent;
 }
 
-declare type ENavCostDisplay = string | symbol;
-declare var ENavCostDisplay = { TotalCost:'TotalCost',HeuristicOnly:'HeuristicOnly',RealCostOnly:'RealCostOnly', };
+declare type ENavCostDisplay = 'TotalCost' | 'HeuristicOnly' | 'RealCostOnly';
+declare var ENavCostDisplay : { TotalCost:'TotalCost',HeuristicOnly:'HeuristicOnly',RealCostOnly:'RealCostOnly', };
 declare class NavigationTestingActor extends Actor { 
 	CapsuleComponent: CapsuleComponent;
 	EdRenderComp: NavTestRenderingComponent;
@@ -11039,7 +13647,7 @@ declare class NavigationTestingActor extends Actor {
 	OffsetFromCornersDistance: number;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavigationTestingActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11047,15 +13655,14 @@ declare class NavigationTestingActor extends Actor {
 	static C(Other: UObject): NavigationTestingActor;
 }
 
-declare type ENavLinkDirection = string | symbol;
-declare var ENavLinkDirection = { BothWays:'BothWays',LeftToRight:'LeftToRight',RightToLeft:'RightToLeft', };
+declare type ENavLinkDirection = 'BothWays' | 'LeftToRight' | 'RightToLeft';
+declare var ENavLinkDirection : { BothWays:'BothWays',LeftToRight:'LeftToRight',RightToLeft:'RightToLeft', };
 declare class NavigationLinkBase { 
 	LeftProjectHeight: number;
 	MaxFallDownLength: number;
 	Direction: ENavLinkDirection;
 	SnapRadius: number;
 	SnapHeight: number;
-	AreaClass: UnrealEngineClass;
 	SupportedAgents: NavAgentSelector;
 	bSupportsAgent0: boolean;
 	bSupportsAgent1: boolean;
@@ -11084,6 +13691,7 @@ declare class NavigationLinkBase {
 	bCustomFlag5: boolean;
 	bCustomFlag6: boolean;
 	bCustomFlag7: boolean;
+	AreaClass: UnrealEngineClass;
 	clone() : NavigationLinkBase;
 	static C(Other: UObject): NavigationLinkBase;
 }
@@ -11112,7 +13720,7 @@ declare class NavLinkDefinition extends UObject {
 	static Load(ResourceName: string): NavLinkDefinition;
 	static Find(Outer: UObject, ResourceName: string): NavLinkDefinition;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavLinkDefinition;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11126,7 +13734,7 @@ declare class NavLinkHostInterface extends Interface {
 	static Load(ResourceName: string): NavLinkHostInterface;
 	static Find(Outer: UObject, ResourceName: string): NavLinkHostInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavLinkHostInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11142,7 +13750,7 @@ declare class NavRelevantComponent extends ActorComponent {
 	static Load(ResourceName: string): NavRelevantComponent;
 	static Find(Outer: UObject, ResourceName: string): NavRelevantComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavRelevantComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11173,7 +13781,7 @@ declare class NavLinkCustomComponent extends NavRelevantComponent {
 	static Load(ResourceName: string): NavLinkCustomComponent;
 	static Find(Outer: UObject, ResourceName: string): NavLinkCustomComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavLinkCustomComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11187,7 +13795,7 @@ declare class NavLinkRenderingComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): NavLinkRenderingComponent;
 	static Find(Outer: UObject, ResourceName: string): NavLinkRenderingComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavLinkRenderingComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11205,7 +13813,7 @@ declare class NavLinkProxy extends Actor {
 	OnSmartLinkReached: UnrealEngineMulticastDelegate<(MovingActor: Actor, DestinationPoint: Vector) => void>;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavLinkProxy;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11224,7 +13832,7 @@ declare class Note extends Actor {
 	ArrowComponent: ArrowComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Note;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11238,7 +13846,7 @@ declare class Interface_CollisionDataProvider extends Interface {
 	static Load(ResourceName: string): Interface_CollisionDataProvider;
 	static Find(Outer: UObject, ResourceName: string): Interface_CollisionDataProvider;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): Interface_CollisionDataProvider;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11246,12 +13854,173 @@ declare class Interface_CollisionDataProvider extends Interface {
 	static C(Other: UObject): Interface_CollisionDataProvider;
 }
 
+declare class VehicleWheel extends UObject { 
+	CollisionMesh: StaticMesh;
+	bDontCreateShape: boolean;
+	bAutoAdjustCollisionSize: boolean;
+	Offset: Vector;
+	ShapeRadius: number;
+	ShapeWidth: number;
+	Mass: number;
+	DampingRate: number;
+	SteerAngle: number;
+	bAffectedByHandbrake: boolean;
+	TireType: TireType;
+	LatStiffMaxLoad: number;
+	LatStiffValue: number;
+	LongStiffValue: number;
+	SuspensionForceOffset: number;
+	SuspensionMaxRaise: number;
+	SuspensionMaxDrop: number;
+	SuspensionNaturalFrequency: number;
+	SuspensionDampingRatio: number;
+	MaxBrakeTorque: number;
+	MaxHandBrakeTorque: number;
+	VehicleSim: WheeledVehicleMovementComponent;
+	WheelIndex: number;
+	DebugLongSlip: number;
+	DebugLatSlip: number;
+	DebugNormalizedTireLoad: number;
+	DebugWheelTorque: number;
+	DebugLongForce: number;
+	DebugLatForce: number;
+	Location: Vector;
+	OldLocation: Vector;
+	Velocity: Vector;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): VehicleWheel;
+	static Find(Outer: UObject, ResourceName: string): VehicleWheel;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): VehicleWheel;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VehicleWheel;
+	GetSuspensionOffset(): number;
+	GetSteerAngle(): number;
+	GetRotationAngle(): number;
+	static C(Other: UObject): VehicleWheel;
+}
+
+declare class WheelSetup { 
+	WheelClass: UnrealEngineClass;
+	BoneName: string;
+	AdditionalOffset: Vector;
+	clone() : WheelSetup;
+	static C(Other: UObject): WheelSetup;
+}
+
+declare class ReplicatedVehicleState { 
+	SteeringInput: number;
+	ThrottleInput: number;
+	BrakeInput: number;
+	HandbrakeInput: number;
+	CurrentGear: number;
+	clone() : ReplicatedVehicleState;
+	static C(Other: UObject): ReplicatedVehicleState;
+}
+
+declare class VehicleInputRate { 
+	RiseRate: number;
+	FallRate: number;
+	clone() : VehicleInputRate;
+	static C(Other: UObject): VehicleInputRate;
+}
+
+declare class WheeledVehicleMovementComponent extends MovementComponent { 
+	bDeprecatedSpringOffsetMode: boolean;
+	WheelSetups: WheelSetup[];
+	Mass: number;
+	DragCoefficient: number;
+	ChassisWidth: number;
+	ChassisHeight: number;
+	bReverseAsBrake: boolean;
+	DragArea: number;
+	EstimatedMaxEngineSpeed: number;
+	MaxEngineRPM: number;
+	DebugDragMagnitude: number;
+	InertiaTensorScale: Vector;
+	MinNormalizedTireLoad: number;
+	MinNormalizedTireLoadFiltered: number;
+	MaxNormalizedTireLoad: number;
+	MaxNormalizedTireLoadFiltered: number;
+	ThresholdLongitudinalSpeed: number;
+	LowForwardSpeedSubStepCount: number;
+	HighForwardSpeedSubStepCount: number;
+	Wheels: VehicleWheel[];
+	bUseRVOAvoidance: boolean;
+	RVOAvoidanceRadius: number;
+	RVOAvoidanceHeight: number;
+	AvoidanceConsiderationRadius: number;
+	RVOSteeringStep: number;
+	RVOThrottleStep: number;
+	AvoidanceUID: number;
+	AvoidanceGroup: NavAvoidanceMask;
+	GroupsToAvoid: NavAvoidanceMask;
+	GroupsToIgnore: NavAvoidanceMask;
+	AvoidanceWeight: number;
+	PendingLaunchVelocity: Vector;
+	ReplicatedState: ReplicatedVehicleState;
+	RawSteeringInput: number;
+	RawThrottleInput: number;
+	RawBrakeInput: number;
+	bRawHandbrakeInput: boolean;
+	bRawGearUpInput: boolean;
+	bRawGearDownInput: boolean;
+	SteeringInput: number;
+	ThrottleInput: number;
+	BrakeInput: number;
+	HandbrakeInput: number;
+	IdleBrakeInput: number;
+	StopThreshold: number;
+	WrongDirectionThreshold: number;
+	ThrottleInputRate: VehicleInputRate;
+	BrakeInputRate: VehicleInputRate;
+	HandbrakeInputRate: VehicleInputRate;
+	SteeringInputRate: VehicleInputRate;
+	bWasAvoidanceUpdated: boolean;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): WheeledVehicleMovementComponent;
+	static Find(Outer: UObject, ResourceName: string): WheeledVehicleMovementComponent;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): WheeledVehicleMovementComponent;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WheeledVehicleMovementComponent;
+	SetUseAutoGears(bUseAuto: boolean): void;
+	SetThrottleInput(Throttle: number): void;
+	SetTargetGear(GearNum: number,bImmediate: boolean): void;
+	SetSteeringInput(Steering: number): void;
+	SetHandbrakeInput(bNewHandbrake: boolean): void;
+	SetGroupsToIgnoreMask(GroupMask: NavAvoidanceMask): void;
+	SetGroupsToIgnore(GroupFlags: number): void;
+	SetGroupsToAvoidMask(GroupMask: NavAvoidanceMask): void;
+	SetGroupsToAvoid(GroupFlags: number): void;
+	SetGearUp(bNewGearUp: boolean): void;
+	SetGearDown(bNewGearDown: boolean): void;
+	SetBrakeInput(Brake: number): void;
+	SetAvoidanceGroupMask(GroupMask: NavAvoidanceMask): void;
+	SetAvoidanceGroup(GroupFlags: number): void;
+	SetAvoidanceEnabled(bEnable: boolean): void;
+	ServerUpdateState(InSteeringInput: number,InThrottleInput: number,InBrakeInput: number,InHandbrakeInput: number,CurrentGear: number): void;
+	GetUseAutoGears(): boolean;
+	GetTargetGear(): number;
+	GetForwardSpeed(): number;
+	GetEngineRotationSpeed(): number;
+	GetEngineMaxRotationSpeed(): number;
+	GetCurrentGear(): number;
+	static C(Other: UObject): WheeledVehicleMovementComponent;
+}
+
 declare class WheeledVehicle extends Pawn { 
 	Mesh: SkeletalMeshComponent;
 	VehicleMovement: WheeledVehicleMovementComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WheeledVehicle;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11259,8 +14028,8 @@ declare class WheeledVehicle extends Pawn {
 	static C(Other: UObject): WheeledVehicle;
 }
 
-declare type EReflectionSourceType = string | symbol;
-declare var EReflectionSourceType = { CapturedScene:'CapturedScene',SpecifiedCubemap:'SpecifiedCubemap', };
+declare type EReflectionSourceType = 'CapturedScene' | 'SpecifiedCubemap';
+declare var EReflectionSourceType : { CapturedScene:'CapturedScene',SpecifiedCubemap:'SpecifiedCubemap', };
 declare class ReflectionCaptureComponent extends SceneComponent { 
 	CaptureOffsetComponent: BillboardComponent;
 	ReflectionSourceType: EReflectionSourceType;
@@ -11274,7 +14043,7 @@ declare class ReflectionCaptureComponent extends SceneComponent {
 	static Load(ResourceName: string): ReflectionCaptureComponent;
 	static Find(Outer: UObject, ResourceName: string): ReflectionCaptureComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReflectionCaptureComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11288,7 +14057,7 @@ declare class ReflectionCapture extends Actor {
 	CaptureOffsetComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ReflectionCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11299,7 +14068,7 @@ declare class ReflectionCapture extends Actor {
 declare class BoxReflectionCapture extends ReflectionCapture { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BoxReflectionCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11310,7 +14079,7 @@ declare class BoxReflectionCapture extends ReflectionCapture {
 declare class PlaneReflectionCapture extends ReflectionCapture { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlaneReflectionCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11324,7 +14093,7 @@ declare class DrawSphereComponent extends SphereComponent {
 	static Load(ResourceName: string): DrawSphereComponent;
 	static Find(Outer: UObject, ResourceName: string): DrawSphereComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DrawSphereComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11336,7 +14105,7 @@ declare class SphereReflectionCapture extends ReflectionCapture {
 	DrawCaptureRadius: DrawSphereComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SphereReflectionCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11347,7 +14116,7 @@ declare class SphereReflectionCapture extends ReflectionCapture {
 declare class RigidBodyBase extends Actor { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RigidBodyBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11361,8 +14130,8 @@ declare class ConstrainComponentPropName {
 	static C(Other: UObject): ConstrainComponentPropName;
 }
 
-declare type EConstraintFrame = string | symbol;
-declare var EConstraintFrame = { Frame1:'Frame1',Frame2:'Frame2', };
+declare type EConstraintFrame = 'Frame1' | 'Frame2';
+declare var EConstraintFrame : { Frame1:'Frame1',Frame2:'Frame2', };
 declare class PhysicsConstraintComponent extends SceneComponent { 
 	ConstraintActor1: Actor;
 	ComponentName1: ConstrainComponentPropName;
@@ -11376,7 +14145,7 @@ declare class PhysicsConstraintComponent extends SceneComponent {
 	static Load(ResourceName: string): PhysicsConstraintComponent;
 	static Find(Outer: UObject, ResourceName: string): PhysicsConstraintComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsConstraintComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11417,7 +14186,7 @@ declare class PhysicsConstraintActor extends RigidBodyBase {
 	bDisableCollision: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsConstraintActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11432,7 +14201,7 @@ declare class PhysicsThrusterComponent extends SceneComponent {
 	static Load(ResourceName: string): PhysicsThrusterComponent;
 	static Find(Outer: UObject, ResourceName: string): PhysicsThrusterComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsThrusterComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11446,7 +14215,7 @@ declare class PhysicsThruster extends RigidBodyBase {
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsThruster;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11468,7 +14237,7 @@ declare class RadialForceComponent extends SceneComponent {
 	static Load(ResourceName: string): RadialForceComponent;
 	static Find(Outer: UObject, ResourceName: string): RadialForceComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RadialForceComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11484,7 +14253,7 @@ declare class RadialForceActor extends RigidBodyBase {
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RadialForceActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11500,7 +14269,7 @@ declare class SceneCapture extends Actor {
 	MeshComp: StaticMeshComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneCapture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11529,7 +14298,7 @@ declare class SceneCaptureComponent extends SceneComponent {
 	static Load(ResourceName: string): SceneCaptureComponent;
 	static Find(Outer: UObject, ResourceName: string): SceneCaptureComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneCaptureComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11550,6 +14319,8 @@ declare class PlanarReflectionComponent extends SceneCaptureComponent {
 	ExtraFOV: number;
 	DistanceFromPlaneFadeStart: number;
 	DistanceFromPlaneFadeEnd: number;
+	DistanceFromPlaneFadeoutStart: number;
+	DistanceFromPlaneFadeoutEnd: number;
 	AngleFromPlaneFadeStart: number;
 	AngleFromPlaneFadeEnd: number;
 	bRenderSceneTwoSided: boolean;
@@ -11558,7 +14329,7 @@ declare class PlanarReflectionComponent extends SceneCaptureComponent {
 	static Load(ResourceName: string): PlanarReflectionComponent;
 	static Find(Outer: UObject, ResourceName: string): PlanarReflectionComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlanarReflectionComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11572,7 +14343,7 @@ declare class PlanarReflection extends SceneCapture {
 	bShowPreviewPlane: boolean;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlanarReflection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11581,10 +14352,10 @@ declare class PlanarReflection extends SceneCapture {
 	static C(Other: UObject): PlanarReflection;
 }
 
-declare type ESceneCaptureSource = string | symbol;
-declare var ESceneCaptureSource = { SCS_SceneColorHDR:'SCS_SceneColorHDR',SCS_FinalColorLDR:'SCS_FinalColorLDR',SCS_SceneColorSceneDepth:'SCS_SceneColorSceneDepth',SCS_SceneDepth:'SCS_SceneDepth',SCS_Normal:'SCS_Normal',SCS_BaseColor:'SCS_BaseColor', };
-declare type ESceneCaptureCompositeMode = string | symbol;
-declare var ESceneCaptureCompositeMode = { SCCM_Overwrite:'SCCM_Overwrite',SCCM_Additive:'SCCM_Additive',SCCM_Composite:'SCCM_Composite', };
+declare type ESceneCaptureSource = 'SCS_SceneColorHDR' | 'SCS_SceneColorHDRNoAlpha' | 'SCS_FinalColorLDR' | 'SCS_SceneColorSceneDepth' | 'SCS_SceneDepth' | 'SCS_Normal' | 'SCS_BaseColor';
+declare var ESceneCaptureSource : { SCS_SceneColorHDR:'SCS_SceneColorHDR',SCS_SceneColorHDRNoAlpha:'SCS_SceneColorHDRNoAlpha',SCS_FinalColorLDR:'SCS_FinalColorLDR',SCS_SceneColorSceneDepth:'SCS_SceneColorSceneDepth',SCS_SceneDepth:'SCS_SceneDepth',SCS_Normal:'SCS_Normal',SCS_BaseColor:'SCS_BaseColor', };
+declare type ESceneCaptureCompositeMode = 'SCCM_Overwrite' | 'SCCM_Additive' | 'SCCM_Composite';
+declare var ESceneCaptureCompositeMode : { SCCM_Overwrite:'SCCM_Overwrite',SCCM_Additive:'SCCM_Additive',SCCM_Composite:'SCCM_Composite', };
 declare class SceneCaptureComponent2D extends SceneCaptureComponent { 
 	ProjectionType: ECameraProjectionMode;
 	FOVAngle: number;
@@ -11599,7 +14370,7 @@ declare class SceneCaptureComponent2D extends SceneCaptureComponent {
 	static Load(ResourceName: string): SceneCaptureComponent2D;
 	static Find(Outer: UObject, ResourceName: string): SceneCaptureComponent2D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneCaptureComponent2D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11613,7 +14384,7 @@ declare class SceneCapture2D extends SceneCapture {
 	DrawFrustum: DrawFrustumComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneCapture2D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11633,7 +14404,7 @@ declare class TextureRenderTargetCube extends TextureRenderTarget {
 	static Load(ResourceName: string): TextureRenderTargetCube;
 	static Find(Outer: UObject, ResourceName: string): TextureRenderTargetCube;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureRenderTargetCube;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11648,7 +14419,7 @@ declare class SceneCaptureComponentCube extends SceneCaptureComponent {
 	static Load(ResourceName: string): SceneCaptureComponentCube;
 	static Find(Outer: UObject, ResourceName: string): SceneCaptureComponentCube;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneCaptureComponentCube;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11662,7 +14433,7 @@ declare class SceneCaptureCube extends SceneCapture {
 	DrawFrustum: DrawFrustumComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SceneCaptureCube;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11677,7 +14448,7 @@ declare class MatineeAnimInterface extends Interface {
 	static Load(ResourceName: string): MatineeAnimInterface;
 	static Find(Outer: UObject, ResourceName: string): MatineeAnimInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MatineeAnimInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11689,7 +14460,7 @@ declare class SplineMeshActor extends Actor {
 	SplineMeshComponent: SplineMeshComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SplineMeshActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11697,8 +14468,8 @@ declare class SplineMeshActor extends Actor {
 	static C(Other: UObject): SplineMeshActor;
 }
 
-declare type EVertexAttributeStreamType = string | symbol;
-declare var EVertexAttributeStreamType = { VAST_unknown:'VAST_unknown',VAST_float:'VAST_float',VAST_float2:'VAST_float2',VAST_float3:'VAST_float3',VAST_float4:'VAST_float4', };
+declare type EVertexAttributeStreamType = 'VAST_unknown' | 'VAST_float' | 'VAST_float2' | 'VAST_float3' | 'VAST_float4';
+declare var EVertexAttributeStreamType : { VAST_unknown:'VAST_unknown',VAST_float:'VAST_float',VAST_float2:'VAST_float2',VAST_float3:'VAST_float3',VAST_float4:'VAST_float4', };
 declare class VertexAttributeStream extends UObject { 
 	Usage: string;
 	AttributeType: EVertexAttributeStreamType;
@@ -11708,7 +14479,7 @@ declare class VertexAttributeStream extends UObject {
 	static Load(ResourceName: string): VertexAttributeStream;
 	static Find(Outer: UObject, ResourceName: string): VertexAttributeStream;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VertexAttributeStream;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11726,7 +14497,7 @@ declare class SubDSurface extends UObject {
 	static Load(ResourceName: string): SubDSurface;
 	static Find(Outer: UObject, ResourceName: string): SubDSurface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SubDSurface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11743,7 +14514,7 @@ declare class SubDSurfaceComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): SubDSurfaceComponent;
 	static Find(Outer: UObject, ResourceName: string): SubDSurfaceComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SubDSurfaceComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11758,7 +14529,7 @@ declare class SubDSurfaceActor extends Actor {
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SubDSurfaceActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11771,7 +14542,7 @@ declare class TargetPoint extends Actor {
 	ArrowComponent: ArrowComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TargetPoint;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11779,57 +14550,12 @@ declare class TargetPoint extends Actor {
 	static C(Other: UObject): TargetPoint;
 }
 
-declare type EHorizTextAligment = string | symbol;
-declare var EHorizTextAligment = { EHTA_Left:'EHTA_Left',EHTA_Center:'EHTA_Center',EHTA_Right:'EHTA_Right', };
-declare type EVerticalTextAligment = string | symbol;
-declare var EVerticalTextAligment = { EVRTA_TextTop:'EVRTA_TextTop',EVRTA_TextCenter:'EVRTA_TextCenter',EVRTA_TextBottom:'EVRTA_TextBottom',EVRTA_QuadTop:'EVRTA_QuadTop', };
-declare class TextRenderComponent extends PrimitiveComponent { 
-	Text: string;
-	TextMaterial: MaterialInterface;
-	Font: Font;
-	HorizontalAlignment: EHorizTextAligment;
-	VerticalAlignment: EVerticalTextAligment;
-	TextRenderColor: Color;
-	XScale: number;
-	YScale: number;
-	WorldSize: number;
-	InvDefaultSize: number;
-	HorizSpacingAdjust: number;
-	VertSpacingAdjust: number;
-	bAlwaysRenderAsText: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): TextRenderComponent;
-	static Find(Outer: UObject, ResourceName: string): TextRenderComponent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): TextRenderComponent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextRenderComponent;
-	SetYScale(Value: number): void;
-	SetXScale(Value: number): void;
-	SetWorldSize(Value: number): void;
-	SetVertSpacingAdjust(Value: number): void;
-	SetVerticalAlignment(Value: EVerticalTextAligment): void;
-	SetTextRenderColor(Value: Color): void;
-	SetTextMaterial(Material: MaterialInterface): void;
-	SetText(Value: string): void;
-	SetHorizSpacingAdjust(Value: number): void;
-	SetHorizontalAlignment(Value: EHorizTextAligment): void;
-	SetFont(Value: Font): void;
-	SetText(Value: string): void;
-	GetTextWorldSize(): Vector;
-	GetTextLocalSize(): Vector;
-	static C(Other: UObject): TextRenderComponent;
-}
-
 declare class TextRenderActor extends Actor { 
 	TextRender: TextRenderComponent;
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextRenderActor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11842,7 +14568,7 @@ declare class TriggerBase extends Actor {
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TriggerBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11853,7 +14579,7 @@ declare class TriggerBase extends Actor {
 declare class TriggerBox extends TriggerBase { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TriggerBox;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11864,7 +14590,7 @@ declare class TriggerBox extends TriggerBase {
 declare class TriggerCapsule extends TriggerBase { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TriggerCapsule;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11875,7 +14601,7 @@ declare class TriggerCapsule extends TriggerBase {
 declare class TriggerSphere extends TriggerBase { 
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TriggerSphere;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11891,7 +14617,7 @@ declare class VectorField extends UObject {
 	static Load(ResourceName: string): VectorField;
 	static Find(Outer: UObject, ResourceName: string): VectorField;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VectorField;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11909,7 +14635,7 @@ declare class VectorFieldComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): VectorFieldComponent;
 	static Find(Outer: UObject, ResourceName: string): VectorFieldComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VectorFieldComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11923,7 +14649,7 @@ declare class VectorFieldVolume extends Actor {
 	SpriteComponent: BillboardComponent;
 	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VectorFieldVolume;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11942,7 +14668,7 @@ declare class ApplicationLifecycleComponent extends ActorComponent {
 	static Load(ResourceName: string): ApplicationLifecycleComponent;
 	static Find(Outer: UObject, ResourceName: string): ApplicationLifecycleComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ApplicationLifecycleComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11950,8 +14676,8 @@ declare class ApplicationLifecycleComponent extends ActorComponent {
 	static C(Other: UObject): ApplicationLifecycleComponent;
 }
 
-declare type EInterpToBehaviourType = string | symbol;
-declare var EInterpToBehaviourType = { OneShot:'OneShot',OneShot_Reverse:'OneShot_Reverse',Loop_Reset:'Loop_Reset',PingPong:'PingPong', };
+declare type EInterpToBehaviourType = 'OneShot' | 'OneShot_Reverse' | 'Loop_Reset' | 'PingPong';
+declare var EInterpToBehaviourType : { OneShot:'OneShot',OneShot_Reverse:'OneShot_Reverse',Loop_Reset:'Loop_Reset',PingPong:'PingPong', };
 declare class InterpControlPoint { 
 	PositionControlPoint: Vector;
 	bPositionIsRelative: boolean;
@@ -11977,7 +14703,7 @@ declare class InterpToMovementComponent extends MovementComponent {
 	static Load(ResourceName: string): InterpToMovementComponent;
 	static Find(Outer: UObject, ResourceName: string): InterpToMovementComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpToMovementComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -11994,7 +14720,7 @@ declare class RVOAvoidanceInterface extends Interface {
 	static Load(ResourceName: string): RVOAvoidanceInterface;
 	static Find(Outer: UObject, ResourceName: string): RVOAvoidanceInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RVOAvoidanceInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12008,7 +14734,7 @@ declare class NetworkPredictionInterface extends Interface {
 	static Load(ResourceName: string): NetworkPredictionInterface;
 	static Find(Outer: UObject, ResourceName: string): NetworkPredictionInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NetworkPredictionInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12027,7 +14753,7 @@ declare class FloatingPawnMovement extends PawnMovementComponent {
 	static Load(ResourceName: string): FloatingPawnMovement;
 	static Find(Outer: UObject, ResourceName: string): FloatingPawnMovement;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): FloatingPawnMovement;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12042,12 +14768,85 @@ declare class SpectatorPawnMovement extends FloatingPawnMovement {
 	static Load(ResourceName: string): SpectatorPawnMovement;
 	static Find(Outer: UObject, ResourceName: string): SpectatorPawnMovement;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SpectatorPawnMovement;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SpectatorPawnMovement;
 	static C(Other: UObject): SpectatorPawnMovement;
+}
+
+declare class ProjectileMovementComponent extends MovementComponent { 
+	InitialSpeed: number;
+	MaxSpeed: number;
+	bRotationFollowsVelocity: boolean;
+	bShouldBounce: boolean;
+	bInitialVelocityInLocalSpace: boolean;
+	bForceSubStepping: boolean;
+	bIsHomingProjectile: boolean;
+	bBounceAngleAffectsFriction: boolean;
+	bIsSliding: boolean;
+	PreviousHitTime: number;
+	PreviousHitNormal: Vector;
+	ProjectileGravityScale: number;
+	Buoyancy: number;
+	Bounciness: number;
+	Friction: number;
+	BounceVelocityStopSimulatingThreshold: number;
+	OnProjectileBounce: UnrealEngineMulticastDelegate<(ImpactResult: HitResult, ImpactVelocity: Vector) => void>;
+	OnProjectileStop: UnrealEngineMulticastDelegate<(ImpactResult: HitResult) => void>;
+	HomingAccelerationMagnitude: number;
+	HomingTargetComponent: any;
+	MaxSimulationTimeStep: number;
+	MaxSimulationIterations: number;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): ProjectileMovementComponent;
+	static Find(Outer: UObject, ResourceName: string): ProjectileMovementComponent;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): ProjectileMovementComponent;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ProjectileMovementComponent;
+	StopSimulating(HitResult: HitResult): void;
+	SetVelocityInLocalSpace(NewVelocity: Vector): void;
+	LimitVelocity(NewVelocity: Vector): Vector;
+	static C(Other: UObject): ProjectileMovementComponent;
+}
+
+declare class RotatingMovementComponent extends MovementComponent { 
+	RotationRate: Rotator;
+	PivotTranslation: Vector;
+	bRotationInLocalSpace: boolean;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): RotatingMovementComponent;
+	static Find(Outer: UObject, ResourceName: string): RotatingMovementComponent;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): RotatingMovementComponent;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RotatingMovementComponent;
+	static C(Other: UObject): RotatingMovementComponent;
+}
+
+declare class SimpleWheeledVehicleMovementComponent extends WheeledVehicleMovementComponent { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SimpleWheeledVehicleMovementComponent;
+	static Find(Outer: UObject, ResourceName: string): SimpleWheeledVehicleMovementComponent;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SimpleWheeledVehicleMovementComponent;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SimpleWheeledVehicleMovementComponent;
+	SetSteerAngle(SteerAngle: number,WheelIndex: number): void;
+	SetDriveTorque(DriveTorque: number,WheelIndex: number): void;
+	SetBrakeTorque(BrakeTorque: number,WheelIndex: number): void;
+	static C(Other: UObject): SimpleWheeledVehicleMovementComponent;
 }
 
 declare class VehicleEngineData { 
@@ -12061,8 +14860,8 @@ declare class VehicleEngineData {
 	static C(Other: UObject): VehicleEngineData;
 }
 
-declare type EVehicleDifferential4W = string | symbol;
-declare var EVehicleDifferential4W = { LimitedSlip_4W:'LimitedSlip_4W',LimitedSlip_FrontDrive:'LimitedSlip_FrontDrive',LimitedSlip_RearDrive:'LimitedSlip_RearDrive',Open_4W:'Open_4W',Open_FrontDrive:'Open_FrontDrive',Open_RearDrive:'Open_RearDrive', };
+declare type EVehicleDifferential4W = 'LimitedSlip_4W' | 'LimitedSlip_FrontDrive' | 'LimitedSlip_RearDrive' | 'Open_4W' | 'Open_FrontDrive' | 'Open_RearDrive';
+declare var EVehicleDifferential4W : { LimitedSlip_4W:'LimitedSlip_4W',LimitedSlip_FrontDrive:'LimitedSlip_FrontDrive',LimitedSlip_RearDrive:'LimitedSlip_RearDrive',Open_4W:'Open_4W',Open_FrontDrive:'Open_FrontDrive',Open_RearDrive:'Open_RearDrive', };
 declare class VehicleDifferential4WData { 
 	DifferentialType: EVehicleDifferential4W;
 	FrontRearSplit: number;
@@ -12107,68 +14906,12 @@ declare class WheeledVehicleMovementComponent4W extends WheeledVehicleMovementCo
 	static Load(ResourceName: string): WheeledVehicleMovementComponent4W;
 	static Find(Outer: UObject, ResourceName: string): WheeledVehicleMovementComponent4W;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): WheeledVehicleMovementComponent4W;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WheeledVehicleMovementComponent4W;
 	static C(Other: UObject): WheeledVehicleMovementComponent4W;
-}
-
-declare class ProjectileMovementComponent extends MovementComponent { 
-	InitialSpeed: number;
-	MaxSpeed: number;
-	bRotationFollowsVelocity: boolean;
-	bShouldBounce: boolean;
-	bInitialVelocityInLocalSpace: boolean;
-	bForceSubStepping: boolean;
-	bIsHomingProjectile: boolean;
-	bBounceAngleAffectsFriction: boolean;
-	bIsSliding: boolean;
-	PreviousHitTime: number;
-	PreviousHitNormal: Vector;
-	ProjectileGravityScale: number;
-	Buoyancy: number;
-	Bounciness: number;
-	Friction: number;
-	BounceVelocityStopSimulatingThreshold: number;
-	OnProjectileBounce: UnrealEngineMulticastDelegate<(ImpactResult: HitResult, ImpactVelocity: Vector) => void>;
-	OnProjectileStop: UnrealEngineMulticastDelegate<(ImpactResult: HitResult) => void>;
-	HomingAccelerationMagnitude: number;
-	HomingTargetComponent: any;
-	MaxSimulationTimeStep: number;
-	MaxSimulationIterations: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ProjectileMovementComponent;
-	static Find(Outer: UObject, ResourceName: string): ProjectileMovementComponent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ProjectileMovementComponent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ProjectileMovementComponent;
-	StopSimulating(HitResult: HitResult): void;
-	SetVelocityInLocalSpace(NewVelocity: Vector): void;
-	LimitVelocity(NewVelocity: Vector): Vector;
-	static C(Other: UObject): ProjectileMovementComponent;
-}
-
-declare class RotatingMovementComponent extends MovementComponent { 
-	RotationRate: Rotator;
-	PivotTranslation: Vector;
-	bRotationInLocalSpace: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): RotatingMovementComponent;
-	static Find(Outer: UObject, ResourceName: string): RotatingMovementComponent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): RotatingMovementComponent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RotatingMovementComponent;
-	static C(Other: UObject): RotatingMovementComponent;
 }
 
 declare class NavLinkCustomInterface extends Interface { 
@@ -12177,7 +14920,7 @@ declare class NavLinkCustomInterface extends Interface {
 	static Load(ResourceName: string): NavLinkCustomInterface;
 	static Find(Outer: UObject, ResourceName: string): NavLinkCustomInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavLinkCustomInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12193,7 +14936,7 @@ declare class NavModifierComponent extends NavRelevantComponent {
 	static Load(ResourceName: string): NavModifierComponent;
 	static Find(Outer: UObject, ResourceName: string): NavModifierComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavModifierComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12215,7 +14958,7 @@ declare class PawnNoiseEmitterComponent extends ActorComponent {
 	static Load(ResourceName: string): PawnNoiseEmitterComponent;
 	static Find(Outer: UObject, ResourceName: string): PawnNoiseEmitterComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PawnNoiseEmitterComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12232,7 +14975,7 @@ declare class PhysicalAnimationComponent extends ActorComponent {
 	static Load(ResourceName: string): PhysicalAnimationComponent;
 	static Find(Outer: UObject, ResourceName: string): PhysicalAnimationComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicalAnimationComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12247,6 +14990,9 @@ declare class PhysicalAnimationComponent extends ActorComponent {
 
 declare class PhysicsHandleComponent extends ActorComponent { 
 	GrabbedComponent: PrimitiveComponent;
+	bSoftAngularConstraint: boolean;
+	bSoftLinearConstraint: boolean;
+	bInterpolateTarget: boolean;
 	LinearDamping: number;
 	LinearStiffness: number;
 	AngularDamping: number;
@@ -12257,7 +15003,7 @@ declare class PhysicsHandleComponent extends ActorComponent {
 	static Load(ResourceName: string): PhysicsHandleComponent;
 	static Find(Outer: UObject, ResourceName: string): PhysicsHandleComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsHandleComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12271,6 +15017,8 @@ declare class PhysicsHandleComponent extends ActorComponent {
 	SetAngularStiffness(NewAngularStiffness: number): void;
 	SetAngularDamping(NewAngularDamping: number): void;
 	ReleaseComponent(): void;
+	GrabComponentAtLocationWithRotation(Component: PrimitiveComponent,InBoneName: string,Location: Vector,Rotation: Rotator): void;
+	GrabComponentAtLocation(Component: PrimitiveComponent,InBoneName: string,GrabLocation: Vector): void;
 	GrabComponent(Component: PrimitiveComponent,InBoneName: string,GrabLocation: Vector,bConstrainRotation: boolean): void;
 	GetTargetLocationAndRotation(TargetLocation?: Vector,TargetRotation?: Rotator): {TargetLocation: Vector, TargetRotation: Rotator};
 	static C(Other: UObject): PhysicsHandleComponent;
@@ -12284,7 +15032,7 @@ declare class PlatformEventsComponent extends ActorComponent {
 	static Load(ResourceName: string): PlatformEventsComponent;
 	static Find(Outer: UObject, ResourceName: string): PlatformEventsComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlatformEventsComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12328,7 +15076,7 @@ declare class DirectionalLightComponent extends LightComponent {
 	static Load(ResourceName: string): DirectionalLightComponent;
 	static Find(Outer: UObject, ResourceName: string): DirectionalLightComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DirectionalLightComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12360,7 +15108,7 @@ declare class NavigationGraphNodeComponent extends SceneComponent {
 	static Load(ResourceName: string): NavigationGraphNodeComponent;
 	static Find(Outer: UObject, ResourceName: string): NavigationGraphNodeComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavigationGraphNodeComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12381,7 +15129,7 @@ declare class PhysicsSpringComponent extends SceneComponent {
 	static Load(ResourceName: string): PhysicsSpringComponent;
 	static Find(Outer: UObject, ResourceName: string): PhysicsSpringComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsSpringComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12393,35 +15141,15 @@ declare class PhysicsSpringComponent extends SceneComponent {
 	static C(Other: UObject): PhysicsSpringComponent;
 }
 
-declare class PostProcessComponent extends SceneComponent { 
-	Settings: PostProcessSettings;
-	Priority: number;
-	BlendRadius: number;
-	BlendWeight: number;
-	bEnabled: boolean;
-	bUnbound: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): PostProcessComponent;
-	static Find(Outer: UObject, ResourceName: string): PostProcessComponent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): PostProcessComponent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PostProcessComponent;
-	static C(Other: UObject): PostProcessComponent;
-}
-
-declare type EBoneSpaces = string | symbol;
-declare var EBoneSpaces = { WorldSpace:'WorldSpace',ComponentSpace:'ComponentSpace', };
+declare type EBoneSpaces = 'WorldSpace' | 'ComponentSpace';
+declare var EBoneSpaces : { WorldSpace:'WorldSpace',ComponentSpace:'ComponentSpace', };
 declare class PoseableMeshComponent extends SkinnedMeshComponent { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): PoseableMeshComponent;
 	static Find(Outer: UObject, ResourceName: string): PoseableMeshComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PoseableMeshComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12445,7 +15173,7 @@ declare class NavMeshRenderingComponent extends PrimitiveComponent {
 	static Load(ResourceName: string): NavMeshRenderingComponent;
 	static Find(Outer: UObject, ResourceName: string): NavMeshRenderingComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavMeshRenderingComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12462,7 +15190,7 @@ declare class BoxReflectionCaptureComponent extends ReflectionCaptureComponent {
 	static Load(ResourceName: string): BoxReflectionCaptureComponent;
 	static Find(Outer: UObject, ResourceName: string): BoxReflectionCaptureComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BoxReflectionCaptureComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12479,7 +15207,7 @@ declare class PlaneReflectionCaptureComponent extends ReflectionCaptureComponent
 	static Load(ResourceName: string): PlaneReflectionCaptureComponent;
 	static Find(Outer: UObject, ResourceName: string): PlaneReflectionCaptureComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlaneReflectionCaptureComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12496,7 +15224,7 @@ declare class SphereReflectionCaptureComponent extends ReflectionCaptureComponen
 	static Load(ResourceName: string): SphereReflectionCaptureComponent;
 	static Find(Outer: UObject, ResourceName: string): SphereReflectionCaptureComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SphereReflectionCaptureComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12528,7 +15256,7 @@ declare class SpringArmComponent extends SceneComponent {
 	static Load(ResourceName: string): SpringArmComponent;
 	static Find(Outer: UObject, ResourceName: string): SpringArmComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SpringArmComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12536,23 +15264,31 @@ declare class SpringArmComponent extends SceneComponent {
 	static C(Other: UObject): SpringArmComponent;
 }
 
-declare type EStereoLayerType = string | symbol;
-declare var EStereoLayerType = { SLT_WorldLocked:'SLT_WorldLocked',SLT_TrackerLocked:'SLT_TrackerLocked',SLT_FaceLocked:'SLT_FaceLocked', };
+declare type EStereoLayerType = 'SLT_WorldLocked' | 'SLT_TrackerLocked' | 'SLT_FaceLocked';
+declare var EStereoLayerType : { SLT_WorldLocked:'SLT_WorldLocked',SLT_TrackerLocked:'SLT_TrackerLocked',SLT_FaceLocked:'SLT_FaceLocked', };
+declare type EStereoLayerShape = 'SLSH_QuadLayer' | 'SLSH_CylinderLayer' | 'SLSH_CubemapLayer';
+declare var EStereoLayerShape : { SLSH_QuadLayer:'SLSH_QuadLayer',SLSH_CylinderLayer:'SLSH_CylinderLayer',SLSH_CubemapLayer:'SLSH_CubemapLayer', };
 declare class StereoLayerComponent extends SceneComponent { 
 	bLiveTexture: boolean;
+	bSupportsDepth: boolean;
 	bNoAlphaChannel: boolean;
 	Texture: Texture;
+	LeftTexture: Texture;
 	bQuadPreserveTextureRatio: boolean;
 	QuadSize: Vector2D;
 	UVRect: Box2D;
+	CylinderRadius: number;
+	CylinderOverlayArc: number;
+	CylinderHeight: number;
 	StereoLayerType: EStereoLayerType;
+	StereoLayerShape: EStereoLayerShape;
 	Priority: number;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): StereoLayerComponent;
 	static Find(Outer: UObject, ResourceName: string): StereoLayerComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StereoLayerComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12579,6 +15315,7 @@ declare class TimelineEventEntry {
 declare class TimelineVectorTrack { 
 	VectorCurve: CurveVector;
 	InterpFunc: UnrealEngineDelegate<(Output: Vector) => void>;
+	TrackName: string;
 	VectorPropertyName: string;
 	VectorProperty: StructProperty;
 	clone() : TimelineVectorTrack;
@@ -12588,6 +15325,7 @@ declare class TimelineVectorTrack {
 declare class TimelineFloatTrack { 
 	FloatCurve: CurveFloat;
 	InterpFunc: UnrealEngineDelegate<(Output: number) => void>;
+	TrackName: string;
 	FloatPropertyName: string;
 	FloatProperty: FloatProperty;
 	clone() : TimelineFloatTrack;
@@ -12597,6 +15335,7 @@ declare class TimelineFloatTrack {
 declare class TimelineLinearColorTrack { 
 	LinearColorCurve: CurveLinearColor;
 	InterpFunc: UnrealEngineDelegate<(Output: LinearColor) => void>;
+	TrackName: string;
 	LinearColorPropertyName: string;
 	LinearColorProperty: StructProperty;
 	clone() : TimelineLinearColorTrack;
@@ -12626,23 +15365,28 @@ declare class Timeline {
 
 declare class TimelineComponent extends ActorComponent { 
 	TheTimeline: Timeline;
+	bIgnoreTimeDilation: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): TimelineComponent;
 	static Find(Outer: UObject, ResourceName: string): TimelineComponent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TimelineComponent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TimelineComponent;
 	Stop(): void;
+	SetVectorCurve(NewVectorCurve: CurveVector,VectorTrackName: string): void;
 	SetTimelineLengthMode(NewLengthMode: ETimelineLengthMode): void;
 	SetTimelineLength(NewLength: number): void;
 	SetPlayRate(NewRate: number): void;
 	SetPlaybackPosition(NewPosition: number,bFireEvents: boolean,bFireUpdate: boolean): void;
 	SetNewTime(NewTime: number): void;
 	SetLooping(bNewLooping: boolean): void;
+	SetLinearColorCurve(NewLinearColorCurve: CurveLinearColor,LinearColorTrackName: string): void;
+	SetIgnoreTimeDilation(bNewIgnoreTimeDilation: boolean): void;
+	SetFloatCurve(NewFloatCurve: CurveFloat,FloatTrackName: string): void;
 	ReverseFromEnd(): void;
 	Reverse(): void;
 	PlayFromStart(): void;
@@ -12654,6 +15398,7 @@ declare class TimelineComponent extends ActorComponent {
 	GetTimelineLength(): number;
 	GetPlayRate(): number;
 	GetPlaybackPosition(): number;
+	GetIgnoreTimeDilation(): boolean;
 	static C(Other: UObject): TimelineComponent;
 }
 
@@ -12665,7 +15410,7 @@ declare class AnimComposite extends AnimCompositeBase {
 	static Load(ResourceName: string): AnimComposite;
 	static Find(Outer: UObject, ResourceName: string): AnimComposite;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimComposite;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12673,8 +15418,8 @@ declare class AnimComposite extends AnimCompositeBase {
 	static C(Other: UObject): AnimComposite;
 }
 
-declare type EBlendSpaceAxis = string | symbol;
-declare var EBlendSpaceAxis = { BSA_None:'BSA_None',BSA_X:'BSA_X',BSA_Y:'BSA_Y', };
+declare type EBlendSpaceAxis = 'BSA_None' | 'BSA_X' | 'BSA_Y';
+declare var EBlendSpaceAxis : { BSA_None:'BSA_None',BSA_X:'BSA_X',BSA_Y:'BSA_Y', };
 declare class BlendSpace extends BlendSpaceBase { 
 	AxisToScaleAnimation: EBlendSpaceAxis;
 	constructor();
@@ -12682,7 +15427,7 @@ declare class BlendSpace extends BlendSpaceBase {
 	static Load(ResourceName: string): BlendSpace;
 	static Find(Outer: UObject, ResourceName: string): BlendSpace;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlendSpace;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12696,7 +15441,7 @@ declare class AimOffsetBlendSpace extends BlendSpace {
 	static Load(ResourceName: string): AimOffsetBlendSpace;
 	static Find(Outer: UObject, ResourceName: string): AimOffsetBlendSpace;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AimOffsetBlendSpace;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12712,7 +15457,7 @@ declare class BlendSpace1D extends BlendSpaceBase {
 	static Load(ResourceName: string): BlendSpace1D;
 	static Find(Outer: UObject, ResourceName: string): BlendSpace1D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlendSpace1D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12726,7 +15471,7 @@ declare class AimOffsetBlendSpace1D extends BlendSpace1D {
 	static Load(ResourceName: string): AimOffsetBlendSpace1D;
 	static Find(Outer: UObject, ResourceName: string): AimOffsetBlendSpace1D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AimOffsetBlendSpace1D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12740,7 +15485,7 @@ declare class AnimStateMachineTypes extends UObject {
 	static Load(ResourceName: string): AnimStateMachineTypes;
 	static Find(Outer: UObject, ResourceName: string): AnimStateMachineTypes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimStateMachineTypes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12754,7 +15499,7 @@ declare class AnimClassInterface extends Interface {
 	static Load(ResourceName: string): AnimClassInterface;
 	static Find(Outer: UObject, ResourceName: string): AnimClassInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimClassInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12832,7 +15577,7 @@ declare class AnimClassData extends UObject {
 	static Load(ResourceName: string): AnimClassData;
 	static Find(Outer: UObject, ResourceName: string): AnimClassData;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimClassData;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12854,7 +15599,7 @@ declare class AnimCompress_Automatic extends AnimCompress {
 	static Load(ResourceName: string): AnimCompress_Automatic;
 	static Find(Outer: UObject, ResourceName: string): AnimCompress_Automatic;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompress_Automatic;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12868,7 +15613,7 @@ declare class AnimCompress_BitwiseCompressOnly extends AnimCompress {
 	static Load(ResourceName: string): AnimCompress_BitwiseCompressOnly;
 	static Find(Outer: UObject, ResourceName: string): AnimCompress_BitwiseCompressOnly;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompress_BitwiseCompressOnly;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12882,7 +15627,7 @@ declare class AnimCompress_LeastDestructive extends AnimCompress {
 	static Load(ResourceName: string): AnimCompress_LeastDestructive;
 	static Find(Outer: UObject, ResourceName: string): AnimCompress_LeastDestructive;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompress_LeastDestructive;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12898,7 +15643,7 @@ declare class AnimCompress_RemoveEverySecondKey extends AnimCompress {
 	static Load(ResourceName: string): AnimCompress_RemoveEverySecondKey;
 	static Find(Outer: UObject, ResourceName: string): AnimCompress_RemoveEverySecondKey;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompress_RemoveEverySecondKey;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12921,7 +15666,7 @@ declare class AnimCompress_RemoveLinearKeys extends AnimCompress {
 	static Load(ResourceName: string): AnimCompress_RemoveLinearKeys;
 	static Find(Outer: UObject, ResourceName: string): AnimCompress_RemoveLinearKeys;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompress_RemoveLinearKeys;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12956,7 +15701,7 @@ declare class AnimCompress_PerTrackCompression extends AnimCompress_RemoveLinear
 	static Load(ResourceName: string): AnimCompress_PerTrackCompression;
 	static Find(Outer: UObject, ResourceName: string): AnimCompress_PerTrackCompression;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompress_PerTrackCompression;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12973,7 +15718,7 @@ declare class AnimCompress_RemoveTrivialKeys extends AnimCompress {
 	static Load(ResourceName: string): AnimCompress_RemoveTrivialKeys;
 	static Find(Outer: UObject, ResourceName: string): AnimCompress_RemoveTrivialKeys;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimCompress_RemoveTrivialKeys;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -12981,13 +15726,34 @@ declare class AnimCompress_RemoveTrivialKeys extends AnimCompress {
 	static C(Other: UObject): AnimCompress_RemoveTrivialKeys;
 }
 
+declare class AnimBlueprintGeneratedClass extends BlueprintGeneratedClass { 
+	BakedStateMachines: BakedAnimationStateMachine[];
+	TargetSkeleton: Skeleton;
+	AnimNotifies: AnimNotifyEvent[];
+	RootAnimNodeIndex: number;
+	OrderedSavedPoseIndices: number[];
+	SyncGroupNames: string[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): AnimBlueprintGeneratedClass;
+	static Find(Outer: UObject, ResourceName: string): AnimBlueprintGeneratedClass;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): AnimBlueprintGeneratedClass;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimBlueprintGeneratedClass;
+	static C(Other: UObject): AnimBlueprintGeneratedClass;
+}
+
 declare class VehicleAnimInstance extends AnimInstance { 
+	WheeledVehicleMovementComponent: WheeledVehicleMovementComponent;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): VehicleAnimInstance;
 	static Find(Outer: UObject, ResourceName: string): VehicleAnimInstance;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VehicleAnimInstance;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13007,7 +15773,7 @@ declare class AnimNotify_PlayParticleEffect extends AnimNotify {
 	static Load(ResourceName: string): AnimNotify_PlayParticleEffect;
 	static Find(Outer: UObject, ResourceName: string): AnimNotify_PlayParticleEffect;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimNotify_PlayParticleEffect;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13026,7 +15792,7 @@ declare class AnimNotify_PlaySound extends AnimNotify {
 	static Load(ResourceName: string): AnimNotify_PlaySound;
 	static Find(Outer: UObject, ResourceName: string): AnimNotify_PlaySound;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimNotify_PlaySound;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13047,7 +15813,7 @@ declare class AnimNotifyState_TimedParticleEffect extends AnimNotifyState {
 	static Load(ResourceName: string): AnimNotifyState_TimedParticleEffect;
 	static Find(Outer: UObject, ResourceName: string): AnimNotifyState_TimedParticleEffect;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimNotifyState_TimedParticleEffect;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13071,7 +15837,7 @@ declare class AnimNotifyState_Trail extends AnimNotifyState {
 	static Load(ResourceName: string): AnimNotifyState_Trail;
 	static Find(Outer: UObject, ResourceName: string): AnimNotifyState_Trail;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimNotifyState_Trail;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13102,7 +15868,7 @@ declare class AnimSet extends UObject {
 	static Load(ResourceName: string): AnimSet;
 	static Find(Outer: UObject, ResourceName: string): AnimSet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimSet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13245,12 +16011,13 @@ declare class AutomationTestSettings extends UObject {
 	ExternalTools: ExternalToolDefinition[];
 	ImportExportTestDefinitions: EditorImportExportTestDefinition[];
 	LaunchOnSettings: LaunchOnTestSettings[];
+	DefaultScreenshotResolution: IntPoint;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): AutomationTestSettings;
 	static Find(Outer: UObject, ResourceName: string): AutomationTestSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AutomationTestSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13264,7 +16031,7 @@ declare class NavEdgeProviderInterface extends Interface {
 	static Load(ResourceName: string): NavEdgeProviderInterface;
 	static Find(Outer: UObject, ResourceName: string): NavEdgeProviderInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavEdgeProviderInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13272,8 +16039,8 @@ declare class NavEdgeProviderInterface extends Interface {
 	static C(Other: UObject): NavEdgeProviderInterface;
 }
 
-declare type EScreenOrientation = string | symbol;
-declare var EScreenOrientation = { Unknown:'Unknown',Portrait:'Portrait',PortraitUpsideDown:'PortraitUpsideDown',LandscapeLeft:'LandscapeLeft',LandscapeRight:'LandscapeRight',FaceUp:'FaceUp',FaceDown:'FaceDown', };
+declare type EScreenOrientation = 'Unknown' | 'Portrait' | 'PortraitUpsideDown' | 'LandscapeLeft' | 'LandscapeRight' | 'FaceUp' | 'FaceDown';
+declare var EScreenOrientation : { Unknown:'Unknown',Portrait:'Portrait',PortraitUpsideDown:'PortraitUpsideDown',LandscapeLeft:'LandscapeLeft',LandscapeRight:'LandscapeRight',FaceUp:'FaceUp',FaceDown:'FaceDown', };
 declare class PlatformGameInstance extends GameInstance { 
 	ApplicationWillDeactivateDelegate: UnrealEngineMulticastDelegate<() => void>;
 	ApplicationHasReactivatedDelegate: UnrealEngineMulticastDelegate<() => void>;
@@ -13291,7 +16058,7 @@ declare class PlatformGameInstance extends GameInstance {
 	static Load(ResourceName: string): PlatformGameInstance;
 	static Find(Outer: UObject, ResourceName: string): PlatformGameInstance;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PlatformGameInstance;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13305,7 +16072,7 @@ declare class BlueprintPlatformLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): BlueprintPlatformLibrary;
 	static Find(Outer: UObject, ResourceName: string): BlueprintPlatformLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BlueprintPlatformLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13314,11 +16081,37 @@ declare class BlueprintPlatformLibrary extends BlueprintFunctionLibrary {
 	static ScheduleLocalNotificationAtTime(FireDateTime: DateTime,LocalTime: boolean,Title: string,Body: string,Action: string,ActivationEvent: string): void;
 	static GetLaunchNotification(NotificationLaunchedApp?: boolean,ActivationEvent?: string,FireDate?: number): {NotificationLaunchedApp: boolean, ActivationEvent: string, FireDate: number};
 	static ClearAllLocalNotifications(): void;
+	static CancelLocalNotification(ActivationEvent: string): void;
 	static C(Other: UObject): BlueprintPlatformLibrary;
 }
 
-declare type EEvaluateCurveTableResult = string | symbol;
-declare var EEvaluateCurveTableResult = { RowFound:'RowFound',RowNotFound:'RowNotFound', };
+declare class BlueprintSetLibrary extends BlueprintFunctionLibrary { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): BlueprintSetLibrary;
+	static Find(Outer: UObject, ResourceName: string): BlueprintSetLibrary;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): BlueprintSetLibrary;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintSetLibrary;
+	static Union(A: any,B: any,Result?: any): {Result: any};
+	static ToArray(A: any,Result?: number[]): {Result: number[]};
+	static RemoveItems(TargetSet: any,Items: number[]): void;
+	static Remove(TargetSet: any,Item: number): boolean;
+	static Length(TargetSet: any): number;
+	static Intersection(A: any,B: any,Result?: any): {Result: any};
+	static Difference(A: any,B: any,Result?: any): {Result: any};
+	static ContainsItem(TargetSet: any,ItemToFind: number): boolean;
+	static Clear(TargetSet: any): void;
+	static AddItems(TargetSet: any,NewItems: number[]): void;
+	static Add(TargetSet: any,NewItem: number): void;
+	static C(Other: UObject): BlueprintSetLibrary;
+}
+
+declare type EEvaluateCurveTableResult = 'RowFound' | 'RowNotFound';
+declare var EEvaluateCurveTableResult : { RowFound:'RowFound',RowNotFound:'RowNotFound', };
 declare class CurveTable extends UObject { 
 	AssetImportData: AssetImportData;
 	ImportPath: string;
@@ -13327,7 +16120,7 @@ declare class CurveTable extends UObject {
 	static Load(ResourceName: string): CurveTable;
 	static Find(Outer: UObject, ResourceName: string): CurveTable;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveTable;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13343,7 +16136,7 @@ declare class DataTableFunctionLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): DataTableFunctionLibrary;
 	static Find(Outer: UObject, ResourceName: string): DataTableFunctionLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DataTableFunctionLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13360,7 +16153,7 @@ declare class DebugDrawService extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): DebugDrawService;
 	static Find(Outer: UObject, ResourceName: string): DebugDrawService;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DebugDrawService;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13414,7 +16207,7 @@ declare class CollisionProfile extends DeveloperSettings {
 	static Load(ResourceName: string): CollisionProfile;
 	static Find(Outer: UObject, ResourceName: string): CollisionProfile;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CollisionProfile;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13436,7 +16229,7 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): KismetSystemLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetSystemLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetSystemLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13456,6 +16249,7 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static SphereOverlapActors_DEPRECATED(WorldContextObject: UObject,SpherePos: Vector,SphereRadius: number,Filter: EOverlapFilterOption,ActorClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutActors?: Actor[]): {OutActors: Actor[], $: boolean};
 	static ShowPlatformSpecificLeaderboardScreen(CategoryName: string): void;
 	static ShowPlatformSpecificAchievementsScreen(SpecificPlayer: PlayerController): void;
+	static ShowInterstitialAd(): void;
 	static ShowAdBanner(AdIdIndex: number,bShowOnBottomOfScreen: boolean): void;
 	static SetWindowTitle(Title: string): void;
 	static SetVolumeButtonsHandledBySystem(bEnabled: boolean): void;
@@ -13494,6 +16288,7 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static MakeLiteralFloat(Value: number): number;
 	static MakeLiteralByte(Value: number): number;
 	static MakeLiteralBool(Value: boolean): boolean;
+	static LoadInterstitialAd(AdIdIndex: number): void;
 	static LineTraceForObjects(WorldContextObject: UObject,Start: Vector,End: Vector,ObjectTypes: EObjectTypeQuery[],bTraceComplex: boolean,ActorsToIgnore: Actor[],DrawDebugType: EDrawDebugTrace,OutHit?: HitResult,bIgnoreSelf?: boolean,TraceColor?: LinearColor,TraceHitColor?: LinearColor,DrawTime?: number): {OutHit: HitResult, $: boolean};
 	static SingleLineTraceByObjectDeprecated(WorldContextObject: UObject,Start: Vector,End: Vector,ObjectsToTrace: ECollisionChannel[],bTraceComplex: boolean,ActorsToIgnore: Actor[],DrawDebugType: EDrawDebugTrace,OutHit?: HitResult,bIgnoreSelf?: boolean,TraceColor?: LinearColor,TraceHitColor?: LinearColor,DrawTime?: number): {OutHit: HitResult, $: boolean};
 	static LineTraceByChannel(WorldContextObject: UObject,Start: Vector,End: Vector,TraceChannel: ETraceTypeQuery,bTraceComplex: boolean,ActorsToIgnore: Actor[],DrawDebugType: EDrawDebugTrace,OutHit?: HitResult,bIgnoreSelf?: boolean,TraceColor?: LinearColor,TraceHitColor?: LinearColor,DrawTime?: number): {OutHit: HitResult, $: boolean};
@@ -13525,9 +16320,12 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static ClearandInvalidateTimerbyHandle(WorldContextObject: UObject,Handle?: TimerHandle): {Handle: TimerHandle};
 	static IsValidClass(Class: UnrealEngineClass): boolean;
 	static IsValid(UObject: UObject): boolean;
+	static IsStandalone(WorldContextObject: UObject): boolean;
 	static IsServer(WorldContextObject: UObject): boolean;
 	static IsPackagedForDistribution(): boolean;
 	static IsLoggedIn(SpecificPlayer: PlayerController): boolean;
+	static IsInterstitialAdRequested(): boolean;
+	static IsInterstitialAdAvailable(): boolean;
 	static IsDedicatedServer(WorldContextObject: UObject): boolean;
 	static IsControllerAssignedToGamepad(ControllerId: number): boolean;
 	static HideAdBanner(): void;
@@ -13549,6 +16347,7 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static GetGameBundleId(): string;
 	static GetEngineVersion(): string;
 	static GetDisplayName(UObject: UObject): string;
+	static GetConvenientWindowedResolutions(Resolutions?: IntPoint[]): {Resolutions: IntPoint[], $: boolean};
 	static GetComponentBounds(Component: SceneComponent,Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
 	static GetDisplayName(Class: UnrealEngineClass): string;
 	static GetAdIDCount(): number;
@@ -13617,7 +16416,7 @@ declare class GameplayStatics extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): GameplayStatics;
 	static Find(Outer: UObject, ResourceName: string): GameplayStatics;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GameplayStatics;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13626,7 +16425,7 @@ declare class GameplayStatics extends BlueprintFunctionLibrary {
 	static SuggestProjectileVelocityCustomArc(WorldContextObject: UObject,OutLaunchVelocity?: Vector,StartPos?: Vector,EndPos?: Vector,OverrideGravityZ?: number,ArcParam?: number): {OutLaunchVelocity: Vector, $: boolean};
 	static SpawnSoundAttached(Sound: SoundBase,AttachToComponent: SceneComponent,AttachPointName: string,Location: Vector,Rotation: Rotator,LocationType: EAttachLocation,bStopWhenAttachedToDestroyed: boolean,VolumeMultiplier: number,PitchMultiplier: number,StartTime: number,AttenuationSettings: SoundAttenuation,ConcurrencySettings: SoundConcurrency): AudioComponent;
 	static SpawnSoundAtLocation(WorldContextObject: UObject,Sound: SoundBase,Location: Vector,Rotation: Rotator,VolumeMultiplier: number,PitchMultiplier: number,StartTime: number,AttenuationSettings: SoundAttenuation,ConcurrencySettings: SoundConcurrency): AudioComponent;
-	static SpawnSound2D(WorldContextObject: UObject,Sound: SoundBase,VolumeMultiplier: number,PitchMultiplier: number,StartTime: number,ConcurrencySettings: SoundConcurrency): AudioComponent;
+	static SpawnSound2D(WorldContextObject: UObject,Sound: SoundBase,VolumeMultiplier: number,PitchMultiplier: number,StartTime: number,ConcurrencySettings: SoundConcurrency,bPersistAcrossLevelTransition: boolean): AudioComponent;
 	static SpawnObject(ObjectClass: UnrealEngineClass,Outer: UObject): UObject;
 	static SpawnEmitterAttached(EmitterTemplate: ParticleSystem,AttachToComponent: SceneComponent,AttachPointName: string,Location: Vector,Rotation: Rotator,LocationType: EAttachLocation,bAutoDestroy: boolean): ParticleSystemComponent;
 	static SpawnEmitterAtLocation(WorldContextObject: UObject,EmitterTemplate: ParticleSystem,Location: Vector,Rotation: Rotator,bAutoDestroy: boolean): ParticleSystemComponent;
@@ -13646,8 +16445,10 @@ declare class GameplayStatics extends BlueprintFunctionLibrary {
 	static SetBaseSoundMix(WorldContextObject: UObject,InSoundMix: SoundMix): void;
 	static SaveGameToSlot(SaveGameObject: SaveGame,SlotName: string,UserIndex: number): boolean;
 	static RemovePlayer(Player: PlayerController,bDestroyPawn: boolean): void;
+	static RebaseZeroOriginOntoLocal(WorldContextObject: UObject,WorldLocation: Vector): Vector;
+	static RebaseLocalOriginOntoZero(WorldContextObject: UObject,WorldLocation: Vector): Vector;
 	static PushSoundMixModifier(WorldContextObject: UObject,InSoundMixModifier: SoundMix): void;
-	static ProjectWorldToScreen(Player: PlayerController,WorldPosition: Vector,ScreenPosition?: Vector2D): {ScreenPosition: Vector2D, $: boolean};
+	static ProjectWorldToScreen(Player: PlayerController,WorldPosition: Vector,ScreenPosition?: Vector2D,bPlayerViewportRelative?: boolean): {ScreenPosition: Vector2D, $: boolean};
 	static PredictProjectilePath(WorldContextObject: UObject,OutHit?: HitResult,OutPathPositions?: Vector[],OutLastTraceDestination?: Vector,StartPos?: Vector,LaunchVelocity?: Vector,bTracePath?: boolean,ProjectileRadius?: number,ObjectTypes?: EObjectTypeQuery[],bTraceComplex?: boolean,ActorsToIgnore?: Actor[],DrawDebugType?: EDrawDebugTrace,DrawDebugTime?: number,SimFrequency?: number,MaxSimTime?: number,OverrideGravityZ?: number): {OutHit: HitResult, OutPathPositions: Vector[], OutLastTraceDestination: Vector, $: boolean};
 	static PopSoundMixModifier(WorldContextObject: UObject,InSoundMixModifier: SoundMix): void;
 	static PlayWorldCameraShake(WorldContextObject: UObject,Shake: UnrealEngineClass,Epicenter: Vector,InnerRadius: number,OuterRadius: number,Falloff: number,bOrientShakeTowardsEpicenter: boolean): void;
@@ -13665,6 +16466,8 @@ declare class GameplayStatics extends BlueprintFunctionLibrary {
 	static GrassOverlappingSphereCount(WorldContextObject: UObject,StaticMesh: StaticMesh,CenterPosition: Vector,Radius: number): number;
 	static GetWorldOriginLocation(WorldContextObject: UObject): IntVector;
 	static GetWorldDeltaSeconds(WorldContextObject: UObject): number;
+	static GetUnpausedTimeSeconds(WorldContextObject: UObject): number;
+	static GetTimeSeconds(WorldContextObject: UObject): number;
 	static GetSurfaceType(Hit: HitResult): EPhysicalSurface;
 	static GetStreamingLevel(WorldContextObject: UObject,PackageName: string): LevelStreaming;
 	static GetRealTimeSeconds(WorldContextObject: UObject): number;
@@ -13678,8 +16481,8 @@ declare class GameplayStatics extends BlueprintFunctionLibrary {
 	static GetKeyValue(Pair: string,Key?: string,Value?: string): {Key: string, Value: string};
 	static GetIntOption(Options: string,Key: string,DefaultValue: number): number;
 	static GetGlobalTimeDilation(WorldContextObject: UObject): number;
-	static GetGameState(WorldContextObject: UObject): GameState;
-	static GetGameMode(WorldContextObject: UObject): GameMode;
+	static GetGameState(WorldContextObject: UObject): GameStateBase;
+	static GetGameMode(WorldContextObject: UObject): GameModeBase;
 	static GetGameInstance(WorldContextObject: UObject): GameInstance;
 	static GetCurrentReverbEffect(WorldContextObject: UObject): ReverbEffect;
 	static GetCurrentLevelName(WorldContextObject: UObject,bRemovePrefixString: boolean): string;
@@ -13698,7 +16501,7 @@ declare class GameplayStatics extends BlueprintFunctionLibrary {
 	static DeprojectScreenToWorld(Player: PlayerController,ScreenPosition: Vector2D,WorldPosition?: Vector,WorldDirection?: Vector): {WorldPosition: Vector, WorldDirection: Vector, $: boolean};
 	static DeleteGameInSlot(SlotName: string,UserIndex: number): boolean;
 	static DeactivateReverbEffect(WorldContextObject: UObject,TagName: string): void;
-	static CreateSound2D(WorldContextObject: UObject,Sound: SoundBase,VolumeMultiplier: number,PitchMultiplier: number,StartTime: number,ConcurrencySettings: SoundConcurrency): AudioComponent;
+	static CreateSound2D(WorldContextObject: UObject,Sound: SoundBase,VolumeMultiplier: number,PitchMultiplier: number,StartTime: number,ConcurrencySettings: SoundConcurrency,bPersistAcrossLevelTransition: boolean): AudioComponent;
 	static CreateSaveGameObjectFromBlueprint(SaveGameBlueprint: Blueprint): SaveGame;
 	static CreateSaveGameObject(SaveGameClass: UnrealEngineClass): SaveGame;
 	static CreatePlayer(WorldContextObject: UObject,ControllerId: number,bSpawnPawn: boolean): PlayerController;
@@ -13720,17 +16523,17 @@ declare class GameplayStatics extends BlueprintFunctionLibrary {
 	static C(Other: UObject): GameplayStatics;
 }
 
-declare type EHMDTrackingOrigin = string | symbol;
-declare var EHMDTrackingOrigin = { Floor:'Floor',Eye:'Eye', };
-declare type EOrientPositionSelector = string | symbol;
-declare var EOrientPositionSelector = { Orientation:'Orientation',Position:'Position',OrientationAndPosition:'OrientationAndPosition', };
+declare type EHMDTrackingOrigin = 'Floor' | 'Eye';
+declare var EHMDTrackingOrigin : { Floor:'Floor',Eye:'Eye', };
+declare type EOrientPositionSelector = 'Orientation' | 'Position' | 'OrientationAndPosition';
+declare var EOrientPositionSelector : { Orientation:'Orientation',Position:'Position',OrientationAndPosition:'OrientationAndPosition', };
 declare class HeadMountedDisplayFunctionLibrary extends BlueprintFunctionLibrary { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): HeadMountedDisplayFunctionLibrary;
 	static Find(Outer: UObject, ResourceName: string): HeadMountedDisplayFunctionLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HeadMountedDisplayFunctionLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13744,7 +16547,7 @@ declare class HeadMountedDisplayFunctionLibrary extends BlueprintFunctionLibrary
 	static HasValidTrackingPosition(): boolean;
 	static GetWorldToMetersScale(WorldContext: UObject): number;
 	static GetVRFocusState(bUseFocus?: boolean,bHasFocus?: boolean): {bUseFocus: boolean, bHasFocus: boolean};
-	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,HFOV?: number,VFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,Index?: number): {Origin: Vector, Rotation: Rotator, HFOV: number, VFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
+	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,Index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
 	static GetTrackingOrigin(): EHMDTrackingOrigin;
 	static GetScreenPercentage(): number;
 	static GetPositionalTrackingCameraParameters(CameraOrigin?: Vector,CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
@@ -13762,7 +16565,7 @@ declare class KismetArrayLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): KismetArrayLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetArrayLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetArrayLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13794,7 +16597,7 @@ declare class KismetGuidLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): KismetGuidLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetGuidLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetGuidLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13815,7 +16618,7 @@ declare class KismetInputLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): KismetInputLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetInputLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetInputLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13869,7 +16672,7 @@ declare class KismetMaterialLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): KismetMaterialLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetMaterialLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetMaterialLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13882,13 +16685,20 @@ declare class KismetMaterialLibrary extends BlueprintFunctionLibrary {
 	static C(Other: UObject): KismetMaterialLibrary;
 }
 
+declare class FloatSpringState { 
+	clone() : FloatSpringState;
+	static C(Other: UObject): FloatSpringState;
+	ResetFloatSpringState(): {SpringState: FloatSpringState};
+	static ResetFloatSpringState(SpringState?: FloatSpringState): {SpringState: FloatSpringState};
+}
+
 declare class KismetMathLibrary extends BlueprintFunctionLibrary { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): KismetMathLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetMathLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetMathLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -13901,6 +16711,7 @@ declare class KismetMathLibrary extends BlueprintFunctionLibrary {
 	static Lerp(A: Vector,B: Vector,Alpha: number): Vector;
 	static VInterpTo_Constant(Current: Vector,Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
 	static VInterpTo(Current: Vector,Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
+	static VectorSpringInterp(Current: Vector,Target: Vector,SpringState?: VectorSpringState,Stiffness?: number,CriticalDampingFactor?: number,DeltaTime?: number,Mass?: number): {SpringState: VectorSpringState, $: Vector};
 	static Vector2DInterpTo_Constant(Current: Vector2D,Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
 	static Vector2DInterpTo(Current: Vector2D,Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
 	static Ease(A: Vector,B: Vector,Alpha: number,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Vector;
@@ -13952,7 +16763,9 @@ declare class KismetMathLibrary extends BlueprintFunctionLibrary {
 	static RInterpTo(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
 	static RGBtoHSV(RGB: LinearColor,HSV?: LinearColor): {HSV: LinearColor};
 	static RGBToHSV(InColor: LinearColor,H?: number,S?: number,V?: number,A?: number): {H: number, S: number, V: number, A: number};
+	static ResetVectorSpringState(SpringState?: VectorSpringState): {SpringState: VectorSpringState};
 	static ResetRandomStream(Stream: RandomStream): void;
+	static ResetFloatSpringState(SpringState?: FloatSpringState): {SpringState: FloatSpringState};
 	static Ease(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
 	static RandomUnitVectorInConeWithYawAndPitch(ConeDir: Vector,MaxYawInDegrees: number,MaxPitchInDegrees: number): Vector;
 	static RandomUnitVectorInCone(ConeDir: Vector,ConeHalfAngle: number): Vector;
@@ -14123,7 +16936,7 @@ declare class KismetMathLibrary extends BlueprintFunctionLibrary {
 	static GetHour(A: DateTime): number;
 	static GetForwardVector(InRot: Rotator): Vector;
 	static GetDuration(A: Timespan): Timespan;
-	static GetDirectionVector(From: Vector,To: Vector): Vector;
+	static GetUnitDirectionVector(From: Vector,To: Vector): Vector;
 	static GetDays(A: Timespan): number;
 	static GetDayOfYear(A: DateTime): number;
 	static GetDay(A: DateTime): number;
@@ -14139,6 +16952,7 @@ declare class KismetMathLibrary extends BlueprintFunctionLibrary {
 	static Division(Dividend: number,Divisor: number,Remainder?: number): {Remainder: number, $: number};
 	static Min(A: number,B: number): number;
 	static Max(A: number,B: number): number;
+	static FloatSpringInterp(Current: number,Target: number,SpringState?: FloatSpringState,Stiffness?: number,CriticalDampingFactor?: number,DeltaTime?: number,Mass?: number): {SpringState: FloatSpringState, $: number};
 	static FixedTurn(InCurrent: number,InDesired: number,InDeltaRate: number): number;
 	static FInterpTo_Constant(Current: number,Target: number,DeltaTime: number,InterpSpeed: number): number;
 	static FInterpTo(Current: number,Target: number,DeltaTime: number,InterpSpeed: number): number;
@@ -14262,7 +17076,7 @@ declare class KismetNodeHelperLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): KismetNodeHelperLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetNodeHelperLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetNodeHelperLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14289,7 +17103,7 @@ declare class KismetRenderingLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): KismetRenderingLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetRenderingLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetRenderingLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14304,17 +17118,17 @@ declare class KismetRenderingLibrary extends BlueprintFunctionLibrary {
 	static C(Other: UObject): KismetRenderingLibrary;
 }
 
-declare type ESearchCase = string | symbol;
-declare var ESearchCase = { CaseSensitive:'CaseSensitive',IgnoreCase:'IgnoreCase', };
-declare type ESearchDir = string | symbol;
-declare var ESearchDir = { FromStart:'FromStart',FromEnd:'FromEnd', };
+declare type ESearchCase = 'CaseSensitive' | 'IgnoreCase';
+declare var ESearchCase : { CaseSensitive:'CaseSensitive',IgnoreCase:'IgnoreCase', };
+declare type ESearchDir = 'FromStart' | 'FromEnd';
+declare var ESearchDir : { FromStart:'FromStart',FromEnd:'FromEnd', };
 declare class KismetStringLibrary extends BlueprintFunctionLibrary { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): KismetStringLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetStringLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetStringLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14383,10 +17197,10 @@ declare class KismetStringLibrary extends BlueprintFunctionLibrary {
 	static C(Other: UObject): KismetStringLibrary;
 }
 
-declare type EFormatArgumentType = string | symbol;
-declare var EFormatArgumentType = { Int:'Int',UInt:'UInt',Float:'Float',Double:'Double',Text:'Text',Gender:'Gender', };
-declare type ETextGender = string | symbol;
-declare var ETextGender = { Masculine:'Masculine',Feminine:'Feminine',Neuter:'Neuter', };
+declare type EFormatArgumentType = 'Int' | 'UInt' | 'Float' | 'Double' | 'Text' | 'Gender';
+declare var EFormatArgumentType : { Int:'Int',UInt:'UInt',Float:'Float',Double:'Double',Text:'Text',Gender:'Gender', };
+declare type ETextGender = 'Masculine' | 'Feminine' | 'Neuter';
+declare var ETextGender : { Masculine:'Masculine',Feminine:'Feminine',Neuter:'Neuter', };
 declare class FormatArgumentData { 
 	ArgumentName: string;
 	ArgumentValueType: EFormatArgumentType;
@@ -14398,15 +17212,15 @@ declare class FormatArgumentData {
 	static C(Other: UObject): FormatArgumentData;
 }
 
-declare type ERoundingMode = string | symbol;
-declare var ERoundingMode = { HalfToEven:'HalfToEven',HalfFromZero:'HalfFromZero',HalfToZero:'HalfToZero',FromZero:'FromZero',ToZero:'ToZero',ToNegativeInfinity:'ToNegativeInfinity',ToPositiveInfinity:'ToPositiveInfinity', };
+declare type ERoundingMode = 'HalfToEven' | 'HalfFromZero' | 'HalfToZero' | 'FromZero' | 'ToZero' | 'ToNegativeInfinity' | 'ToPositiveInfinity';
+declare var ERoundingMode : { HalfToEven:'HalfToEven',HalfFromZero:'HalfFromZero',HalfToZero:'HalfToZero',FromZero:'FromZero',ToZero:'ToZero',ToNegativeInfinity:'ToNegativeInfinity',ToPositiveInfinity:'ToPositiveInfinity', };
 declare class KismetTextLibrary extends BlueprintFunctionLibrary { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): KismetTextLibrary;
 	static Find(Outer: UObject, ResourceName: string): KismetTextLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): KismetTextLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14437,6 +17251,9 @@ declare class KismetTextLibrary extends BlueprintFunctionLibrary {
 	static ToText(InColor: LinearColor): string;
 	static ToText(Value: number): string;
 	static ToText(InBool: boolean): string;
+	static AsTime(InDateTime: DateTime,InTimeZone: string): string;
+	static AsDateTime(InDateTime: DateTime,InTimeZone: string): string;
+	static AsDate(InDateTime: DateTime,InTimeZone: string): string;
 	static AsTimespan(InTimespan: Timespan): string;
 	static AsTime(In: DateTime): string;
 	static AsPercent(Value: number,RoundingMode: ERoundingMode,bUseGrouping: boolean,MinimumIntegralDigits: number,MaximumIntegralDigits: number,MinimumFractionalDigits: number,MaximumFractionalDigits: number): string;
@@ -14454,7 +17271,7 @@ declare class MeshVertexPainterKismetLibrary extends BlueprintFunctionLibrary {
 	static Load(ResourceName: string): MeshVertexPainterKismetLibrary;
 	static Find(Outer: UObject, ResourceName: string): MeshVertexPainterKismetLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MeshVertexPainterKismetLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14465,13 +17282,47 @@ declare class MeshVertexPainterKismetLibrary extends BlueprintFunctionLibrary {
 	static C(Other: UObject): MeshVertexPainterKismetLibrary;
 }
 
+declare class PendingNetGame extends UObject { 
+	NetDriver: NetDriver;
+	DemoNetDriver: DemoNetDriver;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): PendingNetGame;
+	static Find(Outer: UObject, ResourceName: string): PendingNetGame;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): PendingNetGame;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PendingNetGame;
+	static C(Other: UObject): PendingNetGame;
+}
+
+declare class StereoLayerFunctionLibrary extends BlueprintFunctionLibrary { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): StereoLayerFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): StereoLayerFunctionLibrary;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): StereoLayerFunctionLibrary;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): StereoLayerFunctionLibrary;
+	static ShowSplashScreen(): void;
+	static SetSplashScreen(Texture: Texture,Scale: Vector2D,Offset: Vector2D,bShowLoadingMovie: boolean,bShowOnSet: boolean): void;
+	static HideSplashScreen(): void;
+	static EnableAutoLoadingSplashScreen(InAutoShowEnabled: boolean): void;
+	static C(Other: UObject): StereoLayerFunctionLibrary;
+}
+
 declare class VisualLoggerKismetLibrary extends BlueprintFunctionLibrary { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): VisualLoggerKismetLibrary;
 	static Find(Outer: UObject, ResourceName: string): VisualLoggerKismetLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VisualLoggerKismetLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14480,26 +17331,6 @@ declare class VisualLoggerKismetLibrary extends BlueprintFunctionLibrary {
 	static LogLocation(WorldContextObject: UObject,Location: Vector,Text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string): void;
 	static LogBoxShape(WorldContextObject: UObject,BoxShape: Box,Text: string,ObjectColor: LinearColor,LogCategory: string): void;
 	static C(Other: UObject): VisualLoggerKismetLibrary;
-}
-
-declare class AnimBlueprintGeneratedClass extends BlueprintGeneratedClass { 
-	BakedStateMachines: BakedAnimationStateMachine[];
-	TargetSkeleton: Skeleton;
-	AnimNotifies: AnimNotifyEvent[];
-	RootAnimNodeIndex: number;
-	OrderedSavedPoseIndices: number[];
-	SyncGroupNames: string[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): AnimBlueprintGeneratedClass;
-	static Find(Outer: UObject, ResourceName: string): AnimBlueprintGeneratedClass;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): AnimBlueprintGeneratedClass;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimBlueprintGeneratedClass;
-	static C(Other: UObject): AnimBlueprintGeneratedClass;
 }
 
 declare class CircleElement2D { 
@@ -14539,7 +17370,7 @@ declare class BodySetup2D extends BodySetup {
 	static Load(ResourceName: string): BodySetup2D;
 	static Find(Outer: UObject, ResourceName: string): BodySetup2D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BodySetup2D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14554,7 +17385,7 @@ declare class BoneMaskFilter extends UObject {
 	static Load(ResourceName: string): BoneMaskFilter;
 	static Find(Outer: UObject, ResourceName: string): BoneMaskFilter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BoneMaskFilter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14570,7 +17401,7 @@ declare class BookMark2D extends UObject {
 	static Load(ResourceName: string): BookMark2D;
 	static Find(Outer: UObject, ResourceName: string): BookMark2D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): BookMark2D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14585,28 +17416,12 @@ declare class ButtonStyleAsset extends UObject {
 	static Load(ResourceName: string): ButtonStyleAsset;
 	static Find(Outer: UObject, ResourceName: string): ButtonStyleAsset;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ButtonStyleAsset;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ButtonStyleAsset;
 	static C(Other: UObject): ButtonStyleAsset;
-}
-
-declare class PendingNetGame extends UObject { 
-	NetDriver: NetDriver;
-	DemoNetDriver: DemoNetDriver;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): PendingNetGame;
-	static Find(Outer: UObject, ResourceName: string): PendingNetGame;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): PendingNetGame;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PendingNetGame;
-	static C(Other: UObject): PendingNetGame;
 }
 
 declare class ActorChannel extends Channel { 
@@ -14616,7 +17431,7 @@ declare class ActorChannel extends Channel {
 	static Load(ResourceName: string): ActorChannel;
 	static Find(Outer: UObject, ResourceName: string): ActorChannel;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ActorChannel;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14630,7 +17445,7 @@ declare class ControlChannel extends Channel {
 	static Load(ResourceName: string): ControlChannel;
 	static Find(Outer: UObject, ResourceName: string): ControlChannel;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ControlChannel;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14644,7 +17459,7 @@ declare class VoiceChannel extends Channel {
 	static Load(ResourceName: string): VoiceChannel;
 	static Find(Outer: UObject, ResourceName: string): VoiceChannel;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): VoiceChannel;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14659,7 +17474,7 @@ declare class CheckBoxStyleAsset extends UObject {
 	static Load(ResourceName: string): CheckBoxStyleAsset;
 	static Find(Outer: UObject, ResourceName: string): CheckBoxStyleAsset;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CheckBoxStyleAsset;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14673,7 +17488,7 @@ declare class PluginCommandlet extends Commandlet {
 	static Load(ResourceName: string): PluginCommandlet;
 	static Find(Outer: UObject, ResourceName: string): PluginCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PluginCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14687,7 +17502,7 @@ declare class SmokeTestCommandlet extends Commandlet {
 	static Load(ResourceName: string): SmokeTestCommandlet;
 	static Find(Outer: UObject, ResourceName: string): SmokeTestCommandlet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SmokeTestCommandlet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14701,12 +17516,34 @@ declare class CurveEdPresetCurve extends UObject {
 	static Load(ResourceName: string): CurveEdPresetCurve;
 	static Find(Outer: UObject, ResourceName: string): CurveEdPresetCurve;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): CurveEdPresetCurve;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CurveEdPresetCurve;
 	static C(Other: UObject): CurveEdPresetCurve;
+}
+
+declare class PreviewMeshCollectionEntry { 
+	SkeletalMesh: any;
+	clone() : PreviewMeshCollectionEntry;
+	static C(Other: UObject): PreviewMeshCollectionEntry;
+}
+
+declare class PreviewMeshCollection extends DataAsset { 
+	Skeleton: Skeleton;
+	SkeletalMeshes: PreviewMeshCollectionEntry[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): PreviewMeshCollection;
+	static Find(Outer: UObject, ResourceName: string): PreviewMeshCollection;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): PreviewMeshCollection;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PreviewMeshCollection;
+	static C(Other: UObject): PreviewMeshCollection;
 }
 
 declare class AnimationSettings extends DeveloperSettings { 
@@ -14726,12 +17563,13 @@ declare class AnimationSettings extends DeveloperSettings {
 	bTryLinearKeyRemovalCompression: boolean;
 	bTryIntervalKeyRemoval: boolean;
 	bEnablePerformanceLog: boolean;
+	bStripAnimationDataOnDedicatedServer: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): AnimationSettings;
 	static Find(Outer: UObject, ResourceName: string): AnimationSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AnimationSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14749,6 +17587,7 @@ declare class AudioQualitySettings {
 declare class AudioSettings extends DeveloperSettings { 
 	DefaultSoundClassName: StringAssetReference;
 	DefaultSoundConcurrencyName: StringAssetReference;
+	DefaultSoundSubmixName: StringAssetReference;
 	DefaultBaseSoundMix: StringAssetReference;
 	VoiPSoundClass: StringAssetReference;
 	LowPassFilterResonance: number;
@@ -14761,7 +17600,7 @@ declare class AudioSettings extends DeveloperSettings {
 	static Load(ResourceName: string): AudioSettings;
 	static Find(Outer: UObject, ResourceName: string): AudioSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): AudioSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14769,17 +17608,17 @@ declare class AudioSettings extends DeveloperSettings {
 	static C(Other: UObject): AudioSettings;
 }
 
-declare type ERenderFocusRule = string | symbol;
-declare var ERenderFocusRule = { Always:'Always',NonPointer:'NonPointer',NavigationOnly:'NavigationOnly',Never:'Never', };
-declare type EUIScalingRule = string | symbol;
-declare var EUIScalingRule = { ShortestSide:'ShortestSide',LongestSide:'LongestSide',Horizontal:'Horizontal',Vertical:'Vertical',Custom:'Custom', };
+declare type ERenderFocusRule = 'Always' | 'NonPointer' | 'NavigationOnly' | 'Never';
+declare var ERenderFocusRule : { Always:'Always',NonPointer:'NonPointer',NavigationOnly:'NavigationOnly',Never:'Never', };
+declare type EUIScalingRule = 'ShortestSide' | 'LongestSide' | 'Horizontal' | 'Vertical' | 'Custom';
+declare var EUIScalingRule : { ShortestSide:'ShortestSide',LongestSide:'LongestSide',Horizontal:'Horizontal',Vertical:'Vertical',Custom:'Custom', };
 declare class DPICustomScalingRule extends UObject { 
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): DPICustomScalingRule;
 	static Find(Outer: UObject, ResourceName: string): DPICustomScalingRule;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DPICustomScalingRule;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14808,7 +17647,7 @@ declare class UserInterfaceSettings extends DeveloperSettings {
 	static Load(ResourceName: string): UserInterfaceSettings;
 	static Find(Outer: UObject, ResourceName: string): UserInterfaceSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): UserInterfaceSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14829,12 +17668,13 @@ declare class StreamingSettings extends DeveloperSettings {
 	PriorityAsyncLoadingExtraTime: number;
 	LevelStreamingActorsUpdateTimeLimit: number;
 	LevelStreamingComponentsRegistrationGranularity: number;
+	EventDrivenLoaderEnabled: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): StreamingSettings;
 	static Find(Outer: UObject, ResourceName: string): StreamingSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): StreamingSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14858,7 +17698,7 @@ declare class GarbageCollectionSettings extends DeveloperSettings {
 	static Load(ResourceName: string): GarbageCollectionSettings;
 	static Find(Outer: UObject, ResourceName: string): GarbageCollectionSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GarbageCollectionSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14866,14 +17706,30 @@ declare class GarbageCollectionSettings extends DeveloperSettings {
 	static C(Other: UObject): GarbageCollectionSettings;
 }
 
+declare class MeshSimplificationSettings extends DeveloperSettings { 
+	MeshReductionModuleName: string;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MeshSimplificationSettings;
+	static Find(Outer: UObject, ResourceName: string): MeshSimplificationSettings;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MeshSimplificationSettings;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MeshSimplificationSettings;
+	static C(Other: UObject): MeshSimplificationSettings;
+}
+
 declare class NetworkSettings extends DeveloperSettings { 
 	bVerifyPeer: boolean;
+	bEnableMultiplayerWorldOriginRebasing: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): NetworkSettings;
 	static Find(Outer: UObject, ResourceName: string): NetworkSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NetworkSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14881,10 +17737,10 @@ declare class NetworkSettings extends DeveloperSettings {
 	static C(Other: UObject): NetworkSettings;
 }
 
-declare type ESettingsLockedAxis = string | symbol;
-declare var ESettingsLockedAxis = { None:'None',X:'X',Y:'Y',Z:'Z',Invalid:'Invalid', };
-declare type ESettingsDOF = string | symbol;
-declare var ESettingsDOF = { Full3D:'Full3D',YZPlane:'YZPlane',XZPlane:'XZPlane',XYPlane:'XYPlane', };
+declare type ESettingsLockedAxis = 'None' | 'X' | 'Y' | 'Z' | 'Invalid';
+declare var ESettingsLockedAxis : { None:'None',X:'X',Y:'Y',Z:'Z',Invalid:'Invalid', };
+declare type ESettingsDOF = 'Full3D' | 'YZPlane' | 'XZPlane' | 'XYPlane';
+declare var ESettingsDOF : { Full3D:'Full3D',YZPlane:'YZPlane',XZPlane:'XZPlane',XYPlane:'XYPlane', };
 declare class PhysicalSurfaceName { 
 	Type: EPhysicalSurface;
 	Name: string;
@@ -14919,7 +17775,7 @@ declare class PhysicsSettings extends DeveloperSettings {
 	bDefaultHasComplexCollision: boolean;
 	bSuppressFaceRemapTable: boolean;
 	bSupportUVFromHitResults: boolean;
-	bDisableActiveTransforms: boolean;
+	bDisableActiveActors: boolean;
 	bDisableCCD: boolean;
 	MaxPhysicsDeltaTime: number;
 	bSubstepping: boolean;
@@ -14935,7 +17791,7 @@ declare class PhysicsSettings extends DeveloperSettings {
 	static Load(ResourceName: string): PhysicsSettings;
 	static Find(Outer: UObject, ResourceName: string): PhysicsSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PhysicsSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -14943,25 +17799,26 @@ declare class PhysicsSettings extends DeveloperSettings {
 	static C(Other: UObject): PhysicsSettings;
 }
 
-declare type ETranslucentSortPolicy = string | symbol;
-declare var ETranslucentSortPolicy = { SortByDistance:'SortByDistance',SortByProjectedZ:'SortByProjectedZ',SortAlongAxis:'SortAlongAxis', };
-declare type ECustomDepthStencil = string | symbol;
-declare var ECustomDepthStencil = { Disabled:'Disabled',Enabled:'Enabled',EnabledOnDemand:'EnabledOnDemand',EnabledWithStencil:'EnabledWithStencil', };
-declare type EAutoExposureMethodUI = string | symbol;
-declare var EAutoExposureMethodUI = { AEM_Histogram:'AEM_Histogram',AEM_Basic:'AEM_Basic', };
-declare type EAntiAliasingMethodUI = string | symbol;
-declare var EAntiAliasingMethodUI = { AAM_None:'AAM_None',AAM_FXAA:'AAM_FXAA',AAM_TemporalAA:'AAM_TemporalAA', };
-declare type EEarlyZPass = string | symbol;
-declare var EEarlyZPass = { None:'None',OpaqueOnly:'OpaqueOnly',OpaqueAndMasked:'OpaqueAndMasked',Auto:'Auto', };
-declare type EClearSceneOptions = string | symbol;
-declare var EClearSceneOptions = { NoClear:'NoClear',HardwareClear:'HardwareClear',QuadAtMaxZ:'QuadAtMaxZ', };
-declare type EGBufferFormat = string | symbol;
-declare var EGBufferFormat = { Force8BitsPerChannel:'Force8BitsPerChannel',Default:'Default',HighPrecisionNormals:'HighPrecisionNormals',Force16BitsPerChannel:'Force16BitsPerChannel',EGBufferFormat_MAX:'EGBufferFormat_MAX',None:'None', };
+declare type ETranslucentSortPolicy = 'SortByDistance' | 'SortByProjectedZ' | 'SortAlongAxis';
+declare var ETranslucentSortPolicy : { SortByDistance:'SortByDistance',SortByProjectedZ:'SortByProjectedZ',SortAlongAxis:'SortAlongAxis', };
+declare type ECustomDepthStencil = 'Disabled' | 'Enabled' | 'EnabledOnDemand' | 'EnabledWithStencil';
+declare var ECustomDepthStencil : { Disabled:'Disabled',Enabled:'Enabled',EnabledOnDemand:'EnabledOnDemand',EnabledWithStencil:'EnabledWithStencil', };
+declare type EAutoExposureMethodUI = 'AEM_Histogram' | 'AEM_Basic';
+declare var EAutoExposureMethodUI : { AEM_Histogram:'AEM_Histogram',AEM_Basic:'AEM_Basic', };
+declare type EAntiAliasingMethod = 'AAM_None' | 'AAM_FXAA' | 'AAM_TemporalAA' | 'AAM_MSAA';
+declare var EAntiAliasingMethod : { AAM_None:'AAM_None',AAM_FXAA:'AAM_FXAA',AAM_TemporalAA:'AAM_TemporalAA',AAM_MSAA:'AAM_MSAA', };
+declare type EEarlyZPass = 'None' | 'OpaqueOnly' | 'OpaqueAndMasked' | 'Auto';
+declare var EEarlyZPass : { None:'None',OpaqueOnly:'OpaqueOnly',OpaqueAndMasked:'OpaqueAndMasked',Auto:'Auto', };
+declare type EClearSceneOptions = 'NoClear' | 'HardwareClear' | 'QuadAtMaxZ';
+declare var EClearSceneOptions : { NoClear:'NoClear',HardwareClear:'HardwareClear',QuadAtMaxZ:'QuadAtMaxZ', };
+declare type EGBufferFormat = 'Force8BitsPerChannel' | 'Default' | 'HighPrecisionNormals' | 'Force16BitsPerChannel' | 'EGBufferFormat_MAX' | 'None';
+declare var EGBufferFormat : { Force8BitsPerChannel:'Force8BitsPerChannel',Default:'Default',HighPrecisionNormals:'HighPrecisionNormals',Force16BitsPerChannel:'Force16BitsPerChannel',EGBufferFormat_MAX:'EGBufferFormat_MAX',None:'None', };
 declare class RendererSettings extends DeveloperSettings { 
 	bMobileHDR: boolean;
 	MobileNumDynamicPointLights: any;
 	bMobileDynamicPointLightsUseStaticBranch: boolean;
 	bMobileEnableStaticAndCSMShadowReceivers: boolean;
+	bMobileDisableVertexFog: boolean;
 	bDiscardUnusedQualityLevels: boolean;
 	bOcclusionCulling: boolean;
 	MinScreenRadiusForLights: number;
@@ -14972,7 +17829,9 @@ declare class RendererSettings extends DeveloperSettings {
 	bUseDXT5NormalMaps: boolean;
 	bClearCoatEnableSecondNormal: boolean;
 	ReflectionCaptureResolution: number;
+	ReflectionEnvironmentLightmapMixBasedOnRoughness: boolean;
 	bForwardShading: boolean;
+	bVertexFoggingForOpaque: boolean;
 	bAllowStaticLighting: boolean;
 	bUseNormalMapsForStaticLighting: boolean;
 	bGenerateMeshDistanceFields: boolean;
@@ -14989,7 +17848,7 @@ declare class RendererSettings extends DeveloperSettings {
 	DefaultFeatureAutoExposure: EAutoExposureMethodUI;
 	bDefaultFeatureMotionBlur: boolean;
 	bDefaultFeatureLensFlare: boolean;
-	DefaultFeatureAntiAliasing: EAntiAliasingMethodUI;
+	DefaultFeatureAntiAliasing: EAntiAliasingMethod;
 	bStencilForLODDither: boolean;
 	EarlyZPass: EEarlyZPass;
 	bEarlyZPassMovable: boolean;
@@ -14997,24 +17856,25 @@ declare class RendererSettings extends DeveloperSettings {
 	ClearSceneMethod: EClearSceneOptions;
 	bBasePassOutputsVelocity: boolean;
 	bSelectiveBasePassOutputs: boolean;
+	bDefaultParticleCutouts: boolean;
 	bGlobalClipPlane: boolean;
 	GBufferFormat: EGBufferFormat;
 	bUseGPUMorphTargets: boolean;
 	bInstancedStereo: boolean;
 	bMultiView: boolean;
+	bMobileMultiView: boolean;
 	WireframeCullThreshold: number;
 	bSupportStationarySkylight: boolean;
 	bSupportLowQualityLightmaps: boolean;
 	bSupportPointLightWholeSceneShadows: boolean;
 	bSupportAtmosphericFog: boolean;
-	UIScaleRule: EUIScalingRule;
-	UIScaleCurve: RuntimeFloatCurve;
+	bSupportSkinCacheShaders: boolean;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): RendererSettings;
 	static Find(Outer: UObject, ResourceName: string): RendererSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RendererSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15029,7 +17889,7 @@ declare class RendererOverrideSettings extends DeveloperSettings {
 	static Load(ResourceName: string): RendererOverrideSettings;
 	static Find(Outer: UObject, ResourceName: string): RendererOverrideSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RendererOverrideSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15057,7 +17917,7 @@ declare class TextureLODSettings extends UObject {
 	static Load(ResourceName: string): TextureLODSettings;
 	static Find(Outer: UObject, ResourceName: string): TextureLODSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): TextureLODSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15075,7 +17935,7 @@ declare class DeviceProfile extends TextureLODSettings {
 	static Load(ResourceName: string): DeviceProfile;
 	static Find(Outer: UObject, ResourceName: string): DeviceProfile;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DeviceProfile;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15090,7 +17950,7 @@ declare class DeviceProfileManager extends UObject {
 	static Load(ResourceName: string): DeviceProfileManager;
 	static Find(Outer: UObject, ResourceName: string): DeviceProfileManager;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DeviceProfileManager;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15105,7 +17965,7 @@ declare class DistributionFloatConstant extends DistributionFloat {
 	static Load(ResourceName: string): DistributionFloatConstant;
 	static Find(Outer: UObject, ResourceName: string): DistributionFloatConstant;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionFloatConstant;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15113,8 +17973,8 @@ declare class DistributionFloatConstant extends DistributionFloat {
 	static C(Other: UObject): DistributionFloatConstant;
 }
 
-declare type DistributionParamMode = string | symbol;
-declare var DistributionParamMode = { DPM_Normal:'DPM_Normal',DPM_Abs:'DPM_Abs',DPM_Direct:'DPM_Direct', };
+declare type DistributionParamMode = 'DPM_Normal' | 'DPM_Abs' | 'DPM_Direct';
+declare var DistributionParamMode : { DPM_Normal:'DPM_Normal',DPM_Abs:'DPM_Abs',DPM_Direct:'DPM_Direct', };
 declare class DistributionFloatParameterBase extends DistributionFloatConstant { 
 	ParameterName: string;
 	MinInput: number;
@@ -15127,7 +17987,7 @@ declare class DistributionFloatParameterBase extends DistributionFloatConstant {
 	static Load(ResourceName: string): DistributionFloatParameterBase;
 	static Find(Outer: UObject, ResourceName: string): DistributionFloatParameterBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionFloatParameterBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15141,7 +18001,7 @@ declare class DistributionFloatParticleParameter extends DistributionFloatParame
 	static Load(ResourceName: string): DistributionFloatParticleParameter;
 	static Find(Outer: UObject, ResourceName: string): DistributionFloatParticleParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionFloatParticleParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15156,7 +18016,7 @@ declare class DistributionFloatConstantCurve extends DistributionFloat {
 	static Load(ResourceName: string): DistributionFloatConstantCurve;
 	static Find(Outer: UObject, ResourceName: string): DistributionFloatConstantCurve;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionFloatConstantCurve;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15172,7 +18032,7 @@ declare class DistributionFloatUniform extends DistributionFloat {
 	static Load(ResourceName: string): DistributionFloatUniform;
 	static Find(Outer: UObject, ResourceName: string): DistributionFloatUniform;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionFloatUniform;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15205,7 +18065,7 @@ declare class DistributionFloatUniformCurve extends DistributionFloat {
 	static Load(ResourceName: string): DistributionFloatUniformCurve;
 	static Find(Outer: UObject, ResourceName: string): DistributionFloatUniformCurve;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionFloatUniformCurve;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15213,8 +18073,8 @@ declare class DistributionFloatUniformCurve extends DistributionFloat {
 	static C(Other: UObject): DistributionFloatUniformCurve;
 }
 
-declare type EDistributionVectorLockFlags = string | symbol;
-declare var EDistributionVectorLockFlags = { EDVLF_None:'EDVLF_None',EDVLF_XY:'EDVLF_XY',EDVLF_XZ:'EDVLF_XZ',EDVLF_YZ:'EDVLF_YZ',EDVLF_XYZ:'EDVLF_XYZ', };
+declare type EDistributionVectorLockFlags = 'EDVLF_None' | 'EDVLF_XY' | 'EDVLF_XZ' | 'EDVLF_YZ' | 'EDVLF_XYZ';
+declare var EDistributionVectorLockFlags : { EDVLF_None:'EDVLF_None',EDVLF_XY:'EDVLF_XY',EDVLF_XZ:'EDVLF_XZ',EDVLF_YZ:'EDVLF_YZ',EDVLF_XYZ:'EDVLF_XYZ', };
 declare class DistributionVectorConstant extends DistributionVector { 
 	Constant: Vector;
 	bLockAxes: boolean;
@@ -15224,7 +18084,7 @@ declare class DistributionVectorConstant extends DistributionVector {
 	static Load(ResourceName: string): DistributionVectorConstant;
 	static Find(Outer: UObject, ResourceName: string): DistributionVectorConstant;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionVectorConstant;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15244,7 +18104,7 @@ declare class DistributionVectorParameterBase extends DistributionVectorConstant
 	static Load(ResourceName: string): DistributionVectorParameterBase;
 	static Find(Outer: UObject, ResourceName: string): DistributionVectorParameterBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionVectorParameterBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15258,7 +18118,7 @@ declare class DistributionVectorParticleParameter extends DistributionVectorPara
 	static Load(ResourceName: string): DistributionVectorParticleParameter;
 	static Find(Outer: UObject, ResourceName: string): DistributionVectorParticleParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionVectorParticleParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15275,7 +18135,7 @@ declare class DistributionVectorConstantCurve extends DistributionVector {
 	static Load(ResourceName: string): DistributionVectorConstantCurve;
 	static Find(Outer: UObject, ResourceName: string): DistributionVectorConstantCurve;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionVectorConstantCurve;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15283,8 +18143,8 @@ declare class DistributionVectorConstantCurve extends DistributionVector {
 	static C(Other: UObject): DistributionVectorConstantCurve;
 }
 
-declare type EDistributionVectorMirrorFlags = string | symbol;
-declare var EDistributionVectorMirrorFlags = { EDVMF_Same:'EDVMF_Same',EDVMF_Different:'EDVMF_Different',EDVMF_Mirror:'EDVMF_Mirror', };
+declare type EDistributionVectorMirrorFlags = 'EDVMF_Same' | 'EDVMF_Different' | 'EDVMF_Mirror';
+declare var EDistributionVectorMirrorFlags : { EDVMF_Same:'EDVMF_Same',EDVMF_Different:'EDVMF_Different',EDVMF_Mirror:'EDVMF_Mirror', };
 declare class DistributionVectorUniform extends DistributionVector { 
 	Max: Vector;
 	Min: Vector;
@@ -15297,7 +18157,7 @@ declare class DistributionVectorUniform extends DistributionVector {
 	static Load(ResourceName: string): DistributionVectorUniform;
 	static Find(Outer: UObject, ResourceName: string): DistributionVectorUniform;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionVectorUniform;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15342,7 +18202,7 @@ declare class DistributionVectorUniformCurve extends DistributionVector {
 	static Load(ResourceName: string): DistributionVectorUniformCurve;
 	static Find(Outer: UObject, ResourceName: string): DistributionVectorUniformCurve;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DistributionVectorUniformCurve;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15365,7 +18225,7 @@ declare class ComponentDelegateBinding extends DynamicBlueprintBinding {
 	static Load(ResourceName: string): ComponentDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): ComponentDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ComponentDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15379,7 +18239,7 @@ declare class InputDelegateBinding extends DynamicBlueprintBinding {
 	static Load(ResourceName: string): InputDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): InputDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15410,7 +18270,7 @@ declare class InputActionDelegateBinding extends InputDelegateBinding {
 	static Load(ResourceName: string): InputActionDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): InputActionDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputActionDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15432,7 +18292,7 @@ declare class InputAxisDelegateBinding extends InputDelegateBinding {
 	static Load(ResourceName: string): InputAxisDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): InputAxisDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputAxisDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15454,7 +18314,7 @@ declare class InputAxisKeyDelegateBinding extends InputDelegateBinding {
 	static Load(ResourceName: string): InputAxisKeyDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): InputAxisKeyDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputAxisKeyDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15468,7 +18328,7 @@ declare class InputVectorAxisDelegateBinding extends InputAxisKeyDelegateBinding
 	static Load(ResourceName: string): InputVectorAxisDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): InputVectorAxisDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputVectorAxisDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15491,7 +18351,7 @@ declare class InputKeyDelegateBinding extends InputDelegateBinding {
 	static Load(ResourceName: string): InputKeyDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): InputKeyDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputKeyDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15513,7 +18373,7 @@ declare class InputTouchDelegateBinding extends InputDelegateBinding {
 	static Load(ResourceName: string): InputTouchDelegateBinding;
 	static Find(Outer: UObject, ResourceName: string): InputTouchDelegateBinding;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputTouchDelegateBinding;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15529,7 +18389,7 @@ declare class EdGraphNode_Documentation extends EdGraphNode {
 	static Load(ResourceName: string): EdGraphNode_Documentation;
 	static Find(Outer: UObject, ResourceName: string): EdGraphNode_Documentation;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EdGraphNode_Documentation;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15543,7 +18403,7 @@ declare class ImportantToggleSettingInterface extends Interface {
 	static Load(ResourceName: string): ImportantToggleSettingInterface;
 	static Find(Outer: UObject, ResourceName: string): ImportantToggleSettingInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ImportantToggleSettingInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15560,7 +18420,7 @@ declare class EndUserSettings extends UObject {
 	static Load(ResourceName: string): EndUserSettings;
 	static Find(Outer: UObject, ResourceName: string): EndUserSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EndUserSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15577,7 +18437,7 @@ declare class GameEngine extends Engine {
 	static Load(ResourceName: string): GameEngine;
 	static Find(Outer: UObject, ResourceName: string): GameEngine;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): GameEngine;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15591,7 +18451,7 @@ declare class EngineHandlerComponentFactory extends HandlerComponentFactory {
 	static Load(ResourceName: string): EngineHandlerComponentFactory;
 	static Find(Outer: UObject, ResourceName: string): EngineHandlerComponentFactory;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EngineHandlerComponentFactory;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15607,7 +18467,7 @@ declare class HapticFeedbackEffect_Buffer extends HapticFeedbackEffect_Base {
 	static Load(ResourceName: string): HapticFeedbackEffect_Buffer;
 	static Find(Outer: UObject, ResourceName: string): HapticFeedbackEffect_Buffer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HapticFeedbackEffect_Buffer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15629,12 +18489,54 @@ declare class HapticFeedbackEffect_Curve extends HapticFeedbackEffect_Base {
 	static Load(ResourceName: string): HapticFeedbackEffect_Curve;
 	static Find(Outer: UObject, ResourceName: string): HapticFeedbackEffect_Curve;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HapticFeedbackEffect_Curve;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): HapticFeedbackEffect_Curve;
 	static C(Other: UObject): HapticFeedbackEffect_Curve;
+}
+
+declare class SoundEffectBase extends UObject { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SoundEffectBase;
+	static Find(Outer: UObject, ResourceName: string): SoundEffectBase;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SoundEffectBase;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundEffectBase;
+	static C(Other: UObject): SoundEffectBase;
+}
+
+declare class SoundEffectSource extends SoundEffectBase { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SoundEffectSource;
+	static Find(Outer: UObject, ResourceName: string): SoundEffectSource;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SoundEffectSource;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundEffectSource;
+	static C(Other: UObject): SoundEffectSource;
+}
+
+declare class SoundEffectSubmix extends SoundEffectBase { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): SoundEffectSubmix;
+	static Find(Outer: UObject, ResourceName: string): SoundEffectSubmix;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): SoundEffectSubmix;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundEffectSubmix;
+	static C(Other: UObject): SoundEffectSubmix;
 }
 
 declare class SoundGroup { 
@@ -15653,7 +18555,7 @@ declare class SoundGroups extends UObject {
 	static Load(ResourceName: string): SoundGroups;
 	static Find(Outer: UObject, ResourceName: string): SoundGroups;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): SoundGroups;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15668,7 +18570,7 @@ declare class HapticFeedbackEffect_SoundWave extends HapticFeedbackEffect_Base {
 	static Load(ResourceName: string): HapticFeedbackEffect_SoundWave;
 	static Find(Outer: UObject, ResourceName: string): HapticFeedbackEffect_SoundWave;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): HapticFeedbackEffect_SoundWave;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15692,8 +18594,8 @@ declare class InputAxisConfigEntry {
 	static C(Other: UObject): InputAxisConfigEntry;
 }
 
-declare type EMouseCaptureMode = string | symbol;
-declare var EMouseCaptureMode = { NoCapture:'NoCapture',CapturePermanently:'CapturePermanently',CapturePermanently_IncludingInitialMouseDown:'CapturePermanently_IncludingInitialMouseDown',CaptureDuringMouseDown:'CaptureDuringMouseDown',CaptureDuringRightMouseDown:'CaptureDuringRightMouseDown', };
+declare type EMouseCaptureMode = 'NoCapture' | 'CapturePermanently' | 'CapturePermanently_IncludingInitialMouseDown' | 'CaptureDuringMouseDown' | 'CaptureDuringRightMouseDown';
+declare var EMouseCaptureMode : { NoCapture:'NoCapture',CapturePermanently:'CapturePermanently',CapturePermanently_IncludingInitialMouseDown:'CapturePermanently_IncludingInitialMouseDown',CaptureDuringMouseDown:'CaptureDuringMouseDown',CaptureDuringRightMouseDown:'CaptureDuringRightMouseDown', };
 declare class InputActionKeyMapping { 
 	ActionName: string;
 	Key: Key;
@@ -15716,6 +18618,7 @@ declare class InputAxisKeyMapping {
 declare class InputSettings extends UObject { 
 	AxisConfig: InputAxisConfigEntry[];
 	bAltEnterTogglesFullscreen: boolean;
+	bF11TogglesFullscreen: boolean;
 	bUseMouseForTouch: boolean;
 	bEnableMouseSmoothing: boolean;
 	bEnableFOVScaling: boolean;
@@ -15737,7 +18640,7 @@ declare class InputSettings extends UObject {
 	static Load(ResourceName: string): InputSettings;
 	static Find(Outer: UObject, ResourceName: string): InputSettings;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InputSettings;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15753,7 +18656,7 @@ declare class InterpFilter_Classes extends InterpFilter {
 	static Load(ResourceName: string): InterpFilter_Classes;
 	static Find(Outer: UObject, ResourceName: string): InterpFilter_Classes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpFilter_Classes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15768,7 +18671,7 @@ declare class InterpFilter_Custom extends InterpFilter {
 	static Load(ResourceName: string): InterpFilter_Custom;
 	static Find(Outer: UObject, ResourceName: string): InterpFilter_Custom;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpFilter_Custom;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15795,7 +18698,7 @@ declare class InterpGroupCamera extends InterpGroup {
 	static Load(ResourceName: string): InterpGroupCamera;
 	static Find(Outer: UObject, ResourceName: string): InterpGroupCamera;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpGroupCamera;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15809,7 +18712,7 @@ declare class InterpGroupInstCamera extends InterpGroupInst {
 	static Load(ResourceName: string): InterpGroupInstCamera;
 	static Find(Outer: UObject, ResourceName: string): InterpGroupInstCamera;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpGroupInstCamera;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15823,7 +18726,7 @@ declare class InterpGroupInstDirector extends InterpGroupInst {
 	static Load(ResourceName: string): InterpGroupInstDirector;
 	static Find(Outer: UObject, ResourceName: string): InterpGroupInstDirector;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpGroupInstDirector;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15846,7 +18749,7 @@ declare class InterpTrackBoolProp extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackBoolProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackBoolProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackBoolProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15872,7 +18775,7 @@ declare class InterpTrackDirector extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackDirector;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackDirector;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackDirector;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15898,7 +18801,7 @@ declare class InterpTrackEvent extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackEvent;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackEvent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackEvent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15914,7 +18817,7 @@ declare class InterpTrackFloatBase extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackFloatBase;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackFloatBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackFloatBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15943,7 +18846,7 @@ declare class InterpTrackAnimControl extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackAnimControl;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackAnimControl;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackAnimControl;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15960,7 +18863,7 @@ declare class InterpTrackFade extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackFade;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackFade;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackFade;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15977,7 +18880,7 @@ declare class InterpTrackFloatAnimBPParam extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackFloatAnimBPParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackFloatAnimBPParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackFloatAnimBPParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -15993,7 +18896,7 @@ declare class InterpTrackFloatMaterialParam extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackFloatMaterialParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackFloatMaterialParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackFloatMaterialParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16008,7 +18911,7 @@ declare class InterpTrackFloatParticleParam extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackFloatParticleParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackFloatParticleParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackFloatParticleParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16023,7 +18926,7 @@ declare class InterpTrackFloatProp extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackFloatProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackFloatProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackFloatProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16031,8 +18934,8 @@ declare class InterpTrackFloatProp extends InterpTrackFloatBase {
 	static C(Other: UObject): InterpTrackFloatProp;
 }
 
-declare type EInterpMoveAxis = string | symbol;
-declare var EInterpMoveAxis = { AXIS_TranslationX:'AXIS_TranslationX',AXIS_TranslationY:'AXIS_TranslationY',AXIS_TranslationZ:'AXIS_TranslationZ',AXIS_RotationX:'AXIS_RotationX',AXIS_RotationY:'AXIS_RotationY',AXIS_RotationZ:'AXIS_RotationZ', };
+declare type EInterpMoveAxis = 'AXIS_TranslationX' | 'AXIS_TranslationY' | 'AXIS_TranslationZ' | 'AXIS_RotationX' | 'AXIS_RotationY' | 'AXIS_RotationZ';
+declare var EInterpMoveAxis : { AXIS_TranslationX:'AXIS_TranslationX',AXIS_TranslationY:'AXIS_TranslationY',AXIS_TranslationZ:'AXIS_TranslationZ',AXIS_RotationX:'AXIS_RotationX',AXIS_RotationY:'AXIS_RotationY',AXIS_RotationZ:'AXIS_RotationZ', };
 declare class InterpTrackMoveAxis extends InterpTrackFloatBase { 
 	MoveAxis: EInterpMoveAxis;
 	LookupTrack: InterpLookupTrack;
@@ -16041,7 +18944,7 @@ declare class InterpTrackMoveAxis extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackMoveAxis;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackMoveAxis;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackMoveAxis;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16055,7 +18958,7 @@ declare class InterpTrackSlomo extends InterpTrackFloatBase {
 	static Load(ResourceName: string): InterpTrackSlomo;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackSlomo;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackSlomo;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16089,7 +18992,7 @@ declare class InterpTrackLinearColorBase extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackLinearColorBase;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackLinearColorBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackLinearColorBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16104,7 +19007,7 @@ declare class InterpTrackLinearColorProp extends InterpTrackLinearColorBase {
 	static Load(ResourceName: string): InterpTrackLinearColorProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackLinearColorProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackLinearColorProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16129,7 +19032,7 @@ declare class InterpTrackParticleReplay extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackParticleReplay;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackParticleReplay;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackParticleReplay;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16137,8 +19040,8 @@ declare class InterpTrackParticleReplay extends InterpTrack {
 	static C(Other: UObject): InterpTrackParticleReplay;
 }
 
-declare type ETrackToggleAction = string | symbol;
-declare var ETrackToggleAction = { ETTA_Off:'ETTA_Off',ETTA_On:'ETTA_On',ETTA_Toggle:'ETTA_Toggle',ETTA_Trigger:'ETTA_Trigger', };
+declare type ETrackToggleAction = 'ETTA_Off' | 'ETTA_On' | 'ETTA_Toggle' | 'ETTA_Trigger';
+declare var ETrackToggleAction : { ETTA_Off:'ETTA_Off',ETTA_On:'ETTA_On',ETTA_Toggle:'ETTA_Toggle',ETTA_Trigger:'ETTA_Trigger', };
 declare class ToggleTrackKey { 
 	Time: number;
 	ToggleAction: ETrackToggleAction;
@@ -16158,7 +19061,7 @@ declare class InterpTrackToggle extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackToggle;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackToggle;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackToggle;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16174,7 +19077,7 @@ declare class InterpTrackVectorBase extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackVectorBase;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackVectorBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackVectorBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16188,7 +19091,7 @@ declare class InterpTrackAudioMaster extends InterpTrackVectorBase {
 	static Load(ResourceName: string): InterpTrackAudioMaster;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackAudioMaster;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackAudioMaster;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16203,7 +19106,7 @@ declare class InterpTrackColorProp extends InterpTrackVectorBase {
 	static Load(ResourceName: string): InterpTrackColorProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackColorProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackColorProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16217,7 +19120,7 @@ declare class InterpTrackColorScale extends InterpTrackVectorBase {
 	static Load(ResourceName: string): InterpTrackColorScale;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackColorScale;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackColorScale;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16246,7 +19149,7 @@ declare class InterpTrackSound extends InterpTrackVectorBase {
 	static Load(ResourceName: string): InterpTrackSound;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackSound;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackSound;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16262,7 +19165,7 @@ declare class InterpTrackVectorMaterialParam extends InterpTrackVectorBase {
 	static Load(ResourceName: string): InterpTrackVectorMaterialParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackVectorMaterialParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackVectorMaterialParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16277,7 +19180,7 @@ declare class InterpTrackVectorProp extends InterpTrackVectorBase {
 	static Load(ResourceName: string): InterpTrackVectorProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackVectorProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackVectorProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16285,10 +19188,10 @@ declare class InterpTrackVectorProp extends InterpTrackVectorBase {
 	static C(Other: UObject): InterpTrackVectorProp;
 }
 
-declare type EVisibilityTrackAction = string | symbol;
-declare var EVisibilityTrackAction = { EVTA_Hide:'EVTA_Hide',EVTA_Show:'EVTA_Show',EVTA_Toggle:'EVTA_Toggle', };
-declare type EVisibilityTrackCondition = string | symbol;
-declare var EVisibilityTrackCondition = { EVTC_Always:'EVTC_Always',EVTC_GoreEnabled:'EVTC_GoreEnabled',EVTC_GoreDisabled:'EVTC_GoreDisabled', };
+declare type EVisibilityTrackAction = 'EVTA_Hide' | 'EVTA_Show' | 'EVTA_Toggle';
+declare var EVisibilityTrackAction : { EVTA_Hide:'EVTA_Hide',EVTA_Show:'EVTA_Show',EVTA_Toggle:'EVTA_Toggle', };
+declare type EVisibilityTrackCondition = 'EVTC_Always' | 'EVTC_GoreEnabled' | 'EVTC_GoreDisabled';
+declare var EVisibilityTrackCondition : { EVTC_Always:'EVTC_Always',EVTC_GoreEnabled:'EVTC_GoreEnabled',EVTC_GoreDisabled:'EVTC_GoreDisabled', };
 declare class VisibilityTrackKey { 
 	Time: number;
 	Action: EVisibilityTrackAction;
@@ -16307,7 +19210,7 @@ declare class InterpTrackVisibility extends InterpTrack {
 	static Load(ResourceName: string): InterpTrackVisibility;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackVisibility;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackVisibility;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16324,7 +19227,7 @@ declare class InterpTrackInstAnimControl extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstAnimControl;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstAnimControl;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstAnimControl;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16338,7 +19241,7 @@ declare class InterpTrackInstAudioMaster extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstAudioMaster;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstAudioMaster;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstAudioMaster;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16352,7 +19255,7 @@ declare class InterpTrackInstColorScale extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstColorScale;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstColorScale;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstColorScale;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16367,7 +19270,7 @@ declare class InterpTrackInstEvent extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstEvent;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstEvent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstEvent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16381,7 +19284,7 @@ declare class InterpTrackInstFade extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstFade;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstFade;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstFade;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16397,7 +19300,7 @@ declare class InterpTrackInstFloatAnimBPParam extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstFloatAnimBPParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstFloatAnimBPParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstFloatAnimBPParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16423,7 +19326,7 @@ declare class InterpTrackInstFloatMaterialParam extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstFloatMaterialParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstFloatMaterialParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstFloatMaterialParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16438,7 +19341,7 @@ declare class InterpTrackInstFloatParticleParam extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstFloatParticleParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstFloatParticleParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstFloatParticleParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16453,7 +19356,7 @@ declare class InterpTrackInstParticleReplay extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstParticleReplay;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstParticleReplay;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstParticleReplay;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16469,7 +19372,7 @@ declare class InterpTrackInstProperty extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstProperty;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstProperty;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstProperty;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16485,7 +19388,7 @@ declare class InterpTrackInstBoolProp extends InterpTrackInstProperty {
 	static Load(ResourceName: string): InterpTrackInstBoolProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstBoolProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstBoolProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16500,7 +19403,7 @@ declare class InterpTrackInstColorProp extends InterpTrackInstProperty {
 	static Load(ResourceName: string): InterpTrackInstColorProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstColorProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstColorProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16515,7 +19418,7 @@ declare class InterpTrackInstFloatProp extends InterpTrackInstProperty {
 	static Load(ResourceName: string): InterpTrackInstFloatProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstFloatProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstFloatProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16530,7 +19433,7 @@ declare class InterpTrackInstLinearColorProp extends InterpTrackInstProperty {
 	static Load(ResourceName: string): InterpTrackInstLinearColorProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstLinearColorProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstLinearColorProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16545,7 +19448,7 @@ declare class InterpTrackInstVectorProp extends InterpTrackInstProperty {
 	static Load(ResourceName: string): InterpTrackInstVectorProp;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstVectorProp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstVectorProp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16560,7 +19463,7 @@ declare class InterpTrackInstSlomo extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstSlomo;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstSlomo;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstSlomo;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16576,7 +19479,7 @@ declare class InterpTrackInstSound extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstSound;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstSound;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstSound;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16593,7 +19496,7 @@ declare class InterpTrackInstToggle extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstToggle;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstToggle;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstToggle;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16611,7 +19514,7 @@ declare class InterpTrackInstVectorMaterialParam extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstVectorMaterialParam;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstVectorMaterialParam;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstVectorMaterialParam;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16627,7 +19530,7 @@ declare class InterpTrackInstVisibility extends InterpTrackInst {
 	static Load(ResourceName: string): InterpTrackInstVisibility;
 	static Find(Outer: UObject, ResourceName: string): InterpTrackInstVisibility;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): InterpTrackInstVisibility;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16649,7 +19552,7 @@ declare class IntSerialization extends UObject {
 	static Load(ResourceName: string): IntSerialization;
 	static Find(Outer: UObject, ResourceName: string): IntSerialization;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): IntSerialization;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16663,7 +19566,7 @@ declare class LevelStreamingAlwaysLoaded extends LevelStreaming {
 	static Load(ResourceName: string): LevelStreamingAlwaysLoaded;
 	static Find(Outer: UObject, ResourceName: string): LevelStreamingAlwaysLoaded;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelStreamingAlwaysLoaded;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16679,7 +19582,7 @@ declare class LevelStreamingKismet extends LevelStreaming {
 	static Load(ResourceName: string): LevelStreamingKismet;
 	static Find(Outer: UObject, ResourceName: string): LevelStreamingKismet;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelStreamingKismet;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16694,7 +19597,7 @@ declare class LevelStreamingPersistent extends LevelStreaming {
 	static Load(ResourceName: string): LevelStreamingPersistent;
 	static Find(Outer: UObject, ResourceName: string): LevelStreamingPersistent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LevelStreamingPersistent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16710,7 +19613,7 @@ declare class LightmappedSurfaceCollection extends UObject {
 	static Load(ResourceName: string): LightmappedSurfaceCollection;
 	static Find(Outer: UObject, ResourceName: string): LightmappedSurfaceCollection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LightmappedSurfaceCollection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16725,7 +19628,7 @@ declare class LightmassPrimitiveSettingsObject extends UObject {
 	static Load(ResourceName: string): LightmassPrimitiveSettingsObject;
 	static Find(Outer: UObject, ResourceName: string): LightmassPrimitiveSettingsObject;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): LightmassPrimitiveSettingsObject;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16747,7 +19650,7 @@ declare class EngineMessage extends LocalMessage {
 	static Load(ResourceName: string): EngineMessage;
 	static Find(Outer: UObject, ResourceName: string): EngineMessage;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): EngineMessage;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16762,7 +19665,7 @@ declare class MaterialExpressionAbs extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionAbs;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionAbs;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionAbs;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16776,7 +19679,7 @@ declare class MaterialExpressionActorPositionWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionActorPositionWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionActorPositionWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionActorPositionWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16794,7 +19697,7 @@ declare class MaterialExpressionAdd extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionAdd;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionAdd;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionAdd;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16810,7 +19713,7 @@ declare class MaterialExpressionAppendVector extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionAppendVector;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionAppendVector;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionAppendVector;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16825,12 +19728,40 @@ declare class MaterialExpressionAtmosphericFogColor extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionAtmosphericFogColor;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionAtmosphericFogColor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionAtmosphericFogColor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionAtmosphericFogColor;
 	static C(Other: UObject): MaterialExpressionAtmosphericFogColor;
+}
+
+declare class MaterialExpressionAtmosphericLightColor extends MaterialExpression { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MaterialExpressionAtmosphericLightColor;
+	static Find(Outer: UObject, ResourceName: string): MaterialExpressionAtmosphericLightColor;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MaterialExpressionAtmosphericLightColor;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionAtmosphericLightColor;
+	static C(Other: UObject): MaterialExpressionAtmosphericLightColor;
+}
+
+declare class MaterialExpressionAtmosphericLightVector extends MaterialExpression { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MaterialExpressionAtmosphericLightVector;
+	static Find(Outer: UObject, ResourceName: string): MaterialExpressionAtmosphericLightVector;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MaterialExpressionAtmosphericLightVector;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionAtmosphericLightVector;
+	static C(Other: UObject): MaterialExpressionAtmosphericLightVector;
 }
 
 declare class MaterialExpressionBlackBody extends MaterialExpression { 
@@ -16840,7 +19771,7 @@ declare class MaterialExpressionBlackBody extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionBlackBody;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionBlackBody;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionBlackBody;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16848,15 +19779,35 @@ declare class MaterialExpressionBlackBody extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionBlackBody;
 }
 
+declare type EMaterialAttributeBlend = 'Blend' | 'UseA' | 'UseB';
+declare var EMaterialAttributeBlend : { Blend:'Blend',UseA:'UseA',UseB:'UseB', };
+declare class MaterialExpressionBlendMaterialAttributes extends MaterialExpression { 
+	A: MaterialAttributesInput;
+	B: MaterialAttributesInput;
+	Alpha: ExpressionInput;
+	PixelAttributeBlendType: EMaterialAttributeBlend;
+	VertexAttributeBlendType: EMaterialAttributeBlend;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MaterialExpressionBlendMaterialAttributes;
+	static Find(Outer: UObject, ResourceName: string): MaterialExpressionBlendMaterialAttributes;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MaterialExpressionBlendMaterialAttributes;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionBlendMaterialAttributes;
+	static C(Other: UObject): MaterialExpressionBlendMaterialAttributes;
+}
+
 declare class MaterialExpressionBreakMaterialAttributes extends MaterialExpression { 
-	Struct: ExpressionInput;
 	MaterialAttributes: MaterialAttributesInput;
 	constructor();
 	constructor(Outer: UObject);
 	static Load(ResourceName: string): MaterialExpressionBreakMaterialAttributes;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionBreakMaterialAttributes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionBreakMaterialAttributes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16876,7 +19827,7 @@ declare class MaterialExpressionBumpOffset extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionBumpOffset;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionBumpOffset;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionBumpOffset;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16890,7 +19841,7 @@ declare class MaterialExpressionCameraPositionWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCameraPositionWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCameraPositionWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCameraPositionWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16904,7 +19855,7 @@ declare class MaterialExpressionCameraVectorWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCameraVectorWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCameraVectorWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCameraVectorWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16919,7 +19870,7 @@ declare class MaterialExpressionCeil extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCeil;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCeil;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCeil;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16927,8 +19878,8 @@ declare class MaterialExpressionCeil extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionCeil;
 }
 
-declare type EClampMode = string | symbol;
-declare var EClampMode = { CMODE_Clamp:'CMODE_Clamp',CMODE_ClampMin:'CMODE_ClampMin',CMODE_ClampMax:'CMODE_ClampMax', };
+declare type EClampMode = 'CMODE_Clamp' | 'CMODE_ClampMin' | 'CMODE_ClampMax';
+declare var EClampMode : { CMODE_Clamp:'CMODE_Clamp',CMODE_ClampMin:'CMODE_ClampMin',CMODE_ClampMax:'CMODE_ClampMax', };
 declare class MaterialExpressionClamp extends MaterialExpression { 
 	Input: ExpressionInput;
 	Min: ExpressionInput;
@@ -16941,7 +19892,7 @@ declare class MaterialExpressionClamp extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionClamp;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionClamp;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionClamp;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16958,7 +19909,7 @@ declare class MaterialExpressionCollectionParameter extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCollectionParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCollectionParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCollectionParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16977,7 +19928,7 @@ declare class MaterialExpressionComponentMask extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionComponentMask;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionComponentMask;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionComponentMask;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -16992,7 +19943,7 @@ declare class MaterialExpressionConstant extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionConstant;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionConstant;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionConstant;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17008,7 +19959,7 @@ declare class MaterialExpressionConstant2Vector extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionConstant2Vector;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionConstant2Vector;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionConstant2Vector;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17023,7 +19974,7 @@ declare class MaterialExpressionConstant3Vector extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionConstant3Vector;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionConstant3Vector;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionConstant3Vector;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17038,7 +19989,7 @@ declare class MaterialExpressionConstant4Vector extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionConstant4Vector;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionConstant4Vector;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionConstant4Vector;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17055,7 +20006,7 @@ declare class MaterialExpressionConstantBiasScale extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionConstantBiasScale;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionConstantBiasScale;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionConstantBiasScale;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17071,7 +20022,7 @@ declare class MaterialExpressionCosine extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCosine;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCosine;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCosine;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17087,7 +20038,7 @@ declare class MaterialExpressionCrossProduct extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCrossProduct;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCrossProduct;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCrossProduct;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17095,8 +20046,8 @@ declare class MaterialExpressionCrossProduct extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionCrossProduct;
 }
 
-declare type ECustomMaterialOutputType = string | symbol;
-declare var ECustomMaterialOutputType = { CMOT_Float1:'CMOT_Float1',CMOT_Float2:'CMOT_Float2',CMOT_Float3:'CMOT_Float3',CMOT_Float4:'CMOT_Float4', };
+declare type ECustomMaterialOutputType = 'CMOT_Float1' | 'CMOT_Float2' | 'CMOT_Float3' | 'CMOT_Float4';
+declare var ECustomMaterialOutputType : { CMOT_Float1:'CMOT_Float1',CMOT_Float2:'CMOT_Float2',CMOT_Float3:'CMOT_Float3',CMOT_Float4:'CMOT_Float4', };
 declare class CustomInput { 
 	InputName: string;
 	Input: ExpressionInput;
@@ -17114,7 +20065,7 @@ declare class MaterialExpressionCustom extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionCustom;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionCustom;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionCustom;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17129,7 +20080,7 @@ declare class MaterialExpressionClearCoatNormalCustomOutput extends MaterialExpr
 	static Load(ResourceName: string): MaterialExpressionClearCoatNormalCustomOutput;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionClearCoatNormalCustomOutput;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionClearCoatNormalCustomOutput;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17144,7 +20095,7 @@ declare class MaterialExpressionTangentOutput extends MaterialExpressionCustomOu
 	static Load(ResourceName: string): MaterialExpressionTangentOutput;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTangentOutput;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTangentOutput;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17159,7 +20110,7 @@ declare class MaterialExpressionDDX extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDDX;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDDX;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDDX;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17174,7 +20125,7 @@ declare class MaterialExpressionDDY extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDDY;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDDY;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDDY;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17188,7 +20139,7 @@ declare class MaterialExpressionDecalDerivative extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDecalDerivative;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDecalDerivative;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDecalDerivative;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17202,7 +20153,7 @@ declare class MaterialExpressionDecalLifetimeOpacity extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionDecalLifetimeOpacity;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDecalLifetimeOpacity;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDecalLifetimeOpacity;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17219,7 +20170,7 @@ declare class MaterialExpressionDecalMipmapLevel extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDecalMipmapLevel;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDecalMipmapLevel;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDecalMipmapLevel;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17237,7 +20188,7 @@ declare class MaterialExpressionDepthFade extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDepthFade;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDepthFade;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDepthFade;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17245,8 +20196,8 @@ declare class MaterialExpressionDepthFade extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionDepthFade;
 }
 
-declare type EDepthOfFieldFunctionValue = string | symbol;
-declare var EDepthOfFieldFunctionValue = { TDOF_NearAndFarMask:'TDOF_NearAndFarMask',TDOF_NearMask:'TDOF_NearMask',TDOF_FarMask:'TDOF_FarMask',TDOF_CircleOfConfusionRadius:'TDOF_CircleOfConfusionRadius', };
+declare type EDepthOfFieldFunctionValue = 'TDOF_NearAndFarMask' | 'TDOF_NearMask' | 'TDOF_FarMask' | 'TDOF_CircleOfConfusionRadius';
+declare var EDepthOfFieldFunctionValue : { TDOF_NearAndFarMask:'TDOF_NearAndFarMask',TDOF_NearMask:'TDOF_NearMask',TDOF_FarMask:'TDOF_FarMask',TDOF_CircleOfConfusionRadius:'TDOF_CircleOfConfusionRadius', };
 declare class MaterialExpressionDepthOfFieldFunction extends MaterialExpression { 
 	FunctionValue: EDepthOfFieldFunctionValue;
 	Depth: ExpressionInput;
@@ -17255,7 +20206,7 @@ declare class MaterialExpressionDepthOfFieldFunction extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionDepthOfFieldFunction;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDepthOfFieldFunction;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDepthOfFieldFunction;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17270,7 +20221,7 @@ declare class MaterialExpressionDeriveNormalZ extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDeriveNormalZ;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDeriveNormalZ;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDeriveNormalZ;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17287,7 +20238,7 @@ declare class MaterialExpressionDesaturation extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDesaturation;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDesaturation;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDesaturation;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17303,7 +20254,7 @@ declare class MaterialExpressionDistance extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDistance;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDistance;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDistance;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17317,7 +20268,7 @@ declare class MaterialExpressionDistanceCullFade extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDistanceCullFade;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDistanceCullFade;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDistanceCullFade;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17332,7 +20283,7 @@ declare class MaterialExpressionDistanceFieldGradient extends MaterialExpression
 	static Load(ResourceName: string): MaterialExpressionDistanceFieldGradient;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDistanceFieldGradient;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDistanceFieldGradient;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17347,7 +20298,7 @@ declare class MaterialExpressionDistanceToNearestSurface extends MaterialExpress
 	static Load(ResourceName: string): MaterialExpressionDistanceToNearestSurface;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDistanceToNearestSurface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDistanceToNearestSurface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17365,7 +20316,7 @@ declare class MaterialExpressionDivide extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDivide;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDivide;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDivide;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17381,7 +20332,7 @@ declare class MaterialExpressionDotProduct extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDotProduct;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDotProduct;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDotProduct;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17397,7 +20348,7 @@ declare class MaterialExpressionDynamicParameter extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionDynamicParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionDynamicParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionDynamicParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17411,7 +20362,7 @@ declare class MaterialExpressionEyeAdaptation extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionEyeAdaptation;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionEyeAdaptation;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionEyeAdaptation;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17427,7 +20378,7 @@ declare class MaterialExpressionFeatureLevelSwitch extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFeatureLevelSwitch;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFeatureLevelSwitch;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFeatureLevelSwitch;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17442,7 +20393,7 @@ declare class MaterialExpressionFloor extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFloor;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFloor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFloor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17458,7 +20409,7 @@ declare class MaterialExpressionFmod extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFmod;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFmod;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFmod;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17474,7 +20425,7 @@ declare class MaterialExpressionFontSample extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFontSample;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFontSample;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFontSample;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17491,7 +20442,7 @@ declare class MaterialExpressionFontSampleParameter extends MaterialExpressionFo
 	static Load(ResourceName: string): MaterialExpressionFontSampleParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFontSampleParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFontSampleParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17506,7 +20457,7 @@ declare class MaterialExpressionFrac extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFrac;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFrac;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFrac;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17525,7 +20476,7 @@ declare class MaterialExpressionFresnel extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFresnel;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFresnel;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFresnel;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17533,8 +20484,8 @@ declare class MaterialExpressionFresnel extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionFresnel;
 }
 
-declare type EFunctionInputType = string | symbol;
-declare var EFunctionInputType = { FunctionInput_Scalar:'FunctionInput_Scalar',FunctionInput_Vector2:'FunctionInput_Vector2',FunctionInput_Vector3:'FunctionInput_Vector3',FunctionInput_Vector4:'FunctionInput_Vector4',FunctionInput_Texture2D:'FunctionInput_Texture2D',FunctionInput_TextureCube:'FunctionInput_TextureCube',FunctionInput_StaticBool:'FunctionInput_StaticBool',FunctionInput_MaterialAttributes:'FunctionInput_MaterialAttributes', };
+declare type EFunctionInputType = 'FunctionInput_Scalar' | 'FunctionInput_Vector2' | 'FunctionInput_Vector3' | 'FunctionInput_Vector4' | 'FunctionInput_Texture2D' | 'FunctionInput_TextureCube' | 'FunctionInput_StaticBool' | 'FunctionInput_MaterialAttributes';
+declare var EFunctionInputType : { FunctionInput_Scalar:'FunctionInput_Scalar',FunctionInput_Vector2:'FunctionInput_Vector2',FunctionInput_Vector3:'FunctionInput_Vector3',FunctionInput_Vector4:'FunctionInput_Vector4',FunctionInput_Texture2D:'FunctionInput_Texture2D',FunctionInput_TextureCube:'FunctionInput_TextureCube',FunctionInput_StaticBool:'FunctionInput_StaticBool',FunctionInput_MaterialAttributes:'FunctionInput_MaterialAttributes', };
 declare class MaterialExpressionFunctionInput extends MaterialExpression { 
 	Preview: ExpressionInput;
 	InputName: string;
@@ -17550,7 +20501,7 @@ declare class MaterialExpressionFunctionInput extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFunctionInput;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFunctionInput;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFunctionInput;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17570,12 +20521,28 @@ declare class MaterialExpressionFunctionOutput extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionFunctionOutput;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFunctionOutput;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionFunctionOutput;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionFunctionOutput;
 	static C(Other: UObject): MaterialExpressionFunctionOutput;
+}
+
+declare class MaterialExpressionGetMaterialAttributes extends MaterialExpression { 
+	MaterialAttributes: MaterialAttributesInput;
+	AttributeGetTypes: Guid[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MaterialExpressionGetMaterialAttributes;
+	static Find(Outer: UObject, ResourceName: string): MaterialExpressionGetMaterialAttributes;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MaterialExpressionGetMaterialAttributes;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionGetMaterialAttributes;
+	static C(Other: UObject): MaterialExpressionGetMaterialAttributes;
 }
 
 declare class MaterialExpressionGIReplace extends MaterialExpression { 
@@ -17587,7 +20554,7 @@ declare class MaterialExpressionGIReplace extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionGIReplace;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionGIReplace;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionGIReplace;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17609,7 +20576,7 @@ declare class MaterialExpressionIf extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionIf;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionIf;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionIf;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17623,7 +20590,7 @@ declare class MaterialExpressionLightmapUVs extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionLightmapUVs;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLightmapUVs;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLightmapUVs;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17639,7 +20606,7 @@ declare class MaterialExpressionLightmassReplace extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionLightmassReplace;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLightmassReplace;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLightmassReplace;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17653,7 +20620,7 @@ declare class MaterialExpressionLightVector extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionLightVector;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLightVector;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLightVector;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17673,7 +20640,7 @@ declare class MaterialExpressionLinearInterpolate extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionLinearInterpolate;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLinearInterpolate;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLinearInterpolate;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17688,7 +20655,7 @@ declare class MaterialExpressionLogarithm2 extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionLogarithm2;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionLogarithm2;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionLogarithm2;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17720,7 +20687,7 @@ declare class MaterialExpressionMakeMaterialAttributes extends MaterialExpressio
 	static Load(ResourceName: string): MaterialExpressionMakeMaterialAttributes;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionMakeMaterialAttributes;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionMakeMaterialAttributes;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17753,7 +20720,7 @@ declare class MaterialExpressionMaterialFunctionCall extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionMaterialFunctionCall;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionMaterialFunctionCall;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionMaterialFunctionCall;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17769,7 +20736,7 @@ declare class MaterialExpressionMaterialProxyReplace extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionMaterialProxyReplace;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionMaterialProxyReplace;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionMaterialProxyReplace;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17787,7 +20754,7 @@ declare class MaterialExpressionMax extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionMax;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionMax;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionMax;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17805,7 +20772,7 @@ declare class MaterialExpressionMin extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionMin;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionMin;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionMin;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17823,7 +20790,7 @@ declare class MaterialExpressionMultiply extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionMultiply;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionMultiply;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionMultiply;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17831,8 +20798,8 @@ declare class MaterialExpressionMultiply extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionMultiply;
 }
 
-declare type ENoiseFunction = string | symbol;
-declare var ENoiseFunction = { NOISEFUNCTION_SimplexTex:'NOISEFUNCTION_SimplexTex',NOISEFUNCTION_GradientTex:'NOISEFUNCTION_GradientTex',NOISEFUNCTION_GradientTex3D:'NOISEFUNCTION_GradientTex3D',NOISEFUNCTION_GradientALU:'NOISEFUNCTION_GradientALU',NOISEFUNCTION_ValueALU:'NOISEFUNCTION_ValueALU',NOISEFUNCTION_VoronoiALU:'NOISEFUNCTION_VoronoiALU', };
+declare type ENoiseFunction = 'NOISEFUNCTION_SimplexTex' | 'NOISEFUNCTION_GradientTex' | 'NOISEFUNCTION_GradientTex3D' | 'NOISEFUNCTION_GradientALU' | 'NOISEFUNCTION_ValueALU' | 'NOISEFUNCTION_VoronoiALU';
+declare var ENoiseFunction : { NOISEFUNCTION_SimplexTex:'NOISEFUNCTION_SimplexTex',NOISEFUNCTION_GradientTex:'NOISEFUNCTION_GradientTex',NOISEFUNCTION_GradientTex3D:'NOISEFUNCTION_GradientTex3D',NOISEFUNCTION_GradientALU:'NOISEFUNCTION_GradientALU',NOISEFUNCTION_ValueALU:'NOISEFUNCTION_ValueALU',NOISEFUNCTION_VoronoiALU:'NOISEFUNCTION_VoronoiALU', };
 declare class MaterialExpressionNoise extends MaterialExpression { 
 	Position: ExpressionInput;
 	FilterWidth: ExpressionInput;
@@ -17851,7 +20818,7 @@ declare class MaterialExpressionNoise extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionNoise;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionNoise;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionNoise;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17866,7 +20833,7 @@ declare class MaterialExpressionNormalize extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionNormalize;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionNormalize;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionNormalize;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17880,7 +20847,7 @@ declare class MaterialExpressionObjectBounds extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionObjectBounds;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionObjectBounds;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionObjectBounds;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17894,7 +20861,7 @@ declare class MaterialExpressionObjectOrientation extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionObjectOrientation;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionObjectOrientation;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionObjectOrientation;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17908,7 +20875,7 @@ declare class MaterialExpressionObjectPositionWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionObjectPositionWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionObjectPositionWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionObjectPositionWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17922,7 +20889,7 @@ declare class MaterialExpressionObjectRadius extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionObjectRadius;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionObjectRadius;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionObjectRadius;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17937,7 +20904,7 @@ declare class MaterialExpressionOneMinus extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionOneMinus;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionOneMinus;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionOneMinus;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17958,7 +20925,7 @@ declare class MaterialExpressionPanner extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionPanner;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPanner;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionPanner;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17975,7 +20942,7 @@ declare class MaterialExpressionParameter extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -17992,7 +20959,7 @@ declare class MaterialExpressionScalarParameter extends MaterialExpressionParame
 	static Load(ResourceName: string): MaterialExpressionScalarParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionScalarParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionScalarParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18007,7 +20974,7 @@ declare class MaterialExpressionStaticBoolParameter extends MaterialExpressionPa
 	static Load(ResourceName: string): MaterialExpressionStaticBoolParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionStaticBoolParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionStaticBoolParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18023,7 +20990,7 @@ declare class MaterialExpressionStaticSwitchParameter extends MaterialExpression
 	static Load(ResourceName: string): MaterialExpressionStaticSwitchParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionStaticSwitchParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionStaticSwitchParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18042,7 +21009,7 @@ declare class MaterialExpressionStaticComponentMaskParameter extends MaterialExp
 	static Load(ResourceName: string): MaterialExpressionStaticComponentMaskParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionStaticComponentMaskParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionStaticComponentMaskParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18057,7 +21024,7 @@ declare class MaterialExpressionVectorParameter extends MaterialExpressionParame
 	static Load(ResourceName: string): MaterialExpressionVectorParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionVectorParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionVectorParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18071,7 +21038,7 @@ declare class MaterialExpressionParticleColor extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticleColor;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleColor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleColor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18085,7 +21052,7 @@ declare class MaterialExpressionParticleDirection extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticleDirection;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleDirection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleDirection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18099,7 +21066,7 @@ declare class MaterialExpressionParticleMacroUV extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticleMacroUV;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleMacroUV;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleMacroUV;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18113,7 +21080,7 @@ declare class MaterialExpressionParticleMotionBlurFade extends MaterialExpressio
 	static Load(ResourceName: string): MaterialExpressionParticleMotionBlurFade;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleMotionBlurFade;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleMotionBlurFade;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18127,7 +21094,7 @@ declare class MaterialExpressionParticlePositionWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticlePositionWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticlePositionWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticlePositionWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18141,7 +21108,7 @@ declare class MaterialExpressionParticleRadius extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticleRadius;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleRadius;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleRadius;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18155,7 +21122,7 @@ declare class MaterialExpressionParticleRandom extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticleRandom;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleRandom;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleRandom;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18169,7 +21136,7 @@ declare class MaterialExpressionParticleRelativeTime extends MaterialExpression 
 	static Load(ResourceName: string): MaterialExpressionParticleRelativeTime;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleRelativeTime;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleRelativeTime;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18183,7 +21150,7 @@ declare class MaterialExpressionParticleSize extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticleSize;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleSize;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleSize;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18197,7 +21164,7 @@ declare class MaterialExpressionParticleSpeed extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionParticleSpeed;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleSpeed;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleSpeed;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18211,7 +21178,7 @@ declare class MaterialExpressionPerInstanceFadeAmount extends MaterialExpression
 	static Load(ResourceName: string): MaterialExpressionPerInstanceFadeAmount;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPerInstanceFadeAmount;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionPerInstanceFadeAmount;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18225,7 +21192,7 @@ declare class MaterialExpressionPerInstanceRandom extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionPerInstanceRandom;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPerInstanceRandom;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionPerInstanceRandom;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18239,7 +21206,7 @@ declare class MaterialExpressionPixelDepth extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionPixelDepth;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPixelDepth;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionPixelDepth;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18253,7 +21220,7 @@ declare class MaterialExpressionPixelNormalWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionPixelNormalWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPixelNormalWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionPixelNormalWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18270,7 +21237,7 @@ declare class MaterialExpressionPower extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionPower;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPower;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionPower;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18284,12 +21251,26 @@ declare class MaterialExpressionPrecomputedAOMask extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionPrecomputedAOMask;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPrecomputedAOMask;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionPrecomputedAOMask;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionPrecomputedAOMask;
 	static C(Other: UObject): MaterialExpressionPrecomputedAOMask;
+}
+
+declare class MaterialExpressionPreSkinnedPosition extends MaterialExpression { 
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MaterialExpressionPreSkinnedPosition;
+	static Find(Outer: UObject, ResourceName: string): MaterialExpressionPreSkinnedPosition;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MaterialExpressionPreSkinnedPosition;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionPreSkinnedPosition;
+	static C(Other: UObject): MaterialExpressionPreSkinnedPosition;
 }
 
 declare class MaterialExpressionQualitySwitch extends MaterialExpression { 
@@ -18300,7 +21281,7 @@ declare class MaterialExpressionQualitySwitch extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionQualitySwitch;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionQualitySwitch;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionQualitySwitch;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18316,7 +21297,7 @@ declare class MaterialExpressionReflectionVectorWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionReflectionVectorWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionReflectionVectorWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionReflectionVectorWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18335,7 +21316,7 @@ declare class MaterialExpressionRotateAboutAxis extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionRotateAboutAxis;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionRotateAboutAxis;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionRotateAboutAxis;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18355,7 +21336,7 @@ declare class MaterialExpressionRotator extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionRotator;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionRotator;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionRotator;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18363,8 +21344,8 @@ declare class MaterialExpressionRotator extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionRotator;
 }
 
-declare type EMaterialSceneAttributeInputMode = string | symbol;
-declare var EMaterialSceneAttributeInputMode = { Coordinates:'Coordinates',OffsetFraction:'OffsetFraction', };
+declare type EMaterialSceneAttributeInputMode = 'Coordinates' | 'OffsetFraction';
+declare var EMaterialSceneAttributeInputMode : { Coordinates:'Coordinates',OffsetFraction:'OffsetFraction', };
 declare class MaterialExpressionSceneColor extends MaterialExpression { 
 	InputMode: EMaterialSceneAttributeInputMode;
 	Input: ExpressionInput;
@@ -18375,7 +21356,7 @@ declare class MaterialExpressionSceneColor extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSceneColor;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSceneColor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSceneColor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18393,7 +21374,7 @@ declare class MaterialExpressionSceneDepth extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSceneDepth;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSceneDepth;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSceneDepth;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18407,7 +21388,7 @@ declare class MaterialExpressionSceneTexelSize extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSceneTexelSize;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSceneTexelSize;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSceneTexelSize;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18415,8 +21396,8 @@ declare class MaterialExpressionSceneTexelSize extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionSceneTexelSize;
 }
 
-declare type ESceneTextureId = string | symbol;
-declare var ESceneTextureId = { PPI_SceneColor:'PPI_SceneColor',PPI_SceneDepth:'PPI_SceneDepth',PPI_DiffuseColor:'PPI_DiffuseColor',PPI_SpecularColor:'PPI_SpecularColor',PPI_SubsurfaceColor:'PPI_SubsurfaceColor',PPI_BaseColor:'PPI_BaseColor',PPI_Specular:'PPI_Specular',PPI_Metallic:'PPI_Metallic',PPI_WorldNormal:'PPI_WorldNormal',PPI_SeparateTranslucency:'PPI_SeparateTranslucency',PPI_Opacity:'PPI_Opacity',PPI_Roughness:'PPI_Roughness',PPI_MaterialAO:'PPI_MaterialAO',PPI_CustomDepth:'PPI_CustomDepth',PPI_PostProcessInput0:'PPI_PostProcessInput0',PPI_PostProcessInput1:'PPI_PostProcessInput1',PPI_PostProcessInput2:'PPI_PostProcessInput2',PPI_PostProcessInput3:'PPI_PostProcessInput3',PPI_PostProcessInput4:'PPI_PostProcessInput4',PPI_PostProcessInput5:'PPI_PostProcessInput5',PPI_PostProcessInput6:'PPI_PostProcessInput6',PPI_DecalMask:'PPI_DecalMask',PPI_ShadingModel:'PPI_ShadingModel',PPI_AmbientOcclusion:'PPI_AmbientOcclusion',PPI_CustomStencil:'PPI_CustomStencil',PPI_StoredBaseColor:'PPI_StoredBaseColor',PPI_StoredSpecular:'PPI_StoredSpecular', };
+declare type ESceneTextureId = 'PPI_SceneColor' | 'PPI_SceneDepth' | 'PPI_DiffuseColor' | 'PPI_SpecularColor' | 'PPI_SubsurfaceColor' | 'PPI_BaseColor' | 'PPI_Specular' | 'PPI_Metallic' | 'PPI_WorldNormal' | 'PPI_SeparateTranslucency' | 'PPI_Opacity' | 'PPI_Roughness' | 'PPI_MaterialAO' | 'PPI_CustomDepth' | 'PPI_PostProcessInput0' | 'PPI_PostProcessInput1' | 'PPI_PostProcessInput2' | 'PPI_PostProcessInput3' | 'PPI_PostProcessInput4' | 'PPI_PostProcessInput5' | 'PPI_PostProcessInput6' | 'PPI_DecalMask' | 'PPI_ShadingModel' | 'PPI_AmbientOcclusion' | 'PPI_CustomStencil' | 'PPI_StoredBaseColor' | 'PPI_StoredSpecular';
+declare var ESceneTextureId : { PPI_SceneColor:'PPI_SceneColor',PPI_SceneDepth:'PPI_SceneDepth',PPI_DiffuseColor:'PPI_DiffuseColor',PPI_SpecularColor:'PPI_SpecularColor',PPI_SubsurfaceColor:'PPI_SubsurfaceColor',PPI_BaseColor:'PPI_BaseColor',PPI_Specular:'PPI_Specular',PPI_Metallic:'PPI_Metallic',PPI_WorldNormal:'PPI_WorldNormal',PPI_SeparateTranslucency:'PPI_SeparateTranslucency',PPI_Opacity:'PPI_Opacity',PPI_Roughness:'PPI_Roughness',PPI_MaterialAO:'PPI_MaterialAO',PPI_CustomDepth:'PPI_CustomDepth',PPI_PostProcessInput0:'PPI_PostProcessInput0',PPI_PostProcessInput1:'PPI_PostProcessInput1',PPI_PostProcessInput2:'PPI_PostProcessInput2',PPI_PostProcessInput3:'PPI_PostProcessInput3',PPI_PostProcessInput4:'PPI_PostProcessInput4',PPI_PostProcessInput5:'PPI_PostProcessInput5',PPI_PostProcessInput6:'PPI_PostProcessInput6',PPI_DecalMask:'PPI_DecalMask',PPI_ShadingModel:'PPI_ShadingModel',PPI_AmbientOcclusion:'PPI_AmbientOcclusion',PPI_CustomStencil:'PPI_CustomStencil',PPI_StoredBaseColor:'PPI_StoredBaseColor',PPI_StoredSpecular:'PPI_StoredSpecular', };
 declare class MaterialExpressionSceneTexture extends MaterialExpression { 
 	Coordinates: ExpressionInput;
 	SceneTextureId: ESceneTextureId;
@@ -18427,7 +21408,7 @@ declare class MaterialExpressionSceneTexture extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSceneTexture;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSceneTexture;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSceneTexture;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18435,8 +21416,8 @@ declare class MaterialExpressionSceneTexture extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionSceneTexture;
 }
 
-declare type EMaterialExpressionScreenPositionMapping = string | symbol;
-declare var EMaterialExpressionScreenPositionMapping = { MESP_SceneTextureUV:'MESP_SceneTextureUV',MESP_ViewportUV:'MESP_ViewportUV', };
+declare type EMaterialExpressionScreenPositionMapping = 'MESP_SceneTextureUV' | 'MESP_ViewportUV';
+declare var EMaterialExpressionScreenPositionMapping : { MESP_SceneTextureUV:'MESP_SceneTextureUV',MESP_ViewportUV:'MESP_ViewportUV', };
 declare class MaterialExpressionScreenPosition extends MaterialExpression { 
 	Mapping: EMaterialExpressionScreenPositionMapping;
 	constructor();
@@ -18444,12 +21425,28 @@ declare class MaterialExpressionScreenPosition extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionScreenPosition;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionScreenPosition;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionScreenPosition;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionScreenPosition;
 	static C(Other: UObject): MaterialExpressionScreenPosition;
+}
+
+declare class MaterialExpressionSetMaterialAttributes extends MaterialExpression { 
+	Inputs: ExpressionInput[];
+	AttributeSetTypes: Guid[];
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MaterialExpressionSetMaterialAttributes;
+	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSetMaterialAttributes;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MaterialExpressionSetMaterialAttributes;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionSetMaterialAttributes;
+	static C(Other: UObject): MaterialExpressionSetMaterialAttributes;
 }
 
 declare class MaterialExpressionSine extends MaterialExpression { 
@@ -18460,7 +21457,7 @@ declare class MaterialExpressionSine extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSine;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSine;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSine;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18468,12 +21465,12 @@ declare class MaterialExpressionSine extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionSine;
 }
 
-declare type ESpeedTreeGeometryType = string | symbol;
-declare var ESpeedTreeGeometryType = { STG_Branch:'STG_Branch',STG_Frond:'STG_Frond',STG_Leaf:'STG_Leaf',STG_FacingLeaf:'STG_FacingLeaf',STG_Billboard:'STG_Billboard', };
-declare type ESpeedTreeWindType = string | symbol;
-declare var ESpeedTreeWindType = { STW_None:'STW_None',STW_Fastest:'STW_Fastest',STW_Fast:'STW_Fast',STW_Better:'STW_Better',STW_Best:'STW_Best',STW_Palm:'STW_Palm',STW_BestPlus:'STW_BestPlus', };
-declare type ESpeedTreeLODType = string | symbol;
-declare var ESpeedTreeLODType = { STLOD_Pop:'STLOD_Pop',STLOD_Smooth:'STLOD_Smooth', };
+declare type ESpeedTreeGeometryType = 'STG_Branch' | 'STG_Frond' | 'STG_Leaf' | 'STG_FacingLeaf' | 'STG_Billboard';
+declare var ESpeedTreeGeometryType : { STG_Branch:'STG_Branch',STG_Frond:'STG_Frond',STG_Leaf:'STG_Leaf',STG_FacingLeaf:'STG_FacingLeaf',STG_Billboard:'STG_Billboard', };
+declare type ESpeedTreeWindType = 'STW_None' | 'STW_Fastest' | 'STW_Fast' | 'STW_Better' | 'STW_Best' | 'STW_Palm' | 'STW_BestPlus';
+declare var ESpeedTreeWindType : { STW_None:'STW_None',STW_Fastest:'STW_Fastest',STW_Fast:'STW_Fast',STW_Better:'STW_Better',STW_Best:'STW_Best',STW_Palm:'STW_Palm',STW_BestPlus:'STW_BestPlus', };
+declare type ESpeedTreeLODType = 'STLOD_Pop' | 'STLOD_Smooth';
+declare var ESpeedTreeLODType : { STLOD_Pop:'STLOD_Pop',STLOD_Smooth:'STLOD_Smooth', };
 declare class MaterialExpressionSpeedTree extends MaterialExpression { 
 	GeometryType: ESpeedTreeGeometryType;
 	WindType: ESpeedTreeWindType;
@@ -18485,7 +21482,7 @@ declare class MaterialExpressionSpeedTree extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSpeedTree;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSpeedTree;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSpeedTree;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18505,7 +21502,7 @@ declare class MaterialExpressionSphereMask extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSphereMask;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSphereMask;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSphereMask;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18521,7 +21518,7 @@ declare class MaterialExpressionSphericalParticleOpacity extends MaterialExpress
 	static Load(ResourceName: string): MaterialExpressionSphericalParticleOpacity;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSphericalParticleOpacity;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSphericalParticleOpacity;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18536,7 +21533,7 @@ declare class MaterialExpressionSquareRoot extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSquareRoot;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSquareRoot;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSquareRoot;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18551,7 +21548,7 @@ declare class MaterialExpressionStaticBool extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionStaticBool;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionStaticBool;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionStaticBool;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18569,7 +21566,7 @@ declare class MaterialExpressionStaticSwitch extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionStaticSwitch;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionStaticSwitch;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionStaticSwitch;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18587,7 +21584,7 @@ declare class MaterialExpressionSubtract extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionSubtract;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionSubtract;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionSubtract;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18595,8 +21592,8 @@ declare class MaterialExpressionSubtract extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionSubtract;
 }
 
-declare type EMaterialSamplerType = string | symbol;
-declare var EMaterialSamplerType = { SAMPLERTYPE_Color:'SAMPLERTYPE_Color',SAMPLERTYPE_Grayscale:'SAMPLERTYPE_Grayscale',SAMPLERTYPE_Alpha:'SAMPLERTYPE_Alpha',SAMPLERTYPE_Normal:'SAMPLERTYPE_Normal',SAMPLERTYPE_Masks:'SAMPLERTYPE_Masks',SAMPLERTYPE_DistanceFieldFont:'SAMPLERTYPE_DistanceFieldFont',SAMPLERTYPE_LinearColor:'SAMPLERTYPE_LinearColor',SAMPLERTYPE_LinearGrayscale:'SAMPLERTYPE_LinearGrayscale', };
+declare type EMaterialSamplerType = 'SAMPLERTYPE_Color' | 'SAMPLERTYPE_Grayscale' | 'SAMPLERTYPE_Alpha' | 'SAMPLERTYPE_Normal' | 'SAMPLERTYPE_Masks' | 'SAMPLERTYPE_DistanceFieldFont' | 'SAMPLERTYPE_LinearColor' | 'SAMPLERTYPE_LinearGrayscale';
+declare var EMaterialSamplerType : { SAMPLERTYPE_Color:'SAMPLERTYPE_Color',SAMPLERTYPE_Grayscale:'SAMPLERTYPE_Grayscale',SAMPLERTYPE_Alpha:'SAMPLERTYPE_Alpha',SAMPLERTYPE_Normal:'SAMPLERTYPE_Normal',SAMPLERTYPE_Masks:'SAMPLERTYPE_Masks',SAMPLERTYPE_DistanceFieldFont:'SAMPLERTYPE_DistanceFieldFont',SAMPLERTYPE_LinearColor:'SAMPLERTYPE_LinearColor',SAMPLERTYPE_LinearGrayscale:'SAMPLERTYPE_LinearGrayscale', };
 declare class MaterialExpressionTextureBase extends MaterialExpression { 
 	Texture: Texture;
 	SamplerType: EMaterialSamplerType;
@@ -18606,7 +21603,7 @@ declare class MaterialExpressionTextureBase extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionTextureBase;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18620,7 +21617,7 @@ declare class MaterialExpressionTextureObject extends MaterialExpressionTextureB
 	static Load(ResourceName: string): MaterialExpressionTextureObject;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureObject;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureObject;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18628,10 +21625,10 @@ declare class MaterialExpressionTextureObject extends MaterialExpressionTextureB
 	static C(Other: UObject): MaterialExpressionTextureObject;
 }
 
-declare type ETextureMipValueMode = string | symbol;
-declare var ETextureMipValueMode = { TMVM_None:'TMVM_None',TMVM_MipLevel:'TMVM_MipLevel',TMVM_MipBias:'TMVM_MipBias',TMVM_Derivative:'TMVM_Derivative', };
-declare type ESamplerSourceMode = string | symbol;
-declare var ESamplerSourceMode = { SSM_FromTextureAsset:'SSM_FromTextureAsset',SSM_Wrap_WorldGroupSettings:'SSM_Wrap_WorldGroupSettings',SSM_Clamp_WorldGroupSettings:'SSM_Clamp_WorldGroupSettings', };
+declare type ETextureMipValueMode = 'TMVM_None' | 'TMVM_MipLevel' | 'TMVM_MipBias' | 'TMVM_Derivative';
+declare var ETextureMipValueMode : { TMVM_None:'TMVM_None',TMVM_MipLevel:'TMVM_MipLevel',TMVM_MipBias:'TMVM_MipBias',TMVM_Derivative:'TMVM_Derivative', };
+declare type ESamplerSourceMode = 'SSM_FromTextureAsset' | 'SSM_Wrap_WorldGroupSettings' | 'SSM_Clamp_WorldGroupSettings';
+declare var ESamplerSourceMode : { SSM_FromTextureAsset:'SSM_FromTextureAsset',SSM_Wrap_WorldGroupSettings:'SSM_Wrap_WorldGroupSettings',SSM_Clamp_WorldGroupSettings:'SSM_Clamp_WorldGroupSettings', };
 declare class MaterialExpressionTextureSample extends MaterialExpressionTextureBase { 
 	Coordinates: ExpressionInput;
 	TextureObject: ExpressionInput;
@@ -18647,7 +21644,7 @@ declare class MaterialExpressionTextureSample extends MaterialExpressionTextureB
 	static Load(ResourceName: string): MaterialExpressionTextureSample;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureSample;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureSample;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18662,7 +21659,7 @@ declare class MaterialExpressionParticleSubUV extends MaterialExpressionTextureS
 	static Load(ResourceName: string): MaterialExpressionParticleSubUV;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionParticleSubUV;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionParticleSubUV;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18679,7 +21676,7 @@ declare class MaterialExpressionTextureSampleParameter extends MaterialExpressio
 	static Load(ResourceName: string): MaterialExpressionTextureSampleParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureSampleParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureSampleParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18693,7 +21690,7 @@ declare class MaterialExpressionTextureObjectParameter extends MaterialExpressio
 	static Load(ResourceName: string): MaterialExpressionTextureObjectParameter;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureObjectParameter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureObjectParameter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18707,7 +21704,7 @@ declare class MaterialExpressionTextureSampleParameter2D extends MaterialExpress
 	static Load(ResourceName: string): MaterialExpressionTextureSampleParameter2D;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureSampleParameter2D;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureSampleParameter2D;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18715,8 +21712,8 @@ declare class MaterialExpressionTextureSampleParameter2D extends MaterialExpress
 	static C(Other: UObject): MaterialExpressionTextureSampleParameter2D;
 }
 
-declare type ETextureColorChannel = string | symbol;
-declare var ETextureColorChannel = { TCC_Red:'TCC_Red',TCC_Green:'TCC_Green',TCC_Blue:'TCC_Blue',TCC_Alpha:'TCC_Alpha', };
+declare type ETextureColorChannel = 'TCC_Red' | 'TCC_Green' | 'TCC_Blue' | 'TCC_Alpha';
+declare var ETextureColorChannel : { TCC_Red:'TCC_Red',TCC_Green:'TCC_Green',TCC_Blue:'TCC_Blue',TCC_Alpha:'TCC_Alpha', };
 declare class MaterialExpressionAntialiasedTextureMask extends MaterialExpressionTextureSampleParameter2D { 
 	Threshold: number;
 	Channel: ETextureColorChannel;
@@ -18725,7 +21722,7 @@ declare class MaterialExpressionAntialiasedTextureMask extends MaterialExpressio
 	static Load(ResourceName: string): MaterialExpressionAntialiasedTextureMask;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionAntialiasedTextureMask;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionAntialiasedTextureMask;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18740,7 +21737,7 @@ declare class MaterialExpressionTextureSampleParameterSubUV extends MaterialExpr
 	static Load(ResourceName: string): MaterialExpressionTextureSampleParameterSubUV;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureSampleParameterSubUV;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureSampleParameterSubUV;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18754,7 +21751,7 @@ declare class MaterialExpressionTextureSampleParameterCube extends MaterialExpre
 	static Load(ResourceName: string): MaterialExpressionTextureSampleParameterCube;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureSampleParameterCube;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureSampleParameterCube;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18773,7 +21770,7 @@ declare class MaterialExpressionTextureCoordinate extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionTextureCoordinate;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureCoordinate;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureCoordinate;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18781,8 +21778,8 @@ declare class MaterialExpressionTextureCoordinate extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionTextureCoordinate;
 }
 
-declare type EMaterialExposedTextureProperty = string | symbol;
-declare var EMaterialExposedTextureProperty = { TMTM_TextureSize:'TMTM_TextureSize',TMTM_TexelSize:'TMTM_TexelSize', };
+declare type EMaterialExposedTextureProperty = 'TMTM_TextureSize' | 'TMTM_TexelSize';
+declare var EMaterialExposedTextureProperty : { TMTM_TextureSize:'TMTM_TextureSize',TMTM_TexelSize:'TMTM_TexelSize', };
 declare class MaterialExpressionTextureProperty extends MaterialExpression { 
 	TextureObject: ExpressionInput;
 	Property: EMaterialExposedTextureProperty;
@@ -18791,7 +21788,7 @@ declare class MaterialExpressionTextureProperty extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionTextureProperty;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTextureProperty;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTextureProperty;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18808,7 +21805,7 @@ declare class MaterialExpressionTime extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionTime;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTime;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTime;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18816,10 +21813,10 @@ declare class MaterialExpressionTime extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionTime;
 }
 
-declare type EMaterialVectorCoordTransformSource = string | symbol;
-declare var EMaterialVectorCoordTransformSource = { TRANSFORMSOURCE_Tangent:'TRANSFORMSOURCE_Tangent',TRANSFORMSOURCE_Local:'TRANSFORMSOURCE_Local',TRANSFORMSOURCE_World:'TRANSFORMSOURCE_World',TRANSFORMSOURCE_View:'TRANSFORMSOURCE_View',TRANSFORMSOURCE_Camera:'TRANSFORMSOURCE_Camera',TRANSFORMSOURCE_ParticleWorld:'TRANSFORMSOURCE_ParticleWorld', };
-declare type EMaterialVectorCoordTransform = string | symbol;
-declare var EMaterialVectorCoordTransform = { TRANSFORM_Tangent:'TRANSFORM_Tangent',TRANSFORM_Local:'TRANSFORM_Local',TRANSFORM_World:'TRANSFORM_World',TRANSFORM_View:'TRANSFORM_View',TRANSFORM_Camera:'TRANSFORM_Camera',TRANSFORM_ParticleWorld:'TRANSFORM_ParticleWorld', };
+declare type EMaterialVectorCoordTransformSource = 'TRANSFORMSOURCE_Tangent' | 'TRANSFORMSOURCE_Local' | 'TRANSFORMSOURCE_World' | 'TRANSFORMSOURCE_View' | 'TRANSFORMSOURCE_Camera' | 'TRANSFORMSOURCE_ParticleWorld';
+declare var EMaterialVectorCoordTransformSource : { TRANSFORMSOURCE_Tangent:'TRANSFORMSOURCE_Tangent',TRANSFORMSOURCE_Local:'TRANSFORMSOURCE_Local',TRANSFORMSOURCE_World:'TRANSFORMSOURCE_World',TRANSFORMSOURCE_View:'TRANSFORMSOURCE_View',TRANSFORMSOURCE_Camera:'TRANSFORMSOURCE_Camera',TRANSFORMSOURCE_ParticleWorld:'TRANSFORMSOURCE_ParticleWorld', };
+declare type EMaterialVectorCoordTransform = 'TRANSFORM_Tangent' | 'TRANSFORM_Local' | 'TRANSFORM_World' | 'TRANSFORM_View' | 'TRANSFORM_Camera' | 'TRANSFORM_ParticleWorld';
+declare var EMaterialVectorCoordTransform : { TRANSFORM_Tangent:'TRANSFORM_Tangent',TRANSFORM_Local:'TRANSFORM_Local',TRANSFORM_World:'TRANSFORM_World',TRANSFORM_View:'TRANSFORM_View',TRANSFORM_Camera:'TRANSFORM_Camera',TRANSFORM_ParticleWorld:'TRANSFORM_ParticleWorld', };
 declare class MaterialExpressionTransform extends MaterialExpression { 
 	Input: ExpressionInput;
 	TransformSourceType: EMaterialVectorCoordTransformSource;
@@ -18829,7 +21826,7 @@ declare class MaterialExpressionTransform extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionTransform;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTransform;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTransform;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18837,8 +21834,8 @@ declare class MaterialExpressionTransform extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionTransform;
 }
 
-declare type EMaterialPositionTransformSource = string | symbol;
-declare var EMaterialPositionTransformSource = { TRANSFORMPOSSOURCE_Local:'TRANSFORMPOSSOURCE_Local',TRANSFORMPOSSOURCE_World:'TRANSFORMPOSSOURCE_World',TRANSFORMPOSSOURCE_TranslatedWorld:'TRANSFORMPOSSOURCE_TranslatedWorld',TRANSFORMPOSSOURCE_View:'TRANSFORMPOSSOURCE_View',TRANSFORMPOSSOURCE_Camera:'TRANSFORMPOSSOURCE_Camera',TRANSFORMPOSSOURCE_Particle:'TRANSFORMPOSSOURCE_Particle', };
+declare type EMaterialPositionTransformSource = 'TRANSFORMPOSSOURCE_Local' | 'TRANSFORMPOSSOURCE_World' | 'TRANSFORMPOSSOURCE_TranslatedWorld' | 'TRANSFORMPOSSOURCE_View' | 'TRANSFORMPOSSOURCE_Camera' | 'TRANSFORMPOSSOURCE_Particle';
+declare var EMaterialPositionTransformSource : { TRANSFORMPOSSOURCE_Local:'TRANSFORMPOSSOURCE_Local',TRANSFORMPOSSOURCE_World:'TRANSFORMPOSSOURCE_World',TRANSFORMPOSSOURCE_TranslatedWorld:'TRANSFORMPOSSOURCE_TranslatedWorld',TRANSFORMPOSSOURCE_View:'TRANSFORMPOSSOURCE_View',TRANSFORMPOSSOURCE_Camera:'TRANSFORMPOSSOURCE_Camera',TRANSFORMPOSSOURCE_Particle:'TRANSFORMPOSSOURCE_Particle', };
 declare class MaterialExpressionTransformPosition extends MaterialExpression { 
 	Input: ExpressionInput;
 	TransformSourceType: EMaterialPositionTransformSource;
@@ -18848,7 +21845,7 @@ declare class MaterialExpressionTransformPosition extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionTransformPosition;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTransformPosition;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTransformPosition;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18862,12 +21859,33 @@ declare class MaterialExpressionTwoSidedSign extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionTwoSidedSign;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionTwoSidedSign;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionTwoSidedSign;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionTwoSidedSign;
 	static C(Other: UObject): MaterialExpressionTwoSidedSign;
+}
+
+declare type EVectorNoiseFunction = 'VNF_CellnoiseALU' | 'VNF_VectorALU' | 'VNF_GradientALU' | 'VNF_CurlALU' | 'VNF_VoronoiALU';
+declare var EVectorNoiseFunction : { VNF_CellnoiseALU:'VNF_CellnoiseALU',VNF_VectorALU:'VNF_VectorALU',VNF_GradientALU:'VNF_GradientALU',VNF_CurlALU:'VNF_CurlALU',VNF_VoronoiALU:'VNF_VoronoiALU', };
+declare class MaterialExpressionVectorNoise extends MaterialExpression { 
+	Position: ExpressionInput;
+	NoiseFunction: EVectorNoiseFunction;
+	Quality: number;
+	bTiling: boolean;
+	TileSize: any;
+	constructor();
+	constructor(Outer: UObject);
+	static Load(ResourceName: string): MaterialExpressionVectorNoise;
+	static Find(Outer: UObject, ResourceName: string): MaterialExpressionVectorNoise;
+	static StaticClass: any;
+	static GetClassObject(): Class;
+	static GetDefaultObject(): MaterialExpressionVectorNoise;
+	static GetDefaultSubobjectByName(Name: string): UObject;
+	static SetDefaultSubobjectClass(Name: string): void;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialExpressionVectorNoise;
+	static C(Other: UObject): MaterialExpressionVectorNoise;
 }
 
 declare class MaterialExpressionVertexColor extends MaterialExpression { 
@@ -18876,7 +21894,7 @@ declare class MaterialExpressionVertexColor extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionVertexColor;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionVertexColor;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionVertexColor;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18890,7 +21908,7 @@ declare class MaterialExpressionVertexNormalWS extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionVertexNormalWS;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionVertexNormalWS;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionVertexNormalWS;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18898,8 +21916,8 @@ declare class MaterialExpressionVertexNormalWS extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionVertexNormalWS;
 }
 
-declare type EMaterialExposedViewProperty = string | symbol;
-declare var EMaterialExposedViewProperty = { MEVP_BufferSize:'MEVP_BufferSize',MEVP_FieldOfView:'MEVP_FieldOfView',MEVP_TanHalfFieldOfView:'MEVP_TanHalfFieldOfView',MEVP_ViewSize:'MEVP_ViewSize',MEVP_WorldSpaceViewPosition:'MEVP_WorldSpaceViewPosition',MEVP_WorldSpaceCameraPosition:'MEVP_WorldSpaceCameraPosition', };
+declare type EMaterialExposedViewProperty = 'MEVP_BufferSize' | 'MEVP_FieldOfView' | 'MEVP_TanHalfFieldOfView' | 'MEVP_ViewSize' | 'MEVP_WorldSpaceViewPosition' | 'MEVP_WorldSpaceCameraPosition';
+declare var EMaterialExposedViewProperty : { MEVP_BufferSize:'MEVP_BufferSize',MEVP_FieldOfView:'MEVP_FieldOfView',MEVP_TanHalfFieldOfView:'MEVP_TanHalfFieldOfView',MEVP_ViewSize:'MEVP_ViewSize',MEVP_WorldSpaceViewPosition:'MEVP_WorldSpaceViewPosition',MEVP_WorldSpaceCameraPosition:'MEVP_WorldSpaceCameraPosition', };
 declare class MaterialExpressionViewProperty extends MaterialExpression { 
 	Property: EMaterialExposedViewProperty;
 	constructor();
@@ -18907,7 +21925,7 @@ declare class MaterialExpressionViewProperty extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionViewProperty;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionViewProperty;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionViewProperty;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18921,7 +21939,7 @@ declare class MaterialExpressionViewSize extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionViewSize;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionViewSize;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionViewSize;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18929,8 +21947,8 @@ declare class MaterialExpressionViewSize extends MaterialExpression {
 	static C(Other: UObject): MaterialExpressionViewSize;
 }
 
-declare type EWorldPositionIncludedOffsets = string | symbol;
-declare var EWorldPositionIncludedOffsets = { WPT_Default:'WPT_Default',WPT_ExcludeAllShaderOffsets:'WPT_ExcludeAllShaderOffsets',WPT_CameraRelative:'WPT_CameraRelative',WPT_CameraRelativeNoOffsets:'WPT_CameraRelativeNoOffsets', };
+declare type EWorldPositionIncludedOffsets = 'WPT_Default' | 'WPT_ExcludeAllShaderOffsets' | 'WPT_CameraRelative' | 'WPT_CameraRelativeNoOffsets';
+declare var EWorldPositionIncludedOffsets : { WPT_Default:'WPT_Default',WPT_ExcludeAllShaderOffsets:'WPT_ExcludeAllShaderOffsets',WPT_CameraRelative:'WPT_CameraRelative',WPT_CameraRelativeNoOffsets:'WPT_CameraRelativeNoOffsets', };
 declare class MaterialExpressionWorldPosition extends MaterialExpression { 
 	WorldPositionShaderOffset: EWorldPositionIncludedOffsets;
 	constructor();
@@ -18938,7 +21956,7 @@ declare class MaterialExpressionWorldPosition extends MaterialExpression {
 	static Load(ResourceName: string): MaterialExpressionWorldPosition;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionWorldPosition;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MaterialExpressionWorldPosition;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18952,7 +21970,7 @@ declare class MatineeInterface extends Interface {
 	static Load(ResourceName: string): MatineeInterface;
 	static Find(Outer: UObject, ResourceName: string): MatineeInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): MatineeInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18966,7 +21984,7 @@ declare class NavArea_Default extends NavArea {
 	static Load(ResourceName: string): NavArea_Default;
 	static Find(Outer: UObject, ResourceName: string): NavArea_Default;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavArea_Default;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18980,7 +21998,7 @@ declare class NavArea_LowHeight extends NavArea {
 	static Load(ResourceName: string): NavArea_LowHeight;
 	static Find(Outer: UObject, ResourceName: string): NavArea_LowHeight;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavArea_LowHeight;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -18994,7 +22012,7 @@ declare class NavArea_Null extends NavArea {
 	static Load(ResourceName: string): NavArea_Null;
 	static Find(Outer: UObject, ResourceName: string): NavArea_Null;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavArea_Null;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19008,7 +22026,7 @@ declare class NavArea_Obstacle extends NavArea {
 	static Load(ResourceName: string): NavArea_Obstacle;
 	static Find(Outer: UObject, ResourceName: string): NavArea_Obstacle;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavArea_Obstacle;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19022,7 +22040,7 @@ declare class NavAreaMeta extends NavArea {
 	static Load(ResourceName: string): NavAreaMeta;
 	static Find(Outer: UObject, ResourceName: string): NavAreaMeta;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavAreaMeta;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19052,7 +22070,7 @@ declare class NavAreaMeta_SwitchByAgent extends NavAreaMeta {
 	static Load(ResourceName: string): NavAreaMeta_SwitchByAgent;
 	static Find(Outer: UObject, ResourceName: string): NavAreaMeta_SwitchByAgent;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavAreaMeta_SwitchByAgent;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19066,7 +22084,7 @@ declare class RecastNavMeshDataChunk extends NavigationDataChunk {
 	static Load(ResourceName: string): RecastNavMeshDataChunk;
 	static Find(Outer: UObject, ResourceName: string): RecastNavMeshDataChunk;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RecastNavMeshDataChunk;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19080,7 +22098,7 @@ declare class NavigationPathGenerator extends Interface {
 	static Load(ResourceName: string): NavigationPathGenerator;
 	static Find(Outer: UObject, ResourceName: string): NavigationPathGenerator;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavigationPathGenerator;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19094,7 +22112,7 @@ declare class RecastFilter_UseDefaultArea extends NavigationQueryFilter {
 	static Load(ResourceName: string): RecastFilter_UseDefaultArea;
 	static Find(Outer: UObject, ResourceName: string): RecastFilter_UseDefaultArea;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): RecastFilter_UseDefaultArea;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19108,7 +22126,7 @@ declare class NavLinkTrivial extends NavLinkDefinition {
 	static Load(ResourceName: string): NavLinkTrivial;
 	static Find(Outer: UObject, ResourceName: string): NavLinkTrivial;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavLinkTrivial;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19122,7 +22140,7 @@ declare class NavNodeInterface extends Interface {
 	static Load(ResourceName: string): NavNodeInterface;
 	static Find(Outer: UObject, ResourceName: string): NavNodeInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): NavNodeInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19136,7 +22154,7 @@ declare class PackageMapClient extends PackageMap {
 	static Load(ResourceName: string): PackageMapClient;
 	static Find(Outer: UObject, ResourceName: string): PackageMapClient;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): PackageMapClient;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19150,7 +22168,7 @@ declare class DemoNetConnection extends NetConnection {
 	static Load(ResourceName: string): DemoNetConnection;
 	static Find(Outer: UObject, ResourceName: string): DemoNetConnection;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): DemoNetConnection;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19170,7 +22188,7 @@ declare class ObjectLibrary extends UObject {
 	static Load(ResourceName: string): ObjectLibrary;
 	static Find(Outer: UObject, ResourceName: string): ObjectLibrary;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ObjectLibrary;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19185,7 +22203,7 @@ declare class ObjectReferencer extends UObject {
 	static Load(ResourceName: string): ObjectReferencer;
 	static Find(Outer: UObject, ResourceName: string): ObjectReferencer;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ObjectReferencer;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19199,7 +22217,7 @@ declare class OnlineBlueprintCallProxyBase extends UObject {
 	static Load(ResourceName: string): OnlineBlueprintCallProxyBase;
 	static Find(Outer: UObject, ResourceName: string): OnlineBlueprintCallProxyBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): OnlineBlueprintCallProxyBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19214,7 +22232,7 @@ declare class OnlineEngineInterface extends UObject {
 	static Load(ResourceName: string): OnlineEngineInterface;
 	static Find(Outer: UObject, ResourceName: string): OnlineEngineInterface;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): OnlineEngineInterface;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19228,7 +22246,7 @@ declare class ParticleSpriteEmitter extends ParticleEmitter {
 	static Load(ResourceName: string): ParticleSpriteEmitter;
 	static Find(Outer: UObject, ResourceName: string): ParticleSpriteEmitter;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleSpriteEmitter;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19242,7 +22260,7 @@ declare class ParticleModuleOrientationBase extends ParticleModule {
 	static Load(ResourceName: string): ParticleModuleOrientationBase;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleOrientationBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleOrientationBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19250,8 +22268,8 @@ declare class ParticleModuleOrientationBase extends ParticleModule {
 	static C(Other: UObject): ParticleModuleOrientationBase;
 }
 
-declare type EParticleAxisLock = string | symbol;
-declare var EParticleAxisLock = { EPAL_NONE:'EPAL_NONE',EPAL_X:'EPAL_X',EPAL_Y:'EPAL_Y',EPAL_Z:'EPAL_Z',EPAL_NEGATIVE_X:'EPAL_NEGATIVE_X',EPAL_NEGATIVE_Y:'EPAL_NEGATIVE_Y',EPAL_NEGATIVE_Z:'EPAL_NEGATIVE_Z',EPAL_ROTATE_X:'EPAL_ROTATE_X',EPAL_ROTATE_Y:'EPAL_ROTATE_Y',EPAL_ROTATE_Z:'EPAL_ROTATE_Z', };
+declare type EParticleAxisLock = 'EPAL_NONE' | 'EPAL_X' | 'EPAL_Y' | 'EPAL_Z' | 'EPAL_NEGATIVE_X' | 'EPAL_NEGATIVE_Y' | 'EPAL_NEGATIVE_Z' | 'EPAL_ROTATE_X' | 'EPAL_ROTATE_Y' | 'EPAL_ROTATE_Z';
+declare var EParticleAxisLock : { EPAL_NONE:'EPAL_NONE',EPAL_X:'EPAL_X',EPAL_Y:'EPAL_Y',EPAL_Z:'EPAL_Z',EPAL_NEGATIVE_X:'EPAL_NEGATIVE_X',EPAL_NEGATIVE_Y:'EPAL_NEGATIVE_Y',EPAL_NEGATIVE_Z:'EPAL_NEGATIVE_Z',EPAL_ROTATE_X:'EPAL_ROTATE_X',EPAL_ROTATE_Y:'EPAL_ROTATE_Y',EPAL_ROTATE_Z:'EPAL_ROTATE_Z', };
 declare class ParticleModuleOrientationAxisLock extends ParticleModuleOrientationBase { 
 	LockAxisFlags: EParticleAxisLock;
 	constructor();
@@ -19259,7 +22277,7 @@ declare class ParticleModuleOrientationAxisLock extends ParticleModuleOrientatio
 	static Load(ResourceName: string): ParticleModuleOrientationAxisLock;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleOrientationAxisLock;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleOrientationAxisLock;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19274,7 +22292,7 @@ declare class ParticleModuleAccelerationBase extends ParticleModule {
 	static Load(ResourceName: string): ParticleModuleAccelerationBase;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAccelerationBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAccelerationBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19290,7 +22308,7 @@ declare class ParticleModuleAcceleration extends ParticleModuleAccelerationBase 
 	static Load(ResourceName: string): ParticleModuleAcceleration;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAcceleration;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAcceleration;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19305,7 +22323,7 @@ declare class ParticleModuleAccelerationConstant extends ParticleModuleAccelerat
 	static Load(ResourceName: string): ParticleModuleAccelerationConstant;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAccelerationConstant;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAccelerationConstant;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19321,7 +22339,7 @@ declare class ParticleModuleAccelerationDrag extends ParticleModuleAccelerationB
 	static Load(ResourceName: string): ParticleModuleAccelerationDrag;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAccelerationDrag;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAccelerationDrag;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19337,7 +22355,7 @@ declare class ParticleModuleAccelerationDragScaleOverLife extends ParticleModule
 	static Load(ResourceName: string): ParticleModuleAccelerationDragScaleOverLife;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAccelerationDragScaleOverLife;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAccelerationDragScaleOverLife;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19352,7 +22370,7 @@ declare class ParticleModuleAccelerationOverLifetime extends ParticleModuleAccel
 	static Load(ResourceName: string): ParticleModuleAccelerationOverLifetime;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAccelerationOverLifetime;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAccelerationOverLifetime;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19366,7 +22384,7 @@ declare class ParticleModuleAttractorBase extends ParticleModule {
 	static Load(ResourceName: string): ParticleModuleAttractorBase;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAttractorBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAttractorBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19384,7 +22402,7 @@ declare class ParticleModuleAttractorLine extends ParticleModuleAttractorBase {
 	static Load(ResourceName: string): ParticleModuleAttractorLine;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAttractorLine;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAttractorLine;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19392,8 +22410,8 @@ declare class ParticleModuleAttractorLine extends ParticleModuleAttractorBase {
 	static C(Other: UObject): ParticleModuleAttractorLine;
 }
 
-declare type EAttractorParticleSelectionMethod = string | symbol;
-declare var EAttractorParticleSelectionMethod = { EAPSM_Random:'EAPSM_Random',EAPSM_Sequential:'EAPSM_Sequential', };
+declare type EAttractorParticleSelectionMethod = 'EAPSM_Random' | 'EAPSM_Sequential';
+declare var EAttractorParticleSelectionMethod : { EAPSM_Random:'EAPSM_Random',EAPSM_Sequential:'EAPSM_Sequential', };
 declare class ParticleModuleAttractorParticle extends ParticleModuleAttractorBase { 
 	EmitterName: string;
 	Range: RawDistributionFloat;
@@ -19409,7 +22427,7 @@ declare class ParticleModuleAttractorParticle extends ParticleModuleAttractorBas
 	static Load(ResourceName: string): ParticleModuleAttractorParticle;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAttractorParticle;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAttractorParticle;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19436,7 +22454,7 @@ declare class ParticleModuleAttractorPoint extends ParticleModuleAttractorBase {
 	static Load(ResourceName: string): ParticleModuleAttractorPoint;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAttractorPoint;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAttractorPoint;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19454,7 +22472,7 @@ declare class ParticleModuleAttractorPointGravity extends ParticleModuleAttracto
 	static Load(ResourceName: string): ParticleModuleAttractorPointGravity;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleAttractorPointGravity;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleAttractorPointGravity;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19468,7 +22486,7 @@ declare class ParticleModuleBeamBase extends ParticleModule {
 	static Load(ResourceName: string): ParticleModuleBeamBase;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleBeamBase;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleBeamBase;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19476,8 +22494,8 @@ declare class ParticleModuleBeamBase extends ParticleModule {
 	static C(Other: UObject): ParticleModuleBeamBase;
 }
 
-declare type BeamModifierType = string | symbol;
-declare var BeamModifierType = { PEB2MT_Source:'PEB2MT_Source',PEB2MT_Target:'PEB2MT_Target', };
+declare type BeamModifierType = 'PEB2MT_Source' | 'PEB2MT_Target';
+declare var BeamModifierType : { PEB2MT_Source:'PEB2MT_Source',PEB2MT_Target:'PEB2MT_Target', };
 declare class BeamModifierOptions { 
 	bModify: boolean;
 	bScale: boolean;
@@ -19500,7 +22518,7 @@ declare class ParticleModuleBeamModifier extends ParticleModuleBeamBase {
 	static Load(ResourceName: string): ParticleModuleBeamModifier;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleBeamModifier;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleBeamModifier;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
@@ -19534,2993 +22552,11 @@ declare class ParticleModuleBeamNoise extends ParticleModuleBeamBase {
 	static Load(ResourceName: string): ParticleModuleBeamNoise;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleBeamNoise;
 	static StaticClass: any;
-	static GetClassObject(): UClass;
+	static GetClassObject(): Class;
 	static GetDefaultObject(): ParticleModuleBeamNoise;
 	static GetDefaultSubobjectByName(Name: string): UObject;
 	static SetDefaultSubobjectClass(Name: string): void;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleBeamNoise;
 	static C(Other: UObject): ParticleModuleBeamNoise;
-}
-
-declare type Beam2SourceTargetMethod = string | symbol;
-declare var Beam2SourceTargetMethod = { PEB2STM_Default:'PEB2STM_Default',PEB2STM_UserSet:'PEB2STM_UserSet',PEB2STM_Emitter:'PEB2STM_Emitter',PEB2STM_Particle:'PEB2STM_Particle',PEB2STM_Actor:'PEB2STM_Actor', };
-declare type Beam2SourceTargetTangentMethod = string | symbol;
-declare var Beam2SourceTargetTangentMethod = { PEB2STTM_Direct:'PEB2STTM_Direct',PEB2STTM_UserSet:'PEB2STTM_UserSet',PEB2STTM_Distribution:'PEB2STTM_Distribution',PEB2STTM_Emitter:'PEB2STTM_Emitter', };
-declare class ParticleModuleBeamSource extends ParticleModuleBeamBase { 
-	SourceMethod: Beam2SourceTargetMethod;
-	SourceName: string;
-	bSourceAbsolute: boolean;
-	Source: RawDistributionVector;
-	bLockSource: boolean;
-	SourceTangentMethod: Beam2SourceTargetTangentMethod;
-	SourceTangent: RawDistributionVector;
-	bLockSourceTangent: boolean;
-	SourceStrength: RawDistributionFloat;
-	bLockSourceStength: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleBeamSource;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleBeamSource;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleBeamSource;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleBeamSource;
-	static C(Other: UObject): ParticleModuleBeamSource;
-}
-
-declare class ParticleModuleBeamTarget extends ParticleModuleBeamBase { 
-	TargetMethod: Beam2SourceTargetMethod;
-	TargetName: string;
-	Target: RawDistributionVector;
-	bTargetAbsolute: boolean;
-	bLockTarget: boolean;
-	TargetTangentMethod: Beam2SourceTargetTangentMethod;
-	TargetTangent: RawDistributionVector;
-	bLockTargetTangent: boolean;
-	TargetStrength: RawDistributionFloat;
-	bLockTargetStength: boolean;
-	LockRadius: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleBeamTarget;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleBeamTarget;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleBeamTarget;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleBeamTarget;
-	static C(Other: UObject): ParticleModuleBeamTarget;
-}
-
-declare class ParticleModuleCameraBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleCameraBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleCameraBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleCameraBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleCameraBase;
-	static C(Other: UObject): ParticleModuleCameraBase;
-}
-
-declare type EParticleCameraOffsetUpdateMethod = string | symbol;
-declare var EParticleCameraOffsetUpdateMethod = { EPCOUM_DirectSet:'EPCOUM_DirectSet',EPCOUM_Additive:'EPCOUM_Additive',EPCOUM_Scalar:'EPCOUM_Scalar', };
-declare class ParticleModuleCameraOffset extends ParticleModuleCameraBase { 
-	CameraOffset: RawDistributionFloat;
-	bSpawnTimeOnly: boolean;
-	UpdateMethod: EParticleCameraOffsetUpdateMethod;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleCameraOffset;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleCameraOffset;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleCameraOffset;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleCameraOffset;
-	static C(Other: UObject): ParticleModuleCameraOffset;
-}
-
-declare class ParticleModuleCollisionBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleCollisionBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleCollisionBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleCollisionBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleCollisionBase;
-	static C(Other: UObject): ParticleModuleCollisionBase;
-}
-
-declare type EParticleCollisionComplete = string | symbol;
-declare var EParticleCollisionComplete = { EPCC_Kill:'EPCC_Kill',EPCC_Freeze:'EPCC_Freeze',EPCC_HaltCollisions:'EPCC_HaltCollisions',EPCC_FreezeTranslation:'EPCC_FreezeTranslation',EPCC_FreezeRotation:'EPCC_FreezeRotation',EPCC_FreezeMovement:'EPCC_FreezeMovement', };
-declare class ParticleModuleCollision extends ParticleModuleCollisionBase { 
-	DampingFactor: RawDistributionVector;
-	DampingFactorRotation: RawDistributionVector;
-	MaxCollisions: RawDistributionFloat;
-	CollisionCompletionOption: EParticleCollisionComplete;
-	CollisionTypes: EObjectTypeQuery[];
-	bApplyPhysics: boolean;
-	bIgnoreTriggerVolumes: boolean;
-	ParticleMass: RawDistributionFloat;
-	DirScalar: number;
-	bPawnsDoNotDecrementCount: boolean;
-	bOnlyVerticalNormalsDecrementCount: boolean;
-	VerticalFudgeFactor: number;
-	DelayAmount: RawDistributionFloat;
-	bDropDetail: boolean;
-	bCollideOnlyIfVisible: boolean;
-	bIgnoreSourceActor: boolean;
-	MaxCollisionDistance: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleCollision;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleCollision;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleCollision;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleCollision;
-	static C(Other: UObject): ParticleModuleCollision;
-}
-
-declare type EParticleCollisionResponse = string | symbol;
-declare var EParticleCollisionResponse = { Bounce:'Bounce',Stop:'Stop',Kill:'Kill', };
-declare type EParticleCollisionMode = string | symbol;
-declare var EParticleCollisionMode = { SceneDepth:'SceneDepth',DistanceField:'DistanceField', };
-declare class ParticleModuleCollisionGPU extends ParticleModuleCollisionBase { 
-	Resilience: RawDistributionFloat;
-	ResilienceScaleOverLife: RawDistributionFloat;
-	Friction: number;
-	RadiusScale: number;
-	RadiusBias: number;
-	Response: EParticleCollisionResponse;
-	CollisionMode: EParticleCollisionMode;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleCollisionGPU;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleCollisionGPU;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleCollisionGPU;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleCollisionGPU;
-	static C(Other: UObject): ParticleModuleCollisionGPU;
-}
-
-declare class ParticleModuleColorBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleColorBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleColorBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleColorBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleColorBase;
-	static C(Other: UObject): ParticleModuleColorBase;
-}
-
-declare class ParticleModuleColor extends ParticleModuleColorBase { 
-	StartColor: RawDistributionVector;
-	StartAlpha: RawDistributionFloat;
-	bClampAlpha: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleColor;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleColor;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleColor;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleColor;
-	static C(Other: UObject): ParticleModuleColor;
-}
-
-declare class ParticleRandomSeedInfo { 
-	ParameterName: string;
-	bGetSeedFromInstance: boolean;
-	bInstanceSeedIsIndex: boolean;
-	bResetSeedOnEmitterLooping: boolean;
-	bRandomlySelectSeedArray: boolean;
-	RandomSeeds: number[];
-	clone() : ParticleRandomSeedInfo;
-	static C(Other: UObject): ParticleRandomSeedInfo;
-}
-
-declare class ParticleModuleColor_Seeded extends ParticleModuleColor { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleColor_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleColor_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleColor_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleColor_Seeded;
-	static C(Other: UObject): ParticleModuleColor_Seeded;
-}
-
-declare class ParticleModuleColorOverLife extends ParticleModuleColorBase { 
-	ColorOverLife: RawDistributionVector;
-	AlphaOverLife: RawDistributionFloat;
-	bClampAlpha: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleColorOverLife;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleColorOverLife;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleColorOverLife;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleColorOverLife;
-	static C(Other: UObject): ParticleModuleColorOverLife;
-}
-
-declare class ParticleModuleColorScaleOverLife extends ParticleModuleColorBase { 
-	ColorScaleOverLife: RawDistributionVector;
-	AlphaScaleOverLife: RawDistributionFloat;
-	bEmitterTime: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleColorScaleOverLife;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleColorScaleOverLife;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleColorScaleOverLife;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleColorScaleOverLife;
-	static C(Other: UObject): ParticleModuleColorScaleOverLife;
-}
-
-declare class ParticleModuleEventReceiverKillParticles extends ParticleModuleEventReceiverBase { 
-	bStopSpawning: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleEventReceiverKillParticles;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventReceiverKillParticles;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleEventReceiverKillParticles;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventReceiverKillParticles;
-	static C(Other: UObject): ParticleModuleEventReceiverKillParticles;
-}
-
-declare class ParticleModuleEventReceiverSpawn extends ParticleModuleEventReceiverBase { 
-	SpawnCount: RawDistributionFloat;
-	bUseParticleTime: boolean;
-	bUsePSysLocation: boolean;
-	bInheritVelocity: boolean;
-	InheritVelocityScale: RawDistributionVector;
-	PhysicalMaterials: PhysicalMaterial[];
-	bBanPhysicalMaterials: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleEventReceiverSpawn;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventReceiverSpawn;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleEventReceiverSpawn;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventReceiverSpawn;
-	static C(Other: UObject): ParticleModuleEventReceiverSpawn;
-}
-
-declare class ParticleModuleKillBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleKillBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleKillBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleKillBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleKillBase;
-	static C(Other: UObject): ParticleModuleKillBase;
-}
-
-declare class ParticleModuleKillBox extends ParticleModuleKillBase { 
-	LowerLeftCorner: RawDistributionVector;
-	UpperRightCorner: RawDistributionVector;
-	bAbsolute: boolean;
-	bKillInside: boolean;
-	bAxisAlignedAndFixedSize: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleKillBox;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleKillBox;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleKillBox;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleKillBox;
-	static C(Other: UObject): ParticleModuleKillBox;
-}
-
-declare class ParticleModuleKillHeight extends ParticleModuleKillBase { 
-	Height: RawDistributionFloat;
-	bAbsolute: boolean;
-	bFloor: boolean;
-	bApplyPSysScale: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleKillHeight;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleKillHeight;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleKillHeight;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleKillHeight;
-	static C(Other: UObject): ParticleModuleKillHeight;
-}
-
-declare class ParticleModuleLifetimeBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLifetimeBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLifetimeBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLifetimeBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLifetimeBase;
-	static C(Other: UObject): ParticleModuleLifetimeBase;
-}
-
-declare class ParticleModuleLifetime extends ParticleModuleLifetimeBase { 
-	Lifetime: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLifetime;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLifetime;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLifetime;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLifetime;
-	static C(Other: UObject): ParticleModuleLifetime;
-}
-
-declare class ParticleModuleLifetime_Seeded extends ParticleModuleLifetime { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLifetime_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLifetime_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLifetime_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLifetime_Seeded;
-	static C(Other: UObject): ParticleModuleLifetime_Seeded;
-}
-
-declare class ParticleModuleLightBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLightBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLightBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLightBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLightBase;
-	static C(Other: UObject): ParticleModuleLightBase;
-}
-
-declare class ParticleModuleLight extends ParticleModuleLightBase { 
-	bUseInverseSquaredFalloff: boolean;
-	bAffectsTranslucency: boolean;
-	bPreviewLightRadius: boolean;
-	SpawnFraction: number;
-	ColorScaleOverLife: RawDistributionVector;
-	BrightnessOverLife: RawDistributionFloat;
-	RadiusScale: RawDistributionFloat;
-	LightExponent: RawDistributionFloat;
-	bHighQualityLights: boolean;
-	bShadowCastingLights: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLight;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLight;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLight;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLight;
-	static C(Other: UObject): ParticleModuleLight;
-}
-
-declare class ParticleModuleLight_Seeded extends ParticleModuleLight { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLight_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLight_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLight_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLight_Seeded;
-	static C(Other: UObject): ParticleModuleLight_Seeded;
-}
-
-declare class ParticleModuleLocationBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationBase;
-	static C(Other: UObject): ParticleModuleLocationBase;
-}
-
-declare class ParticleModuleLocation extends ParticleModuleLocationBase { 
-	StartLocation: RawDistributionVector;
-	DistributeOverNPoints: number;
-	DistributeThreshold: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocation;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocation;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocation;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocation;
-	static C(Other: UObject): ParticleModuleLocation;
-}
-
-declare class ParticleModuleLocation_Seeded extends ParticleModuleLocation { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocation_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocation_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocation_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocation_Seeded;
-	static C(Other: UObject): ParticleModuleLocation_Seeded;
-}
-
-declare class ParticleModuleLocationWorldOffset extends ParticleModuleLocation { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationWorldOffset;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationWorldOffset;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationWorldOffset;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationWorldOffset;
-	static C(Other: UObject): ParticleModuleLocationWorldOffset;
-}
-
-declare class ParticleModuleLocationWorldOffset_Seeded extends ParticleModuleLocationWorldOffset { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationWorldOffset_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationWorldOffset_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationWorldOffset_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationWorldOffset_Seeded;
-	static C(Other: UObject): ParticleModuleLocationWorldOffset_Seeded;
-}
-
-declare type ELocationBoneSocketSource = string | symbol;
-declare var ELocationBoneSocketSource = { BONESOCKETSOURCE_Bones:'BONESOCKETSOURCE_Bones',BONESOCKETSOURCE_Sockets:'BONESOCKETSOURCE_Sockets', };
-declare class LocationBoneSocketInfo { 
-	BoneSocketName: string;
-	Offset: Vector;
-	clone() : LocationBoneSocketInfo;
-	static C(Other: UObject): LocationBoneSocketInfo;
-}
-
-declare type ELocationBoneSocketSelectionMethod = string | symbol;
-declare var ELocationBoneSocketSelectionMethod = { BONESOCKETSEL_Sequential:'BONESOCKETSEL_Sequential',BONESOCKETSEL_Random:'BONESOCKETSEL_Random', };
-declare class ParticleModuleLocationBoneSocket extends ParticleModuleLocationBase { 
-	SourceType: ELocationBoneSocketSource;
-	UniversalOffset: Vector;
-	SourceLocations: LocationBoneSocketInfo[];
-	SelectionMethod: ELocationBoneSocketSelectionMethod;
-	bUpdatePositionEachFrame: boolean;
-	bOrientMeshEmitters: boolean;
-	bInheritBoneVelocity: boolean;
-	InheritVelocityScale: number;
-	SkelMeshActorParamName: string;
-	NumPreSelectedIndices: number;
-	EditorSkelMesh: SkeletalMesh;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationBoneSocket;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationBoneSocket;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationBoneSocket;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationBoneSocket;
-	static C(Other: UObject): ParticleModuleLocationBoneSocket;
-}
-
-declare class ParticleModuleLocationDirect extends ParticleModuleLocationBase { 
-	Location: RawDistributionVector;
-	LocationOffset: RawDistributionVector;
-	ScaleFactor: RawDistributionVector;
-	Direction: RawDistributionVector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationDirect;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationDirect;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationDirect;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationDirect;
-	static C(Other: UObject): ParticleModuleLocationDirect;
-}
-
-declare type ELocationEmitterSelectionMethod = string | symbol;
-declare var ELocationEmitterSelectionMethod = { ELESM_Random:'ELESM_Random',ELESM_Sequential:'ELESM_Sequential', };
-declare class ParticleModuleLocationEmitter extends ParticleModuleLocationBase { 
-	EmitterName: string;
-	SelectionMethod: ELocationEmitterSelectionMethod;
-	InheritSourceVelocity: boolean;
-	InheritSourceVelocityScale: number;
-	bInheritSourceRotation: boolean;
-	InheritSourceRotationScale: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationEmitter;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationEmitter;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationEmitter;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationEmitter;
-	static C(Other: UObject): ParticleModuleLocationEmitter;
-}
-
-declare class ParticleModuleLocationEmitterDirect extends ParticleModuleLocationBase { 
-	EmitterName: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationEmitterDirect;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationEmitterDirect;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationEmitterDirect;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationEmitterDirect;
-	static C(Other: UObject): ParticleModuleLocationEmitterDirect;
-}
-
-declare class ParticleModuleLocationPrimitiveBase extends ParticleModuleLocationBase { 
-	Positive_X: boolean;
-	Positive_Y: boolean;
-	Positive_Z: boolean;
-	Negative_X: boolean;
-	Negative_Y: boolean;
-	Negative_Z: boolean;
-	SurfaceOnly: boolean;
-	Velocity: boolean;
-	VelocityScale: RawDistributionFloat;
-	StartLocation: RawDistributionVector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationPrimitiveBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationPrimitiveBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationPrimitiveBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationPrimitiveBase;
-	static C(Other: UObject): ParticleModuleLocationPrimitiveBase;
-}
-
-declare type CylinderHeightAxis = string | symbol;
-declare var CylinderHeightAxis = { PMLPC_HEIGHTAXIS_X:'PMLPC_HEIGHTAXIS_X',PMLPC_HEIGHTAXIS_Y:'PMLPC_HEIGHTAXIS_Y',PMLPC_HEIGHTAXIS_Z:'PMLPC_HEIGHTAXIS_Z', };
-declare class ParticleModuleLocationPrimitiveCylinder extends ParticleModuleLocationPrimitiveBase { 
-	RadialVelocity: boolean;
-	StartRadius: RawDistributionFloat;
-	StartHeight: RawDistributionFloat;
-	HeightAxis: CylinderHeightAxis;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationPrimitiveCylinder;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationPrimitiveCylinder;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationPrimitiveCylinder;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationPrimitiveCylinder;
-	static C(Other: UObject): ParticleModuleLocationPrimitiveCylinder;
-}
-
-declare class ParticleModuleLocationPrimitiveCylinder_Seeded extends ParticleModuleLocationPrimitiveCylinder { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationPrimitiveCylinder_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationPrimitiveCylinder_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationPrimitiveCylinder_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationPrimitiveCylinder_Seeded;
-	static C(Other: UObject): ParticleModuleLocationPrimitiveCylinder_Seeded;
-}
-
-declare class ParticleModuleLocationPrimitiveSphere extends ParticleModuleLocationPrimitiveBase { 
-	StartRadius: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationPrimitiveSphere;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationPrimitiveSphere;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationPrimitiveSphere;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationPrimitiveSphere;
-	static C(Other: UObject): ParticleModuleLocationPrimitiveSphere;
-}
-
-declare class ParticleModuleLocationPrimitiveSphere_Seeded extends ParticleModuleLocationPrimitiveSphere { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationPrimitiveSphere_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationPrimitiveSphere_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationPrimitiveSphere_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationPrimitiveSphere_Seeded;
-	static C(Other: UObject): ParticleModuleLocationPrimitiveSphere_Seeded;
-}
-
-declare class ParticleModuleLocationPrimitiveTriangle extends ParticleModuleLocationBase { 
-	StartOffset: RawDistributionVector;
-	Height: RawDistributionFloat;
-	Angle: RawDistributionFloat;
-	Thickness: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationPrimitiveTriangle;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationPrimitiveTriangle;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationPrimitiveTriangle;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationPrimitiveTriangle;
-	static C(Other: UObject): ParticleModuleLocationPrimitiveTriangle;
-}
-
-declare type ELocationSkelVertSurfaceSource = string | symbol;
-declare var ELocationSkelVertSurfaceSource = { VERTSURFACESOURCE_Vert:'VERTSURFACESOURCE_Vert',VERTSURFACESOURCE_Surface:'VERTSURFACESOURCE_Surface', };
-declare class ParticleModuleLocationSkelVertSurface extends ParticleModuleLocationBase { 
-	SourceType: ELocationSkelVertSurfaceSource;
-	UniversalOffset: Vector;
-	bUpdatePositionEachFrame: boolean;
-	bOrientMeshEmitters: boolean;
-	bInheritBoneVelocity: boolean;
-	SkelMeshActorParamName: string;
-	EditorSkelMesh: SkeletalMesh;
-	ValidAssociatedBones: string[];
-	bEnforceNormalCheck: boolean;
-	NormalToCompare: Vector;
-	NormalCheckToleranceDegrees: number;
-	NormalCheckTolerance: number;
-	ValidMaterialIndices: number[];
-	bInheritVertexColor: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleLocationSkelVertSurface;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleLocationSkelVertSurface;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleLocationSkelVertSurface;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleLocationSkelVertSurface;
-	static C(Other: UObject): ParticleModuleLocationSkelVertSurface;
-}
-
-declare class ParticleModulePivotOffset extends ParticleModuleLocationBase { 
-	PivotOffset: Vector2D;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModulePivotOffset;
-	static Find(Outer: UObject, ResourceName: string): ParticleModulePivotOffset;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModulePivotOffset;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModulePivotOffset;
-	static C(Other: UObject): ParticleModulePivotOffset;
-}
-
-declare class ParticleModuleSourceMovement extends ParticleModuleLocationBase { 
-	SourceMovementScale: RawDistributionVector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSourceMovement;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSourceMovement;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSourceMovement;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSourceMovement;
-	static C(Other: UObject): ParticleModuleSourceMovement;
-}
-
-declare class ParticleModuleMaterialBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMaterialBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMaterialBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMaterialBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMaterialBase;
-	static C(Other: UObject): ParticleModuleMaterialBase;
-}
-
-declare class ParticleModuleMeshMaterial extends ParticleModuleMaterialBase { 
-	MeshMaterials: MaterialInterface[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMeshMaterial;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMeshMaterial;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMeshMaterial;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMeshMaterial;
-	static C(Other: UObject): ParticleModuleMeshMaterial;
-}
-
-declare class ParticleModuleParameterBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleParameterBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleParameterBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleParameterBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleParameterBase;
-	static C(Other: UObject): ParticleModuleParameterBase;
-}
-
-declare type EEmitterDynamicParameterValue = string | symbol;
-declare var EEmitterDynamicParameterValue = { EDPV_UserSet:'EDPV_UserSet',EDPV_VelocityX:'EDPV_VelocityX',EDPV_VelocityY:'EDPV_VelocityY',EDPV_VelocityZ:'EDPV_VelocityZ',EDPV_VelocityMag:'EDPV_VelocityMag', };
-declare class EmitterDynamicParameter { 
-	ParamName: string;
-	bUseEmitterTime: boolean;
-	bSpawnTimeOnly: boolean;
-	ValueMethod: EEmitterDynamicParameterValue;
-	bScaleVelocityByParamValue: boolean;
-	ParamValue: RawDistributionFloat;
-	clone() : EmitterDynamicParameter;
-	static C(Other: UObject): EmitterDynamicParameter;
-}
-
-declare class ParticleModuleParameterDynamic extends ParticleModuleParameterBase { 
-	DynamicParams: EmitterDynamicParameter[];
-	UpdateFlags: number;
-	bUsesVelocity: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleParameterDynamic;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleParameterDynamic;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleParameterDynamic;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleParameterDynamic;
-	static C(Other: UObject): ParticleModuleParameterDynamic;
-}
-
-declare class ParticleModuleParameterDynamic_Seeded extends ParticleModuleParameterDynamic { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleParameterDynamic_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleParameterDynamic_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleParameterDynamic_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleParameterDynamic_Seeded;
-	static C(Other: UObject): ParticleModuleParameterDynamic_Seeded;
-}
-
-declare class ParticleModuleRotationBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotationBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotationBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotationBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotationBase;
-	static C(Other: UObject): ParticleModuleRotationBase;
-}
-
-declare class ParticleModuleMeshRotation extends ParticleModuleRotationBase { 
-	StartRotation: RawDistributionVector;
-	bInheritParent: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMeshRotation;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMeshRotation;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMeshRotation;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMeshRotation;
-	static C(Other: UObject): ParticleModuleMeshRotation;
-}
-
-declare class ParticleModuleMeshRotation_Seeded extends ParticleModuleMeshRotation { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMeshRotation_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMeshRotation_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMeshRotation_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMeshRotation_Seeded;
-	static C(Other: UObject): ParticleModuleMeshRotation_Seeded;
-}
-
-declare class ParticleModuleRotation extends ParticleModuleRotationBase { 
-	StartRotation: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotation;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotation;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotation;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotation;
-	static C(Other: UObject): ParticleModuleRotation;
-}
-
-declare class ParticleModuleRotation_Seeded extends ParticleModuleRotation { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotation_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotation_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotation_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotation_Seeded;
-	static C(Other: UObject): ParticleModuleRotation_Seeded;
-}
-
-declare class ParticleModuleRotationOverLifetime extends ParticleModuleRotationBase { 
-	RotationOverLife: RawDistributionFloat;
-	Scale: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotationOverLifetime;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotationOverLifetime;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotationOverLifetime;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotationOverLifetime;
-	static C(Other: UObject): ParticleModuleRotationOverLifetime;
-}
-
-declare class ParticleModuleRotationRateBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotationRateBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotationRateBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotationRateBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotationRateBase;
-	static C(Other: UObject): ParticleModuleRotationRateBase;
-}
-
-declare class ParticleModuleMeshRotationRate extends ParticleModuleRotationRateBase { 
-	StartRotationRate: RawDistributionVector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMeshRotationRate;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMeshRotationRate;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMeshRotationRate;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMeshRotationRate;
-	static C(Other: UObject): ParticleModuleMeshRotationRate;
-}
-
-declare class ParticleModuleRotationRate extends ParticleModuleRotationRateBase { 
-	StartRotationRate: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotationRate;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotationRate;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotationRate;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotationRate;
-	static C(Other: UObject): ParticleModuleRotationRate;
-}
-
-declare class ParticleModuleMeshRotationRate_Seeded extends ParticleModuleMeshRotationRate { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMeshRotationRate_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMeshRotationRate_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMeshRotationRate_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMeshRotationRate_Seeded;
-	static C(Other: UObject): ParticleModuleMeshRotationRate_Seeded;
-}
-
-declare class ParticleModuleMeshRotationRateMultiplyLife extends ParticleModuleRotationRateBase { 
-	LifeMultiplier: RawDistributionVector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMeshRotationRateMultiplyLife;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMeshRotationRateMultiplyLife;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMeshRotationRateMultiplyLife;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMeshRotationRateMultiplyLife;
-	static C(Other: UObject): ParticleModuleMeshRotationRateMultiplyLife;
-}
-
-declare class ParticleModuleMeshRotationRateOverLife extends ParticleModuleRotationRateBase { 
-	RotRate: RawDistributionVector;
-	bScaleRotRate: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleMeshRotationRateOverLife;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleMeshRotationRateOverLife;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleMeshRotationRateOverLife;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleMeshRotationRateOverLife;
-	static C(Other: UObject): ParticleModuleMeshRotationRateOverLife;
-}
-
-declare class ParticleModuleRotationRate_Seeded extends ParticleModuleRotationRate { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotationRate_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotationRate_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotationRate_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotationRate_Seeded;
-	static C(Other: UObject): ParticleModuleRotationRate_Seeded;
-}
-
-declare class ParticleModuleRotationRateMultiplyLife extends ParticleModuleRotationRateBase { 
-	LifeMultiplier: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleRotationRateMultiplyLife;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRotationRateMultiplyLife;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleRotationRateMultiplyLife;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRotationRateMultiplyLife;
-	static C(Other: UObject): ParticleModuleRotationRateMultiplyLife;
-}
-
-declare class ParticleModuleSizeBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSizeBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSizeBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSizeBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSizeBase;
-	static C(Other: UObject): ParticleModuleSizeBase;
-}
-
-declare class ParticleModuleSize extends ParticleModuleSizeBase { 
-	StartSize: RawDistributionVector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSize;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSize;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSize;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSize;
-	static C(Other: UObject): ParticleModuleSize;
-}
-
-declare class ParticleModuleSize_Seeded extends ParticleModuleSize { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSize_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSize_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSize_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSize_Seeded;
-	static C(Other: UObject): ParticleModuleSize_Seeded;
-}
-
-declare class ParticleModuleSizeMultiplyLife extends ParticleModuleSizeBase { 
-	LifeMultiplier: RawDistributionVector;
-	MultiplyX: boolean;
-	MultiplyY: boolean;
-	MultiplyZ: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSizeMultiplyLife;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSizeMultiplyLife;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSizeMultiplyLife;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSizeMultiplyLife;
-	static C(Other: UObject): ParticleModuleSizeMultiplyLife;
-}
-
-declare class ParticleModuleSizeScale extends ParticleModuleSizeBase { 
-	SizeScale: RawDistributionVector;
-	EnableX: boolean;
-	EnableY: boolean;
-	EnableZ: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSizeScale;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSizeScale;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSizeScale;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSizeScale;
-	static C(Other: UObject): ParticleModuleSizeScale;
-}
-
-declare class ParticleModuleSizeScaleBySpeed extends ParticleModuleSizeBase { 
-	SpeedScale: Vector2D;
-	MaxScale: Vector2D;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSizeScaleBySpeed;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSizeScaleBySpeed;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSizeScaleBySpeed;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSizeScaleBySpeed;
-	static C(Other: UObject): ParticleModuleSizeScaleBySpeed;
-}
-
-declare class ParticleModuleSpawnPerUnit extends ParticleModuleSpawnBase { 
-	UnitScalar: number;
-	SpawnPerUnit: RawDistributionFloat;
-	bIgnoreSpawnRateWhenMoving: boolean;
-	MovementTolerance: number;
-	MaxFrameDistance: number;
-	bIgnoreMovementAlongX: boolean;
-	bIgnoreMovementAlongY: boolean;
-	bIgnoreMovementAlongZ: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSpawnPerUnit;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSpawnPerUnit;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSpawnPerUnit;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSpawnPerUnit;
-	static C(Other: UObject): ParticleModuleSpawnPerUnit;
-}
-
-declare class ParticleModuleSubUVBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSubUVBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSubUVBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSubUVBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSubUVBase;
-	static C(Other: UObject): ParticleModuleSubUVBase;
-}
-
-declare type ESubUVBoundingVertexCount = string | symbol;
-declare var ESubUVBoundingVertexCount = { BVC_FourVertices:'BVC_FourVertices',BVC_EightVertices:'BVC_EightVertices', };
-declare type EOpacitySourceMode = string | symbol;
-declare var EOpacitySourceMode = { OSM_Alpha:'OSM_Alpha',OSM_ColorBrightness:'OSM_ColorBrightness',OSM_RedChannel:'OSM_RedChannel',OSM_GreenChannel:'OSM_GreenChannel',OSM_BlueChannel:'OSM_BlueChannel', };
-declare class SubUVAnimation extends UObject { 
-	SubUVTexture: Texture2D;
-	SubImages_Horizontal: number;
-	SubImages_Vertical: number;
-	BoundingMode: ESubUVBoundingVertexCount;
-	OpacitySourceMode: EOpacitySourceMode;
-	AlphaThreshold: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SubUVAnimation;
-	static Find(Outer: UObject, ResourceName: string): SubUVAnimation;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SubUVAnimation;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SubUVAnimation;
-	static C(Other: UObject): SubUVAnimation;
-}
-
-declare class ParticleModuleSubUV extends ParticleModuleSubUVBase { 
-	Animation: SubUVAnimation;
-	SubImageIndex: RawDistributionFloat;
-	bUseRealTime: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSubUV;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSubUV;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSubUV;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSubUV;
-	static C(Other: UObject): ParticleModuleSubUV;
-}
-
-declare class ParticleModuleSubUVMovie extends ParticleModuleSubUV { 
-	bUseEmitterTime: boolean;
-	FrameRate: RawDistributionFloat;
-	StartingFrame: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleSubUVMovie;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSubUVMovie;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleSubUVMovie;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSubUVMovie;
-	static C(Other: UObject): ParticleModuleSubUVMovie;
-}
-
-declare class ParticleModuleTrailBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleTrailBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTrailBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleTrailBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTrailBase;
-	static C(Other: UObject): ParticleModuleTrailBase;
-}
-
-declare type ETrail2SourceMethod = string | symbol;
-declare var ETrail2SourceMethod = { PET2SRCM_Default:'PET2SRCM_Default',PET2SRCM_Particle:'PET2SRCM_Particle',PET2SRCM_Actor:'PET2SRCM_Actor', };
-declare type EParticleSourceSelectionMethod = string | symbol;
-declare var EParticleSourceSelectionMethod = { EPSSM_Random:'EPSSM_Random',EPSSM_Sequential:'EPSSM_Sequential', };
-declare class ParticleModuleTrailSource extends ParticleModuleTrailBase { 
-	SourceMethod: ETrail2SourceMethod;
-	SourceName: string;
-	SourceStrength: RawDistributionFloat;
-	bLockSourceStength: boolean;
-	SourceOffsetCount: number;
-	SourceOffsetDefaults: Vector[];
-	SelectionMethod: EParticleSourceSelectionMethod;
-	bInheritRotation: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleTrailSource;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTrailSource;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleTrailSource;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTrailSource;
-	static C(Other: UObject): ParticleModuleTrailSource;
-}
-
-declare class ParticleModuleTypeDataAnimTrail extends ParticleModuleTypeDataBase { 
-	bDeadTrailsOnDeactivate: boolean;
-	bEnablePreviousTangentRecalculation: boolean;
-	bTangentRecalculationEveryFrame: boolean;
-	TilingDistance: number;
-	DistanceTessellationStepSize: number;
-	TangentTessellationStepSize: number;
-	WidthTessellationStepSize: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleTypeDataAnimTrail;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTypeDataAnimTrail;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleTypeDataAnimTrail;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTypeDataAnimTrail;
-	static C(Other: UObject): ParticleModuleTypeDataAnimTrail;
-}
-
-declare type EBeam2Method = string | symbol;
-declare var EBeam2Method = { PEB2M_Distance:'PEB2M_Distance',PEB2M_Target:'PEB2M_Target',PEB2M_Branch:'PEB2M_Branch', };
-declare type EBeamTaperMethod = string | symbol;
-declare var EBeamTaperMethod = { PEBTM_None:'PEBTM_None',PEBTM_Full:'PEBTM_Full',PEBTM_Partial:'PEBTM_Partial', };
-declare class ParticleModuleTypeDataBeam2 extends ParticleModuleTypeDataBase { 
-	BeamMethod: EBeam2Method;
-	TextureTile: number;
-	TextureTileDistance: number;
-	Sheets: number;
-	MaxBeamCount: number;
-	Speed: number;
-	InterpolationPoints: number;
-	bAlwaysOn: boolean;
-	UpVectorStepSize: number;
-	BranchParentName: string;
-	Distance: RawDistributionFloat;
-	TaperMethod: EBeamTaperMethod;
-	TaperFactor: RawDistributionFloat;
-	TaperScale: RawDistributionFloat;
-	RenderGeometry: boolean;
-	RenderDirectLine: boolean;
-	RenderLines: boolean;
-	RenderTessellation: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleTypeDataBeam2;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTypeDataBeam2;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleTypeDataBeam2;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTypeDataBeam2;
-	static C(Other: UObject): ParticleModuleTypeDataBeam2;
-}
-
-declare class GPUSpriteLocalVectorFieldInfo { 
-	Field: VectorField;
-	Transform: Transform;
-	MinInitialRotation: Rotator;
-	MaxInitialRotation: Rotator;
-	RotationRate: Rotator;
-	Intensity: number;
-	Tightness: number;
-	bIgnoreComponentTransform: boolean;
-	bTileX: boolean;
-	bTileY: boolean;
-	bTileZ: boolean;
-	bUseFixDT: boolean;
-	clone() : GPUSpriteLocalVectorFieldInfo;
-	static C(Other: UObject): GPUSpriteLocalVectorFieldInfo;
-}
-
-declare class FloatDistribution { 
-	Table: DistributionLookupTable;
-	clone() : FloatDistribution;
-	static C(Other: UObject): FloatDistribution;
-}
-
-declare class GPUSpriteEmitterInfo { 
-	RequiredModule: ParticleModuleRequired;
-	SpawnModule: ParticleModuleSpawn;
-	SpawnPerUnitModule: ParticleModuleSpawnPerUnit;
-	SpawnModules: ParticleModule[];
-	LocalVectorField: GPUSpriteLocalVectorFieldInfo;
-	VectorFieldScale: FloatDistribution;
-	DragCoefficient: FloatDistribution;
-	PointAttractorStrength: FloatDistribution;
-	Resilience: FloatDistribution;
-	ConstantAcceleration: Vector;
-	PointAttractorPosition: Vector;
-	PointAttractorRadiusSq: number;
-	OrbitOffsetBase: Vector;
-	OrbitOffsetRange: Vector;
-	InvMaxSize: Vector2D;
-	InvRotationRateScale: number;
-	MaxLifetime: number;
-	MaxParticleCount: number;
-	ScreenAlignment: EParticleScreenAlignment;
-	LockAxisFlag: EParticleAxisLock;
-	bEnableCollision: boolean;
-	CollisionMode: EParticleCollisionMode;
-	DynamicColor: RawDistributionVector;
-	DynamicAlpha: RawDistributionFloat;
-	DynamicColorScale: RawDistributionVector;
-	DynamicAlphaScale: RawDistributionFloat;
-	clone() : GPUSpriteEmitterInfo;
-	static C(Other: UObject): GPUSpriteEmitterInfo;
-}
-
-declare class GPUSpriteResourceData { 
-	QuantizedColorSamples: Color[];
-	QuantizedMiscSamples: Color[];
-	QuantizedSimulationAttrSamples: Color[];
-	ColorScale: Vector4;
-	ColorBias: Vector4;
-	MiscScale: Vector4;
-	MiscBias: Vector4;
-	SimulationAttrCurveScale: Vector4;
-	SimulationAttrCurveBias: Vector4;
-	SubImageSize: Vector4;
-	SizeBySpeed: Vector4;
-	ConstantAcceleration: Vector;
-	OrbitOffsetBase: Vector;
-	OrbitOffsetRange: Vector;
-	OrbitFrequencyBase: Vector;
-	OrbitFrequencyRange: Vector;
-	OrbitPhaseBase: Vector;
-	OrbitPhaseRange: Vector;
-	GlobalVectorFieldScale: number;
-	GlobalVectorFieldTightness: number;
-	PerParticleVectorFieldScale: number;
-	PerParticleVectorFieldBias: number;
-	DragCoefficientScale: number;
-	DragCoefficientBias: number;
-	ResilienceScale: number;
-	ResilienceBias: number;
-	CollisionRadiusScale: number;
-	CollisionRadiusBias: number;
-	CollisionTimeBias: number;
-	OneMinusFriction: number;
-	RotationRateScale: number;
-	CameraMotionBlurAmount: number;
-	ScreenAlignment: EParticleScreenAlignment;
-	LockAxisFlag: EParticleAxisLock;
-	PivotOffset: Vector2D;
-	clone() : GPUSpriteResourceData;
-	static C(Other: UObject): GPUSpriteResourceData;
-}
-
-declare class ParticleModuleTypeDataGpu extends ParticleModuleTypeDataBase { 
-	EmitterInfo: GPUSpriteEmitterInfo;
-	ResourceData: GPUSpriteResourceData;
-	CameraMotionBlurAmount: number;
-	bClearExistingParticlesOnInit: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleTypeDataGpu;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTypeDataGpu;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleTypeDataGpu;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTypeDataGpu;
-	static C(Other: UObject): ParticleModuleTypeDataGpu;
-}
-
-declare type EMeshScreenAlignment = string | symbol;
-declare var EMeshScreenAlignment = { PSMA_MeshFaceCameraWithRoll:'PSMA_MeshFaceCameraWithRoll',PSMA_MeshFaceCameraWithSpin:'PSMA_MeshFaceCameraWithSpin',PSMA_MeshFaceCameraWithLockedAxis:'PSMA_MeshFaceCameraWithLockedAxis', };
-declare type EMeshCameraFacingUpAxis = string | symbol;
-declare var EMeshCameraFacingUpAxis = { CameraFacing_NoneUP:'CameraFacing_NoneUP',CameraFacing_ZUp:'CameraFacing_ZUp',CameraFacing_NegativeZUp:'CameraFacing_NegativeZUp',CameraFacing_YUp:'CameraFacing_YUp',CameraFacing_NegativeYUp:'CameraFacing_NegativeYUp', };
-declare type EMeshCameraFacingOptions = string | symbol;
-declare var EMeshCameraFacingOptions = { XAxisFacing_NoUp:'XAxisFacing_NoUp',XAxisFacing_ZUp:'XAxisFacing_ZUp',XAxisFacing_NegativeZUp:'XAxisFacing_NegativeZUp',XAxisFacing_YUp:'XAxisFacing_YUp',XAxisFacing_NegativeYUp:'XAxisFacing_NegativeYUp',LockedAxis_ZAxisFacing:'LockedAxis_ZAxisFacing',LockedAxis_NegativeZAxisFacing:'LockedAxis_NegativeZAxisFacing',LockedAxis_YAxisFacing:'LockedAxis_YAxisFacing',LockedAxis_NegativeYAxisFacing:'LockedAxis_NegativeYAxisFacing',VelocityAligned_ZAxisFacing:'VelocityAligned_ZAxisFacing',VelocityAligned_NegativeZAxisFacing:'VelocityAligned_NegativeZAxisFacing',VelocityAligned_YAxisFacing:'VelocityAligned_YAxisFacing',VelocityAligned_NegativeYAxisFacing:'VelocityAligned_NegativeYAxisFacing', };
-declare class ParticleModuleTypeDataMesh extends ParticleModuleTypeDataBase { 
-	Mesh: StaticMesh;
-	CastShadows: boolean;
-	DoCollisions: boolean;
-	MeshAlignment: EMeshScreenAlignment;
-	bOverrideMaterial: boolean;
-	bOverrideDefaultMotionBlurSettings: boolean;
-	bEnableMotionBlur: boolean;
-	Pitch: number;
-	Roll: number;
-	Yaw: number;
-	RollPitchYawRange: RawDistributionVector;
-	AxisLockOption: EParticleAxisLock;
-	bCameraFacing: boolean;
-	CameraFacingUpAxisOption: EMeshCameraFacingUpAxis;
-	CameraFacingOption: EMeshCameraFacingOptions;
-	bApplyParticleRotationAsSpin: boolean;
-	bFaceCameraDirectionRatherThanPosition: boolean;
-	bCollisionsConsiderPartilceSize: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleTypeDataMesh;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTypeDataMesh;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleTypeDataMesh;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTypeDataMesh;
-	static C(Other: UObject): ParticleModuleTypeDataMesh;
-}
-
-declare type ETrailsRenderAxisOption = string | symbol;
-declare var ETrailsRenderAxisOption = { Trails_CameraUp:'Trails_CameraUp',Trails_SourceUp:'Trails_SourceUp',Trails_WorldUp:'Trails_WorldUp', };
-declare class ParticleModuleTypeDataRibbon extends ParticleModuleTypeDataBase { 
-	MaxTessellationBetweenParticles: number;
-	SheetsPerTrail: number;
-	MaxTrailCount: number;
-	MaxParticleInTrailCount: number;
-	bDeadTrailsOnDeactivate: boolean;
-	bDeadTrailsOnSourceLoss: boolean;
-	bClipSourceSegement: boolean;
-	bEnablePreviousTangentRecalculation: boolean;
-	bTangentRecalculationEveryFrame: boolean;
-	bSpawnInitialParticle: boolean;
-	RenderAxis: ETrailsRenderAxisOption;
-	TangentSpawningScalar: number;
-	bRenderGeometry: boolean;
-	bRenderSpawnPoints: boolean;
-	bRenderTangents: boolean;
-	bRenderTessellation: boolean;
-	TilingDistance: number;
-	DistanceTessellationStepSize: number;
-	bEnableTangentDiffInterpScale: boolean;
-	TangentTessellationScalar: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleTypeDataRibbon;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTypeDataRibbon;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleTypeDataRibbon;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTypeDataRibbon;
-	static C(Other: UObject): ParticleModuleTypeDataRibbon;
-}
-
-declare class ParticleModuleVectorFieldBase extends ParticleModule { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVectorFieldBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVectorFieldBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVectorFieldBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVectorFieldBase;
-	static C(Other: UObject): ParticleModuleVectorFieldBase;
-}
-
-declare class ParticleModuleVectorFieldGlobal extends ParticleModuleVectorFieldBase { 
-	bOverrideGlobalVectorFieldTightness: boolean;
-	GlobalVectorFieldScale: number;
-	GlobalVectorFieldTightness: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVectorFieldGlobal;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVectorFieldGlobal;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVectorFieldGlobal;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVectorFieldGlobal;
-	static C(Other: UObject): ParticleModuleVectorFieldGlobal;
-}
-
-declare class ParticleModuleVectorFieldLocal extends ParticleModuleVectorFieldBase { 
-	VectorField: VectorField;
-	RelativeTranslation: Vector;
-	RelativeRotation: Rotator;
-	RelativeScale3D: Vector;
-	Intensity: number;
-	Tightness: number;
-	bIgnoreComponentTransform: boolean;
-	bTileX: boolean;
-	bTileY: boolean;
-	bTileZ: boolean;
-	bUseFixDT: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVectorFieldLocal;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVectorFieldLocal;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVectorFieldLocal;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVectorFieldLocal;
-	static C(Other: UObject): ParticleModuleVectorFieldLocal;
-}
-
-declare class ParticleModuleVectorFieldRotation extends ParticleModuleVectorFieldBase { 
-	MinInitialRotation: Vector;
-	MaxInitialRotation: Vector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVectorFieldRotation;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVectorFieldRotation;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVectorFieldRotation;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVectorFieldRotation;
-	static C(Other: UObject): ParticleModuleVectorFieldRotation;
-}
-
-declare class ParticleModuleVectorFieldRotationRate extends ParticleModuleVectorFieldBase { 
-	RotationRate: Vector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVectorFieldRotationRate;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVectorFieldRotationRate;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVectorFieldRotationRate;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVectorFieldRotationRate;
-	static C(Other: UObject): ParticleModuleVectorFieldRotationRate;
-}
-
-declare class ParticleModuleVectorFieldScale extends ParticleModuleVectorFieldBase { 
-	VectorFieldScale: DistributionFloat;
-	VectorFieldScaleRaw: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVectorFieldScale;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVectorFieldScale;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVectorFieldScale;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVectorFieldScale;
-	static C(Other: UObject): ParticleModuleVectorFieldScale;
-}
-
-declare class ParticleModuleVectorFieldScaleOverLife extends ParticleModuleVectorFieldBase { 
-	VectorFieldScaleOverLife: DistributionFloat;
-	VectorFieldScaleOverLifeRaw: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVectorFieldScaleOverLife;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVectorFieldScaleOverLife;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVectorFieldScaleOverLife;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVectorFieldScaleOverLife;
-	static C(Other: UObject): ParticleModuleVectorFieldScaleOverLife;
-}
-
-declare class ParticleModuleVelocityBase extends ParticleModule { 
-	bInWorldSpace: boolean;
-	bApplyOwnerScale: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVelocityBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVelocityBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVelocityBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVelocityBase;
-	static C(Other: UObject): ParticleModuleVelocityBase;
-}
-
-declare class ParticleModuleVelocity extends ParticleModuleVelocityBase { 
-	StartVelocity: RawDistributionVector;
-	StartVelocityRadial: RawDistributionFloat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVelocity;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVelocity;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVelocity;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVelocity;
-	static C(Other: UObject): ParticleModuleVelocity;
-}
-
-declare class ParticleModuleVelocity_Seeded extends ParticleModuleVelocity { 
-	RandomSeedInfo: ParticleRandomSeedInfo;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVelocity_Seeded;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVelocity_Seeded;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVelocity_Seeded;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVelocity_Seeded;
-	static C(Other: UObject): ParticleModuleVelocity_Seeded;
-}
-
-declare class ParticleModuleVelocityCone extends ParticleModuleVelocityBase { 
-	Angle: RawDistributionFloat;
-	Velocity: RawDistributionFloat;
-	Direction: Vector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVelocityCone;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVelocityCone;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVelocityCone;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVelocityCone;
-	static C(Other: UObject): ParticleModuleVelocityCone;
-}
-
-declare class ParticleModuleVelocityInheritParent extends ParticleModuleVelocityBase { 
-	Scale: RawDistributionVector;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVelocityInheritParent;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVelocityInheritParent;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVelocityInheritParent;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVelocityInheritParent;
-	static C(Other: UObject): ParticleModuleVelocityInheritParent;
-}
-
-declare class ParticleModuleVelocityOverLifetime extends ParticleModuleVelocityBase { 
-	VelOverLife: RawDistributionVector;
-	Absolute: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ParticleModuleVelocityOverLifetime;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleVelocityOverLifetime;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ParticleModuleVelocityOverLifetime;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleVelocityOverLifetime;
-	static C(Other: UObject): ParticleModuleVelocityOverLifetime;
-}
-
-declare class DemoPendingNetGame extends PendingNetGame { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): DemoPendingNetGame;
-	static Find(Outer: UObject, ResourceName: string): DemoPendingNetGame;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): DemoPendingNetGame;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DemoPendingNetGame;
-	static C(Other: UObject): DemoPendingNetGame;
-}
-
-declare type EPlatformInterfaceDataType = string | symbol;
-declare var EPlatformInterfaceDataType = { PIDT_None:'PIDT_None',PIDT_Int:'PIDT_Int',PIDT_Float:'PIDT_Float',PIDT_String:'PIDT_String',PIDT_Object:'PIDT_Object',PIDT_Custom:'PIDT_Custom', };
-declare class PlatformInterfaceData { 
-	DataName: string;
-	Type: EPlatformInterfaceDataType;
-	IntValue: number;
-	FloatValue: number;
-	StringValue: string;
-	ObjectValue: UObject;
-	clone() : PlatformInterfaceData;
-	static C(Other: UObject): PlatformInterfaceData;
-}
-
-declare class PlatformInterfaceDelegateResult { 
-	bSuccessful: boolean;
-	Data: PlatformInterfaceData;
-	clone() : PlatformInterfaceDelegateResult;
-	static C(Other: UObject): PlatformInterfaceDelegateResult;
-}
-
-declare class DelegateArray { 
-	Delegates: UnrealEngineDelegate<(Result: PlatformInterfaceDelegateResult) => void>[];
-	clone() : DelegateArray;
-	static C(Other: UObject): DelegateArray;
-}
-
-declare class PlatformInterfaceBase extends UObject { 
-	AllDelegates: DelegateArray[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): PlatformInterfaceBase;
-	static Find(Outer: UObject, ResourceName: string): PlatformInterfaceBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): PlatformInterfaceBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PlatformInterfaceBase;
-	static C(Other: UObject): PlatformInterfaceBase;
-}
-
-declare class CloudStorageBase extends PlatformInterfaceBase { 
-	LocalCloudFiles: string[];
-	bSuppressDelegateCalls: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): CloudStorageBase;
-	static Find(Outer: UObject, ResourceName: string): CloudStorageBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): CloudStorageBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CloudStorageBase;
-	static C(Other: UObject): CloudStorageBase;
-}
-
-declare class InGameAdManager extends PlatformInterfaceBase { 
-	bShouldPauseWhileAdOpen: boolean;
-	ClickedBannerDelegates: UnrealEngineDelegate<() => void>[];
-	ClosedAdDelegates: UnrealEngineDelegate<() => void>[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): InGameAdManager;
-	static Find(Outer: UObject, ResourceName: string): InGameAdManager;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): InGameAdManager;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InGameAdManager;
-	static C(Other: UObject): InGameAdManager;
-}
-
-declare class PurchaseInfo { 
-	Identifier: string;
-	DisplayName: string;
-	DisplayDescription: string;
-	DisplayPrice: string;
-	clone() : PurchaseInfo;
-	static C(Other: UObject): PurchaseInfo;
-}
-
-declare class MicroTransactionBase extends PlatformInterfaceBase { 
-	AvailableProducts: PurchaseInfo[];
-	LastError: string;
-	LastErrorSolution: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): MicroTransactionBase;
-	static Find(Outer: UObject, ResourceName: string): MicroTransactionBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): MicroTransactionBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MicroTransactionBase;
-	static C(Other: UObject): MicroTransactionBase;
-}
-
-declare type ETwitterRequestMethod = string | symbol;
-declare var ETwitterRequestMethod = { TRM_Get:'TRM_Get',TRM_Post:'TRM_Post',TRM_Delete:'TRM_Delete', };
-declare class TwitterIntegrationBase extends PlatformInterfaceBase { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): TwitterIntegrationBase;
-	static Find(Outer: UObject, ResourceName: string): TwitterIntegrationBase;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): TwitterIntegrationBase;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TwitterIntegrationBase;
-	TwitterRequest(URL: string,ParamKeysAndValues: string[],RequestMethod: ETwitterRequestMethod,AccountIndex: number): boolean;
-	ShowTweetUI(InitialMessage: string,URL: string,Picture: string): boolean;
-	Init(): void;
-	GetNumAccounts(): number;
-	GetAccountName(AccountIndex: number): string;
-	CanShowTweetUI(): boolean;
-	AuthorizeAccounts(): boolean;
-	static C(Other: UObject): TwitterIntegrationBase;
-}
-
-declare class PlatformInterfaceWebResponse extends UObject { 
-	OriginalURL: string;
-	ResponseCode: number;
-	Tag: number;
-	StringResponse: string;
-	BinaryResponse: number[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): PlatformInterfaceWebResponse;
-	static Find(Outer: UObject, ResourceName: string): PlatformInterfaceWebResponse;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): PlatformInterfaceWebResponse;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PlatformInterfaceWebResponse;
-	GetNumHeaders(): number;
-	GetHeaderValue(HeaderName: string): string;
-	GetHeader(HeaderIndex: number,Header?: string,Value?: string): {Header: string, Value: string};
-	static C(Other: UObject): PlatformInterfaceWebResponse;
-}
-
-declare class Polys extends UObject { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): Polys;
-	static Find(Outer: UObject, ResourceName: string): Polys;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): Polys;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Polys;
-	static C(Other: UObject): Polys;
-}
-
-declare class SkeletalMeshLODGroupSettings { 
-	ScreenSize: number;
-	OptimizationSettings: SkeletalMeshOptimizationSettings;
-	clone() : SkeletalMeshLODGroupSettings;
-	static C(Other: UObject): SkeletalMeshLODGroupSettings;
-}
-
-declare class SkeletalMeshReductionSettings extends UObject { 
-	Settings: SkeletalMeshLODGroupSettings[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SkeletalMeshReductionSettings;
-	static Find(Outer: UObject, ResourceName: string): SkeletalMeshReductionSettings;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SkeletalMeshReductionSettings;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkeletalMeshReductionSettings;
-	static C(Other: UObject): SkeletalMeshReductionSettings;
-}
-
-declare class SlateTextureAtlasInterface extends Interface { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SlateTextureAtlasInterface;
-	static Find(Outer: UObject, ResourceName: string): SlateTextureAtlasInterface;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SlateTextureAtlasInterface;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SlateTextureAtlasInterface;
-	static C(Other: UObject): SlateTextureAtlasInterface;
-}
-
-declare class SoundWaveProcedural extends SoundWave { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundWaveProcedural;
-	static Find(Outer: UObject, ResourceName: string): SoundWaveProcedural;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundWaveProcedural;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundWaveProcedural;
-	static C(Other: UObject): SoundWaveProcedural;
-}
-
-declare class SoundNodeAssetReferencer extends SoundNode { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeAssetReferencer;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeAssetReferencer;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeAssetReferencer;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeAssetReferencer;
-	static C(Other: UObject): SoundNodeAssetReferencer;
-}
-
-declare class SoundNodeWavePlayer extends SoundNodeAssetReferencer { 
-	SoundWaveAssetPtr: any;
-	SoundWave: SoundWave;
-	bLooping: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeWavePlayer;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeWavePlayer;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeWavePlayer;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeWavePlayer;
-	static C(Other: UObject): SoundNodeWavePlayer;
-}
-
-declare class SoundNodeAttenuation extends SoundNode { 
-	AttenuationSettings: SoundAttenuation;
-	AttenuationOverrides: AttenuationSettings;
-	bOverrideAttenuation: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeAttenuation;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeAttenuation;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeAttenuation;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeAttenuation;
-	static C(Other: UObject): SoundNodeAttenuation;
-}
-
-declare class SoundNodeBranch extends SoundNode { 
-	BoolParameterName: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeBranch;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeBranch;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeBranch;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeBranch;
-	static C(Other: UObject): SoundNodeBranch;
-}
-
-declare class SoundNodeConcatenator extends SoundNode { 
-	InputVolume: number[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeConcatenator;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeConcatenator;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeConcatenator;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeConcatenator;
-	static C(Other: UObject): SoundNodeConcatenator;
-}
-
-declare class SoundNodeDelay extends SoundNode { 
-	DelayMin: number;
-	DelayMax: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeDelay;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeDelay;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeDelay;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeDelay;
-	static C(Other: UObject): SoundNodeDelay;
-}
-
-declare class DialogueWaveParameter { 
-	DialogueWave: DialogueWave;
-	Context: DialogueContext;
-	clone() : DialogueWaveParameter;
-	static C(Other: UObject): DialogueWaveParameter;
-}
-
-declare class SoundNodeDialoguePlayer extends SoundNode { 
-	DialogueWaveParameter: DialogueWaveParameter;
-	bLooping: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeDialoguePlayer;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeDialoguePlayer;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeDialoguePlayer;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeDialoguePlayer;
-	static C(Other: UObject): SoundNodeDialoguePlayer;
-}
-
-declare class DistanceDatum { 
-	FadeInDistanceStart: number;
-	FadeInDistanceEnd: number;
-	FadeOutDistanceStart: number;
-	FadeOutDistanceEnd: number;
-	Volume: number;
-	clone() : DistanceDatum;
-	static C(Other: UObject): DistanceDatum;
-}
-
-declare class SoundNodeDistanceCrossFade extends SoundNode { 
-	CrossFadeInput: DistanceDatum[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeDistanceCrossFade;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeDistanceCrossFade;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeDistanceCrossFade;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeDistanceCrossFade;
-	static C(Other: UObject): SoundNodeDistanceCrossFade;
-}
-
-declare class SoundNodeParamCrossFade extends SoundNodeDistanceCrossFade { 
-	ParamName: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeParamCrossFade;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeParamCrossFade;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeParamCrossFade;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeParamCrossFade;
-	static C(Other: UObject): SoundNodeParamCrossFade;
-}
-
-declare class SoundNodeDoppler extends SoundNode { 
-	DopplerIntensity: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeDoppler;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeDoppler;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeDoppler;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeDoppler;
-	static C(Other: UObject): SoundNodeDoppler;
-}
-
-declare class SoundNodeEnveloper extends SoundNode { 
-	LoopStart: number;
-	LoopEnd: number;
-	DurationAfterLoop: number;
-	LoopCount: number;
-	bLoopIndefinitely: boolean;
-	bLoop: boolean;
-	VolumeInterpCurve: DistributionFloatConstantCurve;
-	PitchInterpCurve: DistributionFloatConstantCurve;
-	VolumeCurve: RuntimeFloatCurve;
-	PitchCurve: RuntimeFloatCurve;
-	PitchMin: number;
-	PitchMax: number;
-	VolumeMin: number;
-	VolumeMax: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeEnveloper;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeEnveloper;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeEnveloper;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeEnveloper;
-	static C(Other: UObject): SoundNodeEnveloper;
-}
-
-declare class SoundNodeGroupControl extends SoundNode { 
-	GroupSizes: number[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeGroupControl;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeGroupControl;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeGroupControl;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeGroupControl;
-	static C(Other: UObject): SoundNodeGroupControl;
-}
-
-declare class SoundNodeLooping extends SoundNode { 
-	LoopCount: number;
-	bLoopIndefinitely: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeLooping;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeLooping;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeLooping;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeLooping;
-	static C(Other: UObject): SoundNodeLooping;
-}
-
-declare class SoundNodeMature extends SoundNode { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeMature;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeMature;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeMature;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeMature;
-	static C(Other: UObject): SoundNodeMature;
-}
-
-declare class SoundNodeMixer extends SoundNode { 
-	InputVolume: number[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeMixer;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeMixer;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeMixer;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeMixer;
-	static C(Other: UObject): SoundNodeMixer;
-}
-
-declare class SoundNodeModulator extends SoundNode { 
-	PitchMin: number;
-	PitchMax: number;
-	VolumeMin: number;
-	VolumeMax: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeModulator;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeModulator;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeModulator;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeModulator;
-	static C(Other: UObject): SoundNodeModulator;
-}
-
-declare type ModulationParamMode = string | symbol;
-declare var ModulationParamMode = { MPM_Normal:'MPM_Normal',MPM_Abs:'MPM_Abs',MPM_Direct:'MPM_Direct', };
-declare class ModulatorContinuousParams { 
-	ParameterName: string;
-	Default: number;
-	MinInput: number;
-	MaxInput: number;
-	MinOutput: number;
-	MaxOutput: number;
-	ParamMode: ModulationParamMode;
-	clone() : ModulatorContinuousParams;
-	static C(Other: UObject): ModulatorContinuousParams;
-}
-
-declare class SoundNodeModulatorContinuous extends SoundNode { 
-	PitchModulationParams: ModulatorContinuousParams;
-	VolumeModulationParams: ModulatorContinuousParams;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeModulatorContinuous;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeModulatorContinuous;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeModulatorContinuous;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeModulatorContinuous;
-	static C(Other: UObject): SoundNodeModulatorContinuous;
-}
-
-declare class SoundNodeOscillator extends SoundNode { 
-	bModulateVolume: boolean;
-	bModulatePitch: boolean;
-	AmplitudeMin: number;
-	AmplitudeMax: number;
-	FrequencyMin: number;
-	FrequencyMax: number;
-	OffsetMin: number;
-	OffsetMax: number;
-	CenterMin: number;
-	CenterMax: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeOscillator;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeOscillator;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeOscillator;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeOscillator;
-	static C(Other: UObject): SoundNodeOscillator;
-}
-
-declare class SoundNodeQualityLevel extends SoundNode { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeQualityLevel;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeQualityLevel;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeQualityLevel;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeQualityLevel;
-	static C(Other: UObject): SoundNodeQualityLevel;
-}
-
-declare class SoundNodeRandom extends SoundNode { 
-	Weights: number[];
-	PreselectAtLevelLoad: number;
-	bRandomizeWithoutReplacement: boolean;
-	HasBeenUsed: boolean[];
-	NumRandomUsed: number;
-	PIEHiddenNodes: number[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeRandom;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeRandom;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeRandom;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeRandom;
-	static C(Other: UObject): SoundNodeRandom;
-}
-
-declare class SoundNodeSoundClass extends SoundNode { 
-	SoundClassOverride: SoundClass;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeSoundClass;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeSoundClass;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeSoundClass;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeSoundClass;
-	static C(Other: UObject): SoundNodeSoundClass;
-}
-
-declare class SoundNodeSwitch extends SoundNode { 
-	IntParameterName: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeSwitch;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeSwitch;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeSwitch;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeSwitch;
-	static C(Other: UObject): SoundNodeSwitch;
-}
-
-declare class SoundNodeWaveParam extends SoundNode { 
-	WaveParameterName: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): SoundNodeWaveParam;
-	static Find(Outer: UObject, ResourceName: string): SoundNodeWaveParam;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): SoundNodeWaveParam;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SoundNodeWaveParam;
-	static C(Other: UObject): SoundNodeWaveParam;
-}
-
-declare class TextPropertyTestObject extends UObject { 
-	DefaultedText: string;
-	UndefaultedText: string;
-	TransientText: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): TextPropertyTestObject;
-	static Find(Outer: UObject, ResourceName: string): TextPropertyTestObject;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): TextPropertyTestObject;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextPropertyTestObject;
-	static C(Other: UObject): TextPropertyTestObject;
-}
-
-declare class LightMapTexture2D extends Texture2D { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): LightMapTexture2D;
-	static Find(Outer: UObject, ResourceName: string): LightMapTexture2D;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): LightMapTexture2D;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LightMapTexture2D;
-	static C(Other: UObject): LightMapTexture2D;
-}
-
-declare type EShadowMapFlags = string | symbol;
-declare var EShadowMapFlags = { SMF_None:'SMF_None',SMF_Streamed:'SMF_Streamed', };
-declare class ShadowMapTexture2D extends Texture2D { 
-	ShadowmapFlags: EShadowMapFlags;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ShadowMapTexture2D;
-	static Find(Outer: UObject, ResourceName: string): ShadowMapTexture2D;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ShadowMapTexture2D;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShadowMapTexture2D;
-	static C(Other: UObject): ShadowMapTexture2D;
-}
-
-declare class Texture2DDynamic extends Texture { 
-	Format: EPixelFormat;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): Texture2DDynamic;
-	static Find(Outer: UObject, ResourceName: string): Texture2DDynamic;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): Texture2DDynamic;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Texture2DDynamic;
-	static C(Other: UObject): Texture2DDynamic;
-}
-
-declare class CanvasRenderTarget2D extends TextureRenderTarget2D { 
-	OnCanvasRenderTargetUpdate: UnrealEngineMulticastDelegate<(Canvas: Canvas, Width: number, Height: number) => void>;
-	World: any;
-	bShouldClearRenderTargetOnReceiveUpdate: boolean;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): CanvasRenderTarget2D;
-	static Find(Outer: UObject, ResourceName: string): CanvasRenderTarget2D;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): CanvasRenderTarget2D;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CanvasRenderTarget2D;
-	UpdateResource(): void;
-	ReceiveUpdate(Canvas: Canvas,Width: number,Height: number): void;
-	GetSize(Width?: number,Height?: number): {Width: number, Height: number};
-	static CreateCanvasRenderTarget2D(WorldContextObject: UObject,CanvasRenderTarget2DClass: UnrealEngineClass,Width: number,Height: number): CanvasRenderTarget2D;
-	static C(Other: UObject): CanvasRenderTarget2D;
-}
-
-declare class UserDefinedEnum extends Enum { 
-	UniqueNameIndex: any;
-	DisplayNames: string[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): UserDefinedEnum;
-	static Find(Outer: UObject, ResourceName: string): UserDefinedEnum;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): UserDefinedEnum;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): UserDefinedEnum;
-	static C(Other: UObject): UserDefinedEnum;
-}
-
-declare type EVectorFieldConstructionOp = string | symbol;
-declare var EVectorFieldConstructionOp = { VFCO_Extrude:'VFCO_Extrude',VFCO_Revolve:'VFCO_Revolve', };
-declare class VectorFieldStatic extends VectorField { 
-	SizeX: number;
-	SizeY: number;
-	SizeZ: number;
-	SourceFilePath: string;
-	AssetImportData: AssetImportData;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): VectorFieldStatic;
-	static Find(Outer: UObject, ResourceName: string): VectorFieldStatic;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): VectorFieldStatic;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VectorFieldStatic;
-	static C(Other: UObject): VectorFieldStatic;
-}
-
-declare class VectorFieldAnimated extends VectorField { 
-	Texture: Texture2D;
-	ConstructionOp: EVectorFieldConstructionOp;
-	VolumeSizeX: number;
-	VolumeSizeY: number;
-	VolumeSizeZ: number;
-	SubImagesX: number;
-	SubImagesY: number;
-	FrameCount: number;
-	FramesPerSecond: number;
-	bLoop: boolean;
-	NoiseField: VectorFieldStatic;
-	NoiseScale: number;
-	NoiseMax: number;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): VectorFieldAnimated;
-	static Find(Outer: UObject, ResourceName: string): VectorFieldAnimated;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): VectorFieldAnimated;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VectorFieldAnimated;
-	static C(Other: UObject): VectorFieldAnimated;
-}
-
-declare class VisualLoggerAutomationTests extends UObject { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): VisualLoggerAutomationTests;
-	static Find(Outer: UObject, ResourceName: string): VisualLoggerAutomationTests;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): VisualLoggerAutomationTests;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VisualLoggerAutomationTests;
-	static C(Other: UObject): VisualLoggerAutomationTests;
-}
-
-declare class VisualLoggerDebugSnapshotInterface extends Interface { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): VisualLoggerDebugSnapshotInterface;
-	static Find(Outer: UObject, ResourceName: string): VisualLoggerDebugSnapshotInterface;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): VisualLoggerDebugSnapshotInterface;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VisualLoggerDebugSnapshotInterface;
-	static C(Other: UObject): VisualLoggerDebugSnapshotInterface;
-}
-
-declare class MoviePlayerSettings extends UObject { 
-	bWaitForMoviesToComplete: boolean;
-	bMoviesAreSkippable: boolean;
-	StartupMovies: string[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): MoviePlayerSettings;
-	static Find(Outer: UObject, ResourceName: string): MoviePlayerSettings;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): MoviePlayerSettings;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MoviePlayerSettings;
-	static C(Other: UObject): MoviePlayerSettings;
-}
-
-declare type EMinimumSupportedOS = string | symbol;
-declare var EMinimumSupportedOS = { MSOS_Vista:'MSOS_Vista',MSOS_XP:'MSOS_XP', };
-declare class WindowsTargetSettings extends UObject { 
-	TargetedRHIs: string[];
-	MinimumOSVersion: EMinimumSupportedOS;
-	AudioDevice: string;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): WindowsTargetSettings;
-	static Find(Outer: UObject, ResourceName: string): WindowsTargetSettings;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): WindowsTargetSettings;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WindowsTargetSettings;
-	static C(Other: UObject): WindowsTargetSettings;
-}
-
-declare class LinuxTargetSettings extends UObject { 
-	TargetedRHIs: string[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): LinuxTargetSettings;
-	static Find(Outer: UObject, ResourceName: string): LinuxTargetSettings;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): LinuxTargetSettings;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LinuxTargetSettings;
-	static C(Other: UObject): LinuxTargetSettings;
-}
-
-declare class NamedInterface { 
-	InterfaceName: string;
-	InterfaceObject: UObject;
-	clone() : NamedInterface;
-	static C(Other: UObject): NamedInterface;
-}
-
-declare class NamedInterfaceDef { 
-	InterfaceName: string;
-	InterfaceClassName: string;
-	clone() : NamedInterfaceDef;
-	static C(Other: UObject): NamedInterfaceDef;
-}
-
-declare class NamedInterfaces extends UObject { 
-	NamedInterfaces: NamedInterface[];
-	NamedInterfaceDefs: NamedInterfaceDef[];
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): NamedInterfaces;
-	static Find(Outer: UObject, ResourceName: string): NamedInterfaces;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): NamedInterfaces;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NamedInterfaces;
-	static C(Other: UObject): NamedInterfaces;
-}
-
-declare class TurnBasedMatchInterface extends Interface { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): TurnBasedMatchInterface;
-	static Find(Outer: UObject, ResourceName: string): TurnBasedMatchInterface;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): TurnBasedMatchInterface;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TurnBasedMatchInterface;
-	OnMatchReceivedTurn(Match: string,bDidBecomeActive: boolean): void;
-	OnMatchEnded(Match: string): void;
-	static C(Other: UObject): TurnBasedMatchInterface;
-}
-
-declare class AchievementBlueprintLibrary extends BlueprintFunctionLibrary { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): AchievementBlueprintLibrary;
-	static Find(Outer: UObject, ResourceName: string): AchievementBlueprintLibrary;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): AchievementBlueprintLibrary;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AchievementBlueprintLibrary;
-	static GetCachedAchievementProgress(WorldContextObject: UObject,PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Progress?: number): {bFoundID: boolean, Progress: number};
-	static GetCachedAchievementDescription(WorldContextObject: UObject,PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Title?: string,LockedDescription?: string,UnlockedDescription?: string,bHidden?: boolean): {bFoundID: boolean, Title: string, LockedDescription: string, UnlockedDescription: string, bHidden: boolean};
-	static C(Other: UObject): AchievementBlueprintLibrary;
-}
-
-declare class AchievementQueryCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<() => void>;
-	OnFailure: UnrealEngineMulticastDelegate<() => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): AchievementQueryCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): AchievementQueryCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): AchievementQueryCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AchievementQueryCallbackProxy;
-	static CacheAchievements(WorldContextObject: UObject,PlayerController: PlayerController): AchievementQueryCallbackProxy;
-	static CacheAchievementDescriptions(WorldContextObject: UObject,PlayerController: PlayerController): AchievementQueryCallbackProxy;
-	static C(Other: UObject): AchievementQueryCallbackProxy;
-}
-
-declare class AchievementWriteCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<(WrittenAchievementName: string, WrittenProgress: number, WrittenUserTag: number) => void>;
-	OnFailure: UnrealEngineMulticastDelegate<(WrittenAchievementName: string, WrittenProgress: number, WrittenUserTag: number) => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): AchievementWriteCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): AchievementWriteCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): AchievementWriteCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AchievementWriteCallbackProxy;
-	static WriteAchievementProgress(WorldContextObject: UObject,PlayerController: PlayerController,AchievementName: string,Progress: number,UserTag: number): AchievementWriteCallbackProxy;
-	static C(Other: UObject): AchievementWriteCallbackProxy;
-}
-
-declare class ConnectionCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<(ErrorCode: number) => void>;
-	OnFailure: UnrealEngineMulticastDelegate<(ErrorCode: number) => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): ConnectionCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): ConnectionCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): ConnectionCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ConnectionCallbackProxy;
-	static ConnectToService(WorldContextObject: UObject,PlayerController: PlayerController): ConnectionCallbackProxy;
-	static C(Other: UObject): ConnectionCallbackProxy;
-}
-
-declare class CreateSessionCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<() => void>;
-	OnFailure: UnrealEngineMulticastDelegate<() => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): CreateSessionCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): CreateSessionCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): CreateSessionCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CreateSessionCallbackProxy;
-	static CreateSession(WorldContextObject: UObject,PlayerController: PlayerController,PublicConnections: number,bUseLAN: boolean): CreateSessionCallbackProxy;
-	static C(Other: UObject): CreateSessionCallbackProxy;
-}
-
-declare class DestroySessionCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<() => void>;
-	OnFailure: UnrealEngineMulticastDelegate<() => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): DestroySessionCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): DestroySessionCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): DestroySessionCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DestroySessionCallbackProxy;
-	static DestroySession(WorldContextObject: UObject,PlayerController: PlayerController): DestroySessionCallbackProxy;
-	static C(Other: UObject): DestroySessionCallbackProxy;
-}
-
-declare class EndMatchCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<() => void>;
-	OnFailure: UnrealEngineMulticastDelegate<() => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): EndMatchCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): EndMatchCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): EndMatchCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EndMatchCallbackProxy;
-	static C(Other: UObject): EndMatchCallbackProxy;
-}
-
-declare class EndTurnCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<() => void>;
-	OnFailure: UnrealEngineMulticastDelegate<() => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): EndTurnCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): EndTurnCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): EndTurnCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EndTurnCallbackProxy;
-	static C(Other: UObject): EndTurnCallbackProxy;
-}
-
-declare class BlueprintSessionResult { 
-	clone() : BlueprintSessionResult;
-	static C(Other: UObject): BlueprintSessionResult;
-}
-
-declare class FindSessionsCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<(Results: BlueprintSessionResult[]) => void>;
-	OnFailure: UnrealEngineMulticastDelegate<(Results: BlueprintSessionResult[]) => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): FindSessionsCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): FindSessionsCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): FindSessionsCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FindSessionsCallbackProxy;
-	static GetServerName(Result: BlueprintSessionResult): string;
-	static GetPingInMs(Result: BlueprintSessionResult): number;
-	static GetMaxPlayers(Result: BlueprintSessionResult): number;
-	static GetCurrentPlayers(Result: BlueprintSessionResult): number;
-	static FindSessions(WorldContextObject: UObject,PlayerController: PlayerController,MaxResults: number,bUseLAN: boolean): FindSessionsCallbackProxy;
-	static C(Other: UObject): FindSessionsCallbackProxy;
-}
-
-declare class FindTurnBasedMatchCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<(MatchID: string) => void>;
-	OnFailure: UnrealEngineMulticastDelegate<(MatchID: string) => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): FindTurnBasedMatchCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): FindTurnBasedMatchCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): FindTurnBasedMatchCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FindTurnBasedMatchCallbackProxy;
-	static C(Other: UObject): FindTurnBasedMatchCallbackProxy;
-}
-
-declare type EInAppPurchaseState = string | symbol;
-declare var EInAppPurchaseState = { Unknown:'Unknown',Success:'Success',Failed:'Failed',Cancelled:'Cancelled',Invalid:'Invalid',NotAllowed:'NotAllowed',Restored:'Restored',AlreadyOwned:'AlreadyOwned', };
-declare class InAppPurchaseProductInfo { 
-	Identifier: string;
-	TransactionIdentifier: string;
-	DisplayName: string;
-	DisplayDescription: string;
-	DisplayPrice: string;
-	RawPrice: number;
-	CurrencyCode: string;
-	CurrencySymbol: string;
-	DecimalSeparator: string;
-	GroupingSeparator: string;
-	ReceiptData: string;
-	clone() : InAppPurchaseProductInfo;
-	static C(Other: UObject): InAppPurchaseProductInfo;
-}
-
-declare class InAppPurchaseProductRequest { 
-	ProductIdentifier: string;
-	bIsConsumable: boolean;
-	clone() : InAppPurchaseProductRequest;
-	static C(Other: UObject): InAppPurchaseProductRequest;
-}
-
-declare class InAppPurchaseCallbackProxy extends UObject { 
-	OnSuccess: UnrealEngineMulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppPurchaseInformation: InAppPurchaseProductInfo) => void>;
-	OnFailure: UnrealEngineMulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppPurchaseInformation: InAppPurchaseProductInfo) => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): InAppPurchaseCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): InAppPurchaseCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): InAppPurchaseCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InAppPurchaseCallbackProxy;
-	static CreateProxyObjectForInAppPurchase(PlayerController: PlayerController,ProductRequest: InAppPurchaseProductRequest): InAppPurchaseCallbackProxy;
-	static C(Other: UObject): InAppPurchaseCallbackProxy;
-}
-
-declare class InAppPurchaseQueryCallbackProxy extends UObject { 
-	OnSuccess: UnrealEngineMulticastDelegate<(InAppPurchaseInformation: InAppPurchaseProductInfo[]) => void>;
-	OnFailure: UnrealEngineMulticastDelegate<(InAppPurchaseInformation: InAppPurchaseProductInfo[]) => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): InAppPurchaseQueryCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): InAppPurchaseQueryCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): InAppPurchaseQueryCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InAppPurchaseQueryCallbackProxy;
-	static ReadInAppPurchaseInformation(PlayerController: PlayerController,ProductIdentifiers: string[]): InAppPurchaseQueryCallbackProxy;
-	static C(Other: UObject): InAppPurchaseQueryCallbackProxy;
-}
-
-declare class InAppPurchaseRestoreInfo { 
-	Identifier: string;
-	ReceiptData: string;
-	TransactionIdentifier: string;
-	clone() : InAppPurchaseRestoreInfo;
-	static C(Other: UObject): InAppPurchaseRestoreInfo;
-}
-
-declare class InAppPurchaseRestoreCallbackProxy extends UObject { 
-	OnSuccess: UnrealEngineMulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppRestorePurchaseInformation: InAppPurchaseRestoreInfo[]) => void>;
-	OnFailure: UnrealEngineMulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppRestorePurchaseInformation: InAppPurchaseRestoreInfo[]) => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): InAppPurchaseRestoreCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): InAppPurchaseRestoreCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): InAppPurchaseRestoreCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InAppPurchaseRestoreCallbackProxy;
-	static CreateProxyObjectForInAppPurchaseRestore(ConsumableProductFlags: InAppPurchaseProductRequest[],PlayerController: PlayerController): InAppPurchaseRestoreCallbackProxy;
-	static C(Other: UObject): InAppPurchaseRestoreCallbackProxy;
-}
-
-declare class IpConnection extends NetConnection { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): IpConnection;
-	static Find(Outer: UObject, ResourceName: string): IpConnection;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): IpConnection;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): IpConnection;
-	static C(Other: UObject): IpConnection;
-}
-
-declare class IpNetDriver extends NetDriver { 
-	LogPortUnreach: boolean;
-	AllowPlayerPortUnreach: boolean;
-	MaxPortCountToTry: any;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): IpNetDriver;
-	static Find(Outer: UObject, ResourceName: string): IpNetDriver;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): IpNetDriver;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): IpNetDriver;
-	static C(Other: UObject): IpNetDriver;
-}
-
-declare class JoinSessionCallbackProxy extends OnlineBlueprintCallProxyBase { 
-	OnSuccess: UnrealEngineMulticastDelegate<() => void>;
-	OnFailure: UnrealEngineMulticastDelegate<() => void>;
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): JoinSessionCallbackProxy;
-	static Find(Outer: UObject, ResourceName: string): JoinSessionCallbackProxy;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): JoinSessionCallbackProxy;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): JoinSessionCallbackProxy;
-	static JoinSession(WorldContextObject: UObject,PlayerController: PlayerController,SearchResult: BlueprintSessionResult): JoinSessionCallbackProxy;
-	static C(Other: UObject): JoinSessionCallbackProxy;
-}
-
-declare class LeaderboardBlueprintLibrary extends BlueprintFunctionLibrary { 
-	constructor();
-	constructor(Outer: UObject);
-	static Load(ResourceName: string): LeaderboardBlueprintLibrary;
-	static Find(Outer: UObject, ResourceName: string): LeaderboardBlueprintLibrary;
-	static StaticClass: any;
-	static GetClassObject(): UClass;
-	static GetDefaultObject(): LeaderboardBlueprintLibrary;
-	static GetDefaultSubobjectByName(Name: string): UObject;
-	static SetDefaultSubobjectClass(Name: string): void;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LeaderboardBlueprintLibrary;
-	static WriteLeaderboardInteger(PlayerController: PlayerController,StatName: string,StatValue: number): boolean;
-	static C(Other: UObject): LeaderboardBlueprintLibrary;
 }
 
