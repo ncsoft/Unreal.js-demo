@@ -3,8 +3,6 @@ let _ = require('lodash')
 let npm = require('./lib/npm')
 let localStorage = require('./lib/localStorage')
 
-let selector = require('./build/demo-selector')
-
 function prepare() {
     if (this.$init) return
     this.$init = true
@@ -34,6 +32,8 @@ async function main(defer, reset) {
     await npm('react-umg')
     await npm('google-material-color')
     await npm('hex-rgb')
+
+    let selector = require('./build/demo-selector')
 
     let busy
     function ready() {
