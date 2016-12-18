@@ -12,6 +12,11 @@ let context = {
     sprite: null
 }
 
+const smallFont = {
+    FontObject: GEngine.SmallFont,
+    Size: 12
+}
+
 let RemoteImage = require('./remote-image')
 
 let {ltrb} = require('../lib/utils')
@@ -80,18 +85,30 @@ class Item extends React.Component {
             "https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png",
             "https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000005CD.png"
         ]
+        const descs = [
+            "Green",
+            "Blue"
+        ]
         const {id} = this.props
-        const url = urls[(id || 0) % urls.length]
+        const index = (id || 0) % urls.length
+        const url = urls[index]
+        const desc = descs[index]
         return (
             <uBorder
                 BrushColor={{ A: 0.2 }}
                 Padding={ltrb(1)}
                 ContentColorAndOpacity={this.props.dimmed ? { R: 1, G: 1, B: 1, A: 0.5 } : { R: 1, G: 1, B: 1, A: 1 }}
                 >
-                <RemoteImage
-                    width={64}
-                    height={64}
-                    url={url} />
+                <div>
+                    <RemoteImage
+                        width={64}
+                        height={64}
+                        url={url} />
+                    <text 
+                        Font={smallFont} 
+                        Justification={'Center'}
+                        Text={desc}/>
+                </div>
             </uBorder>
         )
     }
@@ -174,7 +191,7 @@ class DragAndDrop extends React.Component {
                         ref='sprite'
                         Visibility={'Hidden'}
                         Padding={ltrb(0)}
-                        Slot={{ Size: { X: 64, Y: 64 } }}
+                        Slot={{ Size: { X: 64, Y: 64 + 18 } }}
                         >
                         {_.compact([this.state.dragging]).map(id => (
                             <Item key={id} id={id}/>

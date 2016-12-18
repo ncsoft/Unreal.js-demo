@@ -12,6 +12,11 @@ let context = {
     sprite: null
 };
 
+const smallFont = {
+    FontObject: GEngine.SmallFont,
+    Size: 12
+};
+
 let RemoteImage = require('./remote-image');
 
 let { ltrb } = require('../lib/utils');
@@ -77,8 +82,11 @@ ReactUMG.Register('uDropTarget', MyDropTarget_C);
 class Item extends React.Component {
     render() {
         const urls = ["https://d1u1mce87gyfbn.cloudfront.net/game/unlocks/0x0250000000000657.png", "https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000005CD.png"];
+        const descs = ["Green", "Blue"];
         const { id } = this.props;
-        const url = urls[(id || 0) % urls.length];
+        const index = (id || 0) % urls.length;
+        const url = urls[index];
+        const desc = descs[index];
         return React.createElement(
             'uBorder',
             {
@@ -86,10 +94,18 @@ class Item extends React.Component {
                 Padding: ltrb(1),
                 ContentColorAndOpacity: this.props.dimmed ? { R: 1, G: 1, B: 1, A: 0.5 } : { R: 1, G: 1, B: 1, A: 1 }
             },
-            React.createElement(RemoteImage, {
-                width: 64,
-                height: 64,
-                url: url })
+            React.createElement(
+                'div',
+                null,
+                React.createElement(RemoteImage, {
+                    width: 64,
+                    height: 64,
+                    url: url }),
+                React.createElement('text', {
+                    Font: smallFont,
+                    Justification: 'Center',
+                    Text: desc })
+            )
         );
     }
 }
@@ -180,7 +196,7 @@ class DragAndDrop extends React.Component {
                         ref: 'sprite',
                         Visibility: 'Hidden',
                         Padding: ltrb(0),
-                        Slot: { Size: { X: 64, Y: 64 } }
+                        Slot: { Size: { X: 64, Y: 64 + 18 } }
                     },
                     _.compact([this.state.dragging]).map(id => React.createElement(Item, { key: id, id: id }))
                 )
