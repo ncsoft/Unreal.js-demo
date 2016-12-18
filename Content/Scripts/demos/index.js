@@ -13,18 +13,23 @@ function prepare() {
     let pc = GWorld.GetPlayerController(0)
     pc.bShowMouseCursor = true
     pc.SetInputModeUIOnly()
+
+    // destroy annoying default pawn
+    for (let x of GWorld.GetAllActorsOfClass(Pawn).OutActors) {
+        x.DestroyActor()
+    }
 }
 
 let scenes = {
     'Cables': require('./demo-cable'),
-    'AI' : require('./demo-ai'),
-    'REST' : require('./demo-rest'),
-    'Deep-learning' : require('./demo-deeplearning'),
-    'React' : require('./build/demo-react')
+    'AI': require('./demo-ai'),
+    'REST': require('./demo-rest'),
+    'Deep-learning': require('./demo-deeplearning'),
+    'React': require('./build/demo-react')
 }
 
-async function main(defer,reset) {
-    prepare()    
+async function main(defer, reset) {
+    prepare()
 
     await npm('react-umg')
     await npm('google-material-color')
@@ -38,7 +43,7 @@ async function main(defer,reset) {
     ready()
 
     let scene = localStorage.get('demo')
-    let sceneIds = _.map(scenes,(v,k) => _.extend(_.clone(k),{description:v.description}))
+    let sceneIds = _.map(scenes, (v, k) => _.extend(_.clone(k), { description: v.description }))
     if (scenes[scene] == undefined) {
         scene = sceneIds[0]
     }
@@ -48,11 +53,11 @@ async function main(defer,reset) {
         if (typeof fn == 'function') {
             fn(defer).catch(e => console.error(e.stack))
         }
-        scene = await selector(defer,sceneIds)
-        localStorage.set('demo',scene)
+        scene = await selector(defer, sceneIds)
+        localStorage.set('demo', scene)
         reset()
         ready()
-    }        
+    }
 }
 
 module.exports = main
