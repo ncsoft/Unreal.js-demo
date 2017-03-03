@@ -175,7 +175,7 @@ class DragAndDrop extends React.Component {
                         'uBorder',
                         { BrushColor: { R: 1, A: this.state.focus == id ? 0.5 : 0.2 } },
                         React.createElement('text', {
-                            Text: this.state.dragging ? "Drop HERE!" : `Drop target #${ id } ${ this.state.count[id] }`,
+                            Text: this.state.dragging ? "Drop HERE!" : `Drop target #${id} ${this.state.count[id]}`,
                             Font: Font
                         })
                     )

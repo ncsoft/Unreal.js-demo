@@ -40,12 +40,12 @@ module.exports = async function (defer, scenes) {
     let comp
     let p = new Promise(resolve => {
         comp = ReactUMG.wrap(<DemoSelector scenes={scenes} done={resolve} />)
+        comp.AddToViewport()
     })
     function close() {
         if (!comp) return
         comp.RemoveFromViewport()
     }
-    comp.AddToViewport()
     defer(close)
     return await p
 }
