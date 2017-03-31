@@ -186,7 +186,6 @@ module.exports = function (E) {
             let y = b.FindPin(output,'EGPD_Output')
             x.MakeLinkTo(y)
         }
-        global.x = obj
 
 
         function makeGraphCommands() {
@@ -261,26 +260,28 @@ module.exports = function (E) {
         let graphCommands = makeGraphCommands()
         let graphCommandList = JavascriptMenuLibrary.CreateUICommandList()
         graphCommands.Bind(graphCommandList)
-
         return {
             graph: graph,
             graphCommandList: graphCommandList,
-            nodes: nodes
+            nodes: nodes,
+            destroy: graphCommands.destroy
         }
     }
 
     class GraphEditor extends React.Component {
         constructor(props, context) {
             super(props, context)
-            let {graph, graphCommandList, nodes} = getGraphModules(this.graphContainer);
+            let {graph, graphCommandList, nodes, destroy} = getGraphModules(this.graphContainer);
             this.graph = graph;
             this.graphCommandList = graphCommandList
             this.nodes = nodes
+            this.destroy = destroy
             E.emit('collect', nodes)
         }
 
         componentWillUnmount() {
             this.nodes.forEach(node => node.Ref = null)
+            this.destroy()
         }
 
         render() {
