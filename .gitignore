@@ -1,1 +1,7 @@
-**/node_modules/
+Plugins/*
+Saved/*
+Intermediate/*
+DerivedDataCache/*
+Content/*
+!Content/Scripts
+Content/Scripts/node_modules

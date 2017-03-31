@@ -161,7 +161,7 @@ function main() {
     }
 
     function getNumClassesExported() {
-        return _.filter(_.keys(global),x=>!!global[x].StaticClass).length
+        return _.filter(_.keys(global),x=> global[x] && !!global[x].StaticClass).length
     }
 
     function packageToObject(p,E) {
@@ -244,7 +244,7 @@ function main() {
                 FriendlyName : 'Remove this package',
                 Description : 'Remove this package',
                 ActionType : 'Button'
-            }
+            } 
         ]
     })
 
