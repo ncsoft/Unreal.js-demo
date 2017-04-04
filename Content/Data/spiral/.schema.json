@@ -1,0 +1,44 @@
+{
+    "title": "SpiralMetaData",
+    "type": "object",
+    "properties": {
+        "desc": {
+            "type": "string"
+        },
+        "mesh": {
+            "type": "StaticMesh"
+        },
+        "mtrl": {
+            "type": "Material"
+        },
+        "N": {
+            "type": "integer"
+        },
+        "height": {
+            "type": "float"
+        },
+        "num_spirals": {
+            "type": "integer"
+        },
+        "radius": {
+            "type": "float"
+        },
+        "test": {
+            "type": "array",
+            "items": {
+                "title": "TestStruct",
+                "type": "object",
+                "struct": "true",
+                "properties": {
+                    "A": {
+                        "type": "integer"
+                    },
+                    "B": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "required": ["N", "height", "num_spirals", "radius"]    
+}

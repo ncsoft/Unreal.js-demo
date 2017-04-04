@@ -2,56 +2,10 @@ const React = require('react')
 const ReactUMG = require('react-umg')
 const _ = require('lodash')
 
-let schema = {
-    "title": "SpiralMetaData",
-    "type": "object",
-    "properties": {
-        "desc" : {
-            "type" : "string"  
-        },
-        "mesh" : {
-            "type" : "StaticMesh",
-        },
-        "mtrl" : {
-            "type" : "Material",
-        },
-        "N" : {
-            "type" : "integer",
-        },
-        "height" : {
-            "type" : "float",
-        },
-        "num_spirals" : {
-            "type" : "integer",
-        },
-        "radius" : {
-            "type" : "float"
-        },
-        "test" : {
-            "type" : "array",
-            "items" : {
-                "title": "TestStruct",
-                "type": "object",
-                "struct": "true",
-                "properties": {
-                    "A": {
-                        "type" : "integer"                            
-                    },
-                    "B": {
-                        "type" : "string"                            
-                    }
-                }   
-            }                
-        }
-    },
-    "required" : [ "N", "height", "num_spirals", "radius" ]
-}
-
 module.exports = function viewportDesign(E) {
     const tags = ["PCG"]
 
     let json2u = require('./json2u')()	
-	let meta = json2u.create('spiral',schema)
 
     function get_engine() {
         return Root.GetEngine()
@@ -61,21 +15,9 @@ module.exports = function viewportDesign(E) {
         return get_engine().GetEditorWorld()
     }
 
-    function gen() {
-        let data = new meta()
-        data.num_spirals = 10;
-        data.radius = Math.random() * 300 + 100; 
-        data.N = 100;
-        data.height = Math.random() * 800 + 200
-        data.mesh = StaticMesh.Load('/Engine/BasicShapes/Sphere')
-        data.mtrl = Material.Load('/Game/Color.Color')
-        data.desc = Math.random().toString(16)
-        return data
-    }
-
     function generate_spiral(world, opts) {
-        const mesh = opts.mesh
-        const mtrl = opts.mtrl
+        const mesh = opts.mesh || StaticMesh.Load('/Engine/BasicShapes/Sphere')
+        const mtrl = opts.mtrl || Material.Load('/Game/Color.Color')
         
         let N = opts.N || 10
         let num_spirals = opts.num_spirals || 5
@@ -134,35 +76,37 @@ module.exports = function viewportDesign(E) {
                 if (viewport.GetFloorMeshComponent()) {
                     viewport.GetFloorMeshComponent().SetVisibility(false, true);
                 }
-                this.data = gen()
-                E.on('updateData', () => {
-                    this.draw()
-                })
-                E.emit('choose', this.data)
-                this.draw()
+                this.draw = this.draw.bind(this);
+                E.addListener('updateData', this.draw);
+                E.addListener('choose', this.draw);
             });
 
         }
 
-        draw() {
+        draw(objects = []) {
             let viewport = JavascriptEditorViewport.C(this.Viewport.ueobj)
             let world = viewport.GetViewportWorld();
             purge(world)
-            generate_spiral(world, this.data)
+            this.data = objects.length > 0 ? objects[0] : null
+            if (this.data) {
+                generate_spiral(world, this.data)
+            }
             viewport.Redraw()            
+
         }
         
         componentWillUnmount() {
             let viewport = JavascriptEditorViewport.C(this.Viewport.ueobj)
             let world = viewport.GetViewportWorld();
             purge(world)            
+            E.removeListener('updateData', this.draw);
         }
 
         render() {
             let viewportStyle = {
                 OnGetWidgetMode: elem => 'WM_None',
                 OnClick: (_event, proxy, elem) => {
-                    E.emit('choose', this.data)
+                    E.emit('choose', [this.data])
                 }
             }
 

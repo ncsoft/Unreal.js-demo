@@ -1,0 +1,12 @@
+{
+    "test": {
+        "desc": "테스트",
+        "mesh": null,
+        "mtrl": null,
+        "N": 20,
+        "height": 500,
+        "num_spirals": 5,
+        "radius": 100,
+        "test": []
+    }
+}

@@ -265,7 +265,7 @@ module.exports = function (E) {
                 'uSizeBox',
                 null,
                 React.createElement('uJavascriptGraphEditorWidget', { ref: ref => this.graphContainer = ref, Graph: this.graph, CommandList: this.graphCommandList,
-                    AppearanceInfo: { CornerText: "Hello Javascript" }, OnSelectedNodesChanged: nodes => E.emit('choose', nodes[0]) })
+                    AppearanceInfo: { CornerText: "Hello Javascript" }, OnSelectedNodesChanged: nodes => E.emit('choose', nodes) })
             );
         }
     }

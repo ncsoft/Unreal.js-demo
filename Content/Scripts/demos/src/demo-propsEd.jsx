@@ -6,14 +6,23 @@ module.exports = function PropsDesign(E) {
 
     class PropsEditor extends React.Component {
         componentDidMount() {
-            let propsEd = this.PropsEd.ueobj;
-            E.on('choose', (object) => {
-                propsEd.SetObject(object)
-            })
+            this.onChoose = this.onChoose.bind(this)
+            E.addListener('choose', this.onChoose)
+        }
+        componentWillUnmount() {
+            E.removeListener('choose', this.onChoose)            
         }
         
+        onChoose(objects) {
+            this.objects = objects;
+            let propsEd = this.PropsEd.ueobj;
+            if (propsEd) {
+                propsEd.SetObjects(this.objects);
+            }
+        }
+
         onChange(t) {
-            E.emit('updateData')
+            E.emit('updateData', this.objects);
         }
 
         render() {

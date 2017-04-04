@@ -1,65 +1,177 @@
 const React = require('react')
 const ReactUMG = require('react-umg')
 const _ = require('lodash')
+const ROOT_DIRECTORY = Root.GetDir('GameContent') + '/Data'
 
 module.exports = function broserDesign(E) {
     const SmallFont = {FontObject:Root.GetEngine().SmallFont, Size:12};
     let editorStyle = new JavascriptStyleSet
     editorStyle.StyleSetName = 'EditorStyle'
+    let json2u = require('./json2u')()
+    let SourceItem_C = require('../lib/source-item')(json2u, E)
 
     class BrowserDesign extends React.Component {
         constructor(props, context) {
             super(props, context);            
             this.items = [];
+            this.opened = [];
+            this.update = this.update.bind(this);
         }
 
         componentDidMount() {
-            let elem = this.ListView.ueobj;
-            E.on('collect', (objects) => {
-                this.items = objects;
-                elem.Items = _.clone(this.items);
-                elem.RequestListRefresh()
-            })
+            let elem = this.TreeView.ueobj;
             elem.JavascriptContext = Context;
             elem.proxy = {
                 OnSelectionChanged: item => {
-                    E.emit('choose', item)
+                    let extra = elem.GetSelectedItems().OutItems
+                    E.emit('choose', extra.map(t => t.toUObject()))
                 }
+            }
+            this.onSwitch = this.onSwitch.bind(this)
+            this.updateData = this.updateData.bind(this);
+            E.addListener('updateData', this.updateData);
+            E.addListener('switch',this.onSwitch)
+            this.enumerate()
+
+        }
+
+        updateData(targets) {
+            let arr = targets.map(obj => obj.$source);
+            arr.forEach((obj, index) => {
+                let data = targets[index];
+                let json = JSON.parse(data.toString());
+                _.extend(obj.data , json);
+                obj.markDirty()
+            })
+        }
+
+        componentWillUnmount() {
+            E.removeListener('switch', this.onSwitch)
+        }
+
+        is_open(item) {
+            return this.opened.indexOf(item.path) >= 0
+        }
+
+        onSwitch(arr) {
+            let elem = this.TreeView.ueobj;
+            let prev = arr[0]
+            let next = arr[1]
+            if (prev == data) {
+                data = next
+                elem.SetSelection(null)
+                this.pendingSelection = data
+                E.emit('data',[data])
+                console.log('data', data)
+            }
+
+            if (prev == null) {
+                elem.SetSelection(null)
+            }
+        }
+
+        enumerate() {
+            let elem = this.TreeView.ueobj;
+            this.treeRoot = new SourceItem_C();
+            this.treeRoot.path = ROOT_DIRECTORY;
+            this.treeRoot.expand().then(item => {
+                let p = this.treeRoot.children.map(child => child.expand());
+                this.treeRoot.setup();
+                return Promise.all(p).then(items => {
+                    let promises = []
+                    items.forEach(item => item.children.forEach(i => {
+                        promises.push(i.expand())
+                    }));
+                    Promise.all(promises).then(i => {
+                        this.update();
+                    })
+                })
+                
+            })
+        }
+
+        update() {
+            let elem = this.TreeView.ueobj;
+            this.items = [this.treeRoot]
+            elem.Items = _.clone(this.items);
+            elem.RequestTreeRefresh();
+            if (this.is_open(this.treeRoot)) {
+                elem.SetItemExpansion(this.treeRoot,true)                            
+            }
+            if(this.pendingSelection) {
+                elem.SetSelection(this.pendingSelection)
+                this.pendingSelection = null
             }
         }
 
         updateFilter(text) {
-            let elem = this.ListView.ueobj;
+            let elem = this.TreeView.ueobj;
             if (elem) {
-                elem.Items = _.filter(this.items, item => text == '' || item.GetDisplayName().indexOf(text) >=0)
-                elem.RequestListRefresh()
+                elem.Items = _.filter(this.items, item => text == '' || item.path.indexOf(text) >=0)
+                elem.RequestTreeRefresh()
             }
         }
 
         render() {
-            let listViewStyle = {
-                ItemHeight: 20,
+            let treeViewStyle = {
                 'slot.size.size-rule' : 'Fill',
-                SelectionMode:'Single',
-                Columns: [
-                    {
-                        Id: 'Name',
-                        Width: 1
+                SelectionMode:'Multi',
+                OnGenerateRowEvent: (item, column, widget) => {
+                    let name
+                    if (item) {
+                        name = item.path.split('/')
+                        name = name[name.length-1]
+                    } else {
+                        name = column
                     }
-                ],
-                OnGenerateRowEvent: (item, column) => {
+
                     return ReactUMG.wrap(
-                        <uSizeBox>
-                            <uJavascriptTextBlock Font={SmallFont} Text= {item ? item.GetDisplayName() : column}/>
-                        </uSizeBox>
+                        <span>
+                            {
+                                item ? <img Slot={{Padding:{Right:1, Bottom:1, Top:1}}} BrushDelegate={_ => editorStyle.GetBrush(item.is_json ? 'EditorViewport.WireframeMode' : 
+                                    widget.IsItemExpanded(item) ? 'ContentBrowser.AssetTreeFolderOpen' : 'ContentBrowser.AssetTreeFolderClosed')}/> : []
+                            }
+                            {
+                                item == widget.Items[0] ? <uJavascriptTextBlock Font={SmallFont} Text={"데이터"}/> : 
+                                <uJavascriptTextBlock Font={{FontObject:SmallFont.FontObject, Size:10}} SelectAllTextWhenFocused={true} ClearKeyboardFocusOnCommit={true} RevertTextOnEscape= {true} Text= {name}/>
+                            }
+                        </span>
                     )
+                },
+                OnGetChildren: (item,instance) => {
+                    item.expand();
+                    instance.Children = _.filter(item.children,item => !item.is_schema)
+                    instance.Children.forEach(child => {
+                        process.nextTick(_ => {
+                            if(this.is_open(child)) {
+                                instance.SetItemExpansion(child,true)
+                            }
+                        })
+                    })
+                },                
+                OnExpansionChanged: (item, status) => {
+                    if (status) {
+                        this.opened.push(item.path)
+                        this.opened = _.uniq(this.opened)
+                    }
+                    else {
+                        let len = item.path.length
+                        this.opened = this.opened.filter(x => x.substr(0, len) != item.path)
+                    }
                 }
+                // OnContextMenuOpening: (elem) => {
+                //     return ReactUMG.wrap(
+                //         <uJavascriptMultiBox CommandList={} OnHook={} />
+                //     )
+                // }
             }
 
             return (
                 <div>
                     <uJavascriptSearchBox HintText={"..."} OnTextChanged= {this.updateFilter.bind(this)}/>
-                    <uJavascriptListView ref={ref => this.ListView = ref} {...listViewStyle}/>
+                    <uBorder Slot={{Size:{SizeRule:'Fill'}}} Background={editorStyle.GetBrush('ProjectBrowser.Background')}>
+                        <uJavascriptTreeView ref={ref => this.TreeView = ref} {...treeViewStyle}/>
+                    </uBorder>
                 </div>
             )
         }

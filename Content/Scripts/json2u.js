@@ -64,8 +64,77 @@ module.exports = function() {
         return require('uclass')()(global,eval(code))
 	}
     
+    let tempOuter = JavascriptLibrary.CreatePackage(null,'/Script/GameEditorTemp') 	
+	
+    function JsonToUObject(meta,obj,outer = tempOuter) {
+        let root
+        function createMeta(meta,outer) {
+            let out = new meta(outer)
+            return out
+        }
+        let out = root = createMeta(meta,outer)
+        let k = obj.path
+        let v = obj.data
+        out.$id = k
+        out.$source = obj
+        function update(meta,out,v) {
+            _.forEach(v,(vv,kk) => {  
+                if (out[kk] == undefined) {
+                    if (typeof vv == 'string') {
+                        out[kk] = vv
+                        if (out[kk] != vv) {
+                            if (vv == '"null"') {
+                                out[kk] = null
+                            } else {
+                                let object = UObject.Load(vv)
+                                out[kk] = object;
+                                if(out[kk] == null && object instanceof Blueprint) {
+                                    out[kk] = object.GeneratedClass;
+                                }
+                            }                        
+                        }
+                    } else {
+                        // @TODO: only for UStruct, not for UObject
+                        out[kk] = vv
+                    }
+                } else if (out[kk] instanceof Array) {
+                    let arr = []
+                    if (vv instanceof Array) {
+                        update(meta,arr,vv)
+                    }                    
+                    out[kk] = arr
+                } else if (_.isObject(vv)) {
+                    let obj = {}
+                    update(meta,obj,vv)
+                    out[kk] = obj
+                } else if (out[kk].IsGameRef != undefined) {
+                    out[kk].Ref = vv
+                } else {
+                    try {
+                        out[kk] = vv
+                    }
+                    catch (e) {
+                        console.error(kk,String)
+                    }                    
+                }                
+            })
+        }
+        update(meta,out,v)
+        
+        function serialize(meta,out) {
+            if (!out) return null
+            var tmp = JSON.parse(JSON.stringify(out,null,2))
+            return tmp
+        }
+        out.toString = function() {
+            return JSON.stringify(serialize(meta,out),null,2)
+        }
+        return out
+    }
+
     return {
         create : public_create_meta,
-        get : resolve_ref
+        get : resolve_ref,
+        toUObject : JsonToUObject        
     }
 }
