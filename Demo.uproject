@@ -1,13 +1,13 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.13",
+	"EngineAssociation": "4.15",
 	"Category": "",
 	"Description": "",
-	"Plugins": [
+	"Modules": [
 		{
-			"Name": "UnrealJS",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/be751eedc4a14cc09e39945bc5a531c4"
+			"Name": "Demo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	]
 }
