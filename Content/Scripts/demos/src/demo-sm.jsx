@@ -7,29 +7,28 @@ const LoadSchema_SM = require('../lib/sm-schema')
 function GenerateNode(ParentGraph, Template) {
     let Graph = ParentGraph.GetOuter()
 
-    $execTransaction('Javascript graph editor: New node', () => {
-        ParentGraph.ModifyObject();
-        Graph.ModifyObject();
+    ParentGraph.ModifyObject();
+    Graph.ModifyObject();
 
-        let NewNode = new JavascriptObject(Graph);
+    let NewNode = new JavascriptObject(Graph);
 
-        NewNode.Ref = Template.ref
+    NewNode.Ref = Template.ref
 
-        let NodeCreator = Graph.EdGraph.NodeCreator()
-        let GraphNode = NodeCreator.Node
+    let NodeCreator = Graph.EdGraph.NodeCreator()
+    let GraphNode = NodeCreator.Node
 
-        GraphNode.GraphNode = NewNode
+    GraphNode.GraphNode = NewNode
 
-        NodeCreator.Finalize()
+    NodeCreator.Finalize()
 
-        _.each(Template.meta, (value, key) => GraphNode[key] = value);
-        _.each(Template.delegate, (func, funcName) => GraphNode[funcName] = () => func(GraphNode, NewNode.Ref));
+    _.each(Template.meta, (value, key) => GraphNode[key] = value);
+    _.each(Template.delegate, (func, funcName) => GraphNode[funcName] = () => func(GraphNode, NewNode.Ref));
 
-        Graph.PostEditChange()
-        Graph.MarkPackageDirty()
-    })
+    Graph.PostEditChange()
+    Graph.MarkPackageDirty()
 
     Graph.uNodes.push(GraphNode);
+
     return GraphNode;
 }
 
@@ -39,12 +38,17 @@ module.exports = function (E) {
     let Style_Editor = new JavascriptStyleSet;
     Style_Editor.StyleSetName = 'EditorStyle';
 
-    function getGraphModules(container) {
+    function getGraphModules(_container) {
         let obj = new JavascriptObject
 
         let graph = JavascriptGraphEditorWidget.NewGraph(obj)
-        let schema = graph.Schema.GetDefaultObject();
-        const { GraphSchema, NodeSchema} = LoadSchema_SM(schema, { StateMachineNode, TrainsitionNode });
+
+        class MySchema extends JavascriptGraphAssetGraphSchema { }
+        let MySchema_C = require('uclass')()(global, MySchema)
+        let schema = MySchema_C.GetDefaultObject()
+        graph.Schema = MySchema_C
+
+        const { GraphSchema, NodeSchema } = LoadSchema_SM(schema, { StateMachineNode, TrainsitionNode });
         schema = GraphSchema;
 
         function CreateConnections(TransitionNode, PreviousState, NextState) {
@@ -86,7 +90,7 @@ module.exports = function (E) {
                     node.BackgroundColor.SpecifiedColor = { R: 0.08, G: 0.08, B: 0.08, A: 1 };
                 }
 
-                return ReactUMG.wrap(node.GetWidget()).TakeWidget();
+                return (node.GetWidget()).TakeWidget();
             }
         ];
 
@@ -105,11 +109,13 @@ module.exports = function (E) {
                 let _schema = _.find(NodeSchema, _schema => _schema.MenuDescription == action.MenuDescription)
                 let { Location } = context;
 
-                GenerateNode(this.graph, {
+                let StateMachineNode = GenerateNode(graph, {
                     ref: _.cloneDeep(_schema.Ref),
                     delegate: _schema.Delegate,
                     meta: { NodePosX: Location.X, NodePosY: Location.Y }
                 });
+
+                JavascriptGraphEditorLibrary.TryConnection(schema, context.FromPins[0], StateMachineNode.GetInputPin());
             }
         ];
 
@@ -132,9 +138,9 @@ module.exports = function (E) {
             commands.OnExecuteAction = (what) => {
                 let commands = {
                     Delete: () => {
+                        const container = _container();
                         if (container) {
                             graph.ModifyObject()
-
                             let nodes = container.ueobj.GetSelectedNodes()
                             nodes.forEach(node => {
                                 if (node.CanUserDeleteNode()) {
@@ -146,6 +152,7 @@ module.exports = function (E) {
                         }
                     },
                     SelectAll: () => {
+                        const container = _container();
                         if (container) {
                             container.ueobj.SelectAllNodes()
                         }
@@ -161,10 +168,12 @@ module.exports = function (E) {
             commands.OnCanExecuteAction = (what) => {
                 let commands = {
                     Delete: () => {
+                        const container = _container();
                         let nodes = container != null ? container.ueobj.GetSelectedNodes() : []
                         return _.some(nodes, node => node.CanUserDeleteNode())
                     },
                     Copy: () => {
+                        const container = _container();
                         let nodes = container != null ? container.ueobj.GetSelectedNodes() : []
                         return _.some(nodes, node => node.CanDuplicateNode())
                     },
@@ -192,8 +201,9 @@ module.exports = function (E) {
         return {
             graph: graph,
             graphCommandList: graphCommandList,
+            nodeSchema: NodeSchema,
             destroy: () => {
-                obj.uNodes.forEach(node => node.Ref = null)
+                obj.uNodes.forEach(node => node.GraphNode.Ref = null)
                 graphCommands.destroy()
             }
         }
@@ -245,13 +255,16 @@ module.exports = function (E) {
         }
     }
 
-    class GraphEditor extends React.Component {
+    class GraphSMEditor extends React.Component {
         constructor(props, context) {
-            super(props, context)
-            let { graph, graphCommandList, destroy } = getGraphModules(this.graphContainer);
+            super(props, context);
+
+            this.graphContainer = null;
+            let { graph, graphCommandList, nodeSchema, destroy } = getGraphModules(() => this.graphContainer);
             this.graph = graph;
-            this.graphCommandList = graphCommandList
-            this.destroy = destroy
+            this.graphCommandList = graphCommandList;
+            this.NodeSchema = nodeSchema;
+            this.destroy = destroy;
         }
 
         componentWillMount() {
@@ -263,7 +276,7 @@ module.exports = function (E) {
         }
 
         LoadGraph() {
-            let _schema = _.find(NodeSchema, _schema => _schema.Category == 'StateMachine')
+            let _schema = _.find(this.NodeSchema, _schema => _schema.Category == 'StateMachine')
 
             GenerateNode(this.graph, {
                 ref: _.cloneDeep(_schema.Ref),
@@ -275,15 +288,12 @@ module.exports = function (E) {
         render() {
             return (
                 <uSizeBox>
-                    <uJavascriptGraphEditorWidget
-                        ref={ref => this.graphContainer = ref}
-                        CommandList={this.graphCommandList}
-                        AppearanceInfo={{ CornerText: "Hello SM" }}
-                    />
+                    <uJavascriptGraphEditorWidget ref={ref => this.graphContainer = ref} Graph={this.graph} CommandList={this.graphCommandList}
+                        AppearanceInfo={{ CornerText: "Hello SM" }} />
                 </uSizeBox>
             )
         }
     }
 
-    return ReactUMG.wrap(<GraphEditor />)
+    return ReactUMG.wrap(<GraphSMEditor />)
 }
