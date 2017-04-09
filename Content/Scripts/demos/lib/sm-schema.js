@@ -1,3 +1,7 @@
+const _ = require('lodash')
+const React = require('react');
+const ReactUMG = require('react-umg');
+
 module.exports = (schema, components) => {
 
     /***************************
@@ -12,9 +16,7 @@ module.exports = (schema, components) => {
         Delegate: {
             GetWidget: (GraphNode, ref) => {
                 const ReactComponent = components.StateMachineNode;
-                return (
-                    <ReactComponent nodeName={'StateMachineNode'}/>
-                )
+                return ReactUMG.wrap(React.createElement(ReactComponent, {nodeName: 'StateMachineNode'}));
             },
             IsTrainsionNode: () => false,
             GetInputPin: (GraphNode) => GraphNode.GetPins()[0],
@@ -33,9 +35,7 @@ module.exports = (schema, components) => {
         Delegate: {
             GetWidget: (GraphNode, ref) => {
                 const ReactComponent = components.TrainsitionNode;
-                return (
-                    <ReactComponent nodeName={'TrainsitionNode'}/>
-                )
+                return ReactUMG.wrap(React.createElement(ReactComponent, {nodeName: ':)'}));
             },
             IsTrainsionNode: () => true,
             GetInputPin: (GraphNode) => GraphNode.GetPins()[0],

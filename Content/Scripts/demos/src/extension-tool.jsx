@@ -170,6 +170,10 @@ function layout() {
                                     {                                
                                         TabId: 'GraphTab',
                                         TabState: 'OpenedTab'  
+                                    },
+                                     {                                
+                                        TabId: 'GraphSMTab',
+                                        TabState: 'OpenedTab'  
                                     }
                                 ]
                             },
@@ -210,7 +214,9 @@ function graphTab(E) {
     return makeTab('GraphTab', () => require('./demo-graph')(E));
 }
 
-
+function graphSMTab(E) {
+    return makeTab('GraphSMTab', () => require('./demo-sm')(E));
+}
 
 function headerDesign() {
     const SmallFont = {FontObject:Root.GetEngine().SmallFont, Size:12};
@@ -249,7 +255,7 @@ function headerDesign() {
 function design() {
     let E = new events.EventEmitter();
     let tabManager = new JavascriptEditorTabManager(JavascriptLibrary.CreatePackage(null,'/Script/Javascript'))
-    tabManager.Tabs = [viewportTab(E), propsTab(E), browserTab(E), graphTab(E)]
+    tabManager.Tabs = [viewportTab(E), propsTab(E), browserTab(E), graphTab(E), graphSMTab(E)]
     tabManager.Layout = layout() 
 
     // @todo : convert to react-umg
