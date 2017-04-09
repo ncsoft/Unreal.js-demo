@@ -3,11 +3,15 @@ const ReactUMG = require('react-umg');
 const React = require('react');
 
 module.exports = function (E) {
-    function getGraphModules(container) {
+    function getGraphModules(_container) {
         let obj = new JavascriptObject();
         obj.AllNodes = [];
         let graph = JavascriptGraphEditorWidget.NewGraph(obj);
-        let schema = graph.Schema.GetDefaultObject();
+
+        class MySchema extends JavascriptGraphAssetGraphSchema {}
+        let MySchema_C = require('uclass')()(global, MySchema);
+        let schema = MySchema_C.GetDefaultObject();
+        graph.Schema = MySchema_C;
 
         let nodes = [];
         schema.OnTakeWidget = [node => {
@@ -180,6 +184,7 @@ module.exports = function (E) {
             commands.OnExecuteAction = what => {
                 let commands = {
                     Delete: () => {
+                        const container = _container();
                         if (container) {
                             graph.ModifyObject();
 
@@ -194,6 +199,7 @@ module.exports = function (E) {
                         }
                     },
                     SelectAll: () => {
+                        const container = _container();
                         if (container) {
                             container.ueobj.SelectAllNodes();
                         }
@@ -209,10 +215,12 @@ module.exports = function (E) {
             commands.OnCanExecuteAction = what => {
                 let commands = {
                     Delete: () => {
+                        const container = _container();
                         let nodes = container != null ? container.ueobj.GetSelectedNodes() : [];
                         return _.some(nodes, node => node.CanUserDeleteNode());
                     },
                     Copy: () => {
+                        const container = _container();
                         let nodes = container != null ? container.ueobj.GetSelectedNodes() : [];
                         return _.some(nodes, node => node.CanDuplicateNode());
                     },
@@ -247,7 +255,7 @@ module.exports = function (E) {
     class GraphEditor extends React.Component {
         constructor(props, context) {
             super(props, context);
-            let { graph, graphCommandList, nodes, destroy } = getGraphModules(this.graphContainer);
+            let { graph, graphCommandList, nodes, destroy } = getGraphModules(() => this.graphContainer);
             this.graph = graph;
             this.graphCommandList = graphCommandList;
             this.nodes = nodes;
