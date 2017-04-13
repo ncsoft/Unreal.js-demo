@@ -4,6 +4,11 @@ const ReactUMG = require('react-umg');
 
 module.exports = (schema) => {
 
+    const Style_Font = { FontObject: Root.GetEngine().SmallFont, Size: 10 };
+
+    let Style_Editor = new JavascriptStyleSet;
+    Style_Editor.StyleSetName = 'EditorStyle';
+
     class StateMachineNode extends React.Component {
         render() {
             const nodeName = this.props.nodeName;
@@ -33,7 +38,14 @@ module.exports = (schema) => {
             const Style_Brush_Color = { R: 0.7, G: 0.1, B: 0.1, A: 1 }
             const Style_Slot = { 'HorizontalAlignment': 'HAlign_Center', 'VerticalAlignment': 'VAlign_Center' }
             return (
-                <img Brush={Style_Editor.GetBrush('Graph.TransitionNode.Icon')} />
+                <uOverlay Slot={Style_Slot} >
+                    <img Brush={Style_Editor.GetBrush('Graph.TransitionNode.Body')} />
+                    <img
+                        Brush={Style_Editor.GetBrush('Graph.TransitionNode.ColorSpill')}
+                        ColorAndOpacity={{ SpecifiedColor: Style_Brush_Color }} />
+                    <img Brush={Style_Editor.GetBrush('Graph.TransitionNode.Icon')} />
+                    <img Brush={Style_Editor.GetBrush('Graph.TransitionNode.Gloss')} />
+                </uOverlay>
             )
         }
     }
@@ -71,7 +83,6 @@ module.exports = (schema) => {
         Delegate: {
             GetWidget: (GraphNode, ref) => {
                 GraphNode.BackgroundColor.SpecifiedColor = { R: 0.1, G: 0.1, B: 0.1, A: 1 };
-                const ReactComponent = components.TrainsitionNode;
                 return (
                     <TrainsitionNode />
                 )

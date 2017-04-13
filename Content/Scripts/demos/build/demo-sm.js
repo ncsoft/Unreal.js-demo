@@ -33,10 +33,6 @@ function GenerateNode(ParentGraph, Template) {
 }
 
 module.exports = function (E) {
-    const Style_Font = { FontObject: Root.GetEngine().SmallFont, Size: 10 };
-
-    let Style_Editor = new JavascriptStyleSet();
-    Style_Editor.StyleSetName = 'EditorStyle';
 
     function getGraphModules(_container) {
         let obj = new JavascriptObject();
