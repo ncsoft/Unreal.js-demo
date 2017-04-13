@@ -2,7 +2,41 @@ const _ = require('lodash')
 const React = require('react');
 const ReactUMG = require('react-umg');
 
-module.exports = (schema, components) => {
+module.exports = (schema) => {
+
+    class StateMachineNode extends React.Component {
+        render() {
+            const nodeName = this.props.nodeName;
+            const Style_Brush_Color = { R: 0.08, G: 0.08, B: 0.08, A: 1 }
+            const Style_Slot = { 'HorizontalAlignment': 'HAlign_Center', 'VerticalAlignment': 'VAlign_Center' }
+            return (
+                <uBorder
+                    Brush={Style_Editor.GetBrush('Graph.StateNode.ColorSpill')}
+                    BrushColor={Style_Brush_Color}
+                    Slot={Style_Slot}
+                    Visibility={'SelfHitTestInvisible'} >
+                    <span>
+                        <text
+                            Font={Style_Font}
+                            Slot={{ Style_Slot }}
+                            Text={nodeName}
+                        />
+                    </span>
+                </uBorder>
+            )
+        }
+    }
+
+    class TrainsitionNode extends React.Component {
+        render() {
+            const nodeName = this.props.nodeName;
+            const Style_Brush_Color = { R: 0.7, G: 0.1, B: 0.1, A: 1 }
+            const Style_Slot = { 'HorizontalAlignment': 'HAlign_Center', 'VerticalAlignment': 'VAlign_Center' }
+            return (
+                <img Brush={Style_Editor.GetBrush('Graph.TransitionNode.Icon')} />
+            )
+        }
+    }
 
     /***************************
      ** Node Schema */
@@ -15,8 +49,10 @@ module.exports = (schema, components) => {
         },
         Delegate: {
             GetWidget: (GraphNode, ref) => {
-                const ReactComponent = components.StateMachineNode;
-                return ReactUMG.wrap(React.createElement(ReactComponent, {nodeName: 'StateMachineNode'}));
+                GraphNode.BackgroundColor.SpecifiedColor = { R: 0.08, G: 0.08, B: 0.08, A: 1 };
+                return (
+                    <StateMachineNode nodeName={'StateMachineNode'} />
+                )
             },
             IsTrainsionNode: () => false,
             GetInputPin: (GraphNode) => GraphNode.GetPins()[0],
@@ -34,8 +70,11 @@ module.exports = (schema, components) => {
         },
         Delegate: {
             GetWidget: (GraphNode, ref) => {
+                GraphNode.BackgroundColor.SpecifiedColor = { R: 0.1, G: 0.1, B: 0.1, A: 1 };
                 const ReactComponent = components.TrainsitionNode;
-                return ReactUMG.wrap(React.createElement(ReactComponent, {nodeName: ':)'}));
+                return (
+                    <TrainsitionNode />
+                )
             },
             IsTrainsionNode: () => true,
             GetInputPin: (GraphNode) => GraphNode.GetPins()[0],
