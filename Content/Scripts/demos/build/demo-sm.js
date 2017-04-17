@@ -77,7 +77,6 @@ module.exports = function (E) {
         }];
 
         schema.OnTakeWidget = [node => ReactUMG.wrap(node.GetWidget()).TakeWidget()];
-
         schema.OnContextActions = [() => _(NodeSchema).filter(_schema => !_schema.Hidden).map(_schema => {
             return {
                 Category: _schema.Category,
@@ -188,7 +187,7 @@ module.exports = function (E) {
             }
         };
     }
-
+  
     class GraphSMEditor extends React.Component {
         constructor(props, context) {
             super(props, context);
