@@ -2,7 +2,7 @@ const _ = require('lodash')
 const ReactUMG = require('react-umg')
 const React = require('react')
 
-const LoadSchema_SM = require('../lib/sm-schema')
+const LoadSchema_SM = require('./sm-schema')
 
 function GenerateNode(ParentGraph, Template) {
     let Graph = ParentGraph.GetOuter()
@@ -33,10 +33,6 @@ function GenerateNode(ParentGraph, Template) {
 }
 
 module.exports = function (E) {
-    const Style_Font = { FontObject: Root.GetEngine().SmallFont, Size: 10 };
-
-    let Style_Editor = new JavascriptStyleSet;
-    Style_Editor.StyleSetName = 'EditorStyle';
 
     function getGraphModules(_container) {
         let obj = new JavascriptObject
@@ -48,7 +44,7 @@ module.exports = function (E) {
         let schema = MySchema_C.GetDefaultObject()
         graph.Schema = MySchema_C
 
-        const { GraphSchema, NodeSchema } = LoadSchema_SM(schema, { StateMachineNode, TrainsitionNode });
+        const { GraphSchema, NodeSchema } = LoadSchema_SM(schema);
         schema = GraphSchema;
 
         function CreateConnections(TransitionNode, PreviousState, NextState) {
@@ -83,15 +79,7 @@ module.exports = function (E) {
         ];
 
         schema.OnTakeWidget = [
-            (node) => {
-                if (node.IsTrainsionNode()) {
-                    node.BackgroundColor.SpecifiedColor = { R: 0.1, G: 0.1, B: 0.1, A: 1 };
-                } else {
-                    node.BackgroundColor.SpecifiedColor = { R: 0.08, G: 0.08, B: 0.08, A: 1 };
-                }
-
-                return (node.GetWidget()).TakeWidget();
-            }
+            (node) => ReactUMG.wrap(node.GetWidget()).TakeWidget()
         ];
 
         schema.OnContextActions = [
@@ -206,52 +194,6 @@ module.exports = function (E) {
                 obj.uNodes.forEach(node => node.GraphNode.Ref = null)
                 graphCommands.destroy()
             }
-        }
-    }
-
-    class StateMachineNode extends React.Component {
-        render() {
-            const nodeName = this.props.nodeName;
-            const Style_Brush_Color = { R: 0.08, G: 0.08, B: 0.08, A: 1 }
-            const Style_Slot = { 'HorizontalAlignment': 'HAlign_Center', 'VerticalAlignment': 'VAlign_Center' }
-            return (
-                <uBorder
-                    Brush={Style_Editor.GetBrush('Graph.StateNode.ColorSpill')}
-                    BrushColor={Style_Brush_Color}
-                    Slot={Style_Slot}
-                    Visibility={'SelfHitTestInvisible'} >
-                    <span>
-                        <text
-                            Font={Style_Font}
-                            Slot={{ Style_Slot }}
-                            Text={nodeName}
-                        />
-                    </span>
-                </uBorder>
-            )
-        }
-    }
-
-    class TrainsitionNode extends React.Component {
-        render() {
-            const nodeName = this.props.nodeName;
-            const Style_Brush_Color = { R: 0.7, G: 0.1, B: 0.1, A: 1 }
-            const Style_Slot = { 'HorizontalAlignment': 'HAlign_Center', 'VerticalAlignment': 'VAlign_Center' }
-            return (
-                <uBorder
-                    Brush={Style_Editor.GetBrush('Graph.StateNode.ColorSpill')}
-                    BrushColor={Style_Brush_Color}
-                    Slot={Style_Slot}
-                    Visibility={'SelfHitTestInvisible'} >
-                    <span>
-                        <text
-                            Font={Style_Font}
-                            Slot={{ Style_Slot }}
-                            Text={nodeName}
-                        />
-                    </span>
-                </uBorder>
-            )
         }
     }
 
