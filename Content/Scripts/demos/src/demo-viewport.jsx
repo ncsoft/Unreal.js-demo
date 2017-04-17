@@ -23,7 +23,6 @@ module.exports = function viewportDesign(E) {
         let num_spirals = opts.num_spirals || 5
         let radius = opts.radius || 200
         let height = opts.height || 200 * 5
-        purge(world)  
         let actors = [];
         for (let i = 0; i < N; ++i) {
             let v = i / N
@@ -55,12 +54,17 @@ module.exports = function viewportDesign(E) {
         return actors;
     }
     
-    function purge(world) {
-        let prev_actors = world.GetAllActorsOfClassAndTags(StaticMeshActor, tags).OutActors  
-        prev_actors.forEach((actor) => world.EditorDestroyActor(actor))  
+    function purge(world, spawnedActors) {
+        spawnedActors.forEach((actor) => world.EditorDestroyActor(actor)) 
+        spawnedActors.length = 0;
     }
 
     class ViewportDesign extends React.Component {
+        constructor(props, context) {
+            super(props, context);
+            this.spawnedActors = [];
+        }
+
         componentDidMount() {
             let viewport = JavascriptEditorViewport.C(this.Viewport.ueobj)
             process.nextTick(__ => {
@@ -86,10 +90,10 @@ module.exports = function viewportDesign(E) {
         draw(objects = []) {
             let viewport = JavascriptEditorViewport.C(this.Viewport.ueobj)
             let world = viewport.GetViewportWorld();
-            purge(world)
+            purge(world, this.spawnedActors)
             this.data = objects.length > 0 ? objects[0] : null
             if (this.data) {
-                generate_spiral(world, this.data)
+                this.spawnedActors = generate_spiral(world, this.data)
             }
             viewport.Redraw()            
 
@@ -98,7 +102,8 @@ module.exports = function viewportDesign(E) {
         componentWillUnmount() {
             let viewport = JavascriptEditorViewport.C(this.Viewport.ueobj)
             let world = viewport.GetViewportWorld();
-            purge(world)            
+            purge(world, this.spawnedActors)         
+            E.removeListener('choose', this.draw);
             E.removeListener('updateData', this.draw);
         }
 
@@ -109,10 +114,15 @@ module.exports = function viewportDesign(E) {
                     E.emit('choose', [this.data])
                 }
             }
+            let SmallFont = {FontObject:Root.GetEngine().SmallFont, Size:12};
 
             return (
-                <uSizeBox HeigthOverride={600}>
-                    <uJavascriptEditorViewport ref={ref=> this.Viewport = ref} {...viewportStyle}/>
+                <uSizeBox>
+                    <uJavascriptEditorViewport ref={ref=> this.Viewport = ref} {...viewportStyle}>
+                        <div>
+                            <text Font={SmallFont} Text="Viewport Example"/>
+                        </div>
+                    </uJavascriptEditorViewport>
                 </uSizeBox>
             )
         }
