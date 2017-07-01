@@ -8,7 +8,7 @@
     "watch": "babel --watch demos/src -d demos/build"
   },
   "author": "NCSOFT",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "dependencies": {
     "convnetjs": "^0.3.0",
