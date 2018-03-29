@@ -144,12 +144,12 @@ module.exports = function (E) {
                 let ref = node.GraphNode.Ref.get()
                 if (ref && ref.Inputs) {
                     ref.Inputs.forEach(pin =>
-                        node.CreatePin('EGPD_Input', 'PinCategory_MultipleNodes', '', null, false, false, pin)
+                        node.CreatePin('EGPD_Input', 'PinCategory_MultipleNodes', '', null, pin, {ContainerType: EPinContainerType.None, bIsReference: false, bIsConst: false, Index:-1})
                     )
                 }
                 if (ref && ref.Outputs) {
                     ref.Outputs.forEach(pin =>
-                        node.CreatePin('EGPD_Output', 'PinCategory_MultipleNodes', '', null, false, false, pin)
+                        node.CreatePin('EGPD_Output', 'PinCategory_MultipleNodes', '', null, pin, {ContainerType: EPinContainerType.None, bIsReference: false, bIsConst: false, Index:-1})
                     )
                 }
             }

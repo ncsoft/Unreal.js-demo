@@ -334,8 +334,8 @@ module.exports = (schema) => {
 
     schema.OnAllocateDefaultPins = [
         (node) => {
-            node.CreatePin('EGPD_Input', 'Transition', '', null, false, false, "In")
-            node.CreatePin('EGPD_Output', 'Transition', '', null, false, false, "Out")
+            node.CreatePin('EGPD_Input', 'Transition', '', null, "In", {ContainerType: EPinContainerType.None, bIsReference: false, bIsConst: false, Index:-1})
+            node.CreatePin('EGPD_Output', 'Transition', '', null, "Out", {ContainerType: EPinContainerType.None, bIsReference: false, bIsConst: false, Index:-1})
         }
     ];
 

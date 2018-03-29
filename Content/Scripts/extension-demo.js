@@ -212,6 +212,8 @@ function demoTab() {
         TabId: 'SomeEditor',
         Group: maybe_create_group('Root.A2')
     }, tabMain)
+
+    return flush
 }
 
 function new_styleset(opts) {
@@ -277,11 +279,9 @@ function demoToolbar() {
 
 function main() {
     demoToolbar()
-    demoTab()
+    return demoTab()
 }
 
 module.exports = () => {
-    main()   
-    
-    return flush
+    return main()       
 }
