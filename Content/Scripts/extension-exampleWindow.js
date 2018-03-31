@@ -213,16 +213,16 @@ function main() {
     }
 
     let contexts = makeContext({
-        Id:'UnrealJS_Contexts',
+        ID:'UnrealJS_Contexts',
         Commands:[
             {
-                Id: 'debug',
+                ID: 'debug',
                 FriendlyName : 'Set as debug context',
                 Description : 'Set as debug context',
                 ActionType : 'Button'
             },
             {
-                Id: 'undebug',
+                ID: 'undebug',
                 FriendlyName : 'Reset to normal context',
                 Description : 'Reset to normal context',
                 ActionType : 'Button'
@@ -231,16 +231,16 @@ function main() {
     })
 
     let packages = makeContext({
-        Id:'UnrealJS_Packages',
+        ID:'UnrealJS_Packages',
         Commands: [
             {
-                Id: 'install',
+                ID: 'install',
                 FriendlyName : 'Install this package',
                 Description : 'Install this package',
                 ActionType : 'Button'
             },
             {
-                Id: 'uninstall',
+                ID: 'uninstall',
                 FriendlyName : 'Remove this package',
                 Description : 'Remove this package',
                 ActionType : 'Button'
@@ -264,11 +264,11 @@ function main() {
                 ItemHeight:20,
                 Columns:[
                     {
-                        Id: 'Name',
+                        ID: 'Name',
                         Width: 0.7
                     },
                     {
-                        Id: 'Status',
+                        ID: 'Status',
                         Width: 0.3
                     }
                 ],
@@ -385,11 +385,11 @@ function main() {
                         },
                         Columns:[
                             {
-                                Id: 'Name',
+                                ID: 'Name',
                                 Width: 0.7
                             },
                             {
-                                Id: 'Status',
+                                ID: 'Status',
                                 Width: 0.3
                             }
                         ],
