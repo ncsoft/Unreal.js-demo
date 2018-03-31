@@ -362,7 +362,7 @@ declare class OnlineEngineInterfaceImpl extends OnlineEngineInterface {
 }
 
 declare class PIELoginSettingsInternal { 
-	Id: string;
+	ID: string;
 	Token: string;
 	Type: string;
 	TokenBytes: number[];
@@ -911,7 +911,7 @@ declare class OculusFunctionLibrary extends BlueprintFunctionLibrary {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OculusFunctionLibrary;
 	static ShowLoadingSplashScreen(): void;
 	static ShowLoadingIcon(Texture: Texture2D): void;
-	static SetTiledMultiresLevel(level: ETiledMultiResLevel): void;
+	static SetTiledMultiresLevel(Level: ETiledMultiResLevel): void;
 	static SetPositionScale3D(PosScale3D: Vector): void;
 	static SetLoadingSplashParams(TexturePath: string,DistanceInMeters: Vector,SizeInMeters: Vector2D,RotationAxis: Vector,RotationDeltaInDeg: number): void;
 	static SetDisplayFrequency(RequestedFrequency: number): void;
@@ -1000,7 +1000,7 @@ declare class SteamVRFunctionLibrary extends BlueprintFunctionLibrary {
 	static GetDefaultObject(): SteamVRFunctionLibrary;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRFunctionLibrary;
 	static GetValidTrackedDeviceIds(DeviceType: ESteamVRTrackedDeviceType,OutTrackedDeviceIds?: number[]): {OutTrackedDeviceIds: number[]};
-	static GetTrackedDevicePositionAndOrientation(DeviceId: number,OutPosition?: Vector,OutOrientation?: Rotator): {OutPosition: Vector, OutOrientation: Rotator, $: boolean};
+	static GetTrackedDevicePositionAndOrientation(DeviceID: number,OutPosition?: Vector,OutOrientation?: Rotator): {OutPosition: Vector, OutOrientation: Rotator, $: boolean};
 	static GetHandPositionAndOrientation(ControllerIndex: number,Hand: EControllerHand,OutPosition?: Vector,OutOrientation?: Rotator): {OutPosition: Vector, OutOrientation: Rotator, $: boolean};
 	static C(Other: UObject | any): SteamVRFunctionLibrary;
 }
@@ -1944,7 +1944,7 @@ declare class Overlays extends UObject {
 declare class OverlayItem { 
 	StartTime: Timespan;
 	EndTime: Timespan;
-	Text: string;
+	text: string;
 	Position: Vector2D;
 	clone() : OverlayItem;
 	static C(Other: UObject | any): OverlayItem;
@@ -2036,7 +2036,7 @@ declare class FileMediaSource extends BaseMediaSource {
 
 declare class MediaCaptureDevice { 
 	DisplayName: string;
-	Url: string;
+	URL: string;
 	clone() : MediaCaptureDevice;
 	static C(Other: UObject | any): MediaCaptureDevice;
 }
@@ -2058,16 +2058,16 @@ declare class MediaPlaylist extends UObject {
 	static Find(Outer: UObject, ResourceName: string): MediaPlaylist;
 	static GetDefaultObject(): MediaPlaylist;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MediaPlaylist;
-	Replace(Index: number,Replacement: MediaSource): boolean;
-	RemoveAt(Index: number): boolean;
+	Replace(index: number,Replacement: MediaSource): boolean;
+	RemoveAt(index: number): boolean;
 	Remove(MediaSource: MediaSource): boolean;
 	Num(): number;
-	Insert(MediaSource: MediaSource,Index: number): void;
+	Insert(MediaSource: MediaSource,index: number): void;
 	GetRandom(OutIndex?: number): {OutIndex: number, $: MediaSource};
 	GetPrevious(InOutIndex?: number): {InOutIndex: number, $: MediaSource};
 	GetNext(InOutIndex?: number): {InOutIndex: number, $: MediaSource};
-	Get(Index: number): MediaSource;
-	AddUrl(Url: string): boolean;
+	Get(index: number): MediaSource;
+	AddUrl(URL: string): boolean;
 	AddFile(FilePath: string): boolean;
 	Add(MediaSource: MediaSource): boolean;
 	static C(Other: UObject | any): MediaPlaylist;
@@ -2090,7 +2090,7 @@ declare class MediaPlayer extends UObject {
 	NativeAudioOut: boolean;
 	PlayOnOpen: boolean;
 	Shuffle: boolean;
-	Loop: boolean;
+	loop: boolean;
 	Playlist: MediaPlaylist;
 	PlaylistIndex: number;
 	HorizontalFieldOfView: number;
@@ -2118,9 +2118,9 @@ declare class MediaPlayer extends UObject {
 	Previous(): boolean;
 	Play(): boolean;
 	Pause(): boolean;
-	OpenUrl(Url: string): boolean;
+	OpenUrl(URL: string): boolean;
 	OpenSource(MediaSource: MediaSource): boolean;
-	OpenPlaylistIndex(InPlaylist: MediaPlaylist,Index: number): boolean;
+	OpenPlaylistIndex(InPlaylist: MediaPlaylist,index: number): boolean;
 	OpenPlaylist(InPlaylist: MediaPlaylist): boolean;
 	OpenFile(FilePath: string): boolean;
 	Next(): boolean;
@@ -2160,7 +2160,7 @@ declare class MediaPlayer extends UObject {
 	GetAudioTrackSampleRate(TrackIndex: number,FormatIndex: number): number;
 	GetAudioTrackChannels(TrackIndex: number,FormatIndex: number): number;
 	Close(): void;
-	CanPlayUrl(Url: string): boolean;
+	CanPlayUrl(URL: string): boolean;
 	CanPlaySource(MediaSource: MediaSource): boolean;
 	CanPause(): boolean;
 	static C(Other: UObject | any): MediaPlayer;
@@ -2371,7 +2371,7 @@ declare class PaperFlipbook extends UObject {
 	static Find(Outer: UObject, ResourceName: string): PaperFlipbook;
 	static GetDefaultObject(): PaperFlipbook;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PaperFlipbook;
-	IsValidKeyFrameIndex(Index: number): boolean;
+	IsValidKeyFrameIndex(index: number): boolean;
 	GetTotalDuration(): number;
 	GetSpriteAtTime(Time: number,bClampToEnds: boolean): PaperSprite;
 	GetSpriteAtFrame(FrameIndex: number): PaperSprite;
@@ -3071,7 +3071,7 @@ declare class PixelInspectorView extends UObject {
 	BaseColor: LinearColor;
 	IndirectIrradiance: number;
 	AmbientOcclusion: number;
-	SubSurfaceColor: LinearColor;
+	SubsurfaceColor: LinearColor;
 	SubsurfaceProfile: Vector;
 	Opacity: number;
 	ClearCoat: number;
@@ -3859,10 +3859,10 @@ declare class JavascriptLogCategory {
 	static C(Other: UObject | any): JavascriptLogCategory;
 	GetCategoryName(): string;
 	IsSuppressed(Verbosity: ELogVerbosity_JS): boolean;
-	Log(Verbosity: ELogVerbosity_JS,Message: string,FileName: string,LineNumber: number): void;
+	Log(Verbosity: ELogVerbosity_JS,Message: string,Filename: string,LineNumber: number): void;
 	static GetCategoryName(Category: JavascriptLogCategory): string;
 	static IsSuppressed(Category: JavascriptLogCategory,Verbosity: ELogVerbosity_JS): boolean;
-	static Log(Category: JavascriptLogCategory,Verbosity: ELogVerbosity_JS,Message: string,FileName: string,LineNumber: number): void;
+	static Log(Category: JavascriptLogCategory,Verbosity: ELogVerbosity_JS,Message: string,Filename: string,LineNumber: number): void;
 	static CreateLogCategory(CategoryName: string,InDefaultVerbosity: ELogVerbosity_JS): JavascriptLogCategory;
 }
 
@@ -3942,7 +3942,7 @@ declare class JavascriptLibrary extends BlueprintFunctionLibrary {
 	static NewStat(InStatName: string,InStatDesc: string,InGroupName: string,InGroupCategory: string,InGroupDesc: string,bDefaultEnable: boolean,bShouldClearEveryFrame: boolean,InStatType: EJavascriptStatDataType,bCycleStat: boolean): JavascriptStat;
 	static MarkRenderStateDirty(Component: ActorComponent): void;
 	static MakeDirectory(Path: string,Tree: boolean): boolean;
-	static Log(Category: JavascriptLogCategory,Verbosity: ELogVerbosity_JS,Message: string,FileName: string,LineNumber: number): void;
+	static Log(Category: JavascriptLogCategory,Verbosity: ELogVerbosity_JS,Message: string,Filename: string,LineNumber: number): void;
 	static LoadPackage(InOuter: Package,PackageName: string): Package;
 	static IsSuppressed(Category: JavascriptLogCategory,Verbosity: ELogVerbosity_JS): boolean;
 	static IsRegistered(ActorComponent: ActorComponent): boolean;
@@ -3997,7 +3997,7 @@ declare class JavascriptLibrary extends BlueprintFunctionLibrary {
 	static GetBailoutReason(UNode: JavascriptProfileNode): string;
 	static GetArchetypePathName(UObject: UObject): string;
 	static GetAllActorsOfClassAndTags(WorldContextObject: UObject,ActorClass: UnrealEngineClass,Tags_Accept: string[],Tags_Deny: string[],OutActors?: Actor[]): {OutActors: Actor[]};
-	static GenerateNavigation(world: World,NavData: RecastNavMesh): void;
+	static GenerateNavigation(World: World,NavData: RecastNavMesh): void;
 	static FindPackage(InOuter: UObject,PackageName: string): Package;
 	static FindObjectWithOuter(Outer: UObject,ClassToLookFor: UnrealEngineClass,NameToLookFor: string): UObject;
 	static FileExists(Filename: string): boolean;
@@ -4012,7 +4012,7 @@ declare class JavascriptLibrary extends BlueprintFunctionLibrary {
 	static CreateInternetAddr(): JavascriptInternetAddr;
 	static CreateEnum(Outer: UObject,Name: string,DisplayNames: string[]): Enum;
 	static ClipboardPaste(): string;
-	static ClipboardCopy(String: string): void;
+	static ClipboardCopy(string: string): void;
 	static CallJS(UFunction: JavascriptFunction,CustomStruct: JavascriptStubStruct): void;
 	static AddMessage_int(Stat: JavascriptStat,InStatOperation: EJavascriptStatOperation,Value: number,bIsCycle: boolean): void;
 	static AddMessage_float(Stat: JavascriptStat,InStatOperation: EJavascriptStatOperation,Value: number,bIsCycle: boolean): void;
@@ -4277,7 +4277,7 @@ declare class HeaderRowStyle extends SlateWidgetStyle {
 }
 
 declare class JavascriptColumn { 
-	Id: string;
+	ID: string;
 	Width: number;
 	Widget: Widget;
 	clone() : JavascriptColumn;
@@ -4285,7 +4285,7 @@ declare class JavascriptColumn {
 }
 
 declare class JavascriptTreeView extends TableViewBase { 
-	OnGenerateRowEvent: UnrealEngineDelegate<(UObject: UObject, Id: string, Instance: JavascriptTreeView) => Widget>;
+	OnGenerateRowEvent: UnrealEngineDelegate<(UObject: UObject, ID: string, Instance: JavascriptTreeView) => Widget>;
 	OnExpansionChanged: UnrealEngineDelegate<(Item: UObject, bExpanded: boolean, Instance: JavascriptTreeView) => void>;
 	OnContextMenuOpening: UnrealEngineDelegate<(Instance: JavascriptTreeView) => Widget>;
 	OnGetChildren: UnrealEngineDelegate<(Item: UObject, Instance: JavascriptTreeView) => void>;
@@ -4328,7 +4328,7 @@ declare class JavascriptListView extends JavascriptTreeView {
 
 declare class JavascriptMenuContext extends UObject { 
 	Description: string;
-	ToolTip: string;
+	Tooltip: string;
 	Icon: JavascriptSlateIcon;
 	OnCanExecute: UnrealEngineDelegate<() => boolean>;
 	OnExecute: UnrealEngineDelegate<() => void>;
@@ -4348,7 +4348,7 @@ declare class JavascriptUICommandInfo {
 }
 
 declare class JavascriptUICommand { 
-	Id: string;
+	ID: string;
 	FriendlyName: string;
 	Description: string;
 	DefaultChord: InputChord;
@@ -4468,14 +4468,14 @@ declare class JavascriptMenuLibrary extends BlueprintFunctionLibrary {
 }
 
 declare class JavascriptMultiBox extends Widget { 
-	OnHook: UnrealEngineDelegate<(Id: string, Self: JavascriptMultiBox, CurrentBuilder: JavascriptMenuBuilder) => void>;
+	OnHook: UnrealEngineDelegate<(ID: string, Self: JavascriptMultiBox, CurrentBuilder: JavascriptMenuBuilder) => void>;
 	static Load(ResourceName: string): JavascriptMultiBox;
 	static Find(Outer: UObject, ResourceName: string): JavascriptMultiBox;
 	static GetDefaultObject(): JavascriptMultiBox;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): JavascriptMultiBox;
 	static Bind(Builder: JavascriptMenuBuilder): void;
-	AddSubMenu(Builder?: JavascriptMenuBuilder,Id?: string,Label?: string,ToolTip?: string,bInOpenSubMenuOnClick?: boolean): {Builder: JavascriptMenuBuilder};
-	AddPullDownMenu(Builder?: JavascriptMenuBuilder,Id?: string,Label?: string,ToolTip?: string): {Builder: JavascriptMenuBuilder};
+	AddSubMenu(Builder?: JavascriptMenuBuilder,ID?: string,Label?: string,Tooltip?: string,bInOpenSubMenuOnClick?: boolean): {Builder: JavascriptMenuBuilder};
+	AddPullDownMenu(Builder?: JavascriptMenuBuilder,ID?: string,Label?: string,Tooltip?: string): {Builder: JavascriptMenuBuilder};
 	static C(Other: UObject | any): JavascriptMultiBox;
 }
 
@@ -4489,7 +4489,7 @@ declare class JavascriptTextModel extends UObject {
 	static Find(Outer: UObject, ResourceName: string): JavascriptTextModel;
 	static GetDefaultObject(): JavascriptTextModel;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): JavascriptTextModel;
-	SetString(String: string): void;
+	SetString(string: string): void;
 	GetString(): string;
 	CreateRun(MessageTextStyle: TextBlockStyle,BeginIndex: number,EndIndex: number): JavascriptSlateTextRun;
 	static C(Other: UObject | any): JavascriptTextModel;
@@ -4535,9 +4535,9 @@ declare class JavascriptRichTextBlockHyperlinkDecorator extends RichTextBlockDec
 }
 
 declare class JavascriptSearchBox extends Widget { 
-	OnTextChanged: UnrealEngineMulticastDelegate<(Text: string) => void>;
-	OnTextCommitted: UnrealEngineMulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
-	Text: string;
+	OnTextChanged: UnrealEngineMulticastDelegate<(text: string) => void>;
+	OnTextCommitted: UnrealEngineMulticastDelegate<(text: string, CommitMethod: ETextCommit) => void>;
+	text: string;
 	TextDelegate: UnrealEngineDelegate<() => string>;
 	HintText: string;
 	HintTextDelegate: UnrealEngineDelegate<() => string>;
@@ -4642,10 +4642,10 @@ declare class JavascriptTileView extends TileView {
 }
 
 declare class JavascriptUICommands extends UObject { 
-	OnExecuteAction: UnrealEngineDelegate<(Id: string) => void>;
-	OnCanExecuteAction: UnrealEngineDelegate<(Id: string) => boolean>;
-	OnIsActionChecked: UnrealEngineDelegate<(Id: string) => boolean>;
-	OnIsActionButtonVisible: UnrealEngineDelegate<(Id: string) => boolean>;
+	OnExecuteAction: UnrealEngineDelegate<(ID: string) => void>;
+	OnCanExecuteAction: UnrealEngineDelegate<(ID: string) => boolean>;
+	OnIsActionChecked: UnrealEngineDelegate<(ID: string) => boolean>;
+	OnIsActionButtonVisible: UnrealEngineDelegate<(ID: string) => boolean>;
 	Commands: JavascriptUICommand[];
 	ContextName: string;
 	ContextDesc: string;
@@ -4661,7 +4661,7 @@ declare class JavascriptUICommands extends UObject {
 	Unbind(List: JavascriptUICommandList): void;
 	Refresh(): void;
 	Initialize(): void;
-	GetAction(Id: string): JavascriptUICommandInfo;
+	GetAction(ID: string): JavascriptUICommandInfo;
 	Discard(): void;
 	Commit(): void;
 	static BroadcastCommandsChanged(InContextName: string): void;
@@ -5957,7 +5957,7 @@ declare class AndroidPermissionFunctionLibrary extends BlueprintFunctionLibrary 
 	static GetDefaultObject(): AndroidPermissionFunctionLibrary;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AndroidPermissionFunctionLibrary;
 	static CheckPermission(permission: string): boolean;
-	static AcquirePermissions(permissions: string[]): AndroidPermissionCallbackProxy;
+	static AcquirePermissions(Permissions: string[]): AndroidPermissionCallbackProxy;
 	static C(Other: UObject | any): AndroidPermissionFunctionLibrary;
 }
 
@@ -6114,7 +6114,7 @@ declare class JavascriptPinParams {
 	ContainerType: EPinContainerType;
 	bIsReference: boolean;
 	bIsConst: boolean;
-	Index: number;
+	index: number;
 	clone() : JavascriptPinParams;
 	static C(Other: UObject | any): JavascriptPinParams;
 }
@@ -6282,7 +6282,7 @@ declare class JavascriptGraphAssetGraphSchema extends EdGraphSchema {
 	OnComputeSplineTangent: UnrealEngineDelegate<(A: Vector2D, B: Vector2D) => Vector2D>;
 	OnDrawSplineWithArrow: UnrealEngineDelegate<(A: Vector2D, B: Vector2D, Params: JavascriptConnectionParams, Container: JavascriptGraphConnectionDrawingPolicyContainer, ArrowRadius: Vector2D) => boolean>;
 	OnDrawSplineWithArrow_Geom: UnrealEngineDelegate<(A: Geometry, B: Geometry, Params: JavascriptConnectionParams, Container: JavascriptGraphConnectionDrawingPolicyContainer) => boolean>;
-	OnDrawPreviewConnector: UnrealEngineDelegate<(PinGeometry: Geometry, StartPoint: Vector2D, EndPoint: Vector2D, Pin: JavascriptEdGraphPin, Params: JavascriptConnectionParams, Container: JavascriptGraphConnectionDrawingPolicyContainer) => boolean>;
+	OnDrawPreviewConnector: UnrealEngineDelegate<(PinGeometry: Geometry, StartPoint: Vector2D, Endpoint: Vector2D, Pin: JavascriptEdGraphPin, Params: JavascriptConnectionParams, Container: JavascriptGraphConnectionDrawingPolicyContainer) => boolean>;
 	OnTakeWidget: UnrealEngineDelegate<(Instance: JavascriptGraphEdNode) => JavascriptSlateWidget>;
 	OnTakeTitleWidget: UnrealEngineDelegate<(Instance: JavascriptGraphEdNode) => JavascriptSlateWidget>;
 	OnTakeErrorReportingWidget: UnrealEngineDelegate<(Instance: JavascriptGraphEdNode) => JavascriptSlateWidget>;
@@ -6297,7 +6297,7 @@ declare class JavascriptGraphAssetGraphSchema extends EdGraphSchema {
 	OnCreateAutomaticConversionNodeAndConnections: UnrealEngineDelegate<(A: JavascriptEdGraphPin, B: JavascriptEdGraphPin) => boolean>;
 	OnDetermineLinkGeometry: UnrealEngineDelegate<(OutPin: JavascriptEdGraphPin, InputPin: JavascriptEdGraphPin, StartWidgetGeometry: JavascriptArrangedWidget, EndWidgetGeometry: JavascriptArrangedWidget, Container: JavascriptDetermineLinkGeometryContainer) => boolean>;
 	OnGetNodeComment: UnrealEngineDelegate<(UNode: JavascriptGraphEdNode) => string>;
-	OnSetNodeComment: UnrealEngineDelegate<(UNode: JavascriptGraphEdNode, String: string) => void>;
+	OnSetNodeComment: UnrealEngineDelegate<(UNode: JavascriptGraphEdNode, string: string) => void>;
 	OnIsNodeComment: UnrealEngineDelegate<(Instance: JavascriptGraphEdNode) => boolean>;
 	OnEndUserInteraction: UnrealEngineDelegate<(UNode: JavascriptGraphEdNode) => void>;
 	OnCreateOutputSideAddButton: UnrealEngineDelegate<(Instance: JavascriptGraphEdNode) => boolean>;
@@ -6475,10 +6475,10 @@ declare class JavascriptUIExtender extends UObject {
 	static GetTopCommandList(): JavascriptUICommandList;
 	static EndSection(): void;
 	static Bind(Commands: JavascriptUICommands): void;
-	static BeginSection(Name: string,Text: string): void;
-	static AddToolBarButton(Commands: JavascriptUICommands,Id: string): void;
+	static BeginSection(Name: string,text: string): void;
+	static AddToolBarButton(Commands: JavascriptUICommands,ID: string): void;
 	static AddMenuSeparator(): void;
-	static AddMenuEntry(Commands: JavascriptUICommands,Id: string): void;
+	static AddMenuEntry(Commands: JavascriptUICommands,ID: string): void;
 	static C(Other: UObject | any): JavascriptUIExtender;
 }
 
@@ -6777,7 +6777,7 @@ declare class JavascriptEditorLibrary extends BlueprintFunctionLibrary {
 	static SetAlphamapDataFromMemory(LandscapeInfo: LandscapeInfo,LayerInfo: LandscapeLayerInfoObject,MinX: number,MinY: number,MaxX: number,MaxY: number,PaintingRestriction: ELandscapeLayerPaintingRestriction): void;
 	static SetActorLabel(Actor: Actor,NewActorLabel: string,bMarkDirty: boolean): void;
 	static Select(USelection: USelection,InObject: UObject): void;
-	static SavePackage(Package: Package,FileName: string): boolean;
+	static SavePackage(Package: Package,Filename: string): boolean;
 	static RequestEndPlayMapInPIE(): void;
 	static RemoveLevelInstance(World: World): void;
 	static RemoveExtender(Manager: JavascriptExtensibilityManager,Extender: JavascriptExtender): void;
@@ -6952,8 +6952,8 @@ declare class JavascriptEditorViewport extends PanelWidget {
 	OnInputWidgetDelta: UnrealEngineDelegate<(Drag: Vector, Rot: Rotator, Scale: Vector, Instance: JavascriptEditorViewport) => boolean>;
 	OnInputKey: UnrealEngineDelegate<(ControllerId: number, Key: Key, Event: EInputEvent, Instance: JavascriptEditorViewport) => boolean>;
 	OnInputAxis: UnrealEngineDelegate<(ControllerId: number, Key: Key, Delta: number, DeltaTime: number, Instance: JavascriptEditorViewport) => boolean>;
-	OnMouseEnter: UnrealEngineDelegate<(x: number, y: number, Instance: JavascriptEditorViewport) => boolean>;
-	OnMouseMove: UnrealEngineDelegate<(x: number, y: number, Instance: JavascriptEditorViewport) => boolean>;
+	OnMouseEnter: UnrealEngineDelegate<(X: number, Y: number, Instance: JavascriptEditorViewport) => boolean>;
+	OnMouseMove: UnrealEngineDelegate<(X: number, Y: number, Instance: JavascriptEditorViewport) => boolean>;
 	OnMouseLeave: UnrealEngineDelegate<(Instance: JavascriptEditorViewport) => boolean>;
 	OnDraw: UnrealEngineDelegate<(PDI: JavascriptPDI, Instance: JavascriptEditorViewport) => void>;
 	OnDrawCanvas: UnrealEngineDelegate<(Canvas: Canvas, Instance: JavascriptEditorViewport) => void>;
@@ -7014,7 +7014,7 @@ declare class JavascriptEditorModeTools {
 	DeactivateMode(InID?: string): {Tools: JavascriptEditorModeTools};
 	DestroyMode(InID?: string): {Tools: JavascriptEditorModeTools};
 	EndTracking(Viewport: JavascriptEdViewport): boolean;
-	EnsureNotInMode(ModeID?: string,ErrorMsg?: string,bNotifyUser?: boolean): {Tools: JavascriptEditorModeTools, $: boolean};
+	EnsureNotInMode(ModeId?: string,ErrorMsg?: string,bNotifyUser?: boolean): {Tools: JavascriptEditorModeTools, $: boolean};
 	IsDefaultModeActive(): {Tools: JavascriptEditorModeTools, $: boolean};
 	IsModeActive(InID?: string): {Tools: JavascriptEditorModeTools, $: boolean};
 	IsTracking(): boolean;
@@ -7026,7 +7026,7 @@ declare class JavascriptEditorModeTools {
 	static DeactivateMode(Tools?: JavascriptEditorModeTools,InID?: string): {Tools: JavascriptEditorModeTools};
 	static DestroyMode(Tools?: JavascriptEditorModeTools,InID?: string): {Tools: JavascriptEditorModeTools};
 	static EndTracking(Tools: JavascriptEditorModeTools,Viewport: JavascriptEdViewport): boolean;
-	static EnsureNotInMode(Tools?: JavascriptEditorModeTools,ModeID?: string,ErrorMsg?: string,bNotifyUser?: boolean): {Tools: JavascriptEditorModeTools, $: boolean};
+	static EnsureNotInMode(Tools?: JavascriptEditorModeTools,ModeId?: string,ErrorMsg?: string,bNotifyUser?: boolean): {Tools: JavascriptEditorModeTools, $: boolean};
 	static IsDefaultModeActive(Tools?: JavascriptEditorModeTools): {Tools: JavascriptEditorModeTools, $: boolean};
 	static IsModeActive(Tools?: JavascriptEditorModeTools,InID?: string): {Tools: JavascriptEditorModeTools, $: boolean};
 	static IsTracking(Tools: JavascriptEditorModeTools): boolean;
@@ -7106,7 +7106,7 @@ declare class JavascriptEdModeLibrary extends BlueprintFunctionLibrary {
 	static GetModeManager(Mode: JavascriptEditorMode): JavascriptEditorModeTools;
 	static GetHitProxy(Viewport: JavascriptEdViewport): JavascriptHitProxy;
 	static GetCurrentWidgetAxis(Mode: JavascriptEditorMode): number;
-	static EnsureNotInMode(Tools?: JavascriptEditorModeTools,ModeID?: string,ErrorMsg?: string,bNotifyUser?: boolean): {Tools: JavascriptEditorModeTools, $: boolean};
+	static EnsureNotInMode(Tools?: JavascriptEditorModeTools,ModeId?: string,ErrorMsg?: string,bNotifyUser?: boolean): {Tools: JavascriptEditorModeTools, $: boolean};
 	static EndTracking(Tools: JavascriptEditorModeTools,Viewport: JavascriptEdViewport): boolean;
 	static DestroyMode(Tools?: JavascriptEditorModeTools,InID?: string): {Tools: JavascriptEditorModeTools};
 	static DeactivateMode(Tools?: JavascriptEditorModeTools,InID?: string): {Tools: JavascriptEditorModeTools};
@@ -7142,7 +7142,7 @@ declare class JavascriptInputEventStateLibrary extends BlueprintFunctionLibrary 
 declare type EJSCheckBoxState = 'Unchecked' | 'Checked' | 'Undetermined' | 'EJSCheckBoxState_MAX';
 declare var EJSCheckBoxState : { Unchecked:'Unchecked',Checked:'Checked',Undetermined:'Undetermined',EJSCheckBoxState_MAX:'EJSCheckBoxState_MAX', };
 declare class JavascriptNotification extends UObject { 
-	Text: string;
+	text: string;
 	bUseImage: boolean;
 	UImage: SlateBrush;
 	FadeInDuration: number;
@@ -7248,9 +7248,9 @@ declare class JavascriptDetailChildrenBuilder {
 
 declare class JavascriptPropertyCustomization extends UObject { 
 	PropertyTypeName: string;
-	OnDestroy: UnrealEngineDelegate<(Id: number) => void>;
-	OnCustomizeHeader: UnrealEngineDelegate<(Handle: JavascriptPropertyHandle, HeaderRow: JavascriptDetailWidgetRow, Utils: JavascriptPropertyTypeCustomizationUtils, Id: number) => void>;
-	OnCustomizeChildren: UnrealEngineDelegate<(Handle: JavascriptPropertyHandle, ChildBuilder: JavascriptDetailChildrenBuilder, Utils: JavascriptPropertyTypeCustomizationUtils, Id: number) => void>;
+	OnDestroy: UnrealEngineDelegate<(ID: number) => void>;
+	OnCustomizeHeader: UnrealEngineDelegate<(Handle: JavascriptPropertyHandle, HeaderRow: JavascriptDetailWidgetRow, Utils: JavascriptPropertyTypeCustomizationUtils, ID: number) => void>;
+	OnCustomizeChildren: UnrealEngineDelegate<(Handle: JavascriptPropertyHandle, ChildBuilder: JavascriptDetailChildrenBuilder, Utils: JavascriptPropertyTypeCustomizationUtils, ID: number) => void>;
 	OnPropertyValueChanged: UnrealEngineMulticastDelegate<() => void>;
 	static Load(ResourceName: string): JavascriptPropertyCustomization;
 	static Find(Outer: UObject, ResourceName: string): JavascriptPropertyCustomization;

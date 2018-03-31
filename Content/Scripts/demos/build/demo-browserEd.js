@@ -116,6 +116,10 @@ module.exports = function broserDesign(E) {
             let treeViewStyle = {
                 'slot.size.size-rule': 'Fill',
                 SelectionMode: 'Multi',
+                Columns: [{
+                    ID: 'Name',
+                    Width: 1.0
+                }],
                 OnGenerateRowEvent: (item, column, widget) => {
                     let name;
                     if (item) {

@@ -2111,7 +2111,7 @@ declare class ComboBoxString extends Widget {
 	RefreshOptions(): void;
 	GetSelectedOption(): string;
 	GetOptionCount(): number;
-	GetOptionAtIndex(Index: number): string;
+	GetOptionAtIndex(index: number): string;
 	FindOptionIndex(Option: string): number;
 	ClearSelection(): void;
 	ClearOptions(): void;
@@ -2141,7 +2141,7 @@ declare class ShapedTextOptions {
 declare type ETextCommit = 'Default' | 'OnEnter' | 'OnUserMovedFocus' | 'OnCleared' | 'ETextCommit_MAX';
 declare var ETextCommit : { Default:'Default',OnEnter:'OnEnter',OnUserMovedFocus:'OnUserMovedFocus',OnCleared:'OnCleared',ETextCommit_MAX:'ETextCommit_MAX', };
 declare class EditableText extends Widget { 
-	Text: string;
+	text: string;
 	TextDelegate: UnrealEngineDelegate<() => string>;
 	HintText: string;
 	HintTextDelegate: UnrealEngineDelegate<() => string>;
@@ -2165,8 +2165,8 @@ declare class EditableText extends Widget {
 	VirtualKeyboardDismissAction: EVirtualKeyboardDismissAction;
 	Justification: ETextJustify;
 	ShapedTextOptions: ShapedTextOptions;
-	OnTextChanged: UnrealEngineMulticastDelegate<(Text: string) => void>;
-	OnTextCommitted: UnrealEngineMulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
+	OnTextChanged: UnrealEngineMulticastDelegate<(text: string) => void>;
+	OnTextCommitted: UnrealEngineMulticastDelegate<(text: string, CommitMethod: ETextCommit) => void>;
 	static Load(ResourceName: string): EditableText;
 	static Find(Outer: UObject, ResourceName: string): EditableText;
 	static GetDefaultObject(): EditableText;
@@ -2180,7 +2180,7 @@ declare class EditableText extends Widget {
 }
 
 declare class EditableTextBox extends Widget { 
-	Text: string;
+	text: string;
 	TextDelegate: UnrealEngineDelegate<() => string>;
 	WidgetStyle: EditableTextBoxStyle;
 	Style: SlateWidgetStyleAsset;
@@ -2204,8 +2204,8 @@ declare class EditableTextBox extends Widget {
 	VirtualKeyboardDismissAction: EVirtualKeyboardDismissAction;
 	Justification: ETextJustify;
 	ShapedTextOptions: ShapedTextOptions;
-	OnTextChanged: UnrealEngineMulticastDelegate<(Text: string) => void>;
-	OnTextCommitted: UnrealEngineMulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
+	OnTextChanged: UnrealEngineMulticastDelegate<(text: string) => void>;
+	OnTextCommitted: UnrealEngineMulticastDelegate<(text: string, CommitMethod: ETextCommit) => void>;
 	static Load(ResourceName: string): EditableTextBox;
 	static Find(Outer: UObject, ResourceName: string): EditableTextBox;
 	static GetDefaultObject(): EditableTextBox;
@@ -2378,7 +2378,7 @@ declare var EMenuPlacement : { MenuPlacement_BelowAnchor:'MenuPlacement_BelowAnc
 declare class MenuAnchor extends ContentWidget { 
 	MenuClass: UnrealEngineClass;
 	OnGetMenuContentEvent: UnrealEngineDelegate<() => Widget>;
-	Placement: EMenuPlacement;
+	PLACEMENT: EMenuPlacement;
 	ShouldDeferPaintingAfterWindowContent: boolean;
 	UseApplicationMenuStack: boolean;
 	OnMenuOpenChanged: UnrealEngineMulticastDelegate<(bIsOpen: boolean) => void>;
@@ -2503,7 +2503,7 @@ declare class TextLayoutWidget extends Widget {
 }
 
 declare class MultiLineEditableText extends TextLayoutWidget { 
-	Text: string;
+	text: string;
 	HintText: string;
 	HintTextDelegate: UnrealEngineDelegate<() => string>;
 	WidgetStyle: TextBlockStyle;
@@ -2515,8 +2515,8 @@ declare class MultiLineEditableText extends TextLayoutWidget {
 	ClearKeyboardFocusOnCommit: boolean;
 	AllowContextMenu: boolean;
 	VirtualKeyboardDismissAction: EVirtualKeyboardDismissAction;
-	OnTextChanged: UnrealEngineMulticastDelegate<(Text: string) => void>;
-	OnTextCommitted: UnrealEngineMulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
+	OnTextChanged: UnrealEngineMulticastDelegate<(text: string) => void>;
+	OnTextCommitted: UnrealEngineMulticastDelegate<(text: string, CommitMethod: ETextCommit) => void>;
 	static Load(ResourceName: string): MultiLineEditableText;
 	static Find(Outer: UObject, ResourceName: string): MultiLineEditableText;
 	static GetDefaultObject(): MultiLineEditableText;
@@ -2528,7 +2528,7 @@ declare class MultiLineEditableText extends TextLayoutWidget {
 }
 
 declare class MultiLineEditableTextBox extends TextLayoutWidget { 
-	Text: string;
+	text: string;
 	HintText: string;
 	HintTextDelegate: UnrealEngineDelegate<() => string>;
 	WidgetStyle: EditableTextBoxStyle;
@@ -2541,8 +2541,8 @@ declare class MultiLineEditableTextBox extends TextLayoutWidget {
 	ForegroundColor: LinearColor;
 	BackgroundColor: LinearColor;
 	ReadOnlyForegroundColor: LinearColor;
-	OnTextChanged: UnrealEngineMulticastDelegate<(Text: string) => void>;
-	OnTextCommitted: UnrealEngineMulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
+	OnTextChanged: UnrealEngineMulticastDelegate<(text: string) => void>;
+	OnTextCommitted: UnrealEngineMulticastDelegate<(text: string, CommitMethod: ETextCommit) => void>;
 	static Load(ResourceName: string): MultiLineEditableTextBox;
 	static Find(Outer: UObject, ResourceName: string): MultiLineEditableTextBox;
 	static GetDefaultObject(): MultiLineEditableTextBox;
@@ -2643,7 +2643,7 @@ declare class RichTextBlockDecorator extends UObject {
 }
 
 declare class RichTextBlock extends TextLayoutWidget { 
-	Text: string;
+	text: string;
 	TextDelegate: UnrealEngineDelegate<() => string>;
 	Font: SlateFontInfo;
 	Color: LinearColor;
@@ -2994,7 +2994,7 @@ declare class TextBinding extends PropertyBinding {
 }
 
 declare class TextBlock extends TextLayoutWidget { 
-	Text: string;
+	text: string;
 	TextDelegate: UnrealEngineDelegate<() => string>;
 	ColorAndOpacity: SlateColor;
 	ColorAndOpacityDelegate: UnrealEngineDelegate<() => SlateColor>;
@@ -3221,8 +3221,8 @@ declare class WidgetBlueprintLibrary extends BlueprintFunctionLibrary {
 	static GetAllWidgetsWithInterface(WorldContextObject: UObject,Interface: UnrealEngineClass,FoundWidgets?: UserWidget[],TopLevelOnly?: boolean): {FoundWidgets: UserWidget[]};
 	static GetAllWidgetsOfClass(WorldContextObject: UObject,FoundWidgets?: UserWidget[],WidgetClass?: UnrealEngineClass,TopLevelOnly?: boolean): {FoundWidgets: UserWidget[]};
 	static EndDragDrop(Reply?: EventReply): {Reply: EventReply, $: EventReply};
-	static DrawTextFormatted(Context?: PaintContext,Text?: string,Position?: Vector2D,Font?: Font,FontSize?: number,FontTypeFace?: string,Tint?: LinearColor): {Context: PaintContext};
-	static DrawText(Context?: PaintContext,InString?: string,Position?: Vector2D,Tint?: LinearColor): {Context: PaintContext};
+	static DrawTextFormatted(Context?: PaintContext,text?: string,Position?: Vector2D,Font?: Font,FontSize?: number,FontTypeFace?: string,Tint?: LinearColor): {Context: PaintContext};
+	static DrawText(Context?: PaintContext,inString?: string,Position?: Vector2D,Tint?: LinearColor): {Context: PaintContext};
 	static DrawLines(Context?: PaintContext,Points?: Vector2D[],Tint?: LinearColor,bAntiAlias?: boolean): {Context: PaintContext};
 	static DrawLine(Context?: PaintContext,PositionA?: Vector2D,PositionB?: Vector2D,Tint?: LinearColor,bAntiAlias?: boolean): {Context: PaintContext};
 	static DrawBox(Context?: PaintContext,Position?: Vector2D,Size?: Vector2D,Brush?: SlateBrushAsset,Tint?: LinearColor): {Context: PaintContext};
@@ -3372,9 +3372,9 @@ declare class WidgetSwitcher extends PanelWidget {
 	static Find(Outer: UObject, ResourceName: string): WidgetSwitcher;
 	static GetDefaultObject(): WidgetSwitcher;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WidgetSwitcher;
-	SetActiveWidgetIndex(Index: number): void;
+	SetActiveWidgetIndex(index: number): void;
 	SetActiveWidget(Widget: Widget): void;
-	GetWidgetAtIndex(Index: number): Widget;
+	GetWidgetAtIndex(index: number): Widget;
 	GetNumWidgets(): number;
 	GetActiveWidgetIndex(): number;
 	GetActiveWidget(): Widget;
@@ -4024,7 +4024,7 @@ declare class MovieSceneComponentMaterialTrack extends MovieSceneMaterialTrack {
 
 declare class ScalarParameterNameAndCurve { 
 	ParameterName: string;
-	Index: number;
+	index: number;
 	ParameterCurve: RichCurve;
 	clone() : ScalarParameterNameAndCurve;
 	static C(Other: UObject | any): ScalarParameterNameAndCurve;
@@ -4032,7 +4032,7 @@ declare class ScalarParameterNameAndCurve {
 
 declare class VectorParameterNameAndCurves { 
 	ParameterName: string;
-	Index: number;
+	index: number;
 	XCurve: RichCurve;
 	YCurve: RichCurve;
 	ZCurve: RichCurve;
@@ -4042,7 +4042,7 @@ declare class VectorParameterNameAndCurves {
 
 declare class ColorParameterNameAndCurves { 
 	ParameterName: string;
-	Index: number;
+	index: number;
 	RedCurve: RichCurve;
 	GreenCurve: RichCurve;
 	BlueCurve: RichCurve;
@@ -5437,7 +5437,7 @@ declare class DataAssetFactory extends Factory {
 }
 
 declare class DataTableFactory extends Factory { 
-	Struct: ScriptStruct;
+	struct: ScriptStruct;
 	static Load(ResourceName: string): DataTableFactory;
 	static Find(Outer: UObject, ResourceName: string): DataTableFactory;
 	static GetDefaultObject(): DataTableFactory;
@@ -6357,7 +6357,7 @@ declare class EditorLevelUtils extends UObject {
 declare type ELoadLevelAtStartup = 'None' | 'ProjectDefault' | 'LastOpened' | 'ELoadLevelAtStartup_MAX';
 declare var ELoadLevelAtStartup : { None:'None',ProjectDefault:'ProjectDefault',LastOpened:'LastOpened',ELoadLevelAtStartup_MAX:'ELoadLevelAtStartup_MAX', };
 declare class AutoReimportWildcard { 
-	Wildcard: string;
+	wildcard: string;
 	bInclude: boolean;
 	clone() : AutoReimportWildcard;
 	static C(Other: UObject | any): AutoReimportWildcard;
@@ -6794,7 +6794,7 @@ declare class FbxImportUI extends UObject {
 declare class FbxTestPlan extends UObject { 
 	TestPlanName: string;
 	Action: EFBXTestPlanActionType;
-	LodIndex: number;
+	LODIndex: number;
 	bDeleteFolderAssets: boolean;
 	ExpectedResult: FbxTestPlanExpectedResult[];
 	ImportUI: FbxImportUI;
@@ -9063,7 +9063,7 @@ declare class StructVariableDescription {
 	bEnableMultiLineText: boolean;
 	bEnable3dWidget: boolean;
 	CurrentDefaultValue: string;
-	ToolTip: string;
+	Tooltip: string;
 	clone() : StructVariableDescription;
 	static C(Other: UObject | any): StructVariableDescription;
 }
@@ -9071,7 +9071,7 @@ declare class StructVariableDescription {
 declare class UserDefinedStructEditorData extends UObject { 
 	UniqueNameId: any;
 	VariablesDescriptions: StructVariableDescription[];
-	ToolTip: string;
+	Tooltip: string;
 	static Load(ResourceName: string): UserDefinedStructEditorData;
 	static Find(Outer: UObject, ResourceName: string): UserDefinedStructEditorData;
 	static GetDefaultObject(): UserDefinedStructEditorData;
@@ -10511,7 +10511,7 @@ declare var EPrimaryAssetCookRule : { Unknown:'Unknown',NeverCook:'NeverCook',De
 declare class PrimaryAssetRules { 
 	Priority: number;
 	bApplyRecursively: boolean;
-	ChunkId: number;
+	ChunkID: number;
 	CookRule: EPrimaryAssetCookRule;
 	clone() : PrimaryAssetRules;
 	static C(Other: UObject | any): PrimaryAssetRules;
@@ -12374,12 +12374,12 @@ declare class ImportanceSamplingLibrary extends BlueprintFunctionLibrary {
 	static Find(Outer: UObject, ResourceName: string): ImportanceSamplingLibrary;
 	static GetDefaultObject(): ImportanceSamplingLibrary;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImportanceSamplingLibrary;
-	static RandomSobolFloat(Index: number,Dimension: number,Seed: number): number;
-	static RandomSobolCell3D(Index: number,NumCells: number,Cell: Vector,Seed: Vector): Vector;
-	static RandomSobolCell2D(Index: number,NumCells: number,Cell: Vector2D,Seed: Vector2D): Vector2D;
-	static NextSobolFloat(Index: number,Dimension: number,PreviousValue: number): number;
-	static NextSobolCell3D(Index: number,NumCells: number,PreviousValue: Vector): Vector;
-	static NextSobolCell2D(Index: number,NumCells: number,PreviousValue: Vector2D): Vector2D;
+	static RandomSobolFloat(index: number,Dimension: number,Seed: number): number;
+	static RandomSobolCell3D(index: number,NumCells: number,Cell: Vector,Seed: Vector): Vector;
+	static RandomSobolCell2D(index: number,NumCells: number,Cell: Vector2D,Seed: Vector2D): Vector2D;
+	static NextSobolFloat(index: number,Dimension: number,PreviousValue: number): number;
+	static NextSobolCell3D(index: number,NumCells: number,PreviousValue: Vector): Vector;
+	static NextSobolCell2D(index: number,NumCells: number,PreviousValue: Vector2D): Vector2D;
 	static MakeImportanceTexture(Texture: Texture2D,WeightingFunc: EImportanceWeight): ImportanceTexture;
 	static ImportanceSample(Texture: ImportanceTexture,Rand: Vector2D,Samples: number,Intensity: number,SamplePosition?: Vector2D,SampleColor?: LinearColor,SampleIntensity?: number,SampleSize?: number): {SamplePosition: Vector2D, SampleColor: LinearColor, SampleIntensity: number, SampleSize: number};
 	static BreakImportanceTexture(ImportanceTexture: ImportanceTexture,Texture?: Texture2D,WeightingFunc?: EImportanceWeight): {Texture: Texture2D, WeightingFunc: EImportanceWeight};
@@ -13269,15 +13269,15 @@ declare class KismetArrayLibrary extends BlueprintFunctionLibrary {
 	static FilterArray(TargetArray: Actor[],FilterClass: UnrealEngineClass,FilteredArray?: Actor[]): {FilteredArray: Actor[]};
 	static Array_Swap(TargetArray: number[],FirstIndex: number,SecondIndex: number): void;
 	static Array_Shuffle(TargetArray: number[]): void;
-	static Array_Set(TargetArray: number[],Index: number,Item: number,bSizeToFit: boolean): void;
+	static Array_Set(TargetArray: number[],index: number,Item: number,bSizeToFit: boolean): void;
 	static Array_Resize(TargetArray: number[],Size: number): void;
 	static Array_RemoveItem(TargetArray: number[],Item: number): boolean;
 	static Array_Remove(TargetArray: number[],IndexToRemove: number): void;
 	static Array_Length(TargetArray: number[]): number;
 	static Array_LastIndex(TargetArray: number[]): number;
 	static Array_IsValidIndex(TargetArray: number[],IndexToTest: number): boolean;
-	static Array_Insert(TargetArray: number[],NewItem: number,Index: number): void;
-	static Array_Get(TargetArray: number[],Index: number,Item?: number): {Item: number};
+	static Array_Insert(TargetArray: number[],NewItem: number,index: number): void;
+	static Array_Get(TargetArray: number[],index: number,Item?: number): {Item: number};
 	static Array_Find(TargetArray: number[],ItemToFind: number): number;
 	static Array_Contains(TargetArray: number[],ItemToFind: number): boolean;
 	static Array_Clear(TargetArray: number[]): void;
@@ -13724,10 +13724,10 @@ declare class KismetMathLibrary extends BlueprintFunctionLibrary {
 	static Conv_LinearColorToVector(InLinearColor: LinearColor): Vector;
 	static Conv_LinearColorToColor(InLinearColor: LinearColor): Color;
 	static Conv_IntVectorToVector(InIntVector: IntVector): Vector;
-	static Conv_IntToIntVector(InInt: number): IntVector;
-	static Conv_IntToFloat(InInt: number): number;
-	static Conv_IntToByte(InInt: number): number;
-	static Conv_IntToBool(InInt: number): boolean;
+	static Conv_IntToIntVector(inInt: number): IntVector;
+	static Conv_IntToFloat(inInt: number): number;
+	static Conv_IntToByte(inInt: number): number;
+	static Conv_IntToBool(inInt: number): boolean;
 	static Conv_FloatToVector(InFloat: number): Vector;
 	static Conv_FloatToLinearColor(InFloat: number): LinearColor;
 	static Conv_ColorToLinearColor(InColor: Color): LinearColor;
@@ -13786,7 +13786,7 @@ declare class KismetNodeHelperLibrary extends BlueprintFunctionLibrary {
 	static Find(Outer: UObject, ResourceName: string): KismetNodeHelperLibrary;
 	static GetDefaultObject(): KismetNodeHelperLibrary;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): KismetNodeHelperLibrary;
-	static MarkBit(Data?: number,Index?: number): {Data: number};
+	static MarkBit(Data?: number,index?: number): {Data: number};
 	static HasUnmarkedBit(Data: number,NumBits: number): boolean;
 	static HasMarkedBit(Data: number,NumBits: number): boolean;
 	static GetValidValue(Enum: Enum,EnumeratorValue: number): number;
@@ -13796,9 +13796,9 @@ declare class KismetNodeHelperLibrary extends BlueprintFunctionLibrary {
 	static GetEnumeratorValueFromIndex(Enum: Enum,EnumeratorIndex: number): number;
 	static GetEnumeratorUserFriendlyName(Enum: Enum,EnumeratorValue: number): string;
 	static GetEnumeratorName(Enum: Enum,EnumeratorValue: number): string;
-	static ClearBit(Data?: number,Index?: number): {Data: number};
+	static ClearBit(Data?: number,index?: number): {Data: number};
 	static ClearAllBits(Data?: number): {Data: number};
-	static BitIsMarked(Data: number,Index: number): boolean;
+	static BitIsMarked(Data: number,index: number): boolean;
 	static C(Other: UObject | any): KismetNodeHelperLibrary;
 }
 
@@ -13810,8 +13810,8 @@ declare class KismetRenderingLibrary extends BlueprintFunctionLibrary {
 	static RenderTargetCreateStaticTexture2DEditorOnly(RenderTarget: TextureRenderTarget2D,Name: string,CompressionSettings: TextureCompressionSettings,MipSettings: TextureMipGenSettings): Texture2D;
 	static ReleaseRenderTarget2D(TextureRenderTarget: TextureRenderTarget2D): void;
 	static MakeSkinWeightInfo(Bone0: number,Weight0: number,Bone1: number,Weight1: number,Bone2: number,Weight2: number,Bone3: number,Weight3: number): SkelMeshSkinWeightInfo;
-	static ExportTexture2D(WorldContextObject: UObject,Texture: Texture2D,FilePath: string,FileName: string): void;
-	static ExportRenderTarget(WorldContextObject: UObject,TextureRenderTarget: TextureRenderTarget2D,FilePath: string,FileName: string): void;
+	static ExportTexture2D(WorldContextObject: UObject,Texture: Texture2D,FilePath: string,Filename: string): void;
+	static ExportRenderTarget(WorldContextObject: UObject,TextureRenderTarget: TextureRenderTarget2D,FilePath: string,Filename: string): void;
 	static EndDrawCanvasToRenderTarget(WorldContextObject: UObject,Context: DrawToRenderTargetContext): void;
 	static DrawMaterialToRenderTarget(WorldContextObject: UObject,TextureRenderTarget: TextureRenderTarget2D,Material: MaterialInterface): void;
 	static CreateRenderTarget2D(WorldContextObject: UObject,Width: number,Height: number,Format: ETextureRenderTargetFormat): TextureRenderTarget2D;
@@ -13848,7 +13848,7 @@ declare class KismetStringLibrary extends BlueprintFunctionLibrary {
 	static NotEqual_StrStr(A: string,B: string): boolean;
 	static NotEqual_StriStri(A: string,B: string): boolean;
 	static Mid(SourceString: string,Start: number,Count: number): string;
-	static MatchesWildcard(SourceString: string,Wildcard: string,SearchCase: ESearchCase): boolean;
+	static MatchesWildcard(SourceString: string,wildcard: string,SearchCase: ESearchCase): boolean;
 	static Len(S: string): number;
 	static LeftPad(SourceString: string,ChCount: number): string;
 	static LeftChop(SourceString: string,Count: number): string;
@@ -13856,41 +13856,41 @@ declare class KismetStringLibrary extends BlueprintFunctionLibrary {
 	static JoinStringArray(SourceArray: string[],Separator: string): string;
 	static IsNumeric(SourceString: string): boolean;
 	static GetSubstring(SourceString: string,StartIndex: number,Length: number): string;
-	static GetCharacterAsNumber(SourceString: string,Index: number): number;
+	static GetCharacterAsNumber(SourceString: string,index: number): number;
 	static GetCharacterArrayFromString(SourceString: string): string[];
 	static FindSubstring(SearchIn: string,Substring: string,bUseCase: boolean,bSearchFromEnd: boolean,StartPosition: number): number;
 	static EqualEqual_StrStr(A: string,B: string): boolean;
 	static EqualEqual_StriStri(A: string,B: string): boolean;
 	static EndsWith(SourceString: string,InSuffix: string,SearchCase: ESearchCase): boolean;
-	static CullArray(SourceString: string,InArray?: string[]): {InArray: string[], $: number};
+	static CullArray(SourceString: string,inArray?: string[]): {inArray: string[], $: number};
 	static Conv_VectorToString(InVec: Vector): string;
 	static Conv_Vector2dToString(InVec: Vector2D): string;
 	static Conv_TransformToString(InTrans: Transform): string;
-	static Conv_StringToVector2D(InString: string,OutConvertedVector2D?: Vector2D,OutIsValid?: boolean): {OutConvertedVector2D: Vector2D, OutIsValid: boolean};
-	static Conv_StringToVector(InString: string,OutConvertedVector?: Vector,OutIsValid?: boolean): {OutConvertedVector: Vector, OutIsValid: boolean};
-	static Conv_StringToRotator(InString: string,OutConvertedRotator?: Rotator,OutIsValid?: boolean): {OutConvertedRotator: Rotator, OutIsValid: boolean};
-	static Conv_StringToName(InString: string): string;
-	static Conv_StringToInt(InString: string): number;
-	static Conv_StringToFloat(InString: string): number;
-	static Conv_StringToColor(InString: string,OutConvertedColor?: LinearColor,OutIsValid?: boolean): {OutConvertedColor: LinearColor, OutIsValid: boolean};
+	static Conv_StringToVector2D(inString: string,OutConvertedVector2D?: Vector2D,OutIsValid?: boolean): {OutConvertedVector2D: Vector2D, OutIsValid: boolean};
+	static Conv_StringToVector(inString: string,OutConvertedVector?: Vector,OutIsValid?: boolean): {OutConvertedVector: Vector, OutIsValid: boolean};
+	static Conv_StringToRotator(inString: string,OutConvertedRotator?: Rotator,OutIsValid?: boolean): {OutConvertedRotator: Rotator, OutIsValid: boolean};
+	static Conv_StringToName(inString: string): string;
+	static Conv_StringToInt(inString: string): number;
+	static Conv_StringToFloat(inString: string): number;
+	static Conv_StringToColor(inString: string,OutConvertedColor?: LinearColor,OutIsValid?: boolean): {OutConvertedColor: LinearColor, OutIsValid: boolean};
 	static Conv_RotatorToString(InRot: Rotator): string;
 	static Conv_ObjectToString(InObj: UObject): string;
 	static Conv_NameToString(InName: string): string;
 	static Conv_IntVectorToString(InIntVec: IntVector): string;
-	static Conv_IntToString(InInt: number): string;
+	static Conv_IntToString(inInt: number): string;
 	static Conv_FloatToString(InFloat: number): string;
 	static Conv_ColorToString(InColor: LinearColor): string;
 	static Conv_ByteToString(InByte: number): string;
 	static Conv_BoolToString(InBool: boolean): string;
 	static Contains(SearchIn: string,Substring: string,bUseCase: boolean,bSearchFromEnd: boolean): boolean;
 	static Concat_StrStr(A: string,B: string): string;
-	static BuildString_Vector2d(AppendTo: string,Prefix: string,InVector2d: Vector2D,Suffix: string): string;
+	static BuildString_Vector2d(AppendTo: string,Prefix: string,InVector2D: Vector2D,Suffix: string): string;
 	static BuildString_Vector(AppendTo: string,Prefix: string,InVector: Vector,Suffix: string): string;
 	static BuildString_Rotator(AppendTo: string,Prefix: string,InRot: Rotator,Suffix: string): string;
 	static BuildString_Object(AppendTo: string,Prefix: string,InObj: UObject,Suffix: string): string;
 	static BuildString_Name(AppendTo: string,Prefix: string,InName: string,Suffix: string): string;
 	static BuildString_IntVector(AppendTo: string,Prefix: string,InIntVector: IntVector,Suffix: string): string;
-	static BuildString_Int(AppendTo: string,Prefix: string,InInt: number,Suffix: string): string;
+	static BuildString_Int(AppendTo: string,Prefix: string,inInt: number,Suffix: string): string;
 	static BuildString_Float(AppendTo: string,Prefix: string,InFloat: number,Suffix: string): string;
 	static BuildString_Color(AppendTo: string,Prefix: string,InColor: LinearColor,Suffix: string): string;
 	static BuildString_Bool(AppendTo: string,Prefix: string,InBool: boolean,Suffix: string): string;
@@ -13968,9 +13968,9 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static ResetGamepadAssignments(): void;
 	static RegisterForRemoteNotifications(): void;
 	static QuitGame(WorldContextObject: UObject,SpecificPlayer: PlayerController,QuitPreference: EQuitPreference): void;
-	static PrintWarning(InString: string): void;
+	static PrintWarning(inString: string): void;
 	static PrintText(WorldContextObject: UObject,InText: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
-	static PrintString(WorldContextObject: UObject,InString: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
+	static PrintString(WorldContextObject: UObject,inString: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
 	static NotEqual_SoftObjectReference(A: any,B: any): boolean;
 	static NotEqual_SoftClassReference(A: any,B: any): boolean;
 	static NotEqual_PrimaryAssetType(A: PrimaryAssetType,B: PrimaryAssetType): boolean;
@@ -14079,7 +14079,7 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static EqualEqual_SoftClassReference(A: any,B: any): boolean;
 	static EqualEqual_PrimaryAssetType(A: PrimaryAssetType,B: PrimaryAssetType): boolean;
 	static EqualEqual_PrimaryAssetId(A: PrimaryAssetId,B: PrimaryAssetId): boolean;
-	static DrawDebugString(WorldContextObject: UObject,TextLocation: Vector,Text: string,TestBaseActor: Actor,TextColor: LinearColor,Duration: number): void;
+	static DrawDebugString(WorldContextObject: UObject,TextLocation: Vector,text: string,TestBaseActor: Actor,TextColor: LinearColor,Duration: number): void;
 	static DrawDebugSphere(WorldContextObject: UObject,Center: Vector,Radius: number,Segments: number,LineColor: LinearColor,Duration: number,Thickness: number): void;
 	static DrawDebugPoint(WorldContextObject: UObject,Position: Vector,Size: number,PointColor: LinearColor,Duration: number): void;
 	static DrawDebugPlane(WorldContextObject: UObject,PlaneCoordinates: Plane,Location: Vector,Size: number,PlaneColor: LinearColor,Duration: number): void;
@@ -14100,9 +14100,9 @@ declare class KismetSystemLibrary extends BlueprintFunctionLibrary {
 	static Delay(WorldContextObject: UObject,Duration: number,LatentInfo: LatentActionInfo): void;
 	static CreateCopyForUndoBuffer(ObjectToModify: UObject): void;
 	static Conv_SoftObjectReferenceToString(SoftObjectReference: any): string;
-	static Conv_SoftObjectReferenceToObject(SoftObject: any): UObject;
+	static Conv_SoftObjectReferenceToObject(softobject: any): UObject;
 	static Conv_SoftClassReferenceToString(SoftClassReference: any): string;
-	static Conv_SoftClassReferenceToClass(SoftClass: any): UnrealEngineClass;
+	static Conv_SoftClassReferenceToClass(softclass: any): UnrealEngineClass;
 	static Conv_PrimaryAssetTypeToString(PrimaryAssetType: PrimaryAssetType): string;
 	static Conv_PrimaryAssetIdToString(PrimaryAssetId: PrimaryAssetId): string;
 	static Conv_ObjectToSoftObjectReference(UObject: UObject): any;
@@ -14161,11 +14161,11 @@ declare class KismetTextLibrary extends BlueprintFunctionLibrary {
 	static TextToUpper(InText: string): string;
 	static TextToLower(InText: string): string;
 	static TextIsTransient(InText: string): boolean;
-	static TextIsFromStringTable(Text: string): boolean;
+	static TextIsFromStringTable(text: string): boolean;
 	static TextIsEmpty(InText: string): boolean;
 	static TextIsCultureInvariant(InText: string): boolean;
 	static TextFromStringTable(TableId: string,Key: string): string;
-	static StringTableIdAndKeyFromText(Text: string,OutTableId?: string,OutKey?: string): {OutTableId: string, OutKey: string, $: boolean};
+	static StringTableIdAndKeyFromText(text: string,OutTableId?: string,OutKey?: string): {OutTableId: string, OutKey: string, $: boolean};
 	static NotEqual_TextText(A: string,B: string): boolean;
 	static NotEqual_IgnoreCase_TextText(A: string,B: string): boolean;
 	static GetEmptyText(): string;
@@ -14177,7 +14177,7 @@ declare class KismetTextLibrary extends BlueprintFunctionLibrary {
 	static Conv_Vector2dToText(InVec: Vector2D): string;
 	static Conv_TransformToText(InTrans: Transform): string;
 	static Conv_TextToString(InText: string): string;
-	static Conv_StringToText(InString: string): string;
+	static Conv_StringToText(inString: string): string;
 	static Conv_RotatorToText(InRot: Rotator): string;
 	static Conv_ObjectToText(InObj: UObject): string;
 	static Conv_NameToText(InName: string): string;
@@ -15013,7 +15013,7 @@ declare class MaterialExpressionFunctionInput extends MaterialExpression {
 	Preview: ExpressionInput;
 	InputName: string;
 	Description: string;
-	Id: Guid;
+	ID: Guid;
 	InputType: EFunctionInputType;
 	PreviewValue: Vector4;
 	bUsePreviewValueAsDefault: boolean;
@@ -15032,7 +15032,7 @@ declare class MaterialExpressionFunctionOutput extends MaterialExpression {
 	SortPriority: number;
 	A: ExpressionInput;
 	bLastPreviewed: boolean;
-	Id: Guid;
+	ID: Guid;
 	static Load(ResourceName: string): MaterialExpressionFunctionOutput;
 	static Find(Outer: UObject, ResourceName: string): MaterialExpressionFunctionOutput;
 	static GetDefaultObject(): MaterialExpressionFunctionOutput;
@@ -15683,7 +15683,7 @@ declare class MaterialExpressionSine extends MaterialExpression {
 
 declare class MaterialExpressionSobol extends MaterialExpression { 
 	Cell: ExpressionInput;
-	Index: ExpressionInput;
+	index: ExpressionInput;
 	Seed: ExpressionInput;
 	ConstIndex: any;
 	ConstSeed: Vector2D;
@@ -15835,7 +15835,7 @@ declare class MaterialExpressionTangentOutput extends MaterialExpressionCustomOu
 }
 
 declare class MaterialExpressionTemporalSobol extends MaterialExpression { 
-	Index: ExpressionInput;
+	index: ExpressionInput;
 	Seed: ExpressionInput;
 	ConstIndex: any;
 	ConstSeed: Vector2D;
@@ -16559,7 +16559,7 @@ declare class NodeMappingProviderInterface extends Interface {
 }
 
 declare class Note extends Actor { 
-	Text: string;
+	text: string;
 	SpriteComponent: BillboardComponent;
 	ArrowComponent: ArrowComponent;
 	static GetDefaultObject(): Note;
@@ -17064,7 +17064,7 @@ declare class ParticleModuleLifetimeBase extends ParticleModule {
 }
 
 declare class ParticleModuleLifetime extends ParticleModuleLifetimeBase { 
-	Lifetime: RawDistributionFloat;
+	LifeTime: RawDistributionFloat;
 	static Load(ResourceName: string): ParticleModuleLifetime;
 	static Find(Outer: UObject, ResourceName: string): ParticleModuleLifetime;
 	static GetDefaultObject(): ParticleModuleLifetime;
@@ -19392,7 +19392,7 @@ declare var EHorizTextAligment : { EHTA_Left:'EHTA_Left',EHTA_Center:'EHTA_Cente
 declare type EVerticalTextAligment = 'EVRTA_TextTop' | 'EVRTA_TextCenter' | 'EVRTA_TextBottom' | 'EVRTA_QuadTop' | 'EVRTA_MAX';
 declare var EVerticalTextAligment : { EVRTA_TextTop:'EVRTA_TextTop',EVRTA_TextCenter:'EVRTA_TextCenter',EVRTA_TextBottom:'EVRTA_TextBottom',EVRTA_QuadTop:'EVRTA_QuadTop',EVRTA_MAX:'EVRTA_MAX', };
 declare class TextRenderComponent extends PrimitiveComponent { 
-	Text: string;
+	text: string;
 	TextMaterial: MaterialInterface;
 	Font: Font;
 	HorizontalAlignment: EHorizTextAligment;
@@ -19694,10 +19694,10 @@ declare class VisualLoggerKismetLibrary extends BlueprintFunctionLibrary {
 	static GetDefaultObject(): VisualLoggerKismetLibrary;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VisualLoggerKismetLibrary;
 	static RedirectVislog(SourceOwner: UObject,DestinationOwner: UObject): void;
-	static LogText(WorldContextObject: UObject,Text: string,LogCategory: string,bAddToMessageLog: boolean): void;
-	static LogSegment(WorldContextObject: UObject,SegmentStart: Vector,SegmentEnd: Vector,Text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
-	static LogLocation(WorldContextObject: UObject,Location: Vector,Text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
-	static LogBox(WorldContextObject: UObject,BoxShape: Box,Text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
+	static LogText(WorldContextObject: UObject,text: string,LogCategory: string,bAddToMessageLog: boolean): void;
+	static LogSegment(WorldContextObject: UObject,SegmentStart: Vector,SegmentEnd: Vector,text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
+	static LogLocation(WorldContextObject: UObject,Location: Vector,text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
+	static LogBox(WorldContextObject: UObject,BoxShape: Box,text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
 	static EnableRecording(bEnabled: boolean): void;
 	static C(Other: UObject | any): VisualLoggerKismetLibrary;
 }
@@ -19856,18 +19856,6 @@ declare class MacTargetSettings extends UObject {
 	static GetDefaultObject(): MacTargetSettings;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MacTargetSettings;
 	static C(Other: UObject | any): MacTargetSettings;
-}
-
-declare class LinuxTargetSettings extends UObject { 
-	SpatializationPlugin: string;
-	ReverbPlugin: string;
-	OcclusionPlugin: string;
-	TargetedRHIs: string[];
-	static Load(ResourceName: string): LinuxTargetSettings;
-	static Find(Outer: UObject, ResourceName: string): LinuxTargetSettings;
-	static GetDefaultObject(): LinuxTargetSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LinuxTargetSettings;
-	static C(Other: UObject | any): LinuxTargetSettings;
 }
 
 declare class DialogueVoiceFactory extends Factory { 

@@ -72,7 +72,7 @@ function new_commands(opts) {
     let commands = create_commands(ctx,{ 
         Commands : _.map(opts.commands,(v,k) => (
             {
-                Id: k,
+                ID: k,
                 FriendlyName: v.friendlyName,
                 Description: v.description,
                 ActionType: v.actionType,

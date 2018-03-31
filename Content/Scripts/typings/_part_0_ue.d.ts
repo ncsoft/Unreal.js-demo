@@ -422,8 +422,8 @@ declare class Vector2D {
 	static SetSpectatorScreenModeTexturePlusEyeLayout(EyeRectMin: Vector2D,EyeRectMax: Vector2D,TextureRectMin: Vector2D,TextureRectMax: Vector2D,bDrawEyeFirst: boolean,bClearBlack: boolean): void;
 	static GenerateDynamicImageResource(InDynamicBrushName: string): Vector2D;
 	static MakeVector2D(X: number,Y: number): Vector2D;
-	static NextSobolCell2D(Index: number,NumCells: number,PreviousValue: Vector2D): Vector2D;
-	static RandomSobolCell2D(Index: number,NumCells: number,Cell: Vector2D,Seed: Vector2D): Vector2D;
+	static NextSobolCell2D(index: number,NumCells: number,PreviousValue: Vector2D): Vector2D;
+	static RandomSobolCell2D(index: number,NumCells: number,Cell: Vector2D,Seed: Vector2D): Vector2D;
 	static GetMousePositionOnPlatform(): Vector2D;
 }
 
@@ -444,7 +444,7 @@ declare class IntVector {
 	Conv_IntVectorToVector(): Vector;
 	static Conv_IntVectorToString(InIntVec: IntVector): string;
 	static Conv_IntVectorToVector(InIntVector: IntVector): Vector;
-	static Conv_IntToIntVector(InInt: number): IntVector;
+	static Conv_IntToIntVector(inInt: number): IntVector;
 }
 
 declare class Plane extends Vector { 
@@ -564,7 +564,7 @@ declare class Vector {
 	IsValidAIDirection(): boolean;
 	IsValidAILocation(): boolean;
 	GetPositionalTrackingCameraParameters(CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
-	GetTrackingSensorParameters(Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,Index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
+	GetTrackingSensorParameters(Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
 	static SegmentIntersection2D(SegmentStartA: Vector,SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
 	static GetRawSensorData(AngularAcceleration?: Vector,LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
 	static SetPositionScale3D(PosScale3D: Vector): void;
@@ -655,14 +655,14 @@ declare class Vector {
 	static IsValidAIDirection(DirectionVector: Vector): boolean;
 	static IsValidAILocation(Location: Vector): boolean;
 	static GetPositionalTrackingCameraParameters(CameraOrigin?: Vector,CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
-	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,Index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
+	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
 	static Conv_FloatToVector(InFloat: number): Vector;
 	static CreateVectorFromYawPitch(Yaw: number,Pitch: number,Length: number): Vector;
 	static GetVectorArrayAverage(Vectors: Vector[]): Vector;
 	static MakeVector(X: number,Y: number,Z: number): Vector;
 	static RandomUnitVector(): Vector;
-	static NextSobolCell3D(Index: number,NumCells: number,PreviousValue: Vector): Vector;
-	static RandomSobolCell3D(Index: number,NumCells: number,Cell: Vector,Seed: Vector): Vector;
+	static NextSobolCell3D(index: number,NumCells: number,PreviousValue: Vector): Vector;
+	static RandomSobolCell3D(index: number,NumCells: number,Cell: Vector,Seed: Vector): Vector;
 	static GetActorArrayAverageLocation(Actors: Actor[]): Vector;
 }
 
@@ -1307,7 +1307,7 @@ declare class MaterialFunctionInterface extends UObject {
 declare class MaterialExpressionComment extends MaterialExpression { 
 	SizeX: number;
 	SizeY: number;
-	Text: string;
+	text: string;
 	CommentColor: LinearColor;
 	FontSize: number;
 	static Load(ResourceName: string): MaterialExpressionComment;
@@ -1345,7 +1345,7 @@ declare class MaterialFunction extends MaterialFunctionInterface {
 
 declare class ExpressionOutput { 
 	OutputName: string;
-	Mask: number;
+	mask: number;
 	MaskR: number;
 	MaskG: number;
 	MaskB: number;
@@ -1392,7 +1392,7 @@ declare class MaterialInput {
 	Expression: MaterialExpression;
 	OutputIndex: number;
 	InputName: string;
-	Mask: number;
+	mask: number;
 	MaskR: number;
 	MaskG: number;
 	MaskB: number;
@@ -1445,7 +1445,7 @@ declare class ExpressionInput {
 	Expression: MaterialExpression;
 	OutputIndex: number;
 	InputName: string;
-	Mask: number;
+	mask: number;
 	MaskR: number;
 	MaskG: number;
 	MaskB: number;
@@ -1481,7 +1481,7 @@ declare class MaterialFunctionInfo {
 
 declare class CollectionParameterBase { 
 	ParameterName: string;
-	Id: Guid;
+	ID: Guid;
 	clone() : CollectionParameterBase;
 	static C(Other: UObject | any): CollectionParameterBase;
 }
@@ -1523,7 +1523,7 @@ declare var ERefractionMode : { RM_IndexOfRefraction:'RM_IndexOfRefraction',RM_P
 declare type ETextureSourceFormat = 'TSF_Invalid' | 'TSF_G8' | 'TSF_BGRA8' | 'TSF_BGRE8' | 'TSF_RGBA16' | 'TSF_RGBA16F' | 'TSF_RGBA8' | 'TSF_RGBE8' | 'TSF_MAX';
 declare var ETextureSourceFormat : { TSF_Invalid:'TSF_Invalid',TSF_G8:'TSF_G8',TSF_BGRA8:'TSF_BGRA8',TSF_BGRE8:'TSF_BGRE8',TSF_RGBA16:'TSF_RGBA16',TSF_RGBA16F:'TSF_RGBA16F',TSF_RGBA8:'TSF_RGBA8',TSF_RGBE8:'TSF_RGBE8',TSF_MAX:'TSF_MAX', };
 declare class TextureSource { 
-	Id: Guid;
+	ID: Guid;
 	SizeX: number;
 	SizeY: number;
 	NumSlices: number;
@@ -1752,7 +1752,7 @@ declare var EMaterialParameterAssociation : { LayerParameter:'LayerParameter',Bl
 declare class MaterialParameterInfo { 
 	Name: string;
 	Association: EMaterialParameterAssociation;
-	Index: number;
+	index: number;
 	clone() : MaterialParameterInfo;
 	static C(Other: UObject | any): MaterialParameterInfo;
 }
@@ -4200,7 +4200,7 @@ declare class SkeletalMesh extends UObject {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkeletalMesh;
 	NumSockets(): number;
 	IsSectionUsingCloth(InSectionIndex: number,bCheckCorrespondingSections: boolean): boolean;
-	GetSocketByIndex(Index: number): SkeletalMeshSocket;
+	GetSocketByIndex(index: number): SkeletalMeshSocket;
 	GetNodeMappingContainer(SourceAsset: Blueprint): NodeMappingContainer;
 	GetImportedBounds(): BoxSphereBounds;
 	GetBounds(): BoxSphereBounds;
@@ -5111,12 +5111,12 @@ declare class Character extends Pawn {
 	StopAnimMontage(AnimMontage: AnimMontage): void;
 	SetReplicateMovement(bInReplicateMovement: boolean): void;
 	ServerMoveOld(OldTimeStamp: number,OldAccel: Vector_NetQuantize10,OldMoveFlags: number): void;
-	ServerMoveNoBase(TimeStamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
-	ServerMoveDualNoBase(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,TimeStamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
-	ServerMoveDualHybridRootMotion(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,TimeStamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
-	ServerMoveDual(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,TimeStamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
-	ServerMove(TimeStamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
-	RootMotionDebugClientPrintOnScreen(InString: string): void;
+	ServerMoveNoBase(Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
+	ServerMoveDualNoBase(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
+	ServerMoveDualHybridRootMotion(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
+	ServerMoveDual(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
+	ServerMove(Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
+	RootMotionDebugClientPrintOnScreen(inString: string): void;
 	PlayAnimMontage(AnimMontage: AnimMontage,InPlayRate: number,StartSectionName: string): number;
 	OnWalkingOffLedge(PreviousFloorImpactNormal: Vector,PreviousFloorContactNormal: Vector,PreviousLocation: Vector,TimeDelta: number): void;
 	OnRep_RootMotion(): void;
@@ -5139,14 +5139,14 @@ declare class Character extends Pawn {
 	GetBaseRotationOffsetRotator(): Rotator;
 	GetAnimRootMotionTranslationScale(): number;
 	Crouch(bClientSimulation: boolean): void;
-	ClientVeryShortAdjustPosition(TimeStamp: number,NewLoc: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientVeryShortAdjustPosition(Timestamp: number,NewLoc: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
 	ClientCheatWalk(): void;
 	ClientCheatGhost(): void;
 	ClientCheatFly(): void;
-	ClientAdjustRootMotionSourcePosition(TimeStamp: number,ServerRootMotion: RootMotionSourceGroup,bHasAnimRootMotion: boolean,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
-	ClientAdjustRootMotionPosition(TimeStamp: number,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
-	ClientAdjustPosition(TimeStamp: number,NewLoc: Vector,NewVel: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
-	ClientAckGoodMove(TimeStamp: number): void;
+	ClientAdjustRootMotionSourcePosition(Timestamp: number,ServerRootMotion: RootMotionSourceGroup,bHasAnimRootMotion: boolean,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientAdjustRootMotionPosition(Timestamp: number,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientAdjustPosition(Timestamp: number,NewLoc: Vector,NewVel: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientAckGoodMove(Timestamp: number): void;
 	CanJumpInternal(): boolean;
 	CanJump(): boolean;
 	CacheInitialMeshOffset(MeshRelativeLocation: Vector,MeshRelativeRotation: Rotator): void;
@@ -5298,13 +5298,13 @@ declare class HUD extends Actor {
 	Project(Location: Vector): Vector;
 	PreviousDebugTarget(): void;
 	NextDebugTarget(): void;
-	GetTextSize(Text: string,OutWidth?: number,OutHeight?: number,Font?: Font,Scale?: number): {OutWidth: number, OutHeight: number};
+	GetTextSize(text: string,OutWidth?: number,OutHeight?: number,Font?: Font,Scale?: number): {OutWidth: number, OutHeight: number};
 	GetOwningPlayerController(): PlayerController;
 	GetOwningPawn(): Pawn;
 	GetActorsInSelectionRectangle(ClassFilter: UnrealEngineClass,FirstPoint: Vector2D,SecondPoint: Vector2D,OutActors?: Actor[],bIncludeNonCollidingComponents?: boolean,bActorMustBeFullyEnclosed?: boolean): {OutActors: Actor[]};
 	DrawTextureSimple(Texture: Texture,ScreenX: number,ScreenY: number,Scale: number,bScalePosition: boolean): void;
 	DrawTexture(Texture: Texture,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,TextureU: number,TextureV: number,TextureUWidth: number,TextureVHeight: number,TintColor: LinearColor,BlendMode: EBlendMode,Scale: number,bScalePosition: boolean,Rotation: number,RotPivot: Vector2D): void;
-	DrawText(Text: string,TextColor: LinearColor,ScreenX: number,ScreenY: number,Font: Font,Scale: number,bScalePosition: boolean): void;
+	DrawText(text: string,TextColor: LinearColor,ScreenX: number,ScreenY: number,Font: Font,Scale: number,bScalePosition: boolean): void;
 	DrawRect(RectColor: LinearColor,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number): void;
 	DrawMaterialTriangle(Material: MaterialInterface,V0_Pos: Vector2D,V1_Pos: Vector2D,V2_Pos: Vector2D,V0_UV: Vector2D,V1_UV: Vector2D,V2_UV: Vector2D,V0_Color: LinearColor,V1_Color: LinearColor,V2_Color: LinearColor): void;
 	DrawMaterialSimple(Material: MaterialInterface,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,Scale: number,bScalePosition: boolean): void;
@@ -5685,7 +5685,7 @@ declare class MinimalViewInfo {
 }
 
 declare class CameraCacheEntry { 
-	TimeStamp: number;
+	Timestamp: number;
 	POV: MinimalViewInfo;
 	clone() : CameraCacheEntry;
 	static C(Other: UObject | any): CameraCacheEntry;
@@ -7396,7 +7396,7 @@ declare class StaticMeshComponent extends MeshComponent {
 	DistanceFieldSelfShadowBias: number;
 	StreamingDistanceMultiplier: number;
 	IrrelevantLights: Guid[];
-	LODData: StaticMeshComponentLODInfo[];
+	LodData: StaticMeshComponentLODInfo[];
 	StreamingTextureData: StreamingTextureBuildInfo[];
 	StaticMeshDerivedDataKey: string;
 	MaterialStreamingRelativeBoxes: any[];
@@ -7462,13 +7462,13 @@ declare class PanelWidget extends Widget {
 	static Find(Outer: UObject, ResourceName: string): PanelWidget;
 	static GetDefaultObject(): PanelWidget;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PanelWidget;
-	RemoveChildAt(Index: number): boolean;
+	RemoveChildAt(index: number): boolean;
 	RemoveChild(Content: Widget): boolean;
 	HasChild(Content: Widget): boolean;
 	HasAnyChildren(): boolean;
 	GetChildrenCount(): number;
 	GetChildIndex(Content: Widget): number;
-	GetChildAt(Index: number): Widget;
+	GetChildAt(index: number): Widget;
 	ClearChildren(): void;
 	AddChild(Content: Widget): PanelSlot;
 	static C(Other: UObject | any): PanelWidget;
@@ -7527,7 +7527,7 @@ declare class WidgetNavigation extends UObject {
 declare class PropertyPathSegment { 
 	Name: string;
 	ArrayIndex: number;
-	Struct: Struct;
+	struct: Struct;
 	Field: Field;
 	clone() : PropertyPathSegment;
 	static C(Other: UObject | any): PropertyPathSegment;
@@ -8503,7 +8503,7 @@ declare class SoundEffectSourcePresetChain extends UObject {
 declare type ESoundGroup = 'SOUNDGROUP_Default' | 'SOUNDGROUP_Effects' | 'SOUNDGROUP_UI' | 'SOUNDGROUP_Music' | 'SOUNDGROUP_Voice' | 'SOUNDGROUP_GameSoundGroup1' | 'SOUNDGROUP_GameSoundGroup2' | 'SOUNDGROUP_GameSoundGroup3' | 'SOUNDGROUP_GameSoundGroup4' | 'SOUNDGROUP_GameSoundGroup5' | 'SOUNDGROUP_GameSoundGroup6' | 'SOUNDGROUP_GameSoundGroup7' | 'SOUNDGROUP_GameSoundGroup8' | 'SOUNDGROUP_GameSoundGroup9' | 'SOUNDGROUP_GameSoundGroup10' | 'SOUNDGROUP_GameSoundGroup11' | 'SOUNDGROUP_GameSoundGroup12' | 'SOUNDGROUP_GameSoundGroup13' | 'SOUNDGROUP_GameSoundGroup14' | 'SOUNDGROUP_GameSoundGroup15' | 'SOUNDGROUP_GameSoundGroup16' | 'SOUNDGROUP_GameSoundGroup17' | 'SOUNDGROUP_GameSoundGroup18' | 'SOUNDGROUP_GameSoundGroup19' | 'SOUNDGROUP_GameSoundGroup20' | 'SOUNDGROUP_MAX';
 declare var ESoundGroup : { SOUNDGROUP_Default:'SOUNDGROUP_Default',SOUNDGROUP_Effects:'SOUNDGROUP_Effects',SOUNDGROUP_UI:'SOUNDGROUP_UI',SOUNDGROUP_Music:'SOUNDGROUP_Music',SOUNDGROUP_Voice:'SOUNDGROUP_Voice',SOUNDGROUP_GameSoundGroup1:'SOUNDGROUP_GameSoundGroup1',SOUNDGROUP_GameSoundGroup2:'SOUNDGROUP_GameSoundGroup2',SOUNDGROUP_GameSoundGroup3:'SOUNDGROUP_GameSoundGroup3',SOUNDGROUP_GameSoundGroup4:'SOUNDGROUP_GameSoundGroup4',SOUNDGROUP_GameSoundGroup5:'SOUNDGROUP_GameSoundGroup5',SOUNDGROUP_GameSoundGroup6:'SOUNDGROUP_GameSoundGroup6',SOUNDGROUP_GameSoundGroup7:'SOUNDGROUP_GameSoundGroup7',SOUNDGROUP_GameSoundGroup8:'SOUNDGROUP_GameSoundGroup8',SOUNDGROUP_GameSoundGroup9:'SOUNDGROUP_GameSoundGroup9',SOUNDGROUP_GameSoundGroup10:'SOUNDGROUP_GameSoundGroup10',SOUNDGROUP_GameSoundGroup11:'SOUNDGROUP_GameSoundGroup11',SOUNDGROUP_GameSoundGroup12:'SOUNDGROUP_GameSoundGroup12',SOUNDGROUP_GameSoundGroup13:'SOUNDGROUP_GameSoundGroup13',SOUNDGROUP_GameSoundGroup14:'SOUNDGROUP_GameSoundGroup14',SOUNDGROUP_GameSoundGroup15:'SOUNDGROUP_GameSoundGroup15',SOUNDGROUP_GameSoundGroup16:'SOUNDGROUP_GameSoundGroup16',SOUNDGROUP_GameSoundGroup17:'SOUNDGROUP_GameSoundGroup17',SOUNDGROUP_GameSoundGroup18:'SOUNDGROUP_GameSoundGroup18',SOUNDGROUP_GameSoundGroup19:'SOUNDGROUP_GameSoundGroup19',SOUNDGROUP_GameSoundGroup20:'SOUNDGROUP_GameSoundGroup20',SOUNDGROUP_MAX:'SOUNDGROUP_MAX', };
 declare class SubtitleCue { 
-	Text: string;
+	text: string;
 	Time: number;
 	clone() : SubtitleCue;
 	static C(Other: UObject | any): SubtitleCue;
@@ -8654,7 +8654,7 @@ declare class AudioComponent extends SceneComponent {
 	SetPaused(bPause: boolean): void;
 	SetLowPassFilterFrequency(InLowPassFilterFrequency: number): void;
 	SetLowPassFilterEnabled(InLowPassFilterEnabled: boolean): void;
-	SetIntParameter(InName: string,InInt: number): void;
+	SetIntParameter(InName: string,inInt: number): void;
 	SetFloatParameter(InName: string,InFloat: number): void;
 	SetBoolParameter(InName: string,InBool: boolean): void;
 	Play(StartTime: number): void;
@@ -8825,14 +8825,14 @@ declare class PaintContext {
 	DrawBox(Position?: Vector2D,Size?: Vector2D,Brush?: SlateBrushAsset,Tint?: LinearColor): {Context: PaintContext};
 	DrawLine(PositionA?: Vector2D,PositionB?: Vector2D,Tint?: LinearColor,bAntiAlias?: boolean): {Context: PaintContext};
 	DrawLines(Points?: Vector2D[],Tint?: LinearColor,bAntiAlias?: boolean): {Context: PaintContext};
-	DrawText(InString?: string,Position?: Vector2D,Tint?: LinearColor): {Context: PaintContext};
-	DrawTextFormatted(Text?: string,Position?: Vector2D,Font?: Font,FontSize?: number,FontTypeFace?: string,Tint?: LinearColor): {Context: PaintContext};
+	DrawText(inString?: string,Position?: Vector2D,Tint?: LinearColor): {Context: PaintContext};
+	DrawTextFormatted(text?: string,Position?: Vector2D,Font?: Font,FontSize?: number,FontTypeFace?: string,Tint?: LinearColor): {Context: PaintContext};
 	static DrawSpaceSpline(Context?: PaintContext,InStart?: Vector2D,InStartDir?: Vector2D,InEnd?: Vector2D,InEndDir?: Vector2D,InThickness?: number,InTint?: LinearColor): {Context: PaintContext};
 	static DrawBox(Context?: PaintContext,Position?: Vector2D,Size?: Vector2D,Brush?: SlateBrushAsset,Tint?: LinearColor): {Context: PaintContext};
 	static DrawLine(Context?: PaintContext,PositionA?: Vector2D,PositionB?: Vector2D,Tint?: LinearColor,bAntiAlias?: boolean): {Context: PaintContext};
 	static DrawLines(Context?: PaintContext,Points?: Vector2D[],Tint?: LinearColor,bAntiAlias?: boolean): {Context: PaintContext};
-	static DrawText(Context?: PaintContext,InString?: string,Position?: Vector2D,Tint?: LinearColor): {Context: PaintContext};
-	static DrawTextFormatted(Context?: PaintContext,Text?: string,Position?: Vector2D,Font?: Font,FontSize?: number,FontTypeFace?: string,Tint?: LinearColor): {Context: PaintContext};
+	static DrawText(Context?: PaintContext,inString?: string,Position?: Vector2D,Tint?: LinearColor): {Context: PaintContext};
+	static DrawTextFormatted(Context?: PaintContext,text?: string,Position?: Vector2D,Font?: Font,FontSize?: number,FontTypeFace?: string,Tint?: LinearColor): {Context: PaintContext};
 }
 
 declare class MotionEvent extends InputEvent { 
@@ -9586,7 +9586,7 @@ declare class BuilderPoly {
 
 declare class BrushBuilder extends UObject { 
 	BitmapFilename: string;
-	ToolTip: string;
+	Tooltip: string;
 	NotifyBadParams: boolean;
 	Vertices: Vector[];
 	Polys: BuilderPoly[];
@@ -9603,7 +9603,7 @@ declare class BrushBuilder extends UObject {
 
 declare class GeomSelection { 
 	Type: number;
-	Index: number;
+	index: number;
 	SelectionIndex: number;
 	clone() : GeomSelection;
 	static C(Other: UObject | any): GeomSelection;
@@ -9849,7 +9849,7 @@ declare class InterpGroupActorInfo {
 
 declare class CameraCutInfo { 
 	Location: Vector;
-	TimeStamp: number;
+	Timestamp: number;
 	clone() : CameraCutInfo;
 	static C(Other: UObject | any): CameraCutInfo;
 }
@@ -11138,7 +11138,7 @@ declare class AIController extends Controller {
 
 declare class XRDeviceId { 
 	SystemName: string;
-	DeviceId: number;
+	DeviceID: number;
 	clone() : XRDeviceId;
 	static C(Other: UObject | any): XRDeviceId;
 	GetDevicePose(bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
@@ -11778,9 +11778,9 @@ declare class TraceQueryTestResults extends UObject {
 declare type EComparisonTolerance = 'Zero' | 'Low' | 'Medium' | 'High' | 'Custom' | 'EComparisonTolerance_MAX';
 declare var EComparisonTolerance : { Zero:'Zero',Low:'Low',Medium:'Medium',High:'High',Custom:'Custom',EComparisonTolerance_MAX:'EComparisonTolerance_MAX', };
 declare class ComparisonToleranceAmount { 
-	Red: number;
-	Green: number;
-	Blue: number;
+	red: number;
+	green: number;
+	blue: number;
 	Alpha: number;
 	MinBrightness: number;
 	MaxBrightness: number;
@@ -11851,7 +11851,7 @@ declare class TimerHandle {
 	K2_IsValidTimerHandle(): boolean;
 	static K2_InvalidateTimerHandle(Handle?: TimerHandle): {Handle: TimerHandle, $: TimerHandle};
 	static K2_IsValidTimerHandle(Handle: TimerHandle): boolean;
-	static K2_SetTimerDelegate(Delegate: UnrealEngineDelegate<() => void>,Time: number,bLooping: boolean): TimerHandle;
+	static K2_SetTimerDelegate(delegate: UnrealEngineDelegate<() => void>,Time: number,bLooping: boolean): TimerHandle;
 }
 
 declare type EQuitPreference = 'Quit' | 'Background' | 'EQuitPreference_MAX';
@@ -12073,10 +12073,10 @@ declare class World extends UObject {
 	RegisterTurnBasedMatchInterfaceObject(PlayerController: PlayerController,UObject: UObject): void;
 	GetCachedAchievementDescription(PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Title?: string,LockedDescription?: string,UnlockedDescription?: string,bHidden?: boolean): {bFoundID: boolean, Title: string, LockedDescription: string, UnlockedDescription: string, bHidden: boolean};
 	GetCachedAchievementProgress(PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Progress?: number): {bFoundID: boolean, Progress: number};
-	LogBox(BoxShape: Box,Text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
-	LogLocation(Location: Vector,Text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
-	LogSegment(SegmentStart: Vector,SegmentEnd: Vector,Text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
-	LogText(Text: string,LogCategory: string,bAddToMessageLog: boolean): void;
+	LogBox(BoxShape: Box,text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
+	LogLocation(Location: Vector,text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
+	LogSegment(SegmentStart: Vector,SegmentEnd: Vector,text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
+	LogText(text: string,LogCategory: string,bAddToMessageLog: boolean): void;
 	FindPathToActorSynchronously(PathStart: Vector,GoalActor: Actor,TetherDistance: number,PathfindingContext: Actor,FilterClass: UnrealEngineClass): NavigationPath;
 	FindPathToLocationSynchronously(PathStart: Vector,PathEnd: Vector,PathfindingContext: Actor,FilterClass: UnrealEngineClass): NavigationPath;
 	GetNavigationSystem(): NavigationSystem;
@@ -12123,7 +12123,7 @@ declare class World extends UObject {
 	DrawDebugPlane(PlaneCoordinates: Plane,Location: Vector,Size: number,PlaneColor: LinearColor,Duration: number): void;
 	DrawDebugPoint(Position: Vector,Size: number,PointColor: LinearColor,Duration: number): void;
 	DrawDebugSphere(Center: Vector,Radius: number,Segments: number,LineColor: LinearColor,Duration: number,Thickness: number): void;
-	DrawDebugString(TextLocation: Vector,Text: string,TestBaseActor: Actor,TextColor: LinearColor,Duration: number): void;
+	DrawDebugString(TextLocation: Vector,text: string,TestBaseActor: Actor,TextColor: LinearColor,Duration: number): void;
 	ExecuteConsoleCommand(Command: string,SpecificPlayer: PlayerController): void;
 	FlushDebugStrings(): void;
 	FlushPersistentDebugLines(): void;
@@ -12150,7 +12150,7 @@ declare class World extends UObject {
 	LineTraceSingleForObjects(Start: Vector,End: Vector,ObjectTypes: EObjectTypeQuery[],bTraceComplex: boolean,ActorsToIgnore: Actor[],DrawDebugType: EDrawDebugTrace,OutHit?: HitResult,bIgnoreSelf?: boolean,TraceColor?: LinearColor,TraceHitColor?: LinearColor,DrawTime?: number): {OutHit: HitResult, $: boolean};
 	LoadAsset(Asset: any,OnLoaded: UnrealEngineDelegate<(Loaded: UObject) => void>,LatentInfo: LatentActionInfo): void;
 	LoadAssetClass(AssetClass: any,OnLoaded: UnrealEngineDelegate<(Loaded: UnrealEngineClass) => void>,LatentInfo: LatentActionInfo): void;
-	PrintString(InString: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
+	PrintString(inString: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
 	PrintText(InText: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
 	QuitGame(SpecificPlayer: PlayerController,QuitPreference: EQuitPreference): void;
 	RetriggerableDelay(Duration: number,LatentInfo: LatentActionInfo): void;
@@ -12169,8 +12169,8 @@ declare class World extends UObject {
 	CreateRenderTarget2D(Width: number,Height: number,Format: ETextureRenderTargetFormat): TextureRenderTarget2D;
 	DrawMaterialToRenderTarget(TextureRenderTarget: TextureRenderTarget2D,Material: MaterialInterface): void;
 	EndDrawCanvasToRenderTarget(Context: DrawToRenderTargetContext): void;
-	ExportRenderTarget(TextureRenderTarget: TextureRenderTarget2D,FilePath: string,FileName: string): void;
-	ExportTexture2D(Texture: Texture2D,FilePath: string,FileName: string): void;
+	ExportRenderTarget(TextureRenderTarget: TextureRenderTarget2D,FilePath: string,Filename: string): void;
+	ExportTexture2D(Texture: Texture2D,FilePath: string,Filename: string): void;
 	MinimumAreaRectangle(InVerts: Vector[],SampleSurfaceNormal: Vector,OutRectCenter?: Vector,OutRectRotation?: Rotator,OutSideLengthX?: number,OutSideLengthY?: number,bDebugDraw?: boolean): {OutRectCenter: Vector, OutRectRotation: Rotator, OutSideLengthX: number, OutSideLengthY: number};
 	CreateDynamicMaterialInstance(Parent: MaterialInterface): MaterialInstanceDynamic;
 	GetScalarParameterValue(Collection: MaterialParameterCollection,ParameterName: string): number;
@@ -12283,7 +12283,7 @@ declare class World extends UObject {
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
 	static InitializeActorsForPlay(World: World,URL: URL): void;
-	static GenerateNavigation(world: World,NavData: RecastNavMesh): void;
+	static GenerateNavigation(World: World,NavData: RecastNavMesh): void;
 	static GetAllActorsOfClassAndTags(WorldContextObject: UObject,ActorClass: UnrealEngineClass,Tags_Accept: string[],Tags_Deny: string[],OutActors?: Actor[]): {OutActors: Actor[]};
 	static GetLevels(World: World): Level[];
 	static GetModel(World: World): Model;
@@ -12305,10 +12305,10 @@ declare class World extends UObject {
 	static RegisterTurnBasedMatchInterfaceObject(WorldContextObject: UObject,PlayerController: PlayerController,UObject: UObject): void;
 	static GetCachedAchievementDescription(WorldContextObject: UObject,PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Title?: string,LockedDescription?: string,UnlockedDescription?: string,bHidden?: boolean): {bFoundID: boolean, Title: string, LockedDescription: string, UnlockedDescription: string, bHidden: boolean};
 	static GetCachedAchievementProgress(WorldContextObject: UObject,PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Progress?: number): {bFoundID: boolean, Progress: number};
-	static LogBox(WorldContextObject: UObject,BoxShape: Box,Text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
-	static LogLocation(WorldContextObject: UObject,Location: Vector,Text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
-	static LogSegment(WorldContextObject: UObject,SegmentStart: Vector,SegmentEnd: Vector,Text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
-	static LogText(WorldContextObject: UObject,Text: string,LogCategory: string,bAddToMessageLog: boolean): void;
+	static LogBox(WorldContextObject: UObject,BoxShape: Box,text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
+	static LogLocation(WorldContextObject: UObject,Location: Vector,text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
+	static LogSegment(WorldContextObject: UObject,SegmentStart: Vector,SegmentEnd: Vector,text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
+	static LogText(WorldContextObject: UObject,text: string,LogCategory: string,bAddToMessageLog: boolean): void;
 	static FindPathToActorSynchronously(WorldContextObject: UObject,PathStart: Vector,GoalActor: Actor,TetherDistance: number,PathfindingContext: Actor,FilterClass: UnrealEngineClass): NavigationPath;
 	static FindPathToLocationSynchronously(WorldContextObject: UObject,PathStart: Vector,PathEnd: Vector,PathfindingContext: Actor,FilterClass: UnrealEngineClass): NavigationPath;
 	static GetNavigationSystem(WorldContextObject: UObject): NavigationSystem;
@@ -12355,7 +12355,7 @@ declare class World extends UObject {
 	static DrawDebugPlane(WorldContextObject: UObject,PlaneCoordinates: Plane,Location: Vector,Size: number,PlaneColor: LinearColor,Duration: number): void;
 	static DrawDebugPoint(WorldContextObject: UObject,Position: Vector,Size: number,PointColor: LinearColor,Duration: number): void;
 	static DrawDebugSphere(WorldContextObject: UObject,Center: Vector,Radius: number,Segments: number,LineColor: LinearColor,Duration: number,Thickness: number): void;
-	static DrawDebugString(WorldContextObject: UObject,TextLocation: Vector,Text: string,TestBaseActor: Actor,TextColor: LinearColor,Duration: number): void;
+	static DrawDebugString(WorldContextObject: UObject,TextLocation: Vector,text: string,TestBaseActor: Actor,TextColor: LinearColor,Duration: number): void;
 	static ExecuteConsoleCommand(WorldContextObject: UObject,Command: string,SpecificPlayer: PlayerController): void;
 	static FlushDebugStrings(WorldContextObject: UObject): void;
 	static FlushPersistentDebugLines(WorldContextObject: UObject): void;
@@ -12382,7 +12382,7 @@ declare class World extends UObject {
 	static LineTraceSingleForObjects(WorldContextObject: UObject,Start: Vector,End: Vector,ObjectTypes: EObjectTypeQuery[],bTraceComplex: boolean,ActorsToIgnore: Actor[],DrawDebugType: EDrawDebugTrace,OutHit?: HitResult,bIgnoreSelf?: boolean,TraceColor?: LinearColor,TraceHitColor?: LinearColor,DrawTime?: number): {OutHit: HitResult, $: boolean};
 	static LoadAsset(WorldContextObject: UObject,Asset: any,OnLoaded: UnrealEngineDelegate<(Loaded: UObject) => void>,LatentInfo: LatentActionInfo): void;
 	static LoadAssetClass(WorldContextObject: UObject,AssetClass: any,OnLoaded: UnrealEngineDelegate<(Loaded: UnrealEngineClass) => void>,LatentInfo: LatentActionInfo): void;
-	static PrintString(WorldContextObject: UObject,InString: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
+	static PrintString(WorldContextObject: UObject,inString: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
 	static PrintText(WorldContextObject: UObject,InText: string,bPrintToScreen: boolean,bPrintToLog: boolean,TextColor: LinearColor,Duration: number): void;
 	static QuitGame(WorldContextObject: UObject,SpecificPlayer: PlayerController,QuitPreference: EQuitPreference): void;
 	static RetriggerableDelay(WorldContextObject: UObject,Duration: number,LatentInfo: LatentActionInfo): void;
@@ -12401,8 +12401,8 @@ declare class World extends UObject {
 	static CreateRenderTarget2D(WorldContextObject: UObject,Width: number,Height: number,Format: ETextureRenderTargetFormat): TextureRenderTarget2D;
 	static DrawMaterialToRenderTarget(WorldContextObject: UObject,TextureRenderTarget: TextureRenderTarget2D,Material: MaterialInterface): void;
 	static EndDrawCanvasToRenderTarget(WorldContextObject: UObject,Context: DrawToRenderTargetContext): void;
-	static ExportRenderTarget(WorldContextObject: UObject,TextureRenderTarget: TextureRenderTarget2D,FilePath: string,FileName: string): void;
-	static ExportTexture2D(WorldContextObject: UObject,Texture: Texture2D,FilePath: string,FileName: string): void;
+	static ExportRenderTarget(WorldContextObject: UObject,TextureRenderTarget: TextureRenderTarget2D,FilePath: string,Filename: string): void;
+	static ExportTexture2D(WorldContextObject: UObject,Texture: Texture2D,FilePath: string,Filename: string): void;
 	static MinimumAreaRectangle(WorldContextObject: UObject,InVerts: Vector[],SampleSurfaceNormal: Vector,OutRectCenter?: Vector,OutRectRotation?: Rotator,OutSideLengthX?: number,OutSideLengthY?: number,bDebugDraw?: boolean): {OutRectCenter: Vector, OutRectRotation: Rotator, OutSideLengthX: number, OutSideLengthY: number};
 	static CreateDynamicMaterialInstance(WorldContextObject: UObject,Parent: MaterialInterface): MaterialInstanceDynamic;
 	static GetScalarParameterValue(WorldContextObject: UObject,Collection: MaterialParameterCollection,ParameterName: string): number;
@@ -12517,13 +12517,13 @@ declare class Package extends UObject {
 	static C(Other: UObject | any): Package;
 	DeletePackage(): boolean;
 	FindWorldInPackage(): World;
-	SavePackage(FileName: string): boolean;
+	SavePackage(Filename: string): boolean;
 	GetLongPackagePath(): string;
 	HasAnyPackageFlags(Flags: number): boolean;
 	LoadPackage(PackageName: string): Package;
 	static DeletePackage(Package: Package): boolean;
 	static FindWorldInPackage(Package: Package): World;
-	static SavePackage(Package: Package,FileName: string): boolean;
+	static SavePackage(Package: Package,Filename: string): boolean;
 	static GetLongPackagePath(InPackage: Package): string;
 	static HasAnyPackageFlags(Package: Package,Flags: number): boolean;
 	static LoadPackage(InOuter: Package,PackageName: string): Package;
@@ -12712,7 +12712,7 @@ declare class UObject {
 	static RedirectVislog(SourceOwner: UObject,DestinationOwner: UObject): void;
 	static Conv_ObjectToText(InObj: UObject): string;
 	static Conv_ObjectToSoftObjectReference(UObject: UObject): any;
-	static Conv_SoftObjectReferenceToObject(SoftObject: any): UObject;
+	static Conv_SoftObjectReferenceToObject(softobject: any): UObject;
 	static Conv_SoftObjectReferenceToString(SoftObjectReference: any): string;
 	static CreateCopyForUndoBuffer(ObjectToModify: UObject): void;
 	static DoesImplementInterface(TestObject: UObject,Interface: UnrealEngineClass): boolean;
@@ -12832,7 +12832,7 @@ declare class Class extends Struct {
 	static GetSuperClasses(InClass: UnrealEngineClass): UnrealEngineClass[];
 	static IsGeneratedByBlueprint(InClass: UnrealEngineClass): boolean;
 	static Conv_ClassToSoftClassReference(Class: UnrealEngineClass): any;
-	static Conv_SoftClassReferenceToClass(SoftClass: any): UnrealEngineClass;
+	static Conv_SoftClassReferenceToClass(softclass: any): UnrealEngineClass;
 	static Conv_SoftClassReferenceToString(SoftClassReference: any): string;
 	static EqualEqual_SoftClassReference(A: any,B: any): boolean;
 	static GetClassDisplayName(Class: UnrealEngineClass): string;
@@ -13940,7 +13940,7 @@ declare class ClothCollisionPrim_SphereConnection {
 }
 
 declare class ClothCollisionPrim_Convex { 
-	Planes: Plane[];
+	planes: Plane[];
 	BoneIndex: number;
 	clone() : ClothCollisionPrim_Convex;
 	static C(Other: UObject | any): ClothCollisionPrim_Convex;
@@ -14374,7 +14374,7 @@ declare class HeadMountedDisplayFunctionLibrary extends BlueprintFunctionLibrary
 	static GetWorldToMetersScale(WorldContext: UObject): number;
 	static GetVRFocusState(bUseFocus?: boolean,bHasFocus?: boolean): {bUseFocus: boolean, bHasFocus: boolean};
 	static GetTrackingToWorldTransform(WorldContext: UObject): Transform;
-	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,Index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
+	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
 	static GetTrackingOrigin(): EHMDTrackingOrigin;
 	static GetScreenPercentage(): number;
 	static GetPositionalTrackingCameraParameters(CameraOrigin?: Vector,CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
@@ -17200,8 +17200,8 @@ declare class MovieSceneSection extends MovieSceneSignedObject {
 	bIsActive: boolean;
 	bIsLocked: boolean;
 	bIsInfinite: boolean;
-	PreRollTime: number;
-	PostRollTime: number;
+	PrerollTime: number;
+	PostrollTime: number;
 	BlendType: OptionalMovieSceneBlendType;
 	static Load(ResourceName: string): MovieSceneSection;
 	static Find(Outer: UObject, ResourceName: string): MovieSceneSection;
@@ -17211,7 +17211,7 @@ declare class MovieSceneSection extends MovieSceneSignedObject {
 }
 
 declare class MovieSceneTransformMask { 
-	Mask: any;
+	mask: any;
 	clone() : MovieSceneTransformMask;
 	static C(Other: UObject | any): MovieSceneTransformMask;
 }
@@ -17730,7 +17730,7 @@ declare class SplineComponent extends PrimitiveComponent {
 	SetDefaultUpVector(UpVector: Vector,CoordinateSpace: ESplineCoordinateSpace): void;
 	SetClosedLoopAtPosition(bInClosedLoop: boolean,Key: number,bUpdateSpline: boolean): void;
 	SetClosedLoop(bInClosedLoop: boolean,bUpdateSpline: boolean): void;
-	RemoveSplinePoint(Index: number,bUpdateSpline: boolean): void;
+	RemoveSplinePoint(index: number,bUpdateSpline: boolean): void;
 	IsClosedLoop(): boolean;
 	GetWorldTangentAtDistanceAlongSpline(Distance: number): Vector;
 	GetWorldRotationAtTime(Time: number,bUseConstantVelocity: boolean): Rotator;
@@ -17789,7 +17789,7 @@ declare class SplineComponent extends PrimitiveComponent {
 	FindDirectionClosestToWorldLocation(WorldLocation: Vector,CoordinateSpace: ESplineCoordinateSpace): Vector;
 	ClearSplinePoints(bUpdateSpline: boolean): void;
 	AddSplineWorldPoint(Position: Vector): void;
-	AddSplinePointAtIndex(Position: Vector,Index: number,CoordinateSpace: ESplineCoordinateSpace,bUpdateSpline: boolean): void;
+	AddSplinePointAtIndex(Position: Vector,index: number,CoordinateSpace: ESplineCoordinateSpace,bUpdateSpline: boolean): void;
 	AddSplinePoint(Position: Vector,CoordinateSpace: ESplineCoordinateSpace,bUpdateSpline: boolean): void;
 	AddSplineLocalPoint(Position: Vector): void;
 	AddPoints(Points: SplinePoint[],bUpdateSpline: boolean): void;
@@ -18185,7 +18185,7 @@ declare class UMGEditorProjectSettings extends DeveloperSettings {
 }
 
 declare class EditorPropertyPathSegment { 
-	Struct: Struct;
+	struct: Struct;
 	MemberName: string;
 	MemberGuid: Guid;
 	IsProperty: boolean;
@@ -18472,7 +18472,7 @@ declare class ClassViewerProjectSettings extends UObject {
 
 declare class LocalizedTemplateString { 
 	Language: string;
-	Text: string;
+	text: string;
 	clone() : LocalizedTemplateString;
 	static C(Other: UObject | any): LocalizedTemplateString;
 }
@@ -18989,7 +18989,7 @@ declare class K2Node_ComponentBoundEvent extends K2Node_Event {
 }
 
 declare class KismetUserDeclaredFunctionMetadata { 
-	ToolTip: string;
+	Tooltip: string;
 	Category: string;
 	Keywords: string;
 	CompactNodeTitle: string;
