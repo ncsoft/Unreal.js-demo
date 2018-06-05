@@ -85,13 +85,13 @@ function main() {
         commands.BindingContext = context
         commands.Commands = [
             {
-                ID: 'About',
+                Id: 'About',
                 FriendlyName: 'Unreal.js',
                 Description: 'Learn about unreal.js',
                 ActionType: 'Button'
             },
             {
-                ID: 'NCsoft',
+                Id: 'NCsoft',
                 FriendlyName: 'Visit NCsoft',
                 Description: 'Learn about NCsoft',
                 ActionType: 'Button'

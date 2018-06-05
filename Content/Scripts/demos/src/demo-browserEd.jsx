@@ -118,7 +118,7 @@ module.exports = function broserDesign(E) {
                 SelectionMode:'Multi',
                 Columns:[
                     {
-                        ID: 'Name',
+                        Id: 'Name',
                         Width: 1.0
                     }
                 ],                

@@ -175,7 +175,7 @@ module.exports = function (E) {
             function init() {
                 commands.BindingContext = context;
                 commands.Commands = "SelectAll Delete Copy Cut Paste Duplicate".split(' ').map(x => ({
-                    ID: x,
+                    Id: x,
                     CommandInfo: JavascriptMenuLibrary.GenericCommand(x)
                 }));
                 commands.Initialize();

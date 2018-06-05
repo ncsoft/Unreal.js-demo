@@ -98,7 +98,7 @@ function MakeCommands() {
                 }
             }
         }
-    }, (v, k) => _.extend({ ID: k }, v.params))
+    }, (v, k) => _.extend({ Id: k }, v.params))
     commands.Initialize();
     commands.destroy = () => {
         commands.Uninitialize();

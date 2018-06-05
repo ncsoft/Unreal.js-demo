@@ -117,7 +117,7 @@ module.exports = function broserDesign(E) {
                 'slot.size.size-rule': 'Fill',
                 SelectionMode: 'Multi',
                 Columns: [{
-                    ID: 'Name',
+                    Id: 'Name',
                     Width: 1.0
                 }],
                 OnGenerateRowEvent: (item, column, widget) => {

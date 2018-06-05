@@ -3787,6 +3787,7 @@ declare class JavascriptIsolate extends UObject {
 	static Find(Outer: UObject, ResourceName: string): JavascriptIsolate;
 	static GetDefaultObject(): JavascriptIsolate;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): JavascriptIsolate;
+	Init(bIsEditor: boolean): void;
 	GetHeapStatistics(Statistics?: JavascriptHeapStatistics): {Statistics: JavascriptHeapStatistics};
 	CreateContext(): JavascriptContext;
 	static C(Other: UObject | any): JavascriptIsolate;
