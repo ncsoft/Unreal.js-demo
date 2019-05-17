@@ -23,6 +23,7 @@ module.exports = function broserDesign(E) {
         componentDidMount() {
             let elem = this.TreeView.ueobj;
             elem.JavascriptContext = Context;
+            elem.EntryWidgetClass = WidgetBlueprint.Load('/Game/EntryWidget_C').GeneratedClass;
             elem.proxy = {
                 OnSelectionChanged: item => {
                     let extra = elem.GetSelectedItems().OutItems;

@@ -281,6 +281,7 @@ function main() {
                 ),
                 $link:elem => {
                     elem.JavascriptContext = Context
+                    elem.EntryWidgetClass = WidgetBlueprint.Load('/Game/EntryWidget_C').GeneratedClass
                     elem.alive = true
                     elem.proxy = {
                         OnSelectionChanged: item => contexts.setCurrent(item)
@@ -369,6 +370,7 @@ function main() {
                     UMG(JavascriptListView,{
                         ItemHeight:20,
                         OnContextMenuOpening: packages.contextMenu,
+                        EntryWidgetClass: WidgetBlueprint.Load('/Game/EntryWidget_C').GeneratedClass,                
                         OnGenerateRowEvent:(item,column) => {
                             const isName = column == 'Name'
                             return I(

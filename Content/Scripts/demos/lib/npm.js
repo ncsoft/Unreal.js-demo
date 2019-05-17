@@ -7,7 +7,7 @@ async function npm(what) {
 
     console.log(`trying to install node module: ${what}`)
 
-    let paths = ['','/usr/local/bin/','/usr/bin/','c:\\Program Files (x86)\\nodejs\\']
+    let paths = ['','/usr/local/bin/','/usr/bin/','c:\\Program Files (x86)\\nodejs\\', 'C:\\Program Files\\nodejs\\']
 
     function check(path,param) {
         console.log(path)

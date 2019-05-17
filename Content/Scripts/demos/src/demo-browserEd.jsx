@@ -21,6 +21,7 @@ module.exports = function broserDesign(E) {
         componentDidMount() {
             let elem = this.TreeView.ueobj;
             elem.JavascriptContext = Context;
+            elem.EntryWidgetClass = WidgetBlueprint.Load('/Game/EntryWidget_C').GeneratedClass                
             elem.proxy = {
                 OnSelectionChanged: item => {
                     let extra = elem.GetSelectedItems().OutItems
@@ -121,7 +122,7 @@ module.exports = function broserDesign(E) {
                         Id: 'Name',
                         Width: 1.0
                     }
-                ],                
+                ],
                 OnGenerateRowEvent: (item, column, widget) => {
                     let name
                     if (item) {
