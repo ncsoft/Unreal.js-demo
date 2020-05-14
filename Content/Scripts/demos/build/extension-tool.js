@@ -229,8 +229,11 @@ function headerDesign() {
         )
     ));
 
-    widget.OnDestroy.Add(() => destroy());
-
+    widget.proxy = {
+        OnDestroy: (bReleaseChildren) => {
+            destroy();
+        }
+    }
     return widget;
 }
 
