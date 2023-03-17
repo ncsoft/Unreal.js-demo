@@ -5,7 +5,7 @@ const { palette } = require('google-material-color');
 
 const font = {
     FontObject: GEngine.SmallFont,
-    Size: 15
+    Size: 20
 };
 
 class DemoSelector extends React.Component {
@@ -32,7 +32,7 @@ class DemoSelector extends React.Component {
                             OnClicked: () => done(x),
                             ToolTipText: x.description
                         },
-                        React.createElement('text', { Font: font, Text: x })
+                        React.createElement('text', { Font: font, Text: x, ColorAndOpacity: { SpecifiedColor: { R: 0, G: 0, B: 0, A: 1 } } })
                     ))
                 )
             )

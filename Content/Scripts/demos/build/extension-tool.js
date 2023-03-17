@@ -228,12 +228,12 @@ function headerDesign() {
             React.createElement('text', { Font: SmallFont, Text: 'UMG Editor' })
         )
     ));
-
     widget.proxy = {
-        OnDestroy: (bReleaseChildren) => {
+        OnDestroy: bReleaseChildren => {
             destroy();
         }
-    }
+    };
+
     return widget;
 }
 

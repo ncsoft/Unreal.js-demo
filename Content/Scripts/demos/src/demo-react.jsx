@@ -83,7 +83,7 @@ function application(elem) {
             return <RemoteImage
                 width={128}
                 height={128}
-                url={"https://pbs.twimg.com/profile_images/593636604482228224/mWPsqBsm.jpg"}
+                url={'https://github.com/ncsoft/Unreal.js-core/raw/master/Resources/Icon128.png'}
                 />
         }
     }

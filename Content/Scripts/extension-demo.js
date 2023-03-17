@@ -76,6 +76,7 @@ function new_commands(opts) {
                 FriendlyName: v.friendlyName,
                 Description: v.description,
                 ActionType: v.actionType,
+                IconStyleName: v.iconStyleName,
                 OnExecute: v.onExecute,
                 OnIsActionChecked: v.isChecked,
                 OnCanExecuteAction: v.canExecute
@@ -240,10 +241,10 @@ function new_styleset(opts) {
 function demoToolbar() {
     new_styleset({
         styleset: 'UnrealJSDemo',
-        root: Root.GetDir('EnginePlugins'),
+        root: Root.GetDir('Game'),
         brushes: {
             'UnrealJSDemo.Test': {
-                path: 'Marketplace/UnrealJS/Resources/Icon128.png'
+                path: 'images/Terminal.png'
             }
         }
     })
@@ -254,9 +255,10 @@ function demoToolbar() {
         styleset: 'UnrealJSDemo',
         commands: {
             Test: {
-                friendlyName: 'Test7',
-                description: 'demo',
+                friendlyName: 'demo',
+                description: 'Simple javascript demo to print "Hello test!" to console',
                 actionType: 'Button',
+                iconStyleName: 'UnrealJSDemo.Test',
                 onExecute: _ => {
                     console.log('Hello test!')
                 }
