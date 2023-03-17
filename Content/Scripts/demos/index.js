@@ -44,7 +44,7 @@ async function main(defer, reset) {
 
     let scene = localStorage.get('demo')
     let sceneIds = _.map(scenes, (v, k) => _.extend(_.clone(k), { description: v.description }))
-    if (scenes[scene] == undefined) {
+    if (scene === null || scenes[scene] == undefined) {
         scene = sceneIds[0]
     }
 
